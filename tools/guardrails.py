@@ -94,6 +94,30 @@ def assert_download_allowed(source: str, start: dt.date, end: dt.date) -> None:
         )
 
 
+REGIONS = ROOT / "config" / "regions.json"
+
+
+def holdout_boxes() -> list[tuple[float, float, float, float]]:
+    """(west, south, east, north) of every holdout region in config/regions.json (S01)."""
+    regions = json.loads(REGIONS.read_text(encoding="utf-8"))["regions"]
+    return [
+        (r["west"], r["south"], r["east"], r["north"]) for r in regions if r["role"] == "holdout"
+    ]
+
+
+def in_holdout(lat, lon):
+    """True where a point lies in a holdout region (edges included, so borders are dropped too).
+
+    Works on scalars and on numpy/pandas arrays (uses & and |, not and/or). Import code calls it
+    on every VIIRS chunk and drops the matching rows before anything is written (plan 4.2).
+    """
+    hit = None
+    for west, south, east, north in holdout_boxes():
+        box = (lat >= south) & (lat <= north) & (lon >= west) & (lon <= east)
+        hit = box if hit is None else (hit | box)
+    return False if hit is None else hit
+
+
 def locked_download_reason(text: str) -> str | None:
     """Return why `text` (a command, URL or source line) looks like a locked download."""
     for line in text.splitlines() or [text]:

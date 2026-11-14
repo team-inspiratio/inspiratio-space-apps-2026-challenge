@@ -6,14 +6,15 @@
 <!-- STATUS:BEGIN -->
 ```yaml
 current_card: docs/sessions/1-data.md   # 下一张（或正在做的）任务卡
-status: ready                           # ready | in_progress | blocked | done
-claimed_by: ""                          # 认领人名字；空表示无人认领
-claimed_at: ""                          # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
-last_pushed_stage: S00                  # 最后一个完成并 push 的阶段
+status: in_progress                     # ready | in_progress | blocked | done
+claimed_by: "qiuxue-yee"                # 认领人名字；空表示无人认领
+claimed_at: "2026-11-03T18:48:11Z"      # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
+last_pushed_stage: S01                  # 最后一个完成并 push 的阶段
 last_pushed_at: 2026-11-03
 branch: feat/data-harmonization
-next_step: "开新会话执行任务卡 1-data：S01 预注册 → S02 下载 → S03 导入 → S04 清洗 → S05 网格化 → S06 数据体检"
+next_step: "任务卡 1-data 进行中：S01 已完成，正在做 S02 下载 → S03 导入 → S04 清洗 → S05 网格化 → S06 数据体检"
 needs_human:
+  - "待人确认：冻结的 tools/guardrails.py 在中文 Windows 上读 git 历史会按 GBK 崩溃，目前用 -X utf8 绕开；是否由人 [unfreeze] 修编码（docs/decisions/0002）"
   - "数据阶段需要约 50 GB 磁盘、16 GB 以上内存；.env 里填好 FIRMS_MAP_KEY 和 INSPIRATIO_DATA_DIR"
   - "GitHub CLI 登录：在这台已登录的电脑上接力可以跳过；换电脑接力时先运行一次 gh auth login --web（会话 1 结束时要用 gh 上传 Release 数据包）"
 ```
@@ -24,7 +25,7 @@ needs_human:
 | 会话 | 任务卡 | 覆盖阶段 | 状态 |
 |---|---|---|---|
 | 0 | （本仓库搭建） | S00 | ✅ 完成 |
-| 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | ⏭ 下一张 |
+| 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | 🔄 进行中（qiuxue-yee） |
 | 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09（里程碑 A） | 待开始 |
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | 待开始 |
 | 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | 待开始 |
@@ -36,7 +37,7 @@ needs_human:
 | 阶段 | 内容 | 状态 | 完成时间 | 关键数字 | commit |
 |---|---|---|---|---|---|
 | S00 | 环境、护栏、CI、自说明文件 | ✅ done | 2026-11-03 | CI 绿；pytest 17 项通过 | 3dcf808 |
-| S01 | 预注册（settings、留出区、随机矩形、grader.yml） | ⬜ todo | | | |
+| S01 | 预注册（settings、留出区、随机矩形、grader.yml） | ✅ done | 2026-11-03 | 6 区（3 训练 + 3 留出）；3300 个矩形；冻结 5 个文件 | 7d1aa0c |
 | S02 | 下载（年度包、API 2026、缺测清单、GFED） | ⬜ todo | | | |
 | S03 | 导入（流式转 Parquet，丢弃留出区 VIIRS） | ⬜ todo | | | |
 | S04 | 清洗 | ⬜ todo | | | |

@@ -1,0 +1,9 @@
+{
+  "frozen": {
+    ".github/workflows/grader.yml": "ab094dba09a0638425b04fa53419c9856bb0d84b97934a76a5449b999ef697aa",
+    "config/rectangles.csv": "2b67b6c24cf0499d2de3a850ab3f0d5250e1d2e3ac6186cfeef2e279fd70db5c",
+    "config/regions.json": "c5439312489cba8408bd121a15308dd7bf0039c74f6676083a11e8e3f46a0f1f",
+    "config/settings.yaml": "7393e2ad6d568e1585f19da17dd1444c97ba2c014a75183ce25eaee36f77e1bc",
+    "tools/guardrails.py": "a866030e7cbc43fcea646534a0bd6856255850541b598b61324c0c71ab0d571a"
+  }
+}
