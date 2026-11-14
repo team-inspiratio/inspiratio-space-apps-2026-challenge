@@ -1,38 +1,38 @@
-# MODIS × VIIRS 火点协调
+# MODIS × VIIRS Hotspot Harmonization
 
-把 MODIS（2000 年起）和 VIIRS（2012 年起）两代卫星的火点记录统一成一条可以前后比较的月度序列，再用一个网页让人选区域、看历史、判断最近一个完整月份是否偏高，并下载结果。
+We turn the hotspot records of two satellite sensor generations, MODIS (from 2000) and VIIRS (from 2012), into one monthly series that can be compared across the whole period, then build a web page where people pick an area, view its history, judge whether the latest complete month is unusually high, and download the results.
 
-**完整方案：[docs/proposal.md](docs/proposal.md)**
+**Full proposal: [docs/proposal.md](docs/proposal.md)**
 
-## 一分钟看懂
+## The one-minute version
 
-- **问题：** 两种传感器的分辨率和灵敏度不同，VIIRS 看到的火点数明显更多。直接拼接，2012 年会出现一个由换卫星造成、而不是火情变化造成的跳变。
-- **做法：** 用两者同时在轨的年份训练模型，只看 MODIS 的信息来预测 VIIRS 会记录多少火点，再把这个换算用到 2012 年以前。主模型是 LightGBM，简单比例法作为对照基线；AI 自动实验循环在验证集上帮忙改进模型。
-- **验证：** 用后面的年份推前面的年份，另留一个完全没见过的地区；验证集选模型，测试集锁住，只在模型冻结后跑一次、如实报告。
-- **产出：** 协调算法、公开数据集、网页三件套，加上一份方法与验证说明。
+- **Problem:** The two sensors differ in resolution and sensitivity, and VIIRS records clearly more hotspots. Stitched together directly, the series shows a jump in 2012 that is caused by the change of satellite, not by a change in fire activity.
+- **Approach:** Train a model on the years when both sensors were in orbit to predict, from MODIS information alone, how many hotspots VIIRS would record, then apply this conversion to the years before 2012. The main model is LightGBM, with a simple ratio method as the baseline for comparison; an AI-driven automated experiment loop helps improve the model on the validation set.
+- **Validation:** Use later years to predict earlier years, and hold out one region the model has never seen. The validation set selects the model; the test set stays locked, is run only once after the model is frozen, and is reported as it comes out.
+- **Outputs:** A harmonization algorithm, a public dataset and a web page, plus a write-up of the methods and validation.
 
-## 方案目录
+## Proposal contents
 
-| 部分 | 内容 |
+| Part | Contents |
 |---|---|
-| [项目概览](docs/proposal.md#项目概览) | 问题、解法、交付物 |
-| [用大白话讲](docs/proposal.md#用大白话讲这个项目在干什么) | 不懂遥感也能看懂的解释 |
-| [方案](docs/proposal.md#方案用机器学习把历史统一到-viirs-尺度) / [验证](docs/proposal.md#验证怎么证明模型可信) | 主提案的核心 |
-| [网页成果](docs/proposal.md#网页成果) / [实施范围](docs/proposal.md#实施范围) | 用户能做什么、必做与扩展 |
-| [附录：执行手册](docs/proposal.md#附录执行手册) | 数据、算法、验证体系、AI 循环、24 个任务、提交物、风险、参考资料 |
+| [Project overview](docs/proposal.md#project-overview) | Problem, solution, deliverables |
+| [In plain language](docs/proposal.md#in-plain-language-what-this-project-does) | An explanation that needs no remote-sensing background |
+| [Approach](docs/proposal.md#approach-using-machine-learning-to-bring-history-onto-the-viirs-scale) / [Validation](docs/proposal.md#validation-how-we-show-the-model-can-be-trusted) | The core of the main proposal |
+| [Web page](docs/proposal.md#what-the-web-page-delivers) / [Implementation scope](docs/proposal.md#implementation-scope) | What users can do; required work and extensions |
+| [Appendix: Execution handbook](docs/proposal.md#appendix-execution-handbook) | Data, algorithm, validation framework, AI loop, 24 tasks, submission materials, risks, references |
 
-## 仓库结构
+## Repository layout
 
 ```
-README.md          本文件
-docs/proposal.md   完整方案（主提案 + 执行手册）
-notes/             阅读和学习笔记
-requirements.txt   Python 依赖
-.env.example       密钥模板（复制成 .env，.env 不提交）
+README.md          This file
+docs/proposal.md   Full proposal (main proposal + execution handbook)
+notes/             Reading and study notes
+requirements.txt   Python dependencies
+.env.example       Secrets template (copy to .env; .env is never committed)
 ```
 
-## 约定
+## Conventions
 
-- 改动走分支和 Pull Request，不直接推 main。
-- 密钥（如 FIRMS MAP_KEY）只放在本地 `.env`。
-- 原始数据和处理后的大文件不进仓库，来源和下载方式写在文档里。
+- Changes go through branches and pull requests; do not push directly to main.
+- Secrets (such as the FIRMS MAP_KEY) live only in a local `.env`.
+- Raw data and large processed files stay out of the repository; their sources and download steps are documented.
