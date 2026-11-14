@@ -1,0 +1,58 @@
+# S01 pre-registration: fixed before any model is fitted (plan sections 2-4, docs/preregistration.md).
+# Frozen in config/frozen-manifest.json. Only a human may change it, with an [unfreeze] commit.
+
+grid:
+  cell_deg: 0.25            # aligned with GFED4.1s; cell edges at multiples of 0.25 deg
+  month: calendar_utc       # natural months, acq_date in UTC
+  start_month: "2000-11"
+  end_month: "2026-10"
+
+# Sensors as they appear in FIRMS (column `satellite` / `instrument`).
+sensors:
+  terra:   {instrument: MODIS, satellite: [T, Terra], first_day: "2000-11-01"}
+  aqua:    {instrument: MODIS, satellite: [A, Aqua], first_day: "2002-07-04"}
+  snpp:    {instrument: VIIRS, satellite: [N, "Suomi NPP", SNPP], first_day: "2012-01-20", last_day: "2026-11-02"}
+  noaa20:  {instrument: VIIRS, satellite: [1, N20, "NOAA-20", JPSS1], first_day: "2018-04-01"}
+
+# FIRMS API coverage verified 2026-11-03 (plan section 1). After the SP end date, NRT is used.
+api_2026:
+  first_day: "2026-01-01"
+  last_day: "2026-11-02"
+  sp_last_day: {MODIS: "2026-08-31", VIIRS: "2026-07-31"}
+  snpp_last_day: "2026-11-02"
+
+quality_control:
+  keep_type: [0]                 # 0 vegetation fire; 1 volcano, 2 other static source, 3 offshore dropped
+  modis_min_confidence: 30       # MODIS confidence is 0-100
+  viirs_keep_confidence: [n, h]  # nominal and high; VIIRS low dropped
+  dedup_key: [sensor, acq_date, acq_time, latitude, longitude]
+  dedup_priority: [SP, NRT]      # standard product wins over near real time
+  # NRT has no `type`: drop NRT points on ~1 km cells (or their 8 neighbours) where any SP
+  # product flagged type=2 (static source) in the mask years. Reported in reports/cleaning.md.
+  nrt_static_mask: {cell_deg: 0.01, neighbours: true, years: [2024, 2026]}
+  low_frp_mw: 10                 # "low FRP" feature threshold
+
+splits:
+  # Inclusive month ranges. Test sets are locked (plan section 4).
+  train:            {start: "2016-01", end: "2021-06"}
+  validation:       {start: "2014-01", end: "2015-12"}
+  aux_train:        {start: "2018-01", end: "2021-06"}
+  aux_validation:   {start: "2016-01", end: "2017-12"}
+  test1:            {start: "2012-02", end: "2013-12", space: train_regions}
+  test2:            {start: "2012-02", end: "2021-06", space: holdout_regions}
+  test_train:       {start: "2014-01", end: "2021-06"}   # refit of the frozen model before testing
+  locked_snpp_years: [2012, 2013]                         # never on this machine (plan 4.1)
+
+scoring:
+  male_min_viirs: 10       # primary MALE uses rectangle-months with VIIRS count >= 10
+  aggregate: region_then_full_year_then_equal_weight
+  rectangles: config/rectangles.csv
+  rect_side_deg: {min: 1.0, max: 5.0, step: 0.25}
+  rect_per_gfed_region: 150
+  rect_per_demo_region: 200
+
+seeds:
+  rectangles: 20261103
+  lightgbm: 42
+  bootstrap: 7
+  resampling: 2026

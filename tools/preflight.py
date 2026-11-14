@@ -19,10 +19,19 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def run(cmd: list[str]) -> tuple[int, str]:
     try:
-        p = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=60)
+        # Explicit UTF-8: on Chinese Windows the default codepage (GBK) cannot decode gh's output.
+        p = subprocess.run(
+            cmd,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=60,
+        )
     except (OSError, subprocess.TimeoutExpired) as e:
         return 1, str(e)
-    return p.returncode, (p.stdout + p.stderr).strip()
+    return p.returncode, ((p.stdout or "") + (p.stderr or "")).strip()
 
 
 def main() -> int:
@@ -63,7 +72,7 @@ def main() -> int:
     else:
         results.append(("gh installed", False, "install GitHub CLI: https://cli.github.com"))
 
-    code, out = run([sys.executable, "tools/guardrails.py", "check"])
+    code, out = run([sys.executable, "-X", "utf8", "tools/guardrails.py", "check"])
     results.append(("guardrails", code == 0, out.splitlines()[-1] if out else ""))
 
     width = max(len(name) for name, _, _ in results)

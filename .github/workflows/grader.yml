@@ -1,0 +1,101 @@
+# External blind grader (plan section 4.4). Committed and frozen in S01, before any modelling.
+#
+# Runs only when a human pushes the `final-test` tag (AI agents must never push it). It
+#   1. refuses to run if results/final-test/ already exists on any branch (one exam only);
+#   2. checks every frozen file, including the sealed results/submission.parquet, against
+#      config/frozen-manifest.json;
+#   3. downloads, on GitHub's machine only, the locked S-NPP VIIRS data: the 2012 and 2013 yearly
+#      packages (test 1) and the 2014-2021 packages for the holdout regions (test 2). These files
+#      are public and need no key; they never reach the development machine;
+#   4. scores the submission with the code of the tagged commit:
+#        python -m harmonization.final_test --submission results/submission.parquet \
+#            --locked-dir <dir with the yearly zips> --out results/final-test
+#      (harmonization/final_test.py is written and frozen in S07; it reuses the frozen cleaning
+#      and gridding code, so the answer key is built exactly like the training labels);
+#   5. commits results/final-test/ back to the results branch.
+name: grader
+
+on:
+  push:
+    tags: ["final-test"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: final-test
+  cancel-in-progress: false
+
+env:
+  RESULTS_BRANCH: feat/data-harmonization
+  FIRMS_YEARLY: https://firms.modaps.eosdis.nasa.gov/data/country/zips
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Refuse a second exam
+        run: |
+          git fetch --no-tags origin '+refs/heads/*:refs/remotes/origin/*'
+          if [ -e results/final-test ]; then
+            echo "results/final-test already exists in the tagged commit"; exit 1
+          fi
+          for ref in $(git for-each-ref --format='%(refname)' refs/remotes/origin); do
+            if git cat-file -e "$ref:results/final-test" 2>/dev/null; then
+              echo "results/final-test already exists on $ref: the test can only be taken once"
+              exit 1
+            fi
+          done
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync --locked
+
+      - name: Check frozen files and the sealed submission
+        run: |
+          uv run python tools/guardrails.py check
+          uv run python - <<'EOF'
+          import json, sys
+          frozen = json.load(open("config/frozen-manifest.json"))["frozen"]
+          if "results/submission.parquet" not in frozen:
+              sys.exit("results/submission.parquet is not sealed in the frozen manifest")
+          print("submission sealed:", frozen["results/submission.parquet"])
+          EOF
+
+      - name: Download locked S-NPP VIIRS (GitHub machine only)
+        run: |
+          mkdir -p "$RUNNER_TEMP/locked"
+          cd "$RUNNER_TEMP/locked"
+          for year in 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021; do
+            curl -sSfL --retry 5 -O "$FIRMS_YEARLY/viirs-snpp_${year}_all_countries.zip"
+          done
+          sha256sum *.zip | tee sha256sums.txt
+
+      - name: Score
+        run: |
+          uv run python -m harmonization.final_test \
+            --submission results/submission.parquet \
+            --locked-dir "$RUNNER_TEMP/locked" \
+            --out results/final-test
+          cp "$RUNNER_TEMP/locked/sha256sums.txt" results/final-test/locked-data-sha256.txt
+          echo "tag_commit=$GITHUB_SHA" > results/final-test/provenance.txt
+          echo "run=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> results/final-test/provenance.txt
+          date -u +%Y-%m-%dT%H:%M:%SZ >> results/final-test/provenance.txt
+
+      - name: Commit results back
+        run: |
+          cp -r results/final-test "$RUNNER_TEMP/final-test"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$RESULTS_BRANCH" "origin/$RESULTS_BRANCH"
+          mkdir -p results
+          cp -r "$RUNNER_TEMP/final-test" results/final-test
+          git add results/final-test
+          git commit -m "Final test results from tag final-test ($GITHUB_SHA)"
+          git push origin "$RESULTS_BRANCH"

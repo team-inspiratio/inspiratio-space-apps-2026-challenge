@@ -6,14 +6,15 @@
 <!-- STATUS:BEGIN -->
 ```yaml
 current_card: docs/sessions/1-data.md   # next (or current) task card
-status: ready                           # ready | in_progress | blocked | done
-claimed_by: ""                          # claimant's name; empty means unclaimed
-claimed_at: ""                          # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
-last_pushed_stage: S00                  # last stage completed and pushed
+status: in_progress                     # ready | in_progress | blocked | done
+claimed_by: "qiuxue-yee"                # claimant's name; empty means unclaimed
+claimed_at: "2026-11-03T18:48:11Z"      # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
+last_pushed_stage: S01                  # last stage completed and pushed
 last_pushed_at: 2026-11-03
 branch: feat/data-harmonization
-next_step: "Start a new session for task card 1-data: S01 pre-registration → S02 download → S03 import → S04 cleaning → S05 gridding → S06 data health check"
+next_step: "Task card 1-data in progress: S01 done; now doing S02 download → S03 import → S04 cleaning → S05 gridding → S06 data health check"
 needs_human:
+  - "Awaiting human confirmation: the frozen tools/guardrails.py crashes on Chinese Windows when it reads git history as GBK; currently worked around with -X utf8. Should a person [unfreeze] it to fix the encoding? (docs/decisions/0002)"
   - "The data stages need about 50 GB of disk and 16 GB+ of RAM; fill in FIRMS_MAP_KEY and INSPIRATIO_DATA_DIR in .env"
   - "GitHub CLI login: can be skipped when taking over on this already-logged-in computer; when taking over on another computer, first run gh auth login --web once (gh is needed to upload the Release data package at the end of session 1)"
 ```
@@ -24,7 +25,7 @@ needs_human:
 | Session | Task card | Stages covered | Status |
 |---|---|---|---|
 | 0 | (repository setup) | S00 | ✅ done |
-| 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | ⏭ next |
+| 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | 🔄 in progress (qiuxue-yee) |
 | 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09 (milestone A) | not started |
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | not started |
 | 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | not started |
@@ -36,7 +37,7 @@ needs_human:
 | Stage | Content | Status | Completed | Key numbers | commit |
 |---|---|---|---|---|---|
 | S00 | Environment, guardrails, CI, self-describing files | ✅ done | 2026-11-03 | CI green; 17 pytest tests pass | 3dcf808 |
-| S01 | Pre-registration (settings, holdout regions, random rectangles, grader.yml) | ⬜ todo | | | |
+| S01 | Pre-registration (settings, holdout regions, random rectangles, grader.yml) | ✅ done | 2026-11-03 | 6 regions (3 training + 3 holdout); 3300 rectangles; 5 files frozen | 7d1aa0c |
 | S02 | Download (annual archives, 2026 via API, missing-data list, GFED) | ⬜ todo | | | |
 | S03 | Import (stream to Parquet, drop holdout-region VIIRS) | ⬜ todo | | | |
 | S04 | Cleaning | ⬜ todo | | | |
