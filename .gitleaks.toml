@@ -1,0 +1,15 @@
+title = "inspiratio gitleaks config"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "firms-map-key"
+description = "NASA FIRMS MAP_KEY (32 hex characters) in an assignment or API URL"
+regex = '''(?i)(?:map_?key\s*[=:]\s*["']?|/api/[a-z_]+/(?:csv|json|kml|shp)/)([0-9a-f]{32})'''
+secretGroup = 1
+keywords = ["map_key", "mapkey", "/api/"]
+
+[allowlist]
+description = "Fake keys used by the guardrail tests"
+regexes = ['''^(0123456789abcdef){1,2}$''']

@@ -2,6 +2,13 @@
 
 # MODIS × VIIRS 火点协调
 
+<!-- PROGRESS-BOX:BEGIN -->
+> **当前进度 / Status**：S00（环境搭建）已完成。下一步：会话 1/5，任务卡 [`1-data`](docs/sessions/1-data.md)（预注册 + 下载清洗数据）。
+> Next: session 1 of 5, task card `1-data` (pre-registration + data).
+>
+> **接力三步 / Take over in 3 steps**：① 按 [HANDOFF.md](HANDOFF.md) 装好环境、填好 `.env`；② 把 HANDOFF 里的“通用接力提示词”复制给 Claude Code 或 Codex；③ 按 AI 的提示做需要你本人做的事。详细进度见 [PROGRESS.md](PROGRESS.md)。
+<!-- PROGRESS-BOX:END -->
+
 把 MODIS（2000 年起）和 VIIRS（2012 年起）两代卫星的火点记录统一成一条可以前后比较的月度序列，再用一个网页让人选区域、看历史、判断最近一个完整月份是否偏高，并下载结果。
 
 **完整方案：[docs/proposal.md](docs/proposal.md)**
@@ -26,11 +33,18 @@
 ## 仓库结构
 
 ```
-README.md          本文件
-docs/proposal.md   完整方案（主提案 + 执行手册）
-notes/             阅读和学习笔记
-requirements.txt   Python 依赖
-.env.example       密钥模板（复制成 .env，.env 不提交）
+README.md               本文件
+AGENTS.md / CLAUDE.md   给 AI 的项目规则
+PROGRESS.md             进度（机器可读状态块 + 阶段表）
+HANDOFF.md              接力说明和通用接力提示词（中英文）
+docs/proposal.md        完整方案（主提案 + 执行手册）
+docs/execution-plan.md  数据分析与算法部分的执行计划（唯一依据）
+docs/sessions/          各会话的任务卡
+tools/                  护栏和环境预检脚本
+tests/                  pytest
+notes/                  阅读和学习笔记
+pyproject.toml, uv.lock Python 依赖（用 uv sync 安装）
+.env.example            密钥模板（复制成 .env，.env 不提交）
 ```
 
 ## 约定
