@@ -19,6 +19,6 @@ repos:
         types: [python]
       - id: guardrails
         name: repo guardrails (frozen files, features, locked downloads, keys)
-        entry: uv run --no-sync python tools/guardrails.py check
+        entry: uv run --no-sync python -X utf8 tools/guardrails.py check
         language: system
         pass_filenames: false
