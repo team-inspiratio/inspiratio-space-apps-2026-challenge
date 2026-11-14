@@ -1,5 +1,11 @@
 # MODIS × VIIRS Hotspot Harmonization
 
+<!-- PROGRESS-BOX:BEGIN -->
+> **Status**: S00 (environment setup) is done. Next: session 1 of 5, task card [`1-data`](docs/sessions/1-data.md) (pre-registration + downloading and cleaning the data).
+>
+> **Take over in 3 steps**: ① set up your environment and fill in `.env` following [HANDOFF.md](HANDOFF.md); ② copy the "universal relay prompt" from HANDOFF into Claude Code or Codex; ③ do whatever the AI says needs doing by you in person. Detailed progress is in [PROGRESS.md](PROGRESS.md).
+<!-- PROGRESS-BOX:END -->
+
 We turn the hotspot records of two satellite sensor generations, MODIS (from 2000) and VIIRS (from 2012), into one monthly series that can be compared across the whole period, then build a web page where people pick an area, view its history, judge whether the latest complete month is unusually high, and download the results.
 
 **Full proposal: [docs/proposal.md](docs/proposal.md)**
@@ -24,11 +30,18 @@ We turn the hotspot records of two satellite sensor generations, MODIS (from 200
 ## Repository layout
 
 ```
-README.md          This file
-docs/proposal.md   Full proposal (main proposal + execution handbook)
-notes/             Reading and study notes
-requirements.txt   Python dependencies
-.env.example       Secrets template (copy to .env; .env is never committed)
+README.md               This file
+AGENTS.md / CLAUDE.md   Project rules for AI agents
+PROGRESS.md             Progress (machine-readable status block + stage table)
+HANDOFF.md              Relay guide and the universal relay prompt
+docs/proposal.md        Full proposal (main proposal + execution handbook)
+docs/execution-plan.md  Execution plan for the data analysis and algorithm work (the single source of truth)
+docs/sessions/          Task cards for each session
+tools/                  Guardrail and environment preflight scripts
+tests/                  pytest
+notes/                  Reading and study notes
+pyproject.toml, uv.lock Python dependencies (install with uv sync)
+.env.example            Secrets template (copy to .env; .env is never committed)
 ```
 
 ## Conventions
