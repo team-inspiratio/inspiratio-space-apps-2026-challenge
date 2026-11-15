@@ -7,7 +7,7 @@ This public repository contains the V2 website, scientific documentation, report
 Node.js 22.16+ and npm are required.
 
 ```sh
-cd frontend-v2/website
+cd website
 npm ci
 npm run data:prepare
 npm test
@@ -25,10 +25,10 @@ The catalog covers the global partitions and six demonstration boxes. V2 loads p
 - [Data card](data-card.md), [global data interface](data-interface-global.md) and [validation report](../reports/validation.md).
 - [Recorded blind-test outputs](../results/final-test/): public scores and summaries. These are result files, not a new grading run.
 
-The separate `meta.json` file, full processed Parquet/CSV tables, raw detections and resample assets are not included in this frontend bundle. V2 does not require them. This repository currently has no GitHub Release assets. The legacy `web/archive/website-v1/` data preparation and `pipeline.py all --from-release` require the appropriate assets to be published in this public repository before those optional paths can work. Do not substitute the global bundle for the legacy v1 data: they describe different model versions.
+The separate `meta.json` file, full processed Parquet/CSV tables, raw detections and resample assets are not included in this frontend bundle. V2 does not require them. This repository currently has no GitHub Release assets. The legacy `archive/` data preparation and `pipeline.py all --from-release` require the appropriate assets to be published in this public repository before those optional paths can work. Do not substitute the global bundle for the legacy v1 data: they describe different model versions.
 
 Reproduction from raw NASA FIRMS data uses `pipeline.py all` and the existing scientific guardrails, with the operator's own FIRMS key and data directory. V2 setup does not run that pipeline or change scientific results.
 
 ## Hosting
 
-V2 is published by [GitHub Pages](https://team-inspiratio.github.io/inspiratio-space-apps-2026-challenge/) under this repository. The [deployment workflow](../.github/workflows/pages-v2.yml) verifies the bundled data, tests the production build under the repository path, and publishes `frontend-v2/website/dist/` after relevant changes merge into `main`. Pull requests validate without publishing. Initial setup requires GitHub Pages to use GitHub Actions as its source; see [V2 deployment](../frontend-v2/website/README.md#deployment).
+V2 is published by [GitHub Pages](https://team-inspiratio.github.io/inspiratio-space-apps-2026-challenge/) under this repository. The [deployment workflow](../.github/workflows/pages-v2.yml) verifies the bundled data, tests the production build under the repository path, and publishes `website/dist/` after relevant changes merge into `main`. Pull requests validate without publishing. Initial setup requires GitHub Pages to use GitHub Actions as its source; see [V2 deployment](../website/README.md#deployment).

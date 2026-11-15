@@ -51,7 +51,7 @@ Suggested owners are given by role; the team fills in the names: **Data** (data 
 
 ### X1. Check the deployed front-end version
 
-The front-end source is available in `web/archive/website-v1/` and `frontend-v2/website/`. Confirm that the public deployment matches the intended version; merging source does not automatically update the separately hosted site. See [web setup](../web/archive/website-v1/README.md) and [V2 setup](../frontend-v2/website/README.md).
+The front-end source is available in `archive/` and `website/`. Confirm that the public deployment matches the intended version; merging source does not automatically update the separately hosted site. See [web setup](../archive/README.md) and [V2 setup](../website/README.md).
 
 ### X2. The repository is private and has no LICENSE file
 
@@ -293,7 +293,7 @@ These are "tell the front end" items or environment tips that the repository rec
 - **Options**: close.
 - **Recommendation and reason**: close; done.
 - **Impact if not handled**: none, only a longer list.
-- **Related**: `web/archive/website-v1/scripts/prepare-data.mjs` (`feat/web`).
+- **Related**: `archive/scripts/prepare-data.mjs` (`feat/web`).
 - **Suggested owner**: Front end.
 
 | Decision | Name | Date |
@@ -302,7 +302,7 @@ These are "tell the front end" items or environment tips that the repository rec
 
 ### Item 6: tell the front end about the anomaly indicator reference implementation and the 25 cases
 
-- **In one sentence**: the front end passes all 25 cases field by field (`web/archive/website-v1/test/anomaly.test.mjs`, all passing when PR #5 was verified).
+- **In one sentence**: the front end passes all 25 cases field by field (`archive/test/anomaly.test.mjs`, all passing when PR #5 was verified).
 - **Options**: close.
 - **Recommendation and reason**: close; done. The front end implemented the details in ADR 0011 item 1.
 - **Impact if not handled**: none.
@@ -360,4 +360,4 @@ These are "tell the front end" items or environment tips that the repository rec
 |---|---|---|
 | Last digits of numbers differ between reports | `reports/final-test.md` gives Test 1 total bias 4.8%, seasonal correlation 0.999 and Test 2 bias 18.4%; `reports/validation.md` gives 4.7%, 0.998 and 18.3%. The raw scores are 0.04746, 0.99848 and 0.18348 | Externally, follow `validation.md`, as the submission materials already do. Whether to change `final-test.md` is a person's decision |
 | How the gap in the four tropical regions is described | `docs/project-journey.md` (data branch) says "3–14% worse than M1s"; computed from `reports/global-scores.md`, E028's MALE is higher than M1s's by about 2.5% (EQAS) to 18.6% (NHSA) | The data owner corrects it at the next update |
-| Access scope of the live site | `web/archive/website-v1/README.md` says "Sites private access", but on 2026-11-04 the home page and data files opened without logging in | Confirm in a private browsing window, then change the README or the access settings |
+| Access scope of the live site | `archive/README.md` says "Sites private access", but on 2026-11-04 the home page and data files opened without logging in | Confirm in a private browsing window, then change the README or the access settings |

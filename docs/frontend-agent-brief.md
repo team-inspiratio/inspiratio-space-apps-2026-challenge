@@ -26,7 +26,7 @@ No fire forecasting.
 | **Main data: world map + any area** | `global-v1` (CC BY 4.0) | [`docs/data-interface-global.md`](data-interface-global.md) |
 | Demo-region version (6 regions, the model that went through the external blind grading once) | `v1` (CC BY 4.0) | [`docs/data-interface.md`](data-interface.md) |
 
-Use the bundled public frontend files in `inspiratio-site/public/data/global-v1/`. For V2, run `npm run data:prepare` inside `frontend-v2/website/`; it verifies the required files against `results/expected/dataset-global-v1.sha256` and copies them locally. No account, API key, Python or network download is needed. See [public data availability](public-data.md) for files that are not included.
+Use the bundled public frontend files in `inspiratio-site/public/data/global-v1/`. For V2, run `npm run data:prepare` inside `website/`; it verifies the required files against `results/expected/dataset-global-v1.sha256` and copies them locally. No account, API key, Python or network download is needed. See [public data availability](public-data.md) for files that are not included.
 
 **The web page usually needs only these files:**
 

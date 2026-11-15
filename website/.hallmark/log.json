@@ -9,7 +9,7 @@
   "footer": "preserved sources and attribution",
   "imagery": "actual interactive map and calendar",
   "photos": [],
-  "entry": "frontend-v2/website/src/hallmark.css",
+  "entry": "website/src/hallmark.css",
   "fingerprint": "research-atlas-existing-workspace",
   "sections": [
    "intro",

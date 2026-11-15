@@ -1,6 +1,6 @@
 # Inspiratio Site
 
-这是独立的 Svelte / Vite 网站快照。项目主仓库中的 `web/archive/website-v1/` 和 `frontend-v2/website/` 是其他版本。
+这是独立的 Svelte / Vite 网站快照。项目主仓库中的 `archive/` 和 `website/` 是其他版本。
 
 ## 本地运行
 

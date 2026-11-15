@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { anomaly, boxWeight, subset, csv, annual } from "../src/science.js";
 const doc = JSON.parse(
-  fs.readFileSync(new URL("../../../docs/anomaly-cases.json", import.meta.url)),
+  fs.readFileSync(new URL("../../docs/anomaly-cases.json", import.meta.url)),
 );
 for (const c of doc.cases)
   test(c.id, () => {
