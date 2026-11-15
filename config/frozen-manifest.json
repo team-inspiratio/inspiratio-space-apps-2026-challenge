@@ -1,12 +1,17 @@
 {
   "frozen": {
     ".github/workflows/grader.yml": "ab094dba09a0638425b04fa53419c9856bb0d84b97934a76a5449b999ef697aa",
+    "config/features.json": "67e12e175e35526952259ba22226782e373cafb262794aadcdcb5ee17913f7c8",
     "config/rectangles.csv": "2b67b6c24cf0499d2de3a850ab3f0d5250e1d2e3ac6186cfeef2e279fd70db5c",
     "config/regions.json": "c5439312489cba8408bd121a15308dd7bf0039c74f6676083a11e8e3f46a0f1f",
     "config/settings.yaml": "7393e2ad6d568e1585f19da17dd1444c97ba2c014a75183ce25eaee36f77e1bc",
     "harmonization/evaluate.py": "ed93a05843810622c9b11bc365121aa9d32fdfc0015d888af0b5ab13a39a616e",
     "harmonization/final_test.py": "da3b9daf9615240f3faba09d92777e46efe95b510923da5af56bd49373d392d0",
+    "harmonization/freeze.py": "d0a05484bba38c9aca65bebcf5efb4bb11e06d8f86d74c598007cc3a3f0e08f1",
+    "harmonization/harmonize.py": "95d0197593309b2892dad73eb657a5cbccd50f8e5cd61f879be20cc45a1f3c40",
     "harmonization/prepare.py": "cfc5408cc15fd6085d98a22e8c6d365e722ea898852eb6bc407ebd9522c68237",
+    "results/freeze.json": "8e6f0a2a6d85a475813620a6438fd20b76a1b59822c7ec1c019d7dd32ac0cc01",
+    "results/submission.parquet": "c8c0946bc89003a2bb0e3a7c4c72cc0d7f6be9e4587af7b3dddfd09df7b6047a",
     "tools/guardrails.py": "a866030e7cbc43fcea646534a0bd6856255850541b598b61324c0c71ab0d571a"
   }
 }

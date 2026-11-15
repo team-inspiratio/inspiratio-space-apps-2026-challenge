@@ -355,5 +355,6 @@ LAMBDAS = (0.0, 5.0, 20.0, 50.0, 100.0)  # M1s grid, chosen on the validation wi
 
 
 def fit(train: pd.DataFrame) -> Predict:
-    """Current default method (S08: M1s; S10 may replace it)."""
-    return fit_m1s(train)
+    """The selected and frozen method (S11, docs/decisions/0008): LightGBM E028 = fit_lgb with
+    the LGB configuration above. Frozen with this file; M1s stays available as fit_m1s."""
+    return fit_lgb(train)

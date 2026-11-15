@@ -6,16 +6,16 @@
 <!-- STATUS:BEGIN -->
 ```yaml
 current_card: docs/sessions/4-freeze-test.md   # 下一张（或正在做的）任务卡
-status: ready                           # ready | in_progress | blocked | done
-claimed_by: ""                          # 认领人名字；空表示无人认领
-claimed_at: ""                          # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
+status: in_progress                     # ready | in_progress | blocked | done
+claimed_by: "qiuxue-yee"                # 认领人名字；空表示无人认领
+claimed_at: "2026-11-04T03:00:28Z"    # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
 last_pushed_stage: S10                  # 最后一个完成并 push 的阶段
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
 data_release: data-v0                   # gh release download data-v0；SHA256 见交接备注；里程碑 A 数据在 milestone-a
-next_step: "开新会话执行任务卡 4-freeze-test：S11 按预注册选定并冻结模型（S10 第 1 名 E028 两段式 LightGBM 已通过第 1–5 条初查），封存答卷后由人推送 final-test 标签"
+next_step: "S11 答卷已封存（E028，results/submission.parquet 已进冻结清单）。等人推送 final-test 标签、GitHub 阅卷把 results/final-test/ 提交回本分支后，git pull，写 reports/final-test.md，再做 S12"
 needs_human:
-  - "会话 4 需要人决定推送 final-test 标签（只能考一次，AI 不能自己推）"
+  - "现在由人做：在仓库文件夹运行 git pull，再运行 git tag final-test && git push origin final-test（只能考一次，AI 不能自己推）。阅卷跑完之前不要往 feat/data-harmonization 推任何提交"
   - "请过目：S10 审核记录 reports/model-review.md（结论：前 3 名都通过泄漏审查；风险：纬度在只有 3 个训练区时起了区域标签的作用，留出区可能变差，测试 2 会检验）"
   - "待人决定：NOAA-20 接续的通过标准（docs/decisions/0005 第 4 条；标准是看了检验结果后提出的）"
   - "待人决定：留出区的 Terra 桥接用训练区合并比例还是当地 MODIS 比例（docs/decisions/0005 第 6 条，影响 S12 上线版）"
@@ -35,7 +35,7 @@ needs_human:
 | 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | ✅ 完成 |
 | 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09（里程碑 A） | ✅ 完成 |
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ✅ 完成 |
-| 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | ⏭ 下一张 |
+| 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | 🔄 进行中（qiuxue-yee） |
 | 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15（里程碑 B） | 待开始 |
 | G | [`G-global`](docs/sessions/G-global.md) | 全球重跑 | 待开始（S15 之后） |
 
@@ -54,7 +54,7 @@ needs_human:
 | S08 | 保底模型 M0、M1s、QM；桥接与接续 | ✅ done | 2026-11-03 | 两窗口合并 MALE：M1s（λ=20）0.377、QM 0.463、M0 1.795；Terra→Aqua→M1s 链条 0.522；NOAA-20 接续月总量偏差中位数 −0.3%～+3.1%（`reports/scores-v1.md`） | |
 | S09 | ★里程碑 A：数据集 v0、前端导出、预发布版 | ✅ done | 2026-11-03 | 261.6 万格子-月份：S-NPP 观测 55.4 万、NOAA-20 换算 4.7 万、M1s 182 万、Terra 桥接 19.7 万；预发布版 `milestone-a`，下载后 9 个文件 SHA256 全部核对通过 | |
 | S10 | LightGBM 和 AI 实验 | ✅ done | 2026-11-04 | 37 次实验（E000–E036，预算按 ADR 0007 缩减并提前收工）；最佳验证 MALE：E028 两段式 LightGBM 0.2947，比 M1s（0.3766）低 21.8%（差 −0.082 ± 0.016，95% 区间 −0.113～−0.053），比 QM 低 0.169；前 3 名都通过护栏和泄漏审查（`reports/scores-s10.md`、`reports/model-review.md`） | |
-| S11 | 冻结与外部盲审 | ⬜ todo | | | |
+| S11 | 冻结与外部盲审 | 🔄 答卷已封存，等人推 final-test 标签 | | 按预注册选定 E028（5 条门槛全过）；重训 2014-01–2021-06，轮数 766/970；答卷 596,032 行 + 100 列重采样，校准系数 5.37（`docs/decisions/0008`、`results/freeze.json`） | |
 | S12 | 最终数据集 | ⬜ todo | | | |
 | S13 | 验证报告（D1） | ⬜ todo | | | |
 | S14 | 交付 | ⬜ todo | | | |
@@ -124,3 +124,10 @@ needs_human:
   - 模型很依赖 Terra 的输入，而 Terra 2020 年后有漂移（`reports/findings.md` 第 7 条），报告里要写。
   - 两段式下配置里的 `zero_rule` 不起作用（审核记录第 1.1 节），读代码时别误解。
   - 2002 年 Aqua 上线前（只有 Terra）的月份不在 S10 评估范围内，S12 生成序列前要检查。
+
+### 会话 4（2026-11-04，qiuxue-yee）
+
+- **S11 做到哪**：按预注册第 4 节选定 LightGBM E028（逐条核对见 `docs/decisions/0008` 第 1 节）。冻结了 `harmonize.py`（默认 `fit()` 改为 `fit_lgb`，其余与 E028 源码相同）、`config/features.json`，然后用冻结程序在训练区 2014-01–2021-06 上重训，100 次整年重抽给稳定性区间，校准系数用两个验证窗口定（5.37）。答卷 `results/submission.parquet`、冻结清单 `results/freeze.json`、生成脚本 `harmonization/freeze.py` 已进 `config/frozen-manifest.json`。封卷前用假答案把冻结的阅卷函数跑通。
+- **下一步**：人推 `final-test` 标签 → GitHub 阅卷（`grader.yml`）把 `results/final-test/` 提交回本分支 → `git pull` → 如实写 `reports/final-test.md`（原始/校准覆盖率按 ADR 0008 第 5 节的规则）→ S12。
+- **阅卷期间不要 push 本分支**：工作流最后一步要往本分支推结果，期间有别的提交会让它推送失败。
+- **S12 半成品**：`harmonization/series_v1.py`（已提交，还没正式运行）：上线版 = 冻结的评估版（本机永远没有 2012–2013 年 S-NPP，红线 1），只有 Terra 的月份用 Terra 造 Aqua 输入再进模型（先在验证窗口上和 v0 的 M1s 链条比，`terra-check`），留出区桥接用当地 MODIS 比例（ADR 0005 第 6 条选项 B），区间按 ADR 0008 第 5 节决定要不要乘校准系数，验收 `recount()` 已在 v0 上试过（426 个区域-月，0 处不一致）。中间结果在数据目录 `s11/`。
