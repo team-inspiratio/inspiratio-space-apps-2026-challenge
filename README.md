@@ -1,8 +1,8 @@
 # MODIS × VIIRS 火点协调
 
 <!-- PROGRESS-BOX:BEGIN -->
-> **当前进度 / Status**：S00（环境搭建）已完成。下一步：会话 1/5，任务卡 [`1-data`](docs/sessions/1-data.md)（预注册 + 下载清洗数据）。
-> Next: session 1 of 5, task card `1-data` (pre-registration + data).
+> **当前进度 / Status**：S00–S06 已完成（预注册已冻结；数据已下载、清洗、网格化，处理后数据见预发布版 `data-v0`）。下一步：会话 2/5，任务卡 [`2-baselines`](docs/sessions/2-baselines.md)（判卷机器 + 保底模型 → 里程碑 A）。
+> Next: session 2 of 5, task card `2-baselines` (scoring machinery + baseline models → milestone A). Processed data: release `data-v0`.
 >
 > **接力三步 / Take over in 3 steps**：① 按 [HANDOFF.md](HANDOFF.md) 装好环境、填好 `.env`；② 把 HANDOFF 里的“通用接力提示词”复制给 Claude Code 或 Codex；③ 按 AI 的提示做需要你本人做的事。详细进度见 [PROGRESS.md](PROGRESS.md)。
 <!-- PROGRESS-BOX:END -->

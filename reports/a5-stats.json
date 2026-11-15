@@ -1,0 +1,80 @@
+{
+  "series": {
+    "california_terra_mean_monthly": 559.3465346534654,
+    "california_aqua_mean_monthly": 557.1180555555555,
+    "california_snpp_mean_monthly": 5840.5,
+    "california_noaa20_mean_monthly": 6619.78,
+    "cordoba_terra_mean_monthly": 391.8712871287129,
+    "cordoba_aqua_mean_monthly": 686.375,
+    "cordoba_snpp_mean_monthly": 2817.274647887324,
+    "cordoba_noaa20_mean_monthly": 3004.91,
+    "southern_africa_terra_mean_monthly": 7335.306930693069,
+    "southern_africa_aqua_mean_monthly": 20842.149305555555,
+    "southern_africa_snpp_mean_monthly": 98331.98591549296,
+    "southern_africa_noaa20_mean_monthly": 102985.78
+  },
+  "snpp_aqua_over_time": {
+    "california": {
+      "median_2014_2021h1": 7.01874595992243,
+      "median_2021h2_on": 7.862340998043052,
+      "trend_per_year_2014_2021h1": 0.016938962886452885
+    },
+    "cordoba": {
+      "median_2014_2021h1": 5.402190923317684,
+      "median_2021h2_on": 5.308746736292428,
+      "trend_per_year_2014_2021h1": 0.03477922139159948
+    },
+    "southern_africa": {
+      "median_2014_2021h1": 5.877155172413793,
+      "median_2021h2_on": 6.978494623655914,
+      "trend_per_year_2014_2021h1": 0.0003605786024906645
+    }
+  },
+  "snpp_aqua_lat_pixel": {
+    "by_latitude": {
+      "california|32": 7.526399155227033,
+      "california|34": 7.634777090274472,
+      "california|36": 9.166868491160088,
+      "california|38": 8.365949902779366,
+      "california|40": 9.148373472773896,
+      "cordoba|-36": 4.6710475454194045,
+      "cordoba|-34": 5.48286952873724,
+      "cordoba|-32": 5.624262847514743,
+      "cordoba|-30": 5.084710806466289,
+      "southern_africa|-18": 5.556352663193555,
+      "southern_africa|-16": 5.3745955599393245,
+      "southern_africa|-14": 4.870351988403605,
+      "southern_africa|-12": 4.8567199538629415,
+      "southern_africa|-10": 4.842989474425008
+    },
+    "by_pixel_area": {
+      "(1.0, 1.25]": 6.296081504702195,
+      "(1.25, 1.5]": 5.8308886878607735,
+      "(1.5, 2.0]": 5.088602901947593,
+      "(2.0, 3.0]": 4.879459402538486,
+      "(3.0, 4.0]": 5.0640023677176496,
+      "(4.0, 6.0]": 5.76499617710433,
+      "(6.0, 10.0]": 5.343218012081274
+    }
+  },
+  "noaa20_snpp": {
+    "california": {
+      "median": 1.0031605022821155,
+      "p10": 0.8915576017134318,
+      "p90": 1.0810179263253794,
+      "n_months": 88
+    },
+    "cordoba": {
+      "median": 1.0004209462872538,
+      "p10": 0.8986506150153424,
+      "p90": 1.0784219220724656,
+      "n_months": 88
+    },
+    "southern_africa": {
+      "median": 0.9844310068459823,
+      "p10": 0.926734250413435,
+      "p90": 1.062463590133953,
+      "n_months": 88
+    }
+  }
+}
