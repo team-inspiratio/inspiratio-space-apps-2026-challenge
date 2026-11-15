@@ -8,7 +8,7 @@
 |---|---|
 | 1 | Install [Git](https://git-scm.com/downloads), [uv](https://docs.astral.sh/uv/getting-started/installation/) and [GitHub CLI](https://cli.github.com). |
 | 2 | Run `gh auth login --web` and approve in the browser (you need access to this repository). |
-| 3 | `gh repo clone team-inspiratio/inspiratio-space-apps-2026 inspiratio`, then `cd inspiratio` and `git switch feat/data-harmonization`. On Windows, first run `git config --global core.longpaths true` and put the project under a short path. |
+| 3 | `gh repo clone team-inspiratio/inspiratio-space-apps-2026-challenge inspiratio`, then `cd inspiratio` and `git switch -c feat/project-update`. On Windows, first run `git config --global core.longpaths true` and put the project under a short path. |
 | 4 | Get your own free FIRMS MAP_KEY (1 minute): <https://firms.modaps.eosdis.nasa.gov/api/map_key/>. |
 | 5 | Copy `.env.example` to `.env` and fill in `FIRMS_MAP_KEY=your key` and `INSPIRATIO_DATA_DIR=data folder` (outside the repository, for example `D:/inspiratio-data` or `~/inspiratio-data`). **Never commit `.env`, send it to anyone, or paste it to an AI.** |
 | 6 | Run `uv sync`, then `uv run pre-commit install`, then `uv run python tools/preflight.py` to see what is missing. |

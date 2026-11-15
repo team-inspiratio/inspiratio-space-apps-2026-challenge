@@ -2,9 +2,7 @@
 
 > **Status: to be filled in by people.** This document only organizes the items and makes recommendations; it does not mean any decision has been made. The sign-off fields are filled in by people; the AI does not fill them in for anyone.
 >
-> **Basis**: `needs_human` in `PROGRESS.md`, as of when PR #6 was merged (commit `5dbc2e2`, 20 items in total, numbered in the order of that list).
->
-> **About the links**: PR #6 was merged into `main` on 2026-11-04. Links marked "data branch" are GitHub links to a fixed version, with the same content as `main`.
+> **Basis**: the project review items in `PROGRESS.md` and the decision records linked below.
 
 ## How to use this file
 
@@ -51,20 +49,9 @@ Suggested owners are given by role; the team fills in the names: **Data** (data 
 
 ## Group A: must be decided in person
 
-### X1. The front-end fixes are not merged; the live site is still the old version
+### X1. Check the deployed front-end version
 
-- **In one sentence**: PR #4 (front end added to the repository) and PR #5 (front-end fixes) are both still open, and `main` has no `web/` directory; the live website is the old version from before the fixes, with no separate methods page.
-- **Options**:
-  1. First review and merge #4 → #5, then redeploy following `web/README.md`.
-  2. Do not merge yet; do it together once the deployment option is decided.
-- **Recommendation and reason**: choose 1. #5 has been verified and passes CI; the demo and the project page both need the fixed version. For the deployment method see task 3's [ADR 0016](decisions/0016-deployment-options.md).
-- **Impact if not handled**: judges still see the old web page from before the fixes, for example the "3.24×" wording on the current-month card, and no methods page.
-- **Related**: [PR #4](https://github.com/team-inspiratio/inspiratio-space-apps-2026/pull/4), [PR #5](https://github.com/team-inspiratio/inspiratio-space-apps-2026/pull/5); the earlier [PR #3](https://github.com/team-inspiratio/inspiratio-space-apps-2026/pull/3) is also still open; please confirm whether it is obsolete.
-- **Suggested owner**: Front end.
-
-| Decision | Name | Date |
-|---|---|---|
-|  |  |  |
+The front-end source is available in `web/` and `frontend-v2/`. Confirm that the public deployment matches the intended version; merging source does not automatically update the separately hosted site. See [web setup](../web/README.md) and [V2 setup](../frontend-v2/README.md).
 
 ### X2. The repository is private and has no LICENSE file
 
@@ -91,7 +78,7 @@ Suggested owners are given by role; the team fills in the names: **Data** (data 
   3. Do not add the global version.
 - **Recommendation and reason**: choose 1. The six-region version has blind-test scores and has been verified; the global files are much larger (the largest is about 57 MB uncompressed), and how to label them is not yet decided (ADR 0015). Secure a version that can be demonstrated first.
 - **Impact if not handled**: the front end does not know how far to go, and the submission materials cannot settle how to describe the "coverage".
-- **Related**: [`docs/data-interface-global.md`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/blob/5dbc2e2/docs/data-interface-global.md), [`reports/global-review.md`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/blob/5dbc2e2/reports/global-review.md) (data branch); [ADR 0015](decisions/0015-global-confidence-and-fallback-proposal.md).
+- **Related**: [`docs/data-interface-global.md`](data-interface-global.md), [`reports/global-review.md`](../reports/global-review.md); [ADR 0015](decisions/0015-global-confidence-and-fallback-proposal.md).
 - **Suggested owner**: Front end.
 
 | Decision | Name | Date |
@@ -196,7 +183,7 @@ These have all been done as recommended; people only need to be aware of them. O
 - **Options**: be aware.
 - **Recommendation and reason**: be aware. Everyone must remember that the global version has only validation scores (MALE 0.534, M1s 0.619) and no test scores; the blind test's 22% must not be presented as a global score. The global intervals are very wide: the median width is 0.5–1.6 times the estimate, and about 19% have a lower bound of 0.
 - **Impact if not handled**: not blocking, but getting it wrong externally would be false advertising.
-- **Related**: [ADR 0013 items 3 and 5](https://github.com/team-inspiratio/inspiratio-space-apps-2026/blob/5dbc2e2/docs/decisions/0013-G全球重跑的做法.md) (data branch; in this repository: [ADR 0013](decisions/0013-g-global-rerun-method.md)).
+- **Related**: [ADR 0013 items 3 and 5](decisions/0013-g-global-rerun-method.md).
 - **Suggested owner**: Data.
 
 | Decision | Name | Date |
@@ -289,11 +276,11 @@ These are "tell the front end" items or environment tips that the repository rec
 
 ### Item 2: merge the G-global PR (done)
 
-- **In one sentence**: PR #6 was merged into `main` on 2026-11-04, and the global stage's code, reports and ADR 0013 are all on `main`.
+- **In one sentence**: The global stage's code, reports and ADR 0013 are all on `main`.
 - **Options**: close.
 - **Recommendation and reason**: close; done.
 - **Impact if not handled**: none.
-- **Related**: [PR #6](https://github.com/team-inspiratio/inspiratio-space-apps-2026/pull/6).
+- **Related**: [Global implementation decisions](decisions/0013-g-global-rerun-method.md).
 - **Suggested owner**: Data.
 
 | Decision | Name | Date |

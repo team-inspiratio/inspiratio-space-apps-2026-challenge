@@ -98,7 +98,7 @@ Paste the following as is into the agent building the web page (Claude Code, Cod
 
 ```text
 You are building the "burning calendar" web page for Team Inspiratio at NASA Space Apps 2026. The data is finished and publicly released; you are responsible only for the web page.
-First read docs/frontend-agent-brief.md in the repository team-inspiratio/inspiratio-space-apps-2026 (required, 5 minutes),
+First read docs/frontend-agent-brief.md in the repository team-inspiratio/inspiratio-space-apps-2026-challenge (required, 5 minutes),
 then, as needed, docs/data-interface-global.md and docs/data-interface.md, which it points to. Do not read the data-processing code or the execution plan.
 Rules:
 1) Download the data from GitHub Release global-v1; do not regenerate it or change any values on the front end;

@@ -1,23 +1,23 @@
-# Project journey: what the data track did over two days, and why
+# Project journey: methods, results, and decisions
 
-> **Summary:** a distilled record of the data/algorithm track (2026-11-03 to 11-04): timeline,
+> **Summary:** a distilled record of the data/algorithm track: stages,
 > numbers, the decisions that mattered and why, known weaknesses, and what a v2 or a paper would
 > need. It replaces reading the raw AI conversation logs: it keeps the reasoning, not the chatter.
 > Each claim points to the report or ADR that holds the evidence.
 
 The data track was completed by a person and several AI sessions in relay: one session per task card, plus a top-level session that coordinated. The raw conversations were not uploaded; they are too long and too messy. Only what later readers (front end, proposal writers, demo makers, v2 developers) really need is kept here. The evidence is in the reports and in [`docs/decisions/`](decisions/).
 
-## 1. Timeline
+## 1. Development stages
 
-| Time (local) | Stage | Result |
-|---|---|---|
-| 11-03 13:30 | S00 environment | uv, three layers of guardrails (hook, pre-commit, CI), relay documents |
-| 14:00–17:00 | Task card 1: S01–S06 | Pre-registration and freeze; downloaded 529 million hotspot records, 444 million after cleaning; 0.25° × month gridding; data health check |
-| 17:00–17:45 | Task card 2: S07–S09 | Grader (frozen); baselines M0, M1s, QM; dataset v0; milestone A |
-| 18:00–early next morning | Task card 3: S10 | 37 rounds of LightGBM experiments (E000–E036), selecting the two-stage E028 |
-| Night–11-04 morning | Task card 4: S11–S12 | Freeze; a person pushed the `final-test` tag; one blind grading run in the GitHub cloud; final dataset v1 |
-| 11-04 morning | Task card 5: S13–S15 | Validation report, delivery files; one-command reproduction (87 minutes, all 37 checks pass); merged into main; Release `v1` |
-| 11-04 daytime | G: global rerun | 278,000 cells worldwide; validation scores; intervals; Release `global-v1` |
+| Stage | Result |
+|---|---|
+| S00 environment | uv, three layers of guardrails (hook, pre-commit, CI), relay documents |
+| Task card 1: S01–S06 | Pre-registration and freeze; downloaded 529 million hotspot records, 444 million after cleaning; 0.25° × month gridding; data health check |
+| Task card 2: S07–S09 | Grader (frozen); baselines M0, M1s, QM; dataset v0; milestone A |
+| Task card 3: S10 | 37 rounds of LightGBM experiments (E000–E036), selecting the two-stage E028 |
+| Task card 4: S11–S12 | Freeze; a person pushed the `final-test` tag; one blind grading run in the GitHub cloud; final dataset v1 |
+| Task card 5: S13–S15 | Validation report, delivery files; one-command reproduction (87 minutes, all 37 checks pass); merged into main; Release `v1` |
+| G: global rerun | 278,000 cells worldwide; validation scores; intervals; Release `global-v1` |
 
 ## 2. Results at a glance
 

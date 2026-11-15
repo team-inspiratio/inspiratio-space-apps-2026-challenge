@@ -14,9 +14,9 @@
 | **Where** | Six 7°-10° boxes: three training regions (California, USA; Córdoba, Argentina; southern African miombo savanna) and three holdout regions never used in training (northern Australia; central Siberia; Indo-Gangetic Plain). Boxes in `config/regions.json`. |
 | **When** | 2000-11 to 2026-10, calendar months (UTC), 312 months. |
 | **Size** | 2,615,808 cell-months (8,384 cells × 312 months). |
-| **Version** | v1, 2026-11-04. Model LightGBM E028, frozen before a one-time blind test. |
+| **Version** | v1. Model LightGBM E028, frozen before a one-time blind test. |
 | **Files** | `dataset_v1.parquet` and `dataset_v1.csv.gz` (same table), `region_totals_v1.csv`, one `frontend/<region>.json.gz` per region, `resamples20_v1.parquet`, `meta.json`, `SHA256SUMS.txt`, on the GitHub release of this repository. |
-| **License** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (confirmed by the team, 2026-11-04). The input data are NASA FIRMS and GFED products; see "Citation". |
+| **License** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (confirmed by the team). The input data are NASA FIRMS and GFED products; see "Citation". |
 
 ## 1. Sources
 
@@ -109,4 +109,4 @@ Scores are MALE, the mean absolute difference of log(count + 1) on random 1°-5�
 - **How accurate**: MALE 0.258 in the training regions' test years (simple ratio method 0.332), with annual total bias within 9%; 0.644 in the holdout regions, an error 2.5 times that of the training regions, with totals 14%–45% too low (except northern Australia).
 - **Intervals**: the stability intervals only express "how much the estimate would change with a different set of training years", not "the true value has a 90% chance of falling inside"; after multiplying the regional intervals by 5.37 under a rule fixed in advance, coverage is 95.5% in the training regions and 55.9% in the holdout regions.
 - **Suitable for**: comparing hotspot activity across months and years within the training regions, building a burning calendar and judging "is this month's fire activity high". **Not suitable for**: counting fires, computing burned area or emissions, judging disaster severity, or use outside the training regions without a caveat.
-- **License**: CC BY 4.0 (confirmed by the team on 2026-11-04). The raw data comes from NASA FIRMS and GFED; see section 7 for how to cite.
+- **License**: CC BY 4.0 (confirmed by the team). The raw data comes from NASA FIRMS and GFED; see section 7 for how to cite.
