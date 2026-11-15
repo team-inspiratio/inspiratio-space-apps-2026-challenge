@@ -203,7 +203,6 @@ needs_human:
   - 测试 2 的弱点会直接影响全球推广：留出区误差是训练区的 2.5 倍、总量偏低 14–45%、区间覆盖率只有 56%。全球产品必须标明“训练区以外的估计不确定性更大”。
   - 冻结模型只用 3 个训练区，纬度起了区域标签的作用（S10 审核记录第 5 节）。全球重跑按计划来，不要事后改冻结模型。
 
-
 ### 会话 G（2026-11-04，qiuxue-yee，完成）
 
 - **分支**：`feat/data-harmonization` 先合并了 `origin/main`（squash 后的 PR #2），在这个分支上继续，最后开新 PR（ADR 0013 第 1 条）。
@@ -222,3 +221,14 @@ needs_human:
   - `meta.json`：`52c9c5a1a0723941073090a5494ff7a1d02790e4b4be41c48fac8ad30b3c513e`
 - **接下来**：PR（feat/data-harmonization → main）等人合并。
 - **本机测试注意**：中文 Windows 上 `tests/test_guardrails.py` 读 `git log` 时会按 GBK 解码出错，要用 `PYTHONUTF8=1 uv run pytest` 跑；CI（Linux）不受影响。`tools/guardrails.py` 是冻结文件，没改。
+
+### 前端（web/）
+
+- **日期 / 范围**：2026-11-04，Codex；现有前端源码入库，方便接手修改。本次不改功能，不接管数据任务。
+- **现在的网址**：https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site （Sites 私有站点）。部署方式和权限不变，未配置 GitHub Pages；本次不重新部署。
+- **源码位置**：`web/`，从最新 `main` 新建的 `feat/web` 分支，通过草稿 PR 审阅。现有部署源码基准为 Sites 提交 `bd39d7f2c5064917cee042607433375d59913ebf`；主程序、样式、依赖和锁文件原样复制。
+- **交接入口**：`web/README.md` 写明运行、构建、已有测试、Release v1 文件清单和准备方式、部署步骤、目录结构，以及地图/日历/卡片/折线/方法视图的代码位置。
+- **数据**：科学数据不进 Git。`npm run data:prepare` 从 Release v1 获取并校验文件；`npm run build` 本身不下载数据，发布完整网页前须先准备数据。前端不需要 FIRMS key。
+- **已知问题待修**：原始逐点火点 CSV 需要数据侧提供经批准的分区文件；`global-v1` 尚未接入；自定义选区和 20 次重抽区间为近似；独立设备的人类可用性检查待团队完成。重新部署需现有 Sites 项目的编辑/发布权限。
+- **已有前端历史 PR**：#3 使用 `frontend/` 目录；本次 `feat/web` / `web/` 是用户指定的源码交接位置，避免把两套目录同时合入 main。
+- **本次验收**：干净环境 `npm ci`、`npm run build` 成功；准备 v1 数据后已有前端测试 36 项通过（含 25 个标准异常用例），仓库 Python 测试 79 项通过、2 项本地数据检查跳过；pre-commit 全量检查通过，13 个冻结文件护栏零违规。除本次交接文档外，24 个源码文件的 Git blob 与现有部署一致。根预检中的 FIRMS key / 数据目录两项属于数据流水线配置，本次前端入库未填密钥、未启动数据任务。
