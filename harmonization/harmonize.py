@@ -7,7 +7,7 @@ VIIRS-scale estimate per row. predict() only ever gets prepare.feature_table(): 
 `region`, `month` and the S-NPP label `snpp_count`; they are used for fitting only.
 
   M0   direct splice: H = Aqua count (what you get by joining MODIS before 2012 to VIIRS after)
-  M1s  shrunk ratio (proposal "候选模型"): H = k[g, c] * A with
+  M1s  shrunk ratio (proposal "candidate model"): H = k[g, c] * A with
            k[g, c] = (sum_y V[g, c, y] + lam * k[R, c]) / (sum_y A[g, c, y] + lam)
        g cell, c calendar month, R the cell's training region; cells not seen in training (new
        regions) get the ratio pooled over all training regions for that calendar month

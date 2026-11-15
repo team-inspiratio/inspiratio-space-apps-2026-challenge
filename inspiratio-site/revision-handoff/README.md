@@ -1,27 +1,27 @@
-# Inspiratio 前端修改提示词
+# Inspiratio Frontend Revision Prompt
 
-请接手 `inspiratio-site/` 下的 Svelte 网站。本地预览可用 `npm run dev -- --port 5199` 启动。先看两张截图和[上一轮交接摘要](PRIOR-STATUS.md)，确认现在能复现哪些问题，再按下面三点修改。
+Please take over the Svelte website under `inspiratio-site/`. Start a local preview with `npm run dev -- --port 5199`. First look at the two screenshots and the [previous handoff summary](PRIOR-STATUS.md), confirm which issues you can currently reproduce, then make the three changes below.
 
-## 1. 让数据展示说清楚模型估计了什么
+## 1. Make the data display explain what the model estimates
 
-看图 2 的右上角读数卡、顶部 `Harmonized / Direct splice` 切换，以及左侧故事说明。现在最大的数字是总探测数，下面的 `21.4× a usual September` 讲的是和历史同期相比有多异常。页面把视觉效果和异常程度展示得很突出，但我看完还是不清楚项目的模型在 `estimate` 上具体做出了什么。
+Look at the reading card in the top right of Figure 2, the `Harmonized / Direct splice` toggle at the top, and the story text on the left. Right now the largest number is the total detection count, and the `21.4× a usual September` below it describes how anomalous the month is compared with the same month historically. The page puts the visuals and the degree of anomaly front and center, but after reading it I still can't tell what the project's model actually does for the `estimate`.
 
-请调整这些位置的展示重点。找一个实际使用了模型估计的历史月份，让用户在同一地区、同一月份看懂原始计数是多少、转到 VIIRS 尺度后估计是多少，以及当前读数是模型估计还是卫星观测。对应位置是 [ReadingCard.svelte](../src/components/ReadingCard.svelte) 和 [Story.svelte](../src/components/Story.svelte)。
+Please shift the emphasis in these places. Pick a historical month where the model estimate is actually used, and let the user see, for the same region and month, what the raw count is, what the estimate is after converting to the VIIRS scale, and whether the current reading is a model estimate or a satellite observation. The relevant files are [ReadingCard.svelte](../src/components/ReadingCard.svelte) and [Story.svelte](../src/components/Story.svelte).
 
-## 2. 修复第二个展示段落切换时的拖影
+## 2. Fix the ghosting when switching into the second story section
 
-看图 2 的页面中央。左侧已经显示 `California, September 2020`，中央同时出现散点图和被拉伸成条纹的底图。请复现第二段切入、切出，以及滚到 California 这一幕时的画面，确认拖影什么时候出现。段落切换后，前一段的地图、散点或图表残影应该消失。相关位置是 [Story.svelte](../src/components/Story.svelte) 和 [MapView.svelte](../src/components/MapView.svelte)。
+Look at the center of Figure 2. The left side already shows `California, September 2020`, while the center shows the scatter plot and a basemap smeared into stripes at the same time. Please reproduce entering and leaving the second section, and scrolling to the California scene, and pin down when the ghosting appears. After a section switch, any leftover map, scatter or chart from the previous section should disappear. The relevant files are [Story.svelte](../src/components/Story.svelte) and [MapView.svelte](../src/components/MapView.svelte).
 
-## 3. 修复地图错位，恢复放大后的定位能力
+## 3. Fix map misalignment and restore location finding when zoomed in
 
-看图 1 的世界地图。`MEXICO`、`COLOMBIA`、`BRAZIL` 等标签离对应陆地区域很远，很难判断文字指的是哪块地方。现在已经有地名，接下来请检查 [MapView.svelte](../src/components/MapView.svelte) 中地名、底图和火点格的位置。参考旧版地图的定位和圈选功能，让用户放大后能根据边界、城市名和火点的位置辨认具体区域。视觉风格可以沿用现有版本。
+Look at the world map in Figure 1. Labels such as `MEXICO`, `COLOMBIA` and `BRAZIL` sit far from their land areas, so it is hard to tell which place a label refers to. Place names are already there; next, please check the positions of the place names, basemap and fire cells in [MapView.svelte](../src/components/MapView.svelte). Using the old map's positioning and area selection as a reference, let users identify specific areas by boundaries, city names and fire locations when zoomed in. The current visual style can stay.
 
-## 问题截图
+## Issue screenshots
 
-**图 1 · October 2011 世界地图。** 请看国家标签和对应陆地的位置。
+**Figure 1 · World map, October 2011.** Check the country labels against their land areas.
 
-![图 1 · 世界地图地名与区域错位](01-world-map-labels.png)
+![Figure 1 · World map place names misaligned with their areas](01-world-map-labels.png)
 
-**图 2 · California, September 2020。** 请看中央切换画面和右上角读数卡。
+**Figure 2 · California, September 2020.** Check the transition in the center and the reading card in the top right.
 
-![图 2 · 加州场景的切换拖影和读数卡](02-california-transition.png)
+![Figure 2 · Transition ghosting and reading card in the California scene](02-california-transition.png)

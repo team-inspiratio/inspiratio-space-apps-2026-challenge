@@ -93,7 +93,7 @@ def answer_key(locked_dir: Path) -> pd.DataFrame:
 
 
 def anomaly_class(target: np.ndarray, ref: np.ndarray) -> np.ndarray:
-    """0 low, 1 normal, 2 high from the mid-rank percentile (proposal "异常指标"); `ref` has one
+    """0 low, 1 normal, 2 high from the mid-rank percentile (proposal "anomaly indicator"); `ref` has one
     row of reference values per target, NaN where a year is not in the reference set."""
     n = np.isfinite(ref).sum(axis=1)
     h = target[:, None]
