@@ -1,6 +1,9 @@
 # MODIS × VIIRS 火点协调 / Harmonized Fire Record
 
 **One consistent monthly fire record from 2000 to 2026, across two generations of NASA satellites.**
+
+**[Open the public V2 fire activity explorer](https://inspiratio-fire-activity-v2.hushedotter14.chatgpt.site)** · [V2 source and setup](frontend-v2/README.md)
+
 把 MODIS（2000 年起）和 VIIRS（2012 年起）两代卫星的火点记录，统一成一条可以前后比较的月度序列：全球 0.25° 格子，2000-11 至 2026-10。
 
 ![直接拼接会在 2012 年出现假台阶；协调后接得上](reports/figures/d1-1-problem.png)

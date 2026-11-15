@@ -1,0 +1,12 @@
+{
+  "scanned": "2026-11-08",
+  "findings": {
+    "fonts": "DESIGN.md:7: system sans controls and serif editorial title",
+    "palette": "DESIGN.md:7: ocean, ink, cool paper and fire activity colors",
+    "motion": "src/style.css: existing reduced-motion preferences",
+    "framework": "package.json: vanilla JavaScript, Vite and Leaflet",
+    "scope": "Existing app screen; restyle only"
+  },
+  "preserve": ["English copy", "scientific evidence", "data and calculations", "links and input wiring", "map, calendar and exports", "opt-in accessibility"],
+  "introduce": ["shared CSS tokens", "editorial hierarchy", "flat surfaces", "stronger contrast and focus", "responsive evidence layout"]
+}

@@ -1,0 +1,33 @@
+[
+ {
+  "scope": "app",
+  "shape": "app screen",
+  "theme": "brand",
+  "axes": "light/serif/cool",
+  "hero": "not applicable: existing app",
+  "nav": "preserved horizontal navigation",
+  "footer": "preserved sources and attribution",
+  "imagery": "actual interactive map and calendar",
+  "photos": [],
+  "entry": "frontend-v2/src/hallmark.css",
+  "fingerprint": "research-atlas-existing-workspace",
+  "sections": [
+   "intro",
+   "map and region inspector",
+   "calendar",
+   "historical chart",
+   "values table",
+   "methods and evidence"
+  ],
+  "signature": "real geographic activity grid and full monthly calendar",
+  "waived": [
+   "system control font for offline availability",
+   "retained copy and existing interaction geometry"
+  ],
+  "prompt": "Restyle V2 with Hallmark; preserve all key achievements and functions; separate branch pending approval",
+  "sweep": "0 FAIL, 0 REFLEX, 0 WARN",
+  "finish_review": "in-thread",
+  "date": "2026-11-09",
+  "mode": "build"
+ }
+]
