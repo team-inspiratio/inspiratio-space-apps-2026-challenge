@@ -40,16 +40,9 @@ jobs:
       run:
         working-directory: frontend-v2
     env:
-      PAGES_BASE_PATH: /inspiratio-space-challenges-2026/
+      PAGES_BASE_PATH: /${{ github.event.repository.name }}/
     steps:
       - uses: actions/checkout@v4
-      - name: Verify the requested Pages address before publishing
-        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        run: |
-          if [ "$GITHUB_REPOSITORY" != "team-inspiratio/inspiratio-space-challenges-2026" ]; then
-            echo "::error::Rename the public repository to inspiratio-space-challenges-2026 before publishing."
-            exit 1
-          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 22

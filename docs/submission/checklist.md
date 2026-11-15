@@ -30,7 +30,7 @@
 
 ## 4. Website
 
-- V2 GitHub Pages address: <https://team-inspiratio.github.io/inspiratio-space-challenges-2026/>. Deployment and automated checks are recorded in the `Deploy V2 to GitHub Pages` workflow.
+- V2 GitHub Pages address: <https://team-inspiratio.github.io/inspiratio-space-apps-2026-challenge/>. Deployment and automated checks are recorded in the `Deploy V2 to GitHub Pages` workflow.
 
 - [ ] PRs #4 and #5 are merged and the fixed version is deployed (ADR 0016)
 - [ ] In a private browsing window, the home page and `/methods.html` both open and neither is the old version

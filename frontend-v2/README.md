@@ -4,7 +4,7 @@ Website source in `frontend-v2/`. Documentation, evidence and required data are 
 
 ## Public website
 
-**[Open Inspiratio V2](https://team-inspiratio.github.io/inspiratio-space-challenges-2026/)** — hosted by GitHub Pages under this repository.
+**[Open Inspiratio V2](https://team-inspiratio.github.io/inspiratio-space-apps-2026-challenge/)** — hosted by GitHub Pages under this repository.
 
 The [V2 deployment workflow](../.github/workflows/pages-v2.yml) verifies the bundled `global-v1` assets, runs unit and browser tests, and publishes the production build after relevant changes merge into `main`. Pull requests run the same checks without publishing. The workflow can also be run manually from GitHub Actions.
 
@@ -42,8 +42,8 @@ Browser tests require a running local server and prepared global-v1 data. Set FR
 
 ## Deployment
 
-GitHub Pages serves V2 at `/inspiratio-space-challenges-2026/`. The workflow builds with this Vite base path so JavaScript, styles and on-demand data files resolve under the repository URL. Only `frontend-v2/dist/` is published.
+GitHub Pages serves V2 at `/inspiratio-space-apps-2026-challenge/`. The workflow builds with this Vite base path so JavaScript, styles and on-demand data files resolve under the repository URL. Only `frontend-v2/dist/` is published.
 
-For initial setup, a repository admin renames this public repository to **inspiratio-space-challenges-2026** in **Settings → General → Repository name**, then enables **Settings → Pages → Source: GitHub Actions**. GitHub Pages takes its path from the repository name. The workflow refuses to publish under a different name; pull requests still validate the requested path before the rename. The deployment job also attempts to enable Pages if needed. After a successful workflow run, the `github-pages` environment records the deployed commit and URL. Later source updates deploy automatically after merging into `main`; no Sites account or manual upload is needed.
+GitHub Pages takes its path from the current repository name; no rename is needed. The deployment job attempts to enable Pages automatically. If GitHub requires an admin to enable it, open [the repository's Pages settings](https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/settings/pages), find **Build and deployment → Source**, and select **GitHub Actions**. Then rerun the failed deployment job from the Actions tab. After a successful workflow run, the `github-pages` environment records the deployed commit and URL. Later source updates deploy automatically after merging into `main`; no Sites account or manual upload is needed.
 
-To reproduce the Pages build locally, run `npm run data:prepare` followed by `npm run build -- --base=/inspiratio-space-challenges-2026/`. Use `npx vite preview --host 127.0.0.1 --port 4173 --base=/inspiratio-space-challenges-2026/` and set `FRONTEND_URL=http://127.0.0.1:4173/inspiratio-space-challenges-2026/` for `npm run test:browser`.
+To reproduce the Pages build locally, run `npm run data:prepare` followed by `npm run build -- --base=/inspiratio-space-apps-2026-challenge/`. Use `npx vite preview --host 127.0.0.1 --port 4173 --base=/inspiratio-space-apps-2026-challenge/` and set `FRONTEND_URL=http://127.0.0.1:4173/inspiratio-space-apps-2026-challenge/` for `npm run test:browser`.

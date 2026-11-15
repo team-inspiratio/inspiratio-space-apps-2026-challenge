@@ -2,7 +2,7 @@
 
 **One consistent monthly fire record from 2000 to 2026, across two generations of NASA satellites.**
 
-**[Open the public V2 fire activity explorer](https://team-inspiratio.github.io/inspiratio-space-challenges-2026/)** · [V2 source and setup](frontend-v2/README.md)
+**[Open the public V2 fire activity explorer](https://team-inspiratio.github.io/inspiratio-space-apps-2026-challenge/)** · [V2 source and setup](frontend-v2/README.md)
 
 We bring the hotspot records of two satellite generations, MODIS (from 2000) and VIIRS (from 2012), onto one monthly series that can be compared across the whole period: global 0.25° cells, 2000-11 to 2026-10.
 

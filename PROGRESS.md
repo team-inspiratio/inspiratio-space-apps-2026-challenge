@@ -97,6 +97,6 @@ No active handover. See the status block for outstanding review items.
 ## Public website source maintenance
 
 - V2 publishing uses the repository's GitHub Pages workflow, with checksum-verified bundled assets and production-build browser checks under the repository path. Relevant merges into main deploy automatically.
-- Initial Pages setup is pending a repository admin: rename the public repository to `inspiratio-space-challenges-2026` and select GitHub Actions in Settings → Pages. The current GitHub integration rejects both management operations with HTTP 403; the workflow blocks publication under the old name.
+- V2 uses the current public repository name, `inspiratio-space-apps-2026-challenge`, with no rename. The deployment job attempts to enable Pages; if GitHub rejects automatic setup, a repository admin selects GitHub Actions under Settings → Pages → Build and deployment → Source. Direct Pages management through the current GitHub integration returned HTTP 403.
 - V2 documentation and evidence links use this public repository. Data preparation verifies and copies the bundled global frontend files without credentials or downloads.
 - Public data availability and hosting requirements are documented in `docs/public-data.md`. No scientific results, frozen files or data-stage claims changed.
