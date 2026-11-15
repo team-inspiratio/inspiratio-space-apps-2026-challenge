@@ -6,16 +6,15 @@
 <!-- STATUS:BEGIN -->
 ```yaml
 current_card: docs/sessions/2-baselines.md   # 下一张（或正在做的）任务卡
-status: ready                           # ready | in_progress | blocked | done
-claimed_by: ""                          # 认领人名字；空表示无人认领
-claimed_at: ""                          # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
-last_pushed_stage: S06                  # 最后一个完成并 push 的阶段
+status: in_progress                     # ready | in_progress | blocked | done
+claimed_by: "qiuxue-yee"                # 认领人名字；空表示无人认领
+claimed_at: "2026-11-03T21:58:00Z"      # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
+last_pushed_stage: S07                  # 最后一个完成并 push 的阶段
 last_pushed_at: 2026-11-03
 branch: feat/data-harmonization
 data_release: data-v0                   # gh release download data-v0；SHA256 见交接备注
-next_step: "开新会话执行任务卡 2-baselines：S07 判卷机器 → S08 保底模型 M0、M1s、QM → S09 里程碑 A"
+next_step: "S08 保底模型 M0、M1s、QM，Terra→Aqua 桥接，NOAA-20 接续检验，分数表 v1"
 needs_human:
-  - "S07 冻结 prepare、evaluate 之前，请人过目一遍（计划要求负责人确认后冻结）"
   - "GitHub CLI 登录：这台电脑已登录可跳过；换电脑接力先运行 gh auth login --web（下载 Release 数据要用）"
 ```
 <!-- STATUS:END -->
@@ -43,7 +42,7 @@ needs_human:
 | S04 | 清洗 | ✅ done | 2026-11-03 | 5.29 亿 → 4.44 亿行；类型 −6.1%、低置信度 −9.7%、NRT 掩膜 −0.18%、重复 222 条；抽查 20 条无误删（`reports/cleaning.md`） | 94669f0 |
 | S05 | 网格化与特征 | ✅ done | 2026-11-03 | 总数守恒（各卫星格子计数和 = 清洗后点数）；区域稠密表 261.6 万行；20 个特征 | 0ec693d |
 | S06 | 数据体检（A5） | ✅ done | 2026-11-03 | S-NPP/Aqua 年比约 4.6–10；NOAA-20/S-NPP 中位数 0.98–1.00；Terra/Aqua 2020 年后骤降 | 6603ac1 |
-| S07 | 判卷机器（prepare、evaluate） | ⬜ todo | | | |
+| S07 | 判卷机器（prepare、evaluate） | ✅ done | 2026-11-03 | 假方法：永远 0 合并 MALE 5.90，直接用 MODIS 1.79；两次运行 SHA256 一致（`reports/judge-check.md`） | |
 | S08 | 保底模型 M0、M1s、QM；桥接与接续 | ⬜ todo | | | |
 | S09 | ★里程碑 A：数据集 v0、前端导出、预发布版 | ⬜ todo | | | |
 | S10 | LightGBM 和 AI 实验 | ⬜ todo | | | |
