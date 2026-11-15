@@ -1,4 +1,4 @@
-# Fire Atlas front end (web/archive/website-v1/)
+# Fire Atlas front end (archive/)
 
 The Fire Atlas front end provides maps, monthly calendars, anomaly summaries, exports, and methods documentation.
 
@@ -6,12 +6,12 @@ Current address: <https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site> 
 
 ## Running, building and testing locally
 
-Requires **Node.js 22.16+** and npm. The source code in this repository is public. This legacy version needs v1 assets that are not currently included or published as a Release here. Use the self-contained V2 setup in `../../../frontend-v2/website/README.md`; see `../../../docs/public-data.md` for availability. The legacy preparation script targets only this public repository and will require a future public v1 Release. The front end needs no Python, FIRMS MAP_KEY, GPU or database.
+Requires **Node.js 22.16+** and npm. The source code in this repository is public. This legacy version needs v1 assets that are not currently included or published as a Release here. Use the self-contained V2 setup in `../website/README.md`; see `../docs/public-data.md` for availability. The legacy preparation script targets only this public repository and will require a future public v1 Release. The front end needs no Python, FIRMS MAP_KEY, GPU or database.
 
 ```sh
 git clone https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge.git
 cd inspiratio-space-apps-2026-challenge
-cd web/archive/website-v1
+cd archive
 npm ci
 npm run data:prepare                # first prepare the Release v1 data the web page needs
 npm test
@@ -21,7 +21,7 @@ npm run dev
 Vite prints the local address, usually `http://127.0.0.1:5173/`; the methods and validation page is at `/methods.html`. The download source recorded in `package-lock.json` is `registry.npmmirror.com`; if it cannot be reached, use `npm ci --registry=https://registry.npmjs.org/ --replace-registry-host=always` (which does not change the lock file). Production build and local production preview:
 
 ```sh
-npm run build                      # output: web/archive/website-v1/dist/ (two pages: index.html, methods.html)
+npm run build                      # output: archive/dist/ (two pages: index.html, methods.html)
 npm run preview
 npm run methods:data               # only after reports/ or results/final-test/ change: regenerates src/methods-data.json
 ```
@@ -43,7 +43,7 @@ The repository root's Python tests and pre-commit run separately as described in
 
 ## Data sources, when data is fetched, and the Git boundary
 
-The legacy data contract uses v1 assets. **Those assets are not currently published in this public repository.** `npm run data:prepare` targets a future public v1 Release with the GitHub CLI; it has no alternate repository source. The files needed by this legacy version are listed below. For currently available global frontend data and V2, see [public data availability](../../../docs/public-data.md):
+The legacy data contract uses v1 assets. **Those assets are not currently published in this public repository.** `npm run data:prepare` targets a future public v1 Release with the GitHub CLI; it has no alternate repository source. The files needed by this legacy version are listed below. For currently available global frontend data and V2, see [public data availability](../docs/public-data.md):
 
 | Release file | Purpose / local location |
 | --- | --- |
@@ -64,7 +64,7 @@ The script verifies the SHA256 of every file, retries failed fetches file by fil
 This **Vite + plain JavaScript single-page app** keeps its main views in `src/main.js`.
 
 ```text
-web/archive/website-v1/
+archive/
 ├── index.html                   Page entry point
 ├── package.json                 dev / build / preview / test / data:prepare
 ├── package-lock.json            Exact dependency lock
@@ -105,9 +105,9 @@ It currently uses **Sites**, at <https://inspiratio-fire-atlas.hybrid-0f7b5-5906
 
 When a redeployment is needed, someone with edit/publish permission on that Sites project follows the existing process in Codex with the Sites plugin installed:
 
-1. Take the `web/archive/website-v1/` to publish from the team repository and run `npm ci` → `npm run data:prepare` → `npm test` → `npm run build`.
+1. Take the `archive/` to publish from the team repository and run `npm ci` → `npm run data:prepare` → `npm test` → `npm run build`.
 2. Choose the **existing** Sites project above, read its access status and obtain a short-lived source write credential for the same project, without creating a new project. The credential is passed only through the publishing helper's hidden stdin, never saved to a file or written into command arguments.
-3. Following the Sites skill, open the existing source with the source helper in a separate Sites checkout, then sync the contents of `web/archive/website-v1/` into it as that checkout's project root; do not add an extra directory layer inside the hosting checkout, and do not overwrite `.git/`. Keep the project ID and `static.directory = dist`.
+3. Following the Sites skill, open the existing source with the source helper in a separate Sites checkout, then sync the contents of `archive/` into it as that checkout's project root; do not add an extra directory layer inside the hosting checkout, and do not overwrite `.git/`. Keep the project ID and `static.directory = dist`.
 4. Prepare the same verified data in that checkout, test and build, then use the Sites source helper to push the project source and package the static output; the team repository's `dist/` does not go into Git.
 5. Using the exact source commit and archive returned by the source helper, run the Sites save/private deploy operation, wait for it to succeed, then check the original address. Keep the existing private access scope; giving others access or publish permission needs separate authorization from the project owner.
 

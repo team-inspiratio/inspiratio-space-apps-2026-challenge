@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - frontend-v2/website/**
+      - website/**
       - inspiratio-site/public/data/global-v1/**
       - results/expected/dataset-global-v1.sha256
       - config/regions.json
@@ -15,7 +15,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - frontend-v2/website/**
+      - website/**
       - inspiratio-site/public/data/global-v1/**
       - results/expected/dataset-global-v1.sha256
       - config/regions.json
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-24.04
     defaults:
       run:
-        working-directory: frontend-v2/website
+        working-directory: website
     env:
       PAGES_BASE_PATH: /${{ github.event.repository.name }}/
     steps:
@@ -47,7 +47,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: frontend-v2/website/package-lock.json
+          cache-dependency-path: website/package-lock.json
       - run: npm ci
       - run: npm run data:prepare
       - run: npm test
@@ -74,7 +74,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
-          path: frontend-v2/website/dist
+          path: website/dist
 
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

@@ -1,28 +1,28 @@
 # Inspiratio Version 2
 
-Website source in `frontend-v2/website/`. Documentation, evidence and required data are provided in this public repository.
+Website source in `website/`. Documentation, evidence and required data are provided in this public repository.
 
 ## Public website
 
 **[Open Inspiratio V2](https://team-inspiratio.github.io/inspiratio-space-apps-2026-challenge/)** — hosted by GitHub Pages under this repository.
 
-The [V2 deployment workflow](../../.github/workflows/pages-v2.yml) verifies the bundled `global-v1` assets, runs unit and browser tests, and publishes the production build after relevant changes merge into `main`. Pull requests run the same checks without publishing. The workflow can also be run manually from GitHub Actions.
+The [V2 deployment workflow](../.github/workflows/pages-v2.yml) verifies the bundled `global-v1` assets, runs unit and browser tests, and publishes the production build after relevant changes merge into `main`. Pull requests run the same checks without publishing. The workflow can also be run manually from GitHub Actions.
 
 ## Local setup
 
 Requires Node.js 22.16+ and npm.
 
 ```sh
-cd frontend-v2/website
+cd website
 npm ci
 npm run data:prepare
 npm run build
 npm run dev -- --port 5176
 ```
 
-Data preparation reads `../../inspiratio-site/public/data/global-v1/` and verifies all 21 required files against `../../results/expected/dataset-global-v1.sha256` before copying them into the ignored `public/data/global-v1/` directory. It uses local files only; no GitHub login, GitHub CLI, Python, network download or API key is required. The readiness marker is written only after all checks pass and is removed if preparation fails. The runtime does not need the separate `meta.json` asset. Without prepared data, the interface explicitly shows limited samples; spatial selection is unavailable.
+Data preparation reads `../inspiratio-site/public/data/global-v1/` and verifies all 21 required files against `../results/expected/dataset-global-v1.sha256` before copying them into the ignored `public/data/global-v1/` directory. It uses local files only; no GitHub login, GitHub CLI, Python, network download or API key is required. The readiness marker is written only after all checks pass and is removed if preparation fails. The runtime does not need the separate `meta.json` asset. Without prepared data, the interface explicitly shows limited samples; spatial selection is unavailable.
 
-Documentation and evidence links resolve to this public repository. See [public data availability](../../docs/public-data.md).
+Documentation and evidence links resolve to this public repository. See [public data availability](../docs/public-data.md).
 
 ## Features
 
@@ -42,7 +42,7 @@ Browser tests require a running local server and prepared global-v1 data. Set FR
 
 ## Deployment
 
-GitHub Pages serves V2 at `/inspiratio-space-apps-2026-challenge/`. The workflow builds with this Vite base path so JavaScript, styles and on-demand data files resolve under the repository URL. Only `frontend-v2/website/dist/` is published.
+GitHub Pages serves V2 at `/inspiratio-space-apps-2026-challenge/`. The workflow builds with this Vite base path so JavaScript, styles and on-demand data files resolve under the repository URL. Only `website/dist/` is published.
 
 GitHub Pages takes its path from the current repository name; no rename is needed. The deployment job attempts to enable Pages automatically. If GitHub requires an admin to enable it, open [the repository's Pages settings](https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/settings/pages), find **Build and deployment → Source**, and select **GitHub Actions**. Then rerun the failed deployment job from the Actions tab. After a successful workflow run, the `github-pages` environment records the deployed commit and URL. Later source updates deploy automatically after merging into `main`; no Sites account or manual upload is needed.
 

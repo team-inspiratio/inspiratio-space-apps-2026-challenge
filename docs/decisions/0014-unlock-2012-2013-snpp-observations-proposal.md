@@ -85,7 +85,7 @@ With B, there are two ways to get the data:
 
 - **Data**: the `source` rules, intervals (observed months have no model interval), the source count table, the front-end JSON, `region_totals`, `docs/data-interface.md`.
 - **Anomaly cases**: the 6 real-data cases may change; decide whether to save a separate copy or bump the version (`docs/anomaly-cases.json`).
-- **Web page**: all "withheld" and "blind-test years" wording and the calendar divider in `web/archive/website-v1/src/series.js`, `web/archive/website-v1/src/main.js` and `web/archive/website-v1/src/methods.js`, and `web/archive/website-v1/test/series.test.mjs`.
+- **Web page**: all "withheld" and "blind-test years" wording and the calendar divider in `archive/src/series.js`, `archive/src/main.js` and `archive/src/methods.js`, and `archive/test/series.test.mjs`.
 - **Global version**: `global-v1` has the same estimated period (273,712 training cells × 23 months, about 6.3 million rows). This proposal does not cover it; doing it would need a separate version.
 - **Documents**: limitation 2 in `docs/data-card.md`, limitation 4 in `reports/validation.md`, `docs/ai-usage.md`.
 

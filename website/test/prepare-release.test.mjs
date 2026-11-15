@@ -20,7 +20,7 @@ function fixture(t) {
   const manifest = Object.entries(files).map(([name, content]) =>
     `${createHash("sha256").update(content).digest("hex")}  ${name}`).join("\n");
   fs.writeFileSync(path.join(root, "results/expected/dataset-global-v1.sha256"), manifest);
-  return { root, source, out: path.join(root, "frontend-v2/website/public/data/global-v1") };
+  return { root, source, out: path.join(root, "website/public/data/global-v1") };
 }
 
 test("packages the public catalog and assets without credentials or unused metadata", t => {
