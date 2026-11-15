@@ -1,7 +1,7 @@
 # MODIS × VIIRS Hotspot Harmonization
 
 <!-- PROGRESS-BOX:BEGIN -->
-> **Status**: S00 (environment setup) is done. Next: session 1 of 5, task card [`1-data`](docs/sessions/1-data.md) (pre-registration + downloading and cleaning the data).
+> **Status**: S00–S09 are done and ★milestone A is reached. The grader is frozen; dataset v0, produced by the fallback model M1s, and the front-end files are in the pre-release `milestone-a`, with the interface spec in [docs/data-interface.md](docs/data-interface.md), so the front end can start work. Next: session 3 of 5, task card [`3-model`](docs/sessions/3-model.md) (LightGBM and AI-driven automated experiments).
 >
 > **Take over in 3 steps**: ① set up your environment and fill in `.env` following [HANDOFF.md](HANDOFF.md); ② copy the "universal relay prompt" from HANDOFF into Claude Code or Codex; ③ do whatever the AI says needs doing by you in person. Detailed progress is in [PROGRESS.md](PROGRESS.md).
 <!-- PROGRESS-BOX:END -->

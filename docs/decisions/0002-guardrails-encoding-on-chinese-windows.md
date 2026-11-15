@@ -8,7 +8,7 @@ The file is frozen and an AI may not change it (red line 2), so for now the prob
 
 ## Options
 
-1. **Keep things as they are**: locally, always use `python -X utf8 tools/guardrails.py check` (`.pre-commit-config.yaml` and `tools/preflight.py` have already been changed accordingly; neither file is in the frozen manifest). When running it by hand, also add `-X utf8`, or set the environment variable `PYTHONUTF8=1`.
+1. **Keep things as they are**: locally, always use `python -X utf8 tools/guardrails.py check` (`.pre-commit-config.yaml` and `tools/preflight.py` have already been changed accordingly; neither file is in the frozen manifest). When running it by hand, also add `-X utf8`, or set the environment variable `PYTHONUTF8=1`. The same goes for running the tests: `uv run python -X utf8 -m pytest` (otherwise `test_repository_passes_guardrails` fails on Chinese Windows).
 2. **A person unfreezes and fixes it**: add `encoding="utf-8"` to the two `subprocess.run` calls in `guardrails.py`, freeze it again, and write `[unfreeze]` and the reason in the commit message. Only the encoding changes, none of the rules.
 
 ## Recommendation
@@ -17,4 +17,4 @@ Option 1 is enough: it does not affect any rule or result. If teammates often ru
 
 ## Status
 
-**Awaiting human confirmation** (whether option 2 is needed). Until confirmed, run it as in option 1.
+**Confirmed: option 1 (qiuxue-yee, 2026-11-03).** The user's words (translated from Chinese): "Up to you; go with whichever you think is better." Option 1 was chosen as recommended: no unfreezing, and locally always add `-X utf8`. If anyone later wants option 2, a person must commit the `[unfreeze]` themselves.

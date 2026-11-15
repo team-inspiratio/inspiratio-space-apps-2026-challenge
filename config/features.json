@@ -1,0 +1,25 @@
+{
+  "_comment": "Model inputs (S05). MODIS only plus latitude and calendar month; no year, region name or VIIRS information (AGENTS.md red line 3, checked by CI).",
+  "features": [
+    "lat",
+    "cal_month",
+    "terra_count",
+    "terra_frp_median",
+    "terra_frp_p75",
+    "terra_low_frp_share",
+    "terra_pixel_area_mean",
+    "terra_night_share",
+    "terra_fire_days",
+    "terra_nbr_count",
+    "terra_no_detection",
+    "aqua_count",
+    "aqua_frp_median",
+    "aqua_frp_p75",
+    "aqua_low_frp_share",
+    "aqua_pixel_area_mean",
+    "aqua_night_share",
+    "aqua_fire_days",
+    "aqua_nbr_count",
+    "aqua_no_detection"
+  ]
+}
