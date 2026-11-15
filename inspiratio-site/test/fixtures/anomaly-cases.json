@@ -1,0 +1,3628 @@
+{
+ "about": "Standard test cases for the anomaly indicator (docs/data-interface.md section 6, harmonization/anomaly.py). For each case, call anomaly(series, target, as_of, baseline) and compare every field of `expected`; numbers to 1e-9 relative, lists exactly.",
+ "rules": {
+  "ref_start_year": 2001,
+  "min_reference_years": 10,
+  "min_median_for_ratio": 5.0,
+  "tie_epsilon": 0.005,
+  "high_percentile_at_least": 90.0,
+  "low_percentile_at_most": 10.0
+ },
+ "labels": {
+  "high": {
+   "zh": "火点活动偏高（VIIRS 等效估计）",
+   "en": "Fire activity above normal (VIIRS-equivalent estimate)"
+  },
+  "normal": {
+   "zh": "火点活动正常（VIIRS 等效估计）",
+   "en": "Fire activity normal (VIIRS-equivalent estimate)"
+  },
+  "low": {
+   "zh": "火点活动偏低（VIIRS 等效估计）",
+   "en": "Fire activity below normal (VIIRS-equivalent estimate)"
+  }
+ },
+ "notes": {
+  "small_median": {
+   "zh": "该月历史上通常很少记录到火点",
+   "en": "This month usually has very few detections"
+  },
+  "insufficient_history": {
+   "zh": "历史不足（参考年数少于 10）",
+   "en": "Not enough history (fewer than 10 reference years)"
+  },
+  "preliminary": {
+   "zh": "初步结果（近实时数据）",
+   "en": "Preliminary (near-real-time data)"
+  },
+  "incomplete_coverage": {
+   "zh": "覆盖不完整",
+   "en": "Incomplete coverage"
+  }
+ },
+ "cases": [
+  {
+   "id": "basic_high",
+   "description": "15 reference Julys 1..15, target 20: percentile 100, median 8, ratio 2.5. The June of the target year and a later July are not references.",
+   "input": {
+    "series": [
+     {
+      "month": "2005-07",
+      "value": 1,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-07",
+      "value": 2,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-07",
+      "value": 3,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-07",
+      "value": 4,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-07",
+      "value": 5,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-07",
+      "value": 6,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 7,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 8,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 9,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 10,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 11,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 12,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 13,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 14,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 15,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-06",
+      "value": 999.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 20.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2021-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 20.0,
+    "n_ref": 15,
+    "ref_years": [
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 8.0,
+    "ratio": 2.5,
+    "percentile": 100.0,
+    "level": "high",
+    "preliminary": false,
+    "notes": [],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "ties_count_half",
+   "description": "Equal values count half: 5 smaller, 3 equal of 15 -> 100 * 6.5 / 15.",
+   "input": {
+    "series": [
+     {
+      "month": "2001-03",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2002-03",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2003-03",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-03",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-03",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-03",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-03",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-03",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-03",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-03",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-03",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-03",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-03",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-03",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-03",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-03",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2016-03",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 5.0,
+    "n_ref": 15,
+    "ref_years": [
+     2001,
+     2002,
+     2003,
+     2004,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015
+    ],
+    "median": 5.0,
+    "ratio": 1.0,
+    "percentile": 43.333333333333336,
+    "level": "normal",
+    "preliminary": false,
+    "notes": [],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "boundary_90_is_high",
+   "description": "Percentile exactly 90 is high (10 references 1..10, target 9.5).",
+   "input": {
+    "series": [
+     {
+      "month": "2010-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 2.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 4.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 6.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 7.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 8.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 9.5,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 9.5,
+    "n_ref": 10,
+    "ref_years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 5.5,
+    "ratio": 1.7272727272727273,
+    "percentile": 90.0,
+    "level": "high",
+    "preliminary": false,
+    "notes": [],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "boundary_10_is_low",
+   "description": "Percentile exactly 10 is low (10 references 1..10, target 1.5).",
+   "input": {
+    "series": [
+     {
+      "month": "2010-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 2.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 4.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 6.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 7.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 8.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 1.5,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 1.5,
+    "n_ref": 10,
+    "ref_years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 5.5,
+    "ratio": 0.2727272727272727,
+    "percentile": 10.0,
+    "level": "low",
+    "preliminary": false,
+    "notes": [],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "insufficient_history",
+   "description": "9 reference years: numbers shown, no level.",
+   "input": {
+    "series": [
+     {
+      "month": "2011-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 2.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 4.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 6.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 7.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 8.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 100.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 100.0,
+    "n_ref": 9,
+    "ref_years": [
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 5.0,
+    "ratio": 20.0,
+    "percentile": 100.0,
+    "level": null,
+    "preliminary": false,
+    "notes": [
+     "insufficient_history"
+    ],
+    "status": "insufficient_history"
+   }
+  },
+  {
+   "id": "small_median_no_ratio",
+   "description": "Median 0.5 (< 5): no ratio, note small_median; 10 of 12 smaller.",
+   "input": {
+    "series": [
+     {
+      "month": "2008-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 2.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 4.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 20.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 6.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 6.0,
+    "n_ref": 12,
+    "ref_years": [
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 0.5,
+    "ratio": null,
+    "percentile": 83.33333333333333,
+    "level": "normal",
+    "preliminary": false,
+    "notes": [
+     "small_median"
+    ],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "median_zero_any_fire_is_high",
+   "description": "All references 0, target 3: percentile 100 and high, no ratio (division by 0 avoided).",
+   "input": {
+    "series": [
+     {
+      "month": "2010-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 3.0,
+    "n_ref": 10,
+    "ref_years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 0.0,
+    "ratio": null,
+    "percentile": 100.0,
+    "level": "high",
+    "preliminary": false,
+    "notes": [
+     "small_median"
+    ],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "median_zero_zero_is_normal",
+   "description": "All references 0, target 0: all equal -> percentile 50, normal.",
+   "input": {
+    "series": [
+     {
+      "month": "2010-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 0.0,
+    "n_ref": 10,
+    "ref_years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 0.0,
+    "ratio": null,
+    "percentile": 50.0,
+    "level": "normal",
+    "preliminary": false,
+    "notes": [
+     "small_median"
+    ],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "incomplete_target",
+   "description": "Target month has missing days: value shown, no percentile or level.",
+   "input": {
+    "series": [
+     {
+      "month": "2010-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 50.0,
+      "input_complete": false,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 50.0,
+    "n_ref": 0,
+    "ref_years": [],
+    "median": null,
+    "ratio": null,
+    "percentile": null,
+    "level": null,
+    "preliminary": false,
+    "notes": [
+     "incomplete_coverage"
+    ],
+    "status": "incomplete_coverage"
+   }
+  },
+  {
+   "id": "incomplete_references_dropped",
+   "description": "Reference years with missing days (2003, 2004) are left out: n = 10.",
+   "input": {
+    "series": [
+     {
+      "month": "2001-08",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2002-08",
+      "value": 2.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2003-08",
+      "value": 3.0,
+      "input_complete": false,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-08",
+      "value": 4.0,
+      "input_complete": false,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-08",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-08",
+      "value": 6.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-08",
+      "value": 7.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-08",
+      "value": 8.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-08",
+      "value": 9.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-08",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-08",
+      "value": 11.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-08",
+      "value": 12.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-08",
+      "value": 4.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2013-08",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 4.0,
+    "n_ref": 10,
+    "ref_years": [
+     2001,
+     2002,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012
+    ],
+    "median": 7.5,
+    "ratio": 0.5333333333333333,
+    "percentile": 20.0,
+    "level": "normal",
+    "preliminary": false,
+    "notes": [],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "year_2000_not_a_reference",
+   "description": "Default baseline starts in 2001: 2000-11 (value 0) is not a reference.",
+   "input": {
+    "series": [
+     {
+      "month": "2000-11",
+      "value": 0.0,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2001-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2002-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2003-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-11",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2015-11",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 10.0,
+    "n_ref": 14,
+    "ref_years": [
+     2001,
+     2002,
+     2003,
+     2004,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014
+    ],
+    "median": 10.0,
+    "ratio": 1.0,
+    "percentile": 50.0,
+    "level": "normal",
+    "preliminary": false,
+    "notes": [],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "month_in_progress",
+   "description": "As-of date inside the target month: only the value so far, no anomaly.",
+   "input": {
+    "series": [
+     {
+      "month": "2016-10",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-10",
+      "value": 11.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-10",
+      "value": 12.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-10",
+      "value": 13.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-10",
+      "value": 14.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2021-10",
+      "value": 15.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2022-10",
+      "value": 16.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2023-10",
+      "value": 17.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2024-10",
+      "value": 18.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2025-10",
+      "value": 19.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2026-10",
+      "value": 15.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": true
+     }
+    ],
+    "target": "2026-10",
+    "as_of": "2026-10-20",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 15.0,
+    "n_ref": 0,
+    "ref_years": [],
+    "median": null,
+    "ratio": null,
+    "percentile": null,
+    "level": null,
+    "preliminary": true,
+    "notes": [
+     "preliminary"
+    ],
+    "status": "month_in_progress"
+   }
+  },
+  {
+   "id": "finished_on_first_day_preliminary",
+   "description": "As-of 2026-11-01: October is over. Near-real-time value -> preliminary.",
+   "input": {
+    "series": [
+     {
+      "month": "2016-10",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-10",
+      "value": 11.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-10",
+      "value": 12.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-10",
+      "value": 13.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-10",
+      "value": 14.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2021-10",
+      "value": 15.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2022-10",
+      "value": 16.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2023-10",
+      "value": 17.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2024-10",
+      "value": 18.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2025-10",
+      "value": 19.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2026-10",
+      "value": 15.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": true
+     }
+    ],
+    "target": "2026-10",
+    "as_of": "2026-11-01",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 15.0,
+    "n_ref": 10,
+    "ref_years": [
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024,
+     2025
+    ],
+    "median": 14.5,
+    "ratio": 1.0344827586206897,
+    "percentile": 55.0,
+    "level": "normal",
+    "preliminary": true,
+    "notes": [
+     "preliminary"
+    ],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "baseline_snpp",
+   "description": "Baseline snpp keeps only S-NPP months: 6 references (10..15) -> no level.",
+   "input": {
+    "series": [
+     {
+      "month": "2005-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 11.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 12.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 13.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 14.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 15.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 12.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "snpp"
+   },
+   "expected": {
+    "value": 12.0,
+    "n_ref": 6,
+    "ref_years": [
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 12.5,
+    "ratio": 0.96,
+    "percentile": 41.666666666666664,
+    "level": null,
+    "preliminary": false,
+    "notes": [
+     "insufficient_history"
+    ],
+    "status": "insufficient_history"
+   }
+  },
+  {
+   "id": "baseline_all_same_series",
+   "description": "Same series, default baseline: 15 references, median 1 -> no ratio; 11 smaller, 1 equal.",
+   "input": {
+    "series": [
+     {
+      "month": "2005-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 1.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 10.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 11.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 12.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 13.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 14.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 15.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 12.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 12.0,
+    "n_ref": 15,
+    "ref_years": [
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 1.0,
+    "ratio": null,
+    "percentile": 76.66666666666667,
+    "level": "normal",
+    "preliminary": false,
+    "notes": [
+     "small_median"
+    ],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "tie_tolerance_equal",
+   "description": "3.004 against references of 3.0: equal within 0.005 -> percentile 50.",
+   "input": {
+    "series": [
+     {
+      "month": "2010-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 3.004,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 3.004,
+    "n_ref": 10,
+    "ref_years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 3.0,
+    "ratio": null,
+    "percentile": 50.0,
+    "level": "normal",
+    "preliminary": false,
+    "notes": [
+     "small_median"
+    ],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "tie_tolerance_larger",
+   "description": "3.006 against references of 3.0: larger -> percentile 100.",
+   "input": {
+    "series": [
+     {
+      "month": "2010-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-07",
+      "value": 3.006,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-07",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 3.006,
+    "n_ref": 10,
+    "ref_years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 3.0,
+    "ratio": null,
+    "percentile": 100.0,
+    "level": "high",
+    "preliminary": false,
+    "notes": [
+     "small_median"
+    ],
+    "status": "ok"
+   }
+  },
+  {
+   "id": "no_data",
+   "description": "Target month not in the series (or value null).",
+   "input": {
+    "series": [
+     {
+      "month": "2010-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-07",
+      "value": 3.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-08",
+      "value": null,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2020-08",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": null,
+    "n_ref": 0,
+    "ref_years": [],
+    "median": null,
+    "ratio": null,
+    "percentile": null,
+    "level": null,
+    "preliminary": false,
+    "notes": [],
+    "status": "no_data"
+   }
+  },
+  {
+   "id": "no_history",
+   "description": "First year of the record: no reference month.",
+   "input": {
+    "series": [
+     {
+      "month": "2000-11",
+      "value": 5.0,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2001-03",
+      "value": 7.0,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2001-03",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "value": 7.0,
+    "n_ref": 0,
+    "ref_years": [],
+    "median": null,
+    "ratio": null,
+    "percentile": null,
+    "level": null,
+    "preliminary": false,
+    "notes": [],
+    "status": "no_history"
+   }
+  },
+  {
+   "id": "real_california_2020-09_all_2026-11-03",
+   "description": "Dataset v1 region total, california, target 2020-09, as-of 2026-11-03, baseline all (expected = reference implementation).",
+   "input": {
+    "series": [
+     {
+      "month": "2001-09",
+      "value": 3546.79,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2002-09",
+      "value": 3869.68,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2003-09",
+      "value": 8850.43,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-09",
+      "value": 2331.66,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-09",
+      "value": 2581.24,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-09",
+      "value": 21570.29,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-09",
+      "value": 7748.53,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-09",
+      "value": 6611.5,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-09",
+      "value": 3188.53,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-09",
+      "value": 2427.82,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-09",
+      "value": 1408.67,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-09",
+      "value": 3130.56,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-09",
+      "value": 7535.75,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-09",
+      "value": 11357.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2015-09",
+      "value": 9419.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2016-09",
+      "value": 5531.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-09",
+      "value": 16782.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-09",
+      "value": 7990.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-09",
+      "value": 5729.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-09",
+      "value": 125460.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2021-09",
+      "value": 48273.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2022-09",
+      "value": 7927.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2023-09",
+      "value": 5297.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2024-09",
+      "value": 6344.04,
+      "input_complete": true,
+      "source": "noaa20_scaled",
+      "nrt": false
+     },
+     {
+      "month": "2025-09",
+      "value": 6754.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2026-09",
+      "value": 2435.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": true
+     }
+    ],
+    "target": "2020-09",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "status": "ok",
+    "value": 125460.0,
+    "n_ref": 19,
+    "ref_years": [
+     2001,
+     2002,
+     2003,
+     2004,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 5729.0,
+    "ratio": 21.899109792284868,
+    "percentile": 100.0,
+    "level": "high",
+    "preliminary": false,
+    "notes": []
+   }
+  },
+  {
+   "id": "real_california_2020-09_snpp_2026-11-03",
+   "description": "Dataset v1 region total, california, target 2020-09, as-of 2026-11-03, baseline snpp (expected = reference implementation).",
+   "input": {
+    "series": [
+     {
+      "month": "2001-09",
+      "value": 3546.79,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2002-09",
+      "value": 3869.68,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2003-09",
+      "value": 8850.43,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-09",
+      "value": 2331.66,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-09",
+      "value": 2581.24,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-09",
+      "value": 21570.29,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-09",
+      "value": 7748.53,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-09",
+      "value": 6611.5,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-09",
+      "value": 3188.53,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-09",
+      "value": 2427.82,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-09",
+      "value": 1408.67,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-09",
+      "value": 3130.56,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-09",
+      "value": 7535.75,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-09",
+      "value": 11357.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2015-09",
+      "value": 9419.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2016-09",
+      "value": 5531.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-09",
+      "value": 16782.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-09",
+      "value": 7990.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-09",
+      "value": 5729.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-09",
+      "value": 125460.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2021-09",
+      "value": 48273.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2022-09",
+      "value": 7927.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2023-09",
+      "value": 5297.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2024-09",
+      "value": 6344.04,
+      "input_complete": true,
+      "source": "noaa20_scaled",
+      "nrt": false
+     },
+     {
+      "month": "2025-09",
+      "value": 6754.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2026-09",
+      "value": 2435.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": true
+     }
+    ],
+    "target": "2020-09",
+    "as_of": "2026-11-03",
+    "baseline": "snpp"
+   },
+   "expected": {
+    "status": "insufficient_history",
+    "value": 125460.0,
+    "n_ref": 6,
+    "ref_years": [
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "median": 8704.5,
+    "ratio": 14.413234533861795,
+    "percentile": 100.0,
+    "level": null,
+    "preliminary": false,
+    "notes": [
+     "insufficient_history"
+    ]
+   }
+  },
+  {
+   "id": "real_southern_africa_2026-08_all_2026-11-03",
+   "description": "Dataset v1 region total, southern_africa, target 2026-08, as-of 2026-11-03, baseline all (expected = reference implementation).",
+   "input": {
+    "series": [
+     {
+      "month": "2001-08",
+      "value": 390150.66,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2002-08",
+      "value": 345353.25,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2003-08",
+      "value": 337273.84,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-08",
+      "value": 346760.53,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-08",
+      "value": 330250.81,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-08",
+      "value": 332261.03,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-08",
+      "value": 343951.16,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-08",
+      "value": 285989.84,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-08",
+      "value": 347283.31,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-08",
+      "value": 404151.38,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-08",
+      "value": 358854.09,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-08",
+      "value": 322424.47,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-08",
+      "value": 343162.59,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-08",
+      "value": 312021.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2015-08",
+      "value": 385480.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2016-08",
+      "value": 364891.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-08",
+      "value": 358387.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-08",
+      "value": 428013.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-08",
+      "value": 341758.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-08",
+      "value": 300210.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2021-08",
+      "value": 323356.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2022-08",
+      "value": 390277.91,
+      "input_complete": true,
+      "source": "noaa20_scaled",
+      "nrt": false
+     },
+     {
+      "month": "2023-08",
+      "value": 355681.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2024-08",
+      "value": 339623.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2025-08",
+      "value": 440413.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2026-08",
+      "value": 319671.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": true
+     }
+    ],
+    "target": "2026-08",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "status": "ok",
+    "value": 319671.0,
+    "n_ref": 25,
+    "ref_years": [
+     2001,
+     2002,
+     2003,
+     2004,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024,
+     2025
+    ],
+    "median": 345353.25,
+    "ratio": 0.9256348391103891,
+    "percentile": 12.0,
+    "level": "normal",
+    "preliminary": true,
+    "notes": [
+     "preliminary"
+    ]
+   }
+  },
+  {
+   "id": "real_cordoba_2026-10_all_2026-11-03",
+   "description": "Dataset v1 region total, cordoba, target 2026-10, as-of 2026-11-03, baseline all (expected = reference implementation).",
+   "input": {
+    "series": [
+     {
+      "month": "2001-10",
+      "value": 2445.04,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2002-10",
+      "value": 13598.34,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2003-10",
+      "value": 12677.81,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-10",
+      "value": 10266.1,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-10",
+      "value": 8707.58,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-10",
+      "value": 4223.62,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-10",
+      "value": 3476.3,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-10",
+      "value": 4605.76,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-10",
+      "value": 11134.58,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-10",
+      "value": 5356.01,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-10",
+      "value": 2149.31,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-10",
+      "value": 1990.64,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-10",
+      "value": 4068.43,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-10",
+      "value": 2296.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2015-10",
+      "value": 2624.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2016-10",
+      "value": 1467.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-10",
+      "value": 7333.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-10",
+      "value": 2819.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-10",
+      "value": 2596.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-10",
+      "value": 10779.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2021-10",
+      "value": 8133.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2022-10",
+      "value": 5939.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2023-10",
+      "value": 4037.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2024-10",
+      "value": 4426.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2025-10",
+      "value": 3851.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2026-10",
+      "value": 1272.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": true
+     }
+    ],
+    "target": "2026-10",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "status": "ok",
+    "value": 1272.0,
+    "n_ref": 25,
+    "ref_years": [
+     2001,
+     2002,
+     2003,
+     2004,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024,
+     2025
+    ],
+    "median": 4223.62,
+    "ratio": 0.3011634569397815,
+    "percentile": 0.0,
+    "level": "low",
+    "preliminary": true,
+    "notes": [
+     "preliminary"
+    ]
+   }
+  },
+  {
+   "id": "real_cordoba_2026-10_all_2026-10-15",
+   "description": "Dataset v1 region total, cordoba, target 2026-10, as-of 2026-10-15, baseline all (expected = reference implementation).",
+   "input": {
+    "series": [
+     {
+      "month": "2001-10",
+      "value": 2445.04,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2002-10",
+      "value": 13598.34,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2003-10",
+      "value": 12677.81,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-10",
+      "value": 10266.1,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-10",
+      "value": 8707.58,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-10",
+      "value": 4223.62,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-10",
+      "value": 3476.3,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-10",
+      "value": 4605.76,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-10",
+      "value": 11134.58,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-10",
+      "value": 5356.01,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-10",
+      "value": 2149.31,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-10",
+      "value": 1990.64,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-10",
+      "value": 4068.43,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-10",
+      "value": 2296.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2015-10",
+      "value": 2624.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2016-10",
+      "value": 1467.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2017-10",
+      "value": 7333.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2018-10",
+      "value": 2819.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2019-10",
+      "value": 2596.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2020-10",
+      "value": 10779.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2021-10",
+      "value": 8133.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2022-10",
+      "value": 5939.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2023-10",
+      "value": 4037.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2024-10",
+      "value": 4426.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2025-10",
+      "value": 3851.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": false
+     },
+     {
+      "month": "2026-10",
+      "value": 1272.0,
+      "input_complete": true,
+      "source": "snpp",
+      "nrt": true
+     }
+    ],
+    "target": "2026-10",
+    "as_of": "2026-10-15",
+    "baseline": "all"
+   },
+   "expected": {
+    "status": "month_in_progress",
+    "value": 1272.0,
+    "n_ref": 0,
+    "ref_years": [],
+    "median": null,
+    "ratio": null,
+    "percentile": null,
+    "level": null,
+    "preliminary": true,
+    "notes": [
+     "preliminary"
+    ]
+   }
+  },
+  {
+   "id": "real_indo_gangetic_2016-11_all_2026-11-03",
+   "description": "Dataset v1 region total, indo_gangetic, target 2016-11, as-of 2026-11-03, baseline all (expected = reference implementation).",
+   "input": {
+    "series": [
+     {
+      "month": "2000-11",
+      "value": 7339.29,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2001-11",
+      "value": 8053.9,
+      "input_complete": true,
+      "source": "model_terra_bridge",
+      "nrt": false
+     },
+     {
+      "month": "2002-11",
+      "value": 5499.1,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2003-11",
+      "value": 9051.27,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2004-11",
+      "value": 9390.58,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2005-11",
+      "value": 25287.53,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2006-11",
+      "value": 14196.76,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2007-11",
+      "value": 19241.68,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2008-11",
+      "value": 27531.73,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2009-11",
+      "value": 25955.23,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2010-11",
+      "value": 33313.36,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2011-11",
+      "value": 27957.65,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2012-11",
+      "value": 37654.36,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2013-11",
+      "value": 36249.43,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2014-11",
+      "value": 44782.05,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2015-11",
+      "value": 34861.32,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2016-11",
+      "value": 45361.57,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2017-11",
+      "value": 31470.89,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2018-11",
+      "value": 41493.84,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2019-11",
+      "value": 26926.18,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2020-11",
+      "value": 43683.04,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2021-11",
+      "value": 55270.34,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2022-11",
+      "value": 37040.28,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2023-11",
+      "value": 40354.11,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2024-11",
+      "value": 35034.48,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     },
+     {
+      "month": "2025-11",
+      "value": 29659.87,
+      "input_complete": true,
+      "source": "model_aqua",
+      "nrt": false
+     }
+    ],
+    "target": "2016-11",
+    "as_of": "2026-11-03",
+    "baseline": "all"
+   },
+   "expected": {
+    "status": "ok",
+    "value": 45361.57,
+    "n_ref": 15,
+    "ref_years": [
+     2001,
+     2002,
+     2003,
+     2004,
+     2005,
+     2006,
+     2007,
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015
+    ],
+    "median": 25955.23,
+    "ratio": 1.7476851486193727,
+    "percentile": 100.0,
+    "level": "high",
+    "preliminary": false,
+    "notes": []
+   }
+  }
+ ]
+}

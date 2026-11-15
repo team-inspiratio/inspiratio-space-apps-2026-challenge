@@ -1,0 +1,285 @@
+{
+ "version": "global-v1",
+ "units": [
+  {
+   "name": "AUST",
+   "label": "GFED4.1s basis region AUST (Australia and New Zealand), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    74.0,
+    -89.25,
+    179.0,
+    -9.25
+   ],
+   "kind": "region",
+   "file": "AUST.json.gz",
+   "cells": 12906
+  },
+  {
+   "name": "BOAS",
+   "label": "GFED4.1s basis region BOAS (Boreal Asia), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -180.0,
+    42.5,
+    180.0,
+    86.0
+   ],
+   "kind": "region",
+   "file": "BOAS.json.gz",
+   "cells": 44958
+  },
+  {
+   "name": "BONA",
+   "label": "GFED4.1s basis region BONA (Boreal North America), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -180.0,
+    -21.5,
+    -48.0,
+    82.75
+   ],
+   "kind": "region",
+   "file": "BONA.json.gz",
+   "cells": 36415
+  },
+  {
+   "name": "CEAM",
+   "label": "GFED4.1s basis region CEAM (Central America), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -176.75,
+    -44.25,
+    -57.75,
+    33.0
+   ],
+   "kind": "region",
+   "file": "CEAM.json.gz",
+   "cells": 6509
+  },
+  {
+   "name": "CEAS",
+   "label": "GFED4.1s basis region CEAS (Central Asia), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    22.0,
+    17.0,
+    153.75,
+    56.0
+   ],
+   "kind": "region",
+   "file": "CEAS.json.gz",
+   "cells": 32782
+  },
+  {
+   "name": "EQAS",
+   "label": "GFED4.1s basis region EQAS (Equatorial Asia), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    92.5,
+    -31.75,
+    180.0,
+    23.75
+   ],
+   "kind": "region",
+   "file": "EQAS.json.gz",
+   "cells": 7816
+  },
+  {
+   "name": "EURO",
+   "label": "GFED4.1s basis region EURO (Europe), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -73.25,
+    34.75,
+    31.25,
+    83.5
+   ],
+   "kind": "region",
+   "file": "EURO.json.gz",
+   "cells": 24303
+  },
+  {
+   "name": "MIDE",
+   "label": "GFED4.1s basis region MIDE (Middle East), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -29.0,
+    11.5,
+    72.0,
+    43.0
+   ],
+   "kind": "region",
+   "file": "MIDE.json.gz",
+   "cells": 19739
+  },
+  {
+   "name": "NHAF",
+   "label": "GFED4.1s basis region NHAF (Northern Hemisphere Africa), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -25.25,
+    -16.25,
+    59.5,
+    23.5
+   ],
+   "kind": "region",
+   "file": "NHAF.json.gz",
+   "cells": 20469
+  },
+  {
+   "name": "NHSA",
+   "label": "GFED4.1s basis region NHSA (Northern Hemisphere South America), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -80.5,
+    0.0,
+    -49.25,
+    13.5
+   ],
+   "kind": "region",
+   "file": "NHSA.json.gz",
+   "cells": 4944
+  },
+  {
+   "name": "SEAS",
+   "label": "GFED4.1s basis region SEAS (Southeast Asia), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    62.0,
+    -3.5,
+    146.0,
+    37.0
+   ],
+   "kind": "region",
+   "file": "SEAS.json.gz",
+   "cells": 10450
+  },
+  {
+   "name": "SHAF",
+   "label": "GFED4.1s basis region SHAF (Southern Hemisphere Africa), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -12.25,
+    -89.75,
+    77.75,
+    0.0
+   ],
+   "kind": "region",
+   "file": "SHAF.json.gz",
+   "cells": 15009
+  },
+  {
+   "name": "SHSA",
+   "label": "GFED4.1s basis region SHSA (Southern Hemisphere South America), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -179.75,
+    -89.5,
+    -13.25,
+    1.0
+   ],
+   "kind": "region",
+   "file": "SHSA.json.gz",
+   "cells": 22732
+  },
+  {
+   "name": "TENA",
+   "label": "GFED4.1s basis region TENA (Temperate North America), without the holdout boxes",
+   "role": "train",
+   "bbox": [
+    -125.25,
+    24.5,
+    -67.0,
+    49.0
+   ],
+   "kind": "region",
+   "file": "TENA.json.gz",
+   "cells": 14680
+  },
+  {
+   "name": "north_australia",
+   "label": "Northern Australia savanna (Kimberley, Top End)",
+   "role": "holdout",
+   "bbox": [
+    125.0,
+    -20.0,
+    135.0,
+    -10.0
+   ],
+   "kind": "region",
+   "file": "north_australia.json.gz",
+   "cells": 1600
+  },
+  {
+   "name": "central_siberia",
+   "label": "Central Siberia boreal forest (Krasnoyarsk, Irkutsk taiga)",
+   "role": "holdout",
+   "bbox": [
+    95.0,
+    55.0,
+    105.0,
+    65.0
+   ],
+   "kind": "region",
+   "file": "central_siberia.json.gz",
+   "cells": 1600
+  },
+  {
+   "name": "indo_gangetic",
+   "label": "Indo-Gangetic Plain croplands (Punjab to Uttar Pradesh)",
+   "role": "holdout",
+   "bbox": [
+    73.0,
+    24.0,
+    83.0,
+    32.0
+   ],
+   "kind": "region",
+   "file": "indo_gangetic.json.gz",
+   "cells": 1280
+  },
+  {
+   "name": "california",
+   "label": "California, USA (Mediterranean forest and shrubland)",
+   "role": "train",
+   "bbox": [
+    -124.5,
+    32.5,
+    -114.5,
+    42.0
+   ],
+   "kind": "box",
+   "file": "california.json.gz",
+   "cells": 1520
+  },
+  {
+   "name": "cordoba",
+   "label": "Cordoba and central Argentina (grassland, wetland, cropland)",
+   "role": "train",
+   "bbox": [
+    -67.5,
+    -35.0,
+    -60.5,
+    -28.0
+   ],
+   "kind": "box",
+   "file": "cordoba.json.gz",
+   "cells": 784
+  },
+  {
+   "name": "southern_africa",
+   "label": "Southern African miombo savanna (Zambia, southern DRC, eastern Angola)",
+   "role": "train",
+   "bbox": [
+    22.0,
+    -18.0,
+    32.0,
+    -8.0
+   ],
+   "kind": "box",
+   "file": "southern_africa.json.gz",
+   "cells": 1600
+  }
+ ]
+}
