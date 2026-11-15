@@ -1,7 +1,7 @@
 # MODIS × VIIRS Hotspot Harmonization
 
 <!-- PROGRESS-BOX:BEGIN -->
-> **Status**: S00–S10 are done. Dataset v0 from ★milestone A (M1s) is in the pre-release `milestone-a`, with the interface spec in [docs/data-interface.md](docs/data-interface.md). S10 ran 37 LightGBM experiments; the top one (two-stage LightGBM) has a validation MALE about 22% lower than M1s; see [reports/scores-s10.md](reports/scores-s10.md) and the [review notes](reports/model-review.md). Next: session 4 of 5, task card [`4-freeze-test`](docs/sessions/4-freeze-test.md) (freeze the model and run the external blind grading; pushing the `final-test` tag is a person's decision).
+> **Status**: S00–S12 are done. The final model is a two-stage LightGBM (E028), and the external blind grading was taken only once: MALE 0.258 on the training regions in 2012–2013 (simple ratio method M1s: 0.332) and 0.644 on the completely unseen holdout regions (M1s: 0.857); see [reports/final-test.md](reports/final-test.md). The final dataset v1 (2000-11 to 2026-10, with source flags and stability intervals) is in the pre-release `dataset-v1`, with the interface in [docs/data-interface.md](docs/data-interface.md). Next: session 5 of 5, task card [`5-report`](docs/sessions/5-report.md) (validation report, delivery, milestone B).
 >
 > **Take over in 3 steps**: ① set up your environment and fill in `.env` following [HANDOFF.md](HANDOFF.md); ② copy the "universal relay prompt" from HANDOFF into Claude Code or Codex; ③ do whatever the AI says needs doing by you in person. Detailed progress is in [PROGRESS.md](PROGRESS.md).
 <!-- PROGRESS-BOX:END -->

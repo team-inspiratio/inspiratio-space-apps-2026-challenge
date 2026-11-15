@@ -5,20 +5,22 @@
 
 <!-- STATUS:BEGIN -->
 ```yaml
-current_card: docs/sessions/4-freeze-test.md   # next (or current) task card
-status: in_progress                     # ready | in_progress | blocked | done
-claimed_by: "qiuxue-yee"                # claimant's name; empty means unclaimed
-claimed_at: "2026-11-04T03:00:28Z"    # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
-last_pushed_stage: S10                  # last stage completed and pushed
+current_card: docs/sessions/5-report.md        # next (or current) task card
+status: ready                           # ready | in_progress | blocked | done
+claimed_by: ""                          # claimant's name; empty means unclaimed
+claimed_at: ""                          # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
+last_pushed_stage: S12                  # last stage completed and pushed
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
-data_release: data-v0                   # gh release download data-v0; SHA256 in the handover notes; milestone A data is in milestone-a
-next_step: "S11 answer sheet sealed (E028; results/submission.parquet is in the frozen manifest). Wait for a person to push the final-test tag and for the GitHub grader to commit results/final-test/ back to this branch, then git pull, write reports/final-test.md, then do S12"
+data_release: dataset-v1                # final dataset v1 (S12); processed inputs are in data-v0, milestone A in milestone-a; SHA256 in the handover notes
+next_step: "Start a new session for task card 5-report: S13 validation report (D1, including the final test reports/final-test.md and the era-shift investigation), S14 delivery, S15 milestone B"
 needs_human:
-  - "For a person to do now: in the repository folder run git pull, then git tag final-test && git push origin final-test (the test can be taken only once; an AI may not push it itself). Do not push any commits to feat/data-harmonization until the grading run finishes"
+  - "Please look over: the final test scores reports/final-test.md (Test 1 is 22% better than M1s; in the holdout regions the error is 2.5 times the training regions' and totals are 20–35% too low, which must be considered before the global stage G)"
+  - "Tell the front end: the final dataset pre-release dataset-v1 + docs/data-interface.md (v1: source names changed to model_*, lo_90/hi_90 and nrt added)"
+  - "Awaiting human confirmation: the S12 production version keeps the frozen 2014-01–2021-06 model, and 2012–2013 in the training regions uses estimates, because this machine never has S-NPP for those two years (docs/decisions/0009 item 1)"
   - "Please look over: the S10 review notes reports/model-review.md (conclusion: all top 3 pass the leakage review; risk: with only 3 training regions, latitude acts as a region label, so the holdout regions may do worse; Test 2 will check this)"
   - "Awaiting a person's decision: the pass criterion for the NOAA-20 continuation (docs/decisions/0005 item 4; the criterion was proposed after seeing the test results)"
-  - "Awaiting a person's decision: whether the Terra bridge in the holdout regions uses the training regions' pooled ratio or the local MODIS ratio (docs/decisions/0005 item 6; affects the S12 production version)"
+  - "Recorded: the Terra bridge in the holdout regions uses the local MODIS ratio (option B), as recommended in ADR 0005 item 6, decided by the AI under the user's authorization (docs/decisions/0009 item 3)"
   - "Awaiting human confirmation: QM details, choice of λ, bridge years, v0 source rules (docs/decisions/0005 items 1–3 and 5)"
   - "Recorded: implementation details of the S10 LightGBM and experiment loop (docs/decisions/0006), decided by the AI under the user's authorization"
   - "Recorded: the S10 budget cut, deadline and remedy reruns were the user's decisions (docs/decisions/0007)"
@@ -35,8 +37,8 @@ needs_human:
 | 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | ✅ done |
 | 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09 (milestone A) | ✅ done |
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ✅ done |
-| 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | 🔄 in progress (qiuxue-yee) |
-| 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15 (milestone B) | not started |
+| 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | ✅ done |
+| 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15 (milestone B) | ⏭ next |
 | G | [`G-global`](docs/sessions/G-global.md) | Global rerun | not started (after S15) |
 
 ## Stage table
@@ -54,8 +56,8 @@ needs_human:
 | S08 | Fallback models M0, M1s, QM; bridge and continuation | ✅ done | 2026-11-03 | Combined MALE over both windows: M1s (λ=20) 0.377, QM 0.463, M0 1.795; Terra→Aqua→M1s chain 0.522; NOAA-20 continuation median monthly total bias −0.3% to +3.1% (`reports/scores-v1.md`) | |
 | S09 | ★Milestone A: dataset v0, front-end export, pre-release | ✅ done | 2026-11-03 | 2.616 million cell-months: 554,000 S-NPP observed, 47,000 NOAA-20 converted, 1.82 million M1s, 197,000 Terra bridge; pre-release `milestone-a`, SHA256 of all 9 files checked after download | |
 | S10 | LightGBM and AI experiments | ✅ done | 2026-11-04 | 37 experiments (E000–E036; budget cut and wrapped up early per ADR 0007); best validation MALE: E028 two-stage LightGBM 0.2947, 21.8% lower than M1s (0.3766) (difference −0.082 ± 0.016, 95% interval −0.113 to −0.053), 0.169 lower than QM; all top 3 pass the guardrails and the leakage review (`reports/scores-s10.md`, `reports/model-review.md`) | |
-| S11 | Freeze and external blind grading | 🔄 answer sheet sealed; waiting for a person to push the final-test tag | | E028 selected by the pre-registration (passes all 5 thresholds); retrained on 2014-01–2021-06, trees 766/970; answer sheet 596,032 rows + 100 resampling columns, calibration factor 5.37 (`docs/decisions/0008`, `results/freeze.json`) | |
-| S12 | Final dataset | ⬜ todo | | | |
+| S11 | Freeze and external blind grading | ✅ done | 2026-11-04 | E028 selected. Test MALE: Test 1 **0.258** (M1s 0.332, 22% lower), Test 2 holdout regions **0.644** (M1s 0.857); κ 0.69 / 0.53; regional interval coverage after calibration 95.5% / 55.9% (raw 37.9% / 12.9%); in the holdout regions the zero-hotspot and low-hotspot metrics are worse than M1s and totals are 20–35% too low (`reports/final-test.md`) | 742547e |
+| S12 | Final dataset | ✅ done | 2026-11-04 | Production version = the frozen evaluation version E028 (ADR 0009); 2.616 million cell-months: 554,000 S-NPP observed, 1.817 million model estimates, 197,000 Terra bridge, 47,000 NOAA-20 converted; 100 resampled intervals, regional intervals multiplied by the calibration factor 5.37; acceptance: in the S-NPP segment, 15.19 million points over 426 region-months match the observations one by one; pre-release `dataset-v1` | |
 | S13 | Validation report (D1) | ⬜ todo | | | |
 | S14 | Delivery | ⬜ todo | | | |
 | S15 | ★Milestone B: one-command reproduction, Release v1, merge into main | ⬜ todo | | | |
@@ -130,4 +132,25 @@ needs_human:
 - **Where S11 stands**: LightGBM E028 was selected by pre-registration section 4 (item-by-item check in section 1 of `docs/decisions/0008`). `harmonize.py` (default `fit()` changed to `fit_lgb`, otherwise identical to E028's source) and `config/features.json` were frozen, then the frozen procedure was retrained on the training regions over 2014-01–2021-06, with 100 whole-year resamples for the stability intervals and the calibration factor set from the two validation windows (5.37). The answer sheet `results/submission.parquet`, the freeze record `results/freeze.json` and the generating script `harmonization/freeze.py` are in `config/frozen-manifest.json`. Before sealing, the frozen grading function was run end to end on fake answers.
 - **Next**: a person pushes the `final-test` tag → the GitHub grader (`grader.yml`) commits `results/final-test/` back to this branch → `git pull` → write `reports/final-test.md` truthfully (raw/calibrated coverage according to the rule in ADR 0008 section 5) → S12.
 - **Do not push to this branch during grading**: the workflow's last step pushes results to this branch, and any other commit in the meantime would make that push fail.
-- **S12 work in progress**: `harmonization/series_v1.py` (committed, not yet run for real): production version = the frozen evaluation version (this machine never has S-NPP for 2012–2013, red line 1); Terra-only months build Aqua inputs from Terra before going into the model (first compared with v0's M1s chain on the validation windows, `terra-check`); the holdout-region bridge uses the local MODIS ratio (ADR 0005 item 6, option B); whether intervals are multiplied by the calibration factor is decided by ADR 0008 section 5; the acceptance check `recount()` has been tried on v0 (426 region-months, 0 mismatches). Intermediate results are in `s11/` in the data directory.
+- **S12 (done)**: `harmonization/series_v1.py` (committed, not yet run for real): production version = the frozen evaluation version (this machine never has S-NPP for 2012–2013, red line 1); Terra-only months build Aqua inputs from Terra before going into the model (first compared with v0's M1s chain on the validation windows, `terra-check`); the holdout-region bridge uses the local MODIS ratio (ADR 0005 item 6, option B); whether intervals are multiplied by the calibration factor is decided by ADR 0008 section 5; the acceptance check `recount()` has been tried on v0 (426 region-months, 0 mismatches). Intermediate results are in `s11/` in the data directory.
+- **S11 scores**: Test 1 MALE 0.258 (M1s 0.332), Test 2 0.644 (M1s 0.857); E028 is better in both; but in the holdout regions the zero-hotspot and low-hotspot metrics are worse than M1s and totals are 20–35% too low (except northern Australia), with central Siberia at MALE 1.14. Interval coverage uses the calibrated values per the ADR 0008 rule: 95.5% / 55.9%. Full text in `reports/final-test.md`.
+- **S12 dataset v1** (pre-release `dataset-v1`): generated by `uv run python -X utf8 -m harmonization.series_v1 build` (resampling results are cached in `s12/` in the data directory; without the cache it retrains 100 times, about 1 hour). The production version and the evaluation version are the same model (training regions 2014-01–2021-06, trees 766/970), and retraining reproduces the answer sheet's `est_final` bit for bit. Download with `gh release download dataset-v1 --repo team-inspiratio/inspiratio-space-apps-2026`, then `sha256sum -c SHA256SUMS.txt`.
+
+  | File | SHA256 |
+  |---|---|
+  | `data-interface.md` | `535aed67ec0a0e365b263c23e5e83775f42597964e83a94c7e3674420938fcf7` |
+  | `dataset_v1.parquet` | `60d13babfa450b86194ae72fd1d2d8c048085b303a1e381a7685e6d23b5a559e` |
+  | `california.json.gz` | `f206711f9a55bfac7f7256b8b087d7b3bbc7e684c0ef5f7c05e233be0ef98a3f` |
+  | `central_siberia.json.gz` | `08e510de4bf5e5a23062158ae16fd44a3f19a028f50da402b2c98ca8ff4ea426` |
+  | `cordoba.json.gz` | `703ad6f3b2343ff0a47611de6f38c7f925342a630ab512e8e59968a2d9195175` |
+  | `indo_gangetic.json.gz` | `af0e3742caf0f4f253ffa2e175e17eec262e4561d3a73f938043a61e0f58f2d7` |
+  | `north_australia.json.gz` | `c38ae0a87c5d79f138a0b8a5bdf5f9da2d3334a305100fb68f968fe57b963c97` |
+  | `southern_africa.json.gz` | `c7b00890426b6699979f24bd1caffb6c6902d045feca9ed8ca026bce69958dda` |
+  | `meta.json` | `6abc6c3663a45aa093a036b7328c0a5b6ac17652b00a2494d33ddf3290f0b8db` |
+  | `region_totals_v1.csv` | `54e3cfbff46a70cd0c2318c0139b3e9a281e67f397b96cebb5c8de1076e10dda` |
+  | `resamples20_v1.parquet` | `7cd6d799f3aa8a5e94c1eb1de9119eab1dab5251fe264afb0c629a8293f2c56e` |
+
+- **Tips for session 5**:
+  - The report (S13) must state clearly: Test 2's weaknesses (section 3), the intervals' insufficient coverage in new regions, that 2012–2013 in the training regions are estimates in the dataset (ADR 0009 item 1, awaiting human confirmation), and that the error for Terra-only months is about 1.6 times that with Aqua (ADR 0009 item 2).
+  - The era-shift investigation (pre-registration section 8) has not been done yet; it is in S13.
+  - In the GFED plausibility check, the 2012–2013 VIIRS part can only use data on the same basis as the blind grading, which this machine does not have.
