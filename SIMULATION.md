@@ -37,7 +37,7 @@ Planned times are US Central Time (CST, UTC-6). The commit log has the actual pu
 | P05 | A | 11-14 18:39 | 11-15 00:39 | S07: judge code (prepare, evaluate, final_test), frozen after human review | `e19f26c` | 2026-11-03 17:38 | pushed |
 | P06 | A | 11-14 19:02 | 11-15 01:02 | S08-S09: baselines M0/M1s/QM, dataset v0; milestone A | `25d7785` | 2026-11-03 17:50 | pushed |
 | P07 | A | 11-14 19:26 | 11-15 01:26 | S10: LightGBM, 37 experiments, model review | `1922079` | 2026-11-03 21:52 | pushed |
-| P08 | A | 11-14 19:44 | 11-15 01:44 | S11: select E028 by the preregistered rule, freeze, seal the final-test submission | `674b3f5` | 2026-11-03 22:36 | planned |
+| P08 | A | 11-14 19:44 | 11-15 01:44 | S11: select E028 by the preregistered rule, freeze, seal the final-test submission | `674b3f5` | 2026-11-03 22:36 | pushed |
 | P09 | A | 11-14 20:07 | 11-15 02:07 | S11 blind-test results; S12 final dataset v1 | `13c19b9` | 2026-11-03 23:32 | planned |
 | P10 | A | 11-14 20:31 | 11-15 02:31 | S13-S14: validation report, data card, AI usage statement, anomaly reference implementation; first pipeline.py | `c856c50` | 2026-11-04 00:18 | planned |
 | P11 | A | 11-14 20:52 | 11-15 02:52 | S15: one-command reproduction; milestone B | `e8a260e` | 2026-11-04 01:56 | planned |
