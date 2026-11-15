@@ -1,19 +1,21 @@
-# 数据接口规范（草稿，数据集 v0 / 里程碑 A）
+# 数据接口规范（数据集 v1 / S12 最终版；v0 见第 7 节）
 
-> 给前端用。数据在 GitHub 预发布版 `milestone-a`，用 `harmonization/series.py` 生成。v0 是 **M1s 保底版**：先让网页能开工，S12 会出最终版（字段不变，可能会加区间字段）。这里没写到的约定，以提案“网页成果”“异常指标”“从格子到用户区域”为准。
+> 给前端用。v1 在 GitHub 预发布版 `dataset-v1`，用 `uv run python -X utf8 -m harmonization.series_v1 build` 生成。v1 用选定的模型 **LightGBM E028**（S11 冻结、经外部盲审打分），字段与 v0 兼容，新增区间和近实时标记，来源名从 `m1s_*` 改成 `model_*`。这里没写到的约定，以提案“网页成果”“异常指标”“从格子到用户区域”为准。做法细节见 `docs/decisions/0009`。
 
 ## 1. 文件
 
 | 文件 | 内容 |
 |---|---|
 | `frontend/<region>.json.gz` | 每个预设区域一个 gzip 压缩的 JSON（格式见第 3 节），网页直接读 |
-| `dataset_v0.parquet` | 六个区全部格子 × 月份的长表（第 2 节），给分析和下载用 |
-| `region_totals_v0.csv` | 区域 × 月 × 来源的总量，给快速核对用 |
+| `dataset_v1.parquet` | 六个区全部格子 × 月份的长表（第 2 节），给分析和下载用 |
+| `region_totals_v1.csv` | 区域 × 月的总量、区间、来源、标记 |
+| `resamples20_v1.parquet` | 前 20 次重抽的格子级估计（只存非零值；列 `lat_idx, lon_idx, month, resample, value`），给用户自圈区域算区间：每个 `resample` 分别加总，再取第 2 小和第 19 大附近的值作近似 5%/95% |
+| `meta.json` | 模型、训练范围、轮数、区间是否校准 |
 | `SHA256SUMS.txt` | 上面各文件的 SHA256 |
 
 六个区域：`california`、`cordoba`、`southern_africa`（训练区），`north_australia`、`central_siberia`、`indo_gangetic`（留出区）。边界见 `config/regions.json`。
 
-## 2. 基本单位和字段（`dataset_v0.parquet`）
+## 2. 基本单位和字段（`dataset_v1.parquet`）
 
 - **格子**：0.25° × 0.25°。`lat_idx = floor((lat + 90) / 0.25)`、`lon_idx = floor((lon + 180) / 0.25)`，从西南角起算。格子中心纬度 = −90 + (lat_idx + 0.5) × 0.25，经度同理。
 - **时间**：自然月，按 UTC 统计，`month` 写成 `YYYY-MM`，范围 2000-11 至 2026-10，共 312 个月。
@@ -24,7 +26,9 @@
 | `region`, `role` | string | `train` / `holdout` | 所属区域和角色 |
 | `month` | string | `YYYY-MM` | 月份 |
 | `est` | float32 | 火点数 / 格子 / 月（VIIRS S-NPP 375 m 等效） | **主值**：协调后的月度火点数。估计值可以有小数 |
+| `lo_90`, `hi_90` | float32 | 火点数 | 格子级稳定性区间（100 次整年重抽的 5%/95% 分位数）；只反映“换一批训练年份估计会变多少”，不是误差范围。观测月和 NOAA-20 月等于 `est` |
 | `source` | category | 见第 4 节 | `est` 的来源 |
+| `nrt` | bool | — | 这个值来自近实时数据（VIIRS 2026-08 起、MODIS 2026-09 起），以后标准产品发布会小幅修订 |
 | `input_complete` | bool | — | 这个值所用的传感器在该月是否完整；`false` 表示有缺测天，数值可能偏低 |
 | `est_m0` | float32 | 火点数 | 直接拼接（2012-02 前用 MODIS 原始数，之后用 S-NPP 观测），只用来展示“不协调会怎样”；没有观测时为空 |
 | `aqua_count`, `terra_count` | float32 | 火点数（MODIS 1 km） | MODIS 原始计数；传感器没在轨或整月缺测时为空 |
@@ -36,25 +40,27 @@
 
 ```json
 {
-  "version": "v0",
+  "version": "v1",
   "region": "california",
   "label": "California, USA (Mediterranean forest and shrubland)",
   "role": "train",
   "bbox": [-124.5, 32.5, -114.5, 42.0],
   "cell_deg": 0.25,
   "months": ["2000-11", "...", "2026-10"],
-  "month_source": ["m1s_terra_bridge", "...", "snpp"],
+  "month_source": ["model_terra_bridge", "...", "snpp"],
+  "month_nrt": [false, "...", true],
   "month_input_complete": [true, "...", true],
   "cells": {"lat_idx": [490, "..."], "lon_idx": [222, "..."]},
   "est": [[0.0, 1.25, "..."], "..."],
-  "totals": {"est": [...], "est_m0": [...], "aqua_count": [...], "terra_count": [...], "snpp_count": [...]},
-  "model": {"lambda": 20.0, "m1s_fit": ["2014-01", "2021-06"], "...": "..."}
+  "totals": {"est": [...], "lo_90": [...], "hi_90": [...], "est_m0": [...], "aqua_count": [...], "terra_count": [...], "snpp_count": [...]},
+  "model": {"model": "LightGBM E028 ...", "training": {"months": ["2014-01", "2021-06"]}, "interval": {"calibrated": true, "...": "..."}}
 }
 ```
 
 - `est[i][t]` 是第 i 个格子（`cells.lat_idx[i]`, `cells.lon_idx[i]`）在第 t 个月（`months[t]`）的估计值，保留 2 位小数。
 - 同一区域里，**同一个月所有格子的来源都相同**，所以来源按月给（`month_source`、`month_input_complete`）。
 - `totals.*[t]`：整个区域在第 t 个月的总量；`null` 表示该月没有这类数据。
+- `totals.lo_90/hi_90`：区域总量的稳定性区间（先把每次重抽加总成区域总量，再取 5%/95%）。`model.interval.calibrated = true` 时已按验证集定的系数围绕估计值放大（`docs/decisions/0008` 第 5 节），并在测试集上检验过覆盖率（`reports/final-test.md`）。
 
 ## 4. 来源标记（`source` / `month_source`）
 
@@ -62,14 +68,14 @@
 |---|---|---|
 | `snpp` | S-NPP VIIRS 观测值（训练区，2014-01 起的完整月） | 观测 |
 | `noaa20_scaled` | 该月 S-NPP 缺测或部分缺测，改用 NOAA-20 整月值换算到 S-NPP 尺度（不和 S-NPP 相加） | 换算值；连续性检验还没通过人审，**先别写“连续”**（`docs/decisions/0005` 第 4 条） |
-| `m1s_aqua` | 用 Aqua MODIS 和 M1s 比例换算出的估计 | 估计值 |
-| `m1s_terra_bridge` | 只有 Terra（2000-11 至 2002-06，以及 Aqua 缺测月）：Terra → Aqua 桥接，再用 M1s | 低置信度估计 |
+| `model_aqua` | 用 MODIS（Aqua + Terra）输入和选定模型算出的估计 | 估计值 |
+| `model_terra_bridge` | Aqua 不完整、只有 Terra（2000-11 至 2002-09，以及 Aqua 缺测月）：用 Terra 造出 Aqua 输入再进模型 | 低置信度估计（验证集上误差约是有 Aqua 时的 1.6 倍） |
 
-v0 的限制：
-- 本机永远没有 2012–2013 年的 S-NPP，所以训练区这两年也是 `m1s_aqua`。
-- 留出区每个月都是估计值（`m1s_*`）。
-- 留出区的 Terra 桥接段可能明显偏高（北澳约偏高 1.5–2 倍，见 `docs/decisions/0005` 第 6 条）。
-- v0 没有不确定性区间，S12 会补上。
+v1 的限制：
+- 本机永远没有 2012–2013 年的 S-NPP（测试集隔离），所以训练区这两年也是 `model_aqua`（`docs/decisions/0009` 第 1 条）。
+- 留出区每个月都是估计值（`model_*`），桥接比例用当地 MODIS 拟合。
+- 模型的纬度输入实际起了“像哪个训练区”的作用，离训练区很远的地方要看测试 2 的成绩再决定能不能用（`reports/model-review.md` 第 5 节、`reports/final-test.md`）。
+- NOAA-20 段的连续性标准还没经人确认，先别写“连续”。
 
 ## 5. 从格子到用户圈选区域
 
@@ -91,3 +97,4 @@ v0 的限制：
 | 版本 | 时间 | 说明 |
 |---|---|---|
 | v0 | 2026-11-03 | 里程碑 A：M1s 保底版，预发布版 `milestone-a` |
+| v1 | 2026-11-04 | S12：选定模型 LightGBM E028 + 稳定性区间 + 近实时标记，预发布版 `dataset-v1` |

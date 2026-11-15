@@ -129,11 +129,37 @@ def interval_rule() -> tuple[bool, float, dict]:
     return any(c < 0.80 for c in cov.values()), scale, cov
 
 
-def build(df: pd.DataFrame, resamples: int = freeze.RESAMPLES) -> tuple[pd.DataFrame, dict]:
+def resampled(cfg: dict, train: pd.DataFrame, feats: pd.DataFrame, draws: list) -> np.ndarray:
+    """Estimates of the model rows under each resample; cached in <data>/s12/ (same draws,
+    same inputs -> same file), so a rerun of the build does not refit 100 models."""
+    path = data_dir() / "s12" / f"resamples_{len(draws)}.npy"
+    digest = hashlib.sha256(pd.util.hash_pandas_object(feats, index=False).to_numpy()).hexdigest()
+    tag = path.with_suffix(".sha256")
+    if path.exists() and tag.exists() and tag.read_text().strip() == digest:
+        return np.load(path)
+    rs = np.empty((len(feats), len(draws)), dtype=np.float32)
+    for b, (_, idx) in enumerate(draws):
+        m = freeze.fixed_fit(cfg, train.iloc[idx].reset_index(drop=True))
+        rs[:, b] = harmonize.models_predict(m, feats, cfg)
+        print(f"resample {b + 1}/{len(draws)}", flush=True)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    np.save(path, rs)
+    tag.write_text(digest + "\n")
+    return rs
+
+
+def build(
+    df: pd.DataFrame, resamples: int = freeze.RESAMPLES, resamples_only: bool = False
+) -> tuple[pd.DataFrame, dict]:
     fz = frozen_config()
     cfg = fz["config"]
     train = freeze.training_table(df, "test")
     models = freeze.fixed_fit(cfg, train)
+    sub = pd.read_parquet(freeze.SUBMISSION, columns=prepare.KEY + ["month", "est_final"])
+    rows = freeze.eval_rows(df, "test")
+    again = harmonize.models_predict(models, prepare.feature_table(rows), cfg)
+    if not np.array_equal(again, sub["est_final"].to_numpy(float)):
+        raise SystemExit("the production refit does not reproduce the sealed est_final")
 
     x = df.reset_index(drop=True)
     is_train = (x["role"] == "train").to_numpy()
@@ -175,11 +201,9 @@ def build(df: pd.DataFrame, resamples: int = freeze.RESAMPLES) -> tuple[pd.DataF
     draws = freeze.year_blocks(train["month"], resamples, settings()["seeds"]["resampling"])
     if [d[0] for d in draws] != fz["resamples"]["years_drawn"][:resamples]:
         raise SystemExit("resample draws differ from the sealed submission")
-    rs = np.empty((int(model_rows.sum()), resamples), dtype=np.float32)
-    for b, (_, idx) in enumerate(draws):
-        m = freeze.fixed_fit(cfg, train.iloc[idx].reset_index(drop=True))
-        rs[:, b] = harmonize.models_predict(m, feats, cfg)
-        print(f"resample {b + 1}/{resamples}", flush=True)
+    rs = resampled(cfg, train, feats, draws)
+    if resamples_only:
+        return pd.DataFrame(), {}
     lo = est.copy()
     hi = est.copy()
     lo[model_rows] = np.percentile(rs, 5, axis=1)
@@ -218,7 +242,8 @@ def build(df: pd.DataFrame, resamples: int = freeze.RESAMPLES) -> tuple[pd.DataF
     tot = out.groupby(["region", "month"], observed=True).agg(
         est=("est", "sum"), est_m0=("est_m0", lambda s: s.sum(min_count=1))
     )
-    tot["lo_90"], tot["hi_90"] = tot["est"], tot["est"]
+    tot = tot.astype({"est": float, "est_m0": float})
+    tot["lo_90"], tot["hi_90"] = tot["est"].copy(), tot["est"].copy()
     q = rs_tot.reindex(tot.index).dropna()
     tot.loc[q.index, "lo_90"] = np.percentile(q.to_numpy(float), 5, axis=1)
     tot.loc[q.index, "hi_90"] = np.percentile(q.to_numpy(float), 95, axis=1)
@@ -375,6 +400,7 @@ def main() -> int:
     sub.add_parser("terra-check")
     b = sub.add_parser("build")
     b.add_argument("-n", type=int, default=freeze.RESAMPLES)
+    b.add_argument("--resamples-only", action="store_true", help="only fill the resample cache")
     args = p.parse_args()
     if args.cmd == "terra-check":
         res = terra_check()
@@ -383,7 +409,14 @@ def main() -> int:
         path.write_text(json.dumps(res, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(res["combined_male"], indent=2))
         return 0
-    out, extra = build(prepare.load_grid(), args.n)
+    out, extra = build(prepare.load_grid(), args.n, args.resamples_only)
+    if args.resamples_only:
+        return 0
+    rec = recount(out)
+    print(f"acceptance recount: {rec}", flush=True)
+    if rec["mismatches"]:
+        raise SystemExit("observed S-NPP months differ from the cleaned observations")
+    extra["meta"]["acceptance_recount"] = rec
     lines = write(out, extra)
     print(f"{len(out)} cell-months; sources: {out['source'].value_counts().to_dict()}")
     print("\n".join(lines))
