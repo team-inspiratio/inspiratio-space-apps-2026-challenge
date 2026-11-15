@@ -44,3 +44,18 @@ Following the rules in AGENTS.md, execute docs/sessions/3-model.md.
 - **Where does the data come from?** Session 1 downloads it from FIRMS and processes it; after that, every session ends by uploading the processed data as a GitHub Release asset, and `PROGRESS.md` records which Release to use and its SHA256. To download: `gh release download <tag> -D <your data folder>`.
 - **What if CI goes red?** Paste the Actions error to the AI and have it fix the problem following AGENTS.md; if the error comes from the guardrails, a red line has been touched, so ask a person first.
 - **What is the test set, and why can't I download 2012/2013 S-NPP data?** It is the answer key for the final exam. Only GitHub Actions downloads it in the cloud and scores the submission, and the test can be taken only once. The rules are the same whoever takes over.
+
+## 5. Where the results are (from S14)
+
+| You want | Look here |
+|---|---|
+| Headline results | [`reports/validation.md`](reports/validation.md) (validation report, 6 core figures + limitations), [`reports/final-test.md`](reports/final-test.md) (one-time blind-test scores) |
+| The dataset | GitHub Release (pre-release `dataset-v1`; from S15 the full release `v1`): `dataset_v1.parquet`, `dataset_v1.csv.gz`, `region_totals_v1.csv`, front-end `<region>.json.gz`. After downloading, check with `sha256sum -c SHA256SUMS.txt` |
+| Data card | [`docs/data-card.md`](docs/data-card.md) |
+| Front-end interface | [`docs/data-interface.md`](docs/data-interface.md) |
+| How the anomaly indicator is computed and checked | Reference implementation [`harmonization/anomaly.py`](harmonization/anomaly.py), standard test cases [`docs/anomaly-cases.json`](docs/anomaly-cases.json) (25 of them, for the front end to check one by one) |
+| AI usage statement | [`docs/ai-usage.md`](docs/ai-usage.md) |
+| Decisions still open | `needs_human` in the `PROGRESS.md` status block; details in [`docs/decisions/`](docs/decisions/) |
+| What next | After milestone B comes task card [`G-global`](docs/sessions/G-global.md) (global rerun). Before starting, read section 9 "Limitations" of the validation report: the error in the holdout regions is 2.5 times that in the training regions, so the global stage needs more training regions or must mark everything outside them as low confidence |
+
+**Data only, no code**: with `gh` installed and logged in, run `gh release download dataset-v1 --repo team-inspiratio/inspiratio-space-apps-2026 -D <folder>` and read `data-card.md`; no FIRMS key is needed.

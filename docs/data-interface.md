@@ -8,6 +8,9 @@
 |---|---|
 | `frontend/<region>.json.gz` | One gzip-compressed JSON per preset region (format in section 3), read directly by the web page |
 | `dataset_v1.parquet` | Long table of every cell × month for the six regions (section 2), for analysis and downloads |
+| `dataset_v1.csv.gz` | The same table as CSV (gzip-compressed, UTF-8, LF line endings): an empty field = no data, numbers kept to 6 significant digits, booleans written as `True`/`False` (S14) |
+| `data-card.md` | Data card (sources, processing, uncertainty, validation, limitations, citation; in English, with a short summary at the end) |
+| `anomaly-cases.json` | Standard test cases for the anomaly indicator (section 6), for the front end to check its answers one by one |
 | `region_totals_v1.csv` | Totals, intervals, sources and flags by region × month |
 | `resamples20_v1.parquet` | Cell-level estimates from the first 20 resamples (non-zero values only; columns `lat_idx, lon_idx, month, resample, value`), for computing intervals over areas the user draws: sum each `resample` separately, then take the values near the 2nd smallest and the 19th largest as approximate 5%/95% |
 | `meta.json` | Model, training range, numbers of trees, whether the intervals are calibrated |
@@ -81,7 +84,17 @@ Limitations of v1:
 
 Add up the cells that fall inside the area; when only part of a cell is inside, apportion it by overlap area. This assumes hotspots are evenly distributed within a cell: for small selections, the boundary error can be noticeable. When the selection is smaller than one cell, give only an approximate value and point out this limitation.
 
-## 6. Anomaly indicators (definitions; reference implementation in S14)
+## 6. Anomaly indicators (reference implementation `harmonization/anomaly.py`, standard test cases `anomaly-cases.json`)
+
+The front end implements the same function `anomaly(series, target, as_of, baseline)` following the rules below, then feeds the `input` of each case in `anomaly-cases.json` into it and compares every field with `expected` (numbers within a relative error of 1e-9, lists exactly equal). 25 cases: 19 hand-worked edge cases (ties, exactly 90/10, 9 reference years, a median of 0, a target month with missing data, an unfinished current month, the S-NPP baseline period and so on) and 6 examples using real regional totals from dataset v1. Output fields: `status`, `value`, `n_ref`, `ref_years`, `median`, `ratio`, `percentile`, `level` (`high`/`normal`/`low`/null), `preliminary`, `notes`. The Chinese and English wording is also in `labels` and `notes` in the JSON. The original definitions below are unchanged; S14 added a few details (`docs/decisions/0011`):
+
+- **End of month**: a month counts as ended only if the as-of date (UTC, `YYYY-MM-DD`) is no earlier than the 1st of the next month.
+- **Ties**: values are given only to 2 decimal places, so |x − h| ≤ 0.005 counts as "equal" and x < h − 0.005 as "less".
+- **Reference set**: the same calendar month, from 2001 to the year before the target year, with a value and `input_complete = true`; when the "S-NPP" baseline period is chosen, only months with `source = snpp` are kept. Terra-only months (low confidence) also count as references.
+- **Order of statuses**: no value `no_data` → current month not yet over `month_in_progress` (show only the value so far) → target month with missing data `incomplete_coverage` → no reference months `no_history` → 1–9 reference years `insufficient_history` (give the percentile, median and multiple, but no level) → `ok`.
+- Median = the ordinary median (the mean of the middle two when the count is even); when the median is < 5, no multiple is given and `small_median` is added to `notes`; when the target value comes from near real-time data, `preliminary = true`.
+
+Original definitions:
 
 - **Only evaluate complete months that have ended**. While the current month is still running, show only "cumulative hotspot count as of a given date", with no anomaly verdict.
 - **Anomaly multiple** = that month's `est` ÷ the historical same-month median.
@@ -98,3 +111,4 @@ Add up the cells that fall inside the area; when only part of a cell is inside, 
 |---|---|---|
 | v0 | 2026-11-03 | Milestone A: M1s fallback version, pre-release `milestone-a` |
 | v1 | 2026-11-04 | S12: selected model LightGBM E028 + stability intervals + near real-time flag, pre-release `dataset-v1` |
+| v1 (S14 delivery) | 2026-11-04 | Data unchanged; adds the CSV version, the data card, and the anomaly indicator reference implementation with standard test cases. Published as Release `v1` (S15) |

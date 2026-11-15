@@ -6,15 +6,20 @@
 <!-- STATUS:BEGIN -->
 ```yaml
 current_card: docs/sessions/5-report.md        # next (or current) task card
-status: ready                           # ready | in_progress | blocked | done
-claimed_by: ""                          # claimant's name; empty means unclaimed
-claimed_at: ""                          # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
-last_pushed_stage: S12                  # last stage completed and pushed
+status: in_progress                     # ready | in_progress | blocked | done
+claimed_by: "qiuxue-yee"                # claimant's name; empty means unclaimed
+claimed_at: "2026-11-04T04:41:07Z"      # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
+last_pushed_stage: S14                  # last stage completed and pushed
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
 data_release: dataset-v1                # final dataset v1 (S12); processed inputs are in data-v0, milestone A in milestone-a; SHA256 in the handover notes
-next_step: "Start a new session for task card 5-report: S13 validation report (D1, including the final test reports/final-test.md and the era-shift investigation), S14 delivery, S15 milestone B"
+next_step: "Task card 5-report in progress: S13 and S14 done; next is S15 milestone B (one-command reproduction with pipeline.py all in a clean environment, matching the score tables; after a person confirms, publish Release v1 and squash-merge into main)"
 needs_human:
+  - "Awaiting a person's decision: the dataset license (CC BY 4.0 suggested; docs/data-card.md, docs/decisions/0011 item 3), to be settled before Release v1 is published"
+  - "Tell the front end: the anomaly indicator reference implementation harmonization/anomaly.py + 25 standard test cases docs/anomaly-cases.json (check answers field by field; extra details in docs/data-interface.md section 6 and docs/decisions/0011 item 1); the dataset now also has a CSV version"
+  - "Please read through: the data card docs/data-card.md and the AI usage statement docs/ai-usage.md"
+  - "Please read through: the validation report reports/validation.md (6 core figures + limitations; conclusion: trustworthy in the training regions; in the holdout regions the error is 2.5 times larger and totals are 14–45% too low)"
+  - "Awaiting human confirmation (a look-over is enough; not blocking): implementation details of the GFED check and the era-shift investigation newly done in S13 (docs/decisions/0010: the era-shift main number uses the mean 5-fold AUC; GFED only through 2016; no numeric comparison with the literature value)"
   - "Please look over: the final test scores reports/final-test.md (Test 1 is 22% better than M1s; in the holdout regions the error is 2.5 times the training regions' and totals are 20–35% too low, which must be considered before the global stage G)"
   - "Tell the front end: the final dataset pre-release dataset-v1 + docs/data-interface.md (v1: source names changed to model_*, lo_90/hi_90 and nrt added)"
   - "Awaiting human confirmation: the S12 production version keeps the frozen 2014-01–2021-06 model, and 2012–2013 in the training regions uses estimates, because this machine never has S-NPP for those two years (docs/decisions/0009 item 1)"
@@ -58,8 +63,8 @@ needs_human:
 | S10 | LightGBM and AI experiments | ✅ done | 2026-11-04 | 37 experiments (E000–E036; budget cut and wrapped up early per ADR 0007); best validation MALE: E028 two-stage LightGBM 0.2947, 21.8% lower than M1s (0.3766) (difference −0.082 ± 0.016, 95% interval −0.113 to −0.053), 0.169 lower than QM; all top 3 pass the guardrails and the leakage review (`reports/scores-s10.md`, `reports/model-review.md`) | |
 | S11 | Freeze and external blind grading | ✅ done | 2026-11-04 | E028 selected. Test MALE: Test 1 **0.258** (M1s 0.332, 22% lower), Test 2 holdout regions **0.644** (M1s 0.857); κ 0.69 / 0.53; regional interval coverage after calibration 95.5% / 55.9% (raw 37.9% / 12.9%); in the holdout regions the zero-hotspot and low-hotspot metrics are worse than M1s and totals are 20–35% too low (`reports/final-test.md`) | 742547e |
 | S12 | Final dataset | ✅ done | 2026-11-04 | Production version = the frozen evaluation version E028 (ADR 0009); 2.616 million cell-months: 554,000 S-NPP observed, 1.817 million model estimates, 197,000 Terra bridge, 47,000 NOAA-20 converted; 100 resampled intervals, regional intervals multiplied by the calibration factor 5.37; acceptance: in the S-NPP segment, 15.19 million points over 426 region-months match the observations one by one; pre-release `dataset-v1` | |
-| S13 | Validation report (D1) | ⬜ todo | | | |
-| S14 | Delivery | ⬜ todo | | | |
+| S13 | Validation report (D1) | ✅ done | 2026-11-04 | All of items 1–7 in section 3 done (`reports/validation.md`). The two new items: era-shift AUC 0.57 (training regions) / 0.56 (holdout regions), versus 0.75 / 0.70 for the 2022–2026 control (Terra drift); hotspots per km² of GFED burned area unchanged across 2012 (southern Africa 2.77 → 2.92, Córdoba 5.90 → 5.86), while direct stitching jumps about 5 times. 6 core figures `reports/figures/d1-*.png` | |
+| S14 | Delivery | ✅ done | 2026-11-04 | CSV version of the dataset `dataset_v1.csv.gz` (18 MB, checked column by column against the Parquet, relative error < 5×10⁻⁶); data card `docs/data-card.md`; AI usage statement `docs/ai-usage.md`; anomaly indicator reference implementation `harmonization/anomaly.py` + 25 standard test cases `docs/anomaly-cases.json` (19 hand-worked edge cases + 6 from real data); HANDOFF section "Where the results are"; ADR 0011 | |
 | S15 | ★Milestone B: one-command reproduction, Release v1, merge into main | ⬜ todo | | | |
 
 ## Handover notes
