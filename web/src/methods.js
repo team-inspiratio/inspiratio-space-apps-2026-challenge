@@ -294,7 +294,7 @@ document.querySelector("#app").innerHTML = `${siteHeader("methods")}
       <a href="${REPO}/blob/main/docs/ai-usage.md" target="_blank" rel="noopener">${icon("spark")}<span><strong>AI usage statement</strong><small>What the AI did and what people did</small></span>${icon("arrow")}</a>
       <a href="/data/v1/data-card.md" download>${icon("download")}<span><strong>Dataset card</strong><small>Methods, interpretation, limitations and citation</small></span>${icon("arrow")}</a>
     </div>
-    <p class="small muted">The code and data repository is public; the one-time grading run record stays in the team's private development repository.</p>
+    <p class="small muted">The code and data repository is public.</p>
   </section>
 
   <footer><span class="footer-brand">Team Inspiratio <span>NASA Space Apps 2026</span></span><span>NASA FIRMS · MODIS & VIIRS · Dataset CC BY 4.0</span><a class="text-button" href="/">Back to the atlas ${icon("arrow")}</a></footer>

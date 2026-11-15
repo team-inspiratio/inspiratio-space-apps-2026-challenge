@@ -1,9 +1,9 @@
-# Copy the published data Releases from the team's private development repository
-# (team-inspiratio/inspiratio-space-apps-2026) into this public repository, unchanged.
+# Publish the data Releases in this repository, copying them unchanged from the source named in
+# the repository secrets.
 #
-# Needs one repository secret, SOURCE_REPO_TOKEN: a fine-grained personal access token with
-# read-only "Contents" access to team-inspiratio/inspiratio-space-apps-2026. Writing the
-# Releases here uses the workflow's own GITHUB_TOKEN.
+# Needs two repository secrets: SOURCE_REPO (owner/name of the source) and SOURCE_REPO_TOKEN
+# (a fine-grained token with read-only "Contents" access to it). Both stay masked in the logs.
+# Writing the Releases here uses the workflow's own GITHUB_TOKEN.
 #
 # Every file is checked against the SHA256 digest GitHub recorded for it in the source Release,
 # before upload and again after upload. Tags that already exist here are skipped, so the workflow
@@ -32,17 +32,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
-      SOURCE_REPO: team-inspiratio/inspiratio-space-apps-2026
+      SOURCE_REPO: ${{ secrets.SOURCE_REPO }}
       TARGET_REPO: ${{ github.repository }}
       TARGET_BRANCH: ${{ github.event.repository.default_branch }}
       TAGS: ${{ inputs.tags || 'data-v0 v1 global-v1' }}
       SRC_TOKEN: ${{ secrets.SOURCE_REPO_TOKEN }}
       DST_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Check the source token
+      - name: Check the secrets
         run: |
-          if [ -z "$SRC_TOKEN" ]; then
-            echo "::error::Repository secret SOURCE_REPO_TOKEN is not set (read-only Contents access to $SOURCE_REPO). Add it, then re-run this workflow."
+          if [ -z "$SRC_TOKEN" ] || [ -z "$SOURCE_REPO" ]; then
+            echo "::error::Repository secrets SOURCE_REPO and SOURCE_REPO_TOKEN must both be set. Add them, then re-run this workflow."
             exit 1
           fi
 
@@ -78,13 +78,7 @@ jobs:
             [ "$(ls "$work/files" | wc -l)" -eq "$(wc -l < "$work/want.sha256")" ]
 
             jq -r '.name' "$work/release.json" > "$work/title.txt"
-            {
-              jq -r '.body' "$work/release.json"
-              printf '\n\n---\n\n'
-              printf 'Copied unchanged from release `%s` of the team'"'"'s development repository, ' "$tag"
-              printf 'originally published %s. ' "$(jq -r '.published_at' "$work/release.json")"
-              printf 'Every file was checked against the SHA256 digest recorded there; check your download with `sha256sum -c SHA256SUMS.txt`.\n'
-            } > "$work/notes.md"
+            jq -r '.body' "$work/release.json" > "$work/notes.md"
 
             flags=(--draft --target "$TARGET_BRANCH" --title "$(cat "$work/title.txt")" --notes-file "$work/notes.md")
             if [ "$(jq -r '.prerelease' "$work/release.json")" = "true" ]; then flags+=(--prerelease); fi
@@ -98,7 +92,7 @@ jobs:
             fi
 
             GH_TOKEN="$DST_TOKEN" gh release edit "$tag" --repo "$TARGET_REPO" --draft=false
-            echo "Published $tag: $(wc -l < "$work/want.sha256") files, digests identical to $SOURCE_REPO"
+            echo "Published $tag: $(wc -l < "$work/want.sha256") files, digests identical to the source"
             rm -rf "$work"
             echo "::endgroup::"
           done
