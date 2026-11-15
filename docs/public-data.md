@@ -31,4 +31,4 @@ Reproduction from raw NASA FIRMS data uses `pipeline.py all` and the existing sc
 
 ## Hosting
 
-GitHub source updates do not automatically update the existing hosted website. A publisher with access to that Site must rebuild V2 with the verified bundled files and deploy the resulting `dist/`. Preserve the existing audience and Site identity.
+V2 is published by [GitHub Pages](https://team-inspiratio.github.io/inspiratio-space-apps-2026-challenge/) under this repository. The [deployment workflow](../.github/workflows/pages-v2.yml) verifies the bundled data, tests the production build under the repository path, and publishes `frontend-v2/dist/` after relevant changes merge into `main`. Pull requests validate without publishing. Initial setup requires GitHub Pages to use GitHub Actions as its source; see [V2 deployment](../frontend-v2/README.md#deployment).
