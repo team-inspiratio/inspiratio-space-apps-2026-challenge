@@ -3,8 +3,8 @@
 # MODIS × VIIRS 火点协调
 
 <!-- PROGRESS-BOX:BEGIN -->
-> **当前进度 / Status**：S00–S12 已完成。最终模型是两段式 LightGBM（E028），外部盲审只考了一次：训练区 2012–2013 年的 MALE 0.258（简单比例法 M1s 0.332），完全没见过的留出区 0.644（M1s 0.857），见 [reports/final-test.md](reports/final-test.md)。最终数据集 v1（2000-11 至 2026-10，带来源标记和稳定性区间）在预发布版 `dataset-v1`，接口见 [docs/data-interface.md](docs/data-interface.md)。下一步：会话 5/5，任务卡 [`5-report`](docs/sessions/5-report.md)（验证报告、交付、里程碑 B）。
-> Next: session 5 of 5, task card `5-report`. Final test (run once on GitHub): MALE 0.258 on the training regions 2012-2013 (M1s 0.332), 0.644 on unseen holdout regions (M1s 0.857). Final dataset v1 is the `dataset-v1` pre-release.
+> **当前进度 / Status**：里程碑 B 完成（S00–S15）。最终数据集 v1 已作为正式版 [Release `v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1) 发布（CC BY 4.0），说明见 [docs/data-card.md](docs/data-card.md)，前端接口见 [docs/data-interface.md](docs/data-interface.md)。最终模型是两段式 LightGBM（E028），外部盲审只考了一次：训练区 2012–2013 年的 MALE 0.258（简单比例法 M1s 0.332），完全没见过的留出区 0.644（M1s 0.857），验证报告见 [reports/validation.md](reports/validation.md)。一条命令复现：`uv run python -X utf8 pipeline.py all --from-release`（约 1.5 小时，37 项核对）。下一步：任务卡 [`G-global`](docs/sessions/G-global.md)（全球重跑）。
+> Status: milestone B done. Dataset v1 is Release `v1` (CC BY 4.0); read `docs/data-card.md`. Final test (run once on GitHub): MALE 0.258 on the training regions 2012-2013 (M1s 0.332), 0.644 on unseen holdout regions (M1s 0.857). Reproduce with `pipeline.py all --from-release`. Next: task card `G-global`.
 >
 > **接力三步 / Take over in 3 steps**：① 按 [HANDOFF.md](HANDOFF.md) 装好环境、填好 `.env`；② 把 HANDOFF 里的“通用接力提示词”复制给 Claude Code 或 Codex；③ 按 AI 的提示做需要你本人做的事。详细进度见 [PROGRESS.md](PROGRESS.md)。
 <!-- PROGRESS-BOX:END -->

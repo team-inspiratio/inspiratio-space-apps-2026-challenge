@@ -96,6 +96,32 @@ def record(rel: str, source: str, start: dt.date, end: dt.date, path: Path, rows
     write_manifest(manifest)
 
 
+def present(rel: str, manifest: dict[str, dict]) -> bool:
+    """Already in THIS data folder with the size the manifest records. The manifest is committed
+    (it describes the original run), so being listed alone does not mean the file is here."""
+    path = data_dir() / rel
+    row = manifest.get(rel)
+    return row is not None and path.exists() and path.stat().st_size == int(row["bytes"])
+
+
+def imported_here(name: str) -> bool:
+    """A yearly zip already imported into this data folder (VIIRS zips are deleted after S03)."""
+    stem = name.removesuffix(".zip")
+    return any((data_dir() / "interim" / "points").glob(f"*/*/{stem}.parquet"))
+
+
+def keep_or_check(rel: str, source: str, start, end, path: Path, rows: int, manifest) -> None:
+    """New file: record it. File the manifest already lists: it must have the recorded SHA256
+    (raw data are hash-locked, plan section 10); the committed row is left as it is."""
+    row = manifest.get(rel)
+    if row is None:
+        record(rel, source, start, end, path, rows)
+        return
+    got = sha256(path)
+    if got != row["sha256"]:
+        raise SystemExit(f"{rel}: SHA256 {got} differs from docs/data-manifest.csv")
+
+
 def fetch(url: str, dest: Path, source: str, start: dt.date, end: dt.date, size: int = 0) -> Path:
     """Resumable streaming download into dest (a .part file is renamed on completion)."""
     assert_download_allowed(source, start, end)
@@ -164,7 +190,7 @@ def annual(only: str | None = None) -> None:
     for prefix, source, year in jobs:
         name = f"{prefix}_{year}_all_countries.zip"
         rel = f"raw/firms_yearly/{name}"
-        if rel in manifest:
+        if present(rel, manifest) or imported_here(name):
             continue
         if name not in sizes:
             log(f"skip {name}: not in FIRMS listing")
@@ -173,7 +199,7 @@ def annual(only: str | None = None) -> None:
         t0 = time.time()
         path = fetch(f"{YEARLY}/{name}", out / name, source, start, end, sizes[name])
         rows = count_zip_rows(path)
-        record(rel, source, start, end, path, rows)
+        keep_or_check(rel, source, start, end, path, rows, manifest)
         mb = path.stat().st_size / 1e6
         log(f"ok {name}: {mb:.0f} MB, {rows} rows, {time.time() - t0:.0f} s")
 
@@ -184,11 +210,11 @@ def gfed() -> None:
     for year in GFED_YEARS:
         name = f"GFED4.1s_{year}{'_beta' if year >= 2017 else ''}.hdf5"
         rel = f"raw/gfed/{name}"
-        if rel in manifest:
+        if present(rel, manifest):
             continue
         start, end = dt.date(year, 1, 1), dt.date(year, 12, 31)
         path = fetch(f"{GFED}/{name}", out / name, "GFED4.1s", start, end)
-        record(rel, "GFED4.1s", start, end, path, 0)
+        keep_or_check(rel, "GFED4.1s", start, end, path, 0, manifest)
         log(f"ok {name}: {path.stat().st_size / 1e6:.0f} MB")
 
 

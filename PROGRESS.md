@@ -5,17 +5,18 @@
 
 <!-- STATUS:BEGIN -->
 ```yaml
-current_card: docs/sessions/5-report.md        # 下一张（或正在做的）任务卡
-status: in_progress                     # ready | in_progress | blocked | done
-claimed_by: "qiuxue-yee"                # 认领人名字；空表示无人认领
-claimed_at: "2026-11-04T04:41:07Z"      # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
-last_pushed_stage: S14                  # 最后一个完成并 push 的阶段
+current_card: docs/sessions/G-global.md        # 下一张（或正在做的）任务卡
+status: ready                           # ready | in_progress | blocked | done
+claimed_by: ""                          # 认领人名字；空表示无人认领
+claimed_at: ""                          # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
+last_pushed_stage: S15                  # 最后一个完成并 push 的阶段
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
-data_release: dataset-v1                # 最终数据集 v1（S12）；处理后的输入在 data-v0，里程碑 A 在 milestone-a；SHA256 见交接备注
-next_step: "任务卡 5-report 进行中：S13、S14 已完成，下一步 S15 里程碑 B（干净环境一条命令复现 pipeline.py all，对上成绩表；人确认后发 Release v1、squash-merge 进 main）"
+data_release: v1                        # 正式版 Release v1（CC BY 4.0，S15）；处理后的输入在 data-v0，里程碑 A 在 milestone-a；SHA256 见交接备注和 results/expected/
+next_step: "里程碑 B 完成（S13–S15，main 已合并，Release v1 已发布）。下一张卡 G-global：全球重跑（计划内，2026-11-03 用户已同意扩展到全球）"
 needs_human:
-  - "待人决定：数据集许可证（建议 CC BY 4.0，docs/data-card.md、docs/decisions/0011 第 3 条），公开发布 Release v1 前定"
+  - "待人确认（过目即可，不阻塞）：S15 验收用 pipeline.py all --from-release 入口（从 Release data-v0 网格表起步），没有从原始数据完整重跑（docs/decisions/0012 第 1 条）"
+  - "通知前端：正式版 Release v1 已发布（CC BY 4.0）：gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026，数据与预发布版 dataset-v1 相同，多了 CSV、数据说明卡、异常测试用例"
   - "通知前端：异常指标参考实现 harmonization/anomaly.py + 25 个标准测试用例 docs/anomaly-cases.json（逐字段对答案；补充细节见 docs/data-interface.md 第 6 节、docs/decisions/0011 第 1 条）；数据集新增 CSV 版"
   - "请通读：数据说明卡 docs/data-card.md、AI 使用说明 docs/ai-usage.md"
   - "请通读：验证报告 reports/validation.md（6 张核心图 + 局限性；结论：训练区可信，留出区误差 2.5 倍、偏低 14–45%）"
@@ -43,8 +44,8 @@ needs_human:
 | 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09（里程碑 A） | ✅ 完成 |
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ✅ 完成 |
 | 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | ✅ 完成 |
-| 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15（里程碑 B） | ⏭ 下一张 |
-| G | [`G-global`](docs/sessions/G-global.md) | 全球重跑 | 待开始（S15 之后） |
+| 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15（里程碑 B） | ✅ 完成 |
+| G | [`G-global`](docs/sessions/G-global.md) | 全球重跑 | ⏭ 下一张 |
 
 ## 阶段表
 
@@ -65,7 +66,7 @@ needs_human:
 | S12 | 最终数据集 | ✅ done | 2026-11-04 | 上线版 = 冻结评估版 E028（ADR 0009）；261.6 万格子-月份：S-NPP 观测 55.4 万、模型估计 181.7 万、Terra 桥接 19.7 万、NOAA-20 换算 4.7 万；100 次重抽区间，区域区间乘校准系数 5.37；验收：S-NPP 段 426 个区域-月共 1519 万点与观测逐个一致；预发布版 `dataset-v1` | |
 | S13 | 验证报告（D1） | ✅ done | 2026-11-04 | 第 3 节 1–7 全部完成（`reports/validation.md`）。新做的两项：年代偏移 AUC 0.57（训练区）/ 0.56（留出区），对照 2022–2026 年 0.75 / 0.70（Terra 漂移）；GFED 每 km² 燃烧面积火点数 2012 年前后不变（南部非洲 2.77 → 2.92，科尔多瓦 5.90 → 5.86），直接拼接跳约 5 倍。6 张核心图 `reports/figures/d1-*.png` | |
 | S14 | 交付 | ✅ done | 2026-11-04 | 数据集 CSV 版 `dataset_v1.csv.gz`（18 MB，和 Parquet 逐列核对，相对误差 < 5×10⁻⁶）；数据说明卡 `docs/data-card.md`；AI 使用说明 `docs/ai-usage.md`；异常指标参考实现 `harmonization/anomaly.py` + 25 个标准测试用例 `docs/anomaly-cases.json`（19 个手算边界 + 6 个真实数据）；HANDOFF 第 6 节“成果在哪”；ADR 0011 | |
-| S15 | ★里程碑 B：一条命令复现、Release v1、合并 main | ⬜ todo | | | |
+| S15 | ★里程碑 B：一条命令复现、Release v1、合并 main | ✅ done | 2026-11-04 | 用户确认后 squash-merge 进 main、发布正式版 Release `v1`（CC BY 4.0）。全新克隆 + 空数据目录运行 `pipeline.py all --from-release`：87 分钟，`pipeline.py check` 37 项全过（成绩文件逐字相同；两个验证窗口分数等于 freeze.json 和 E028；测试集 est_final 和 100 次重抽与封存答卷逐位相同；数据集 v0、v1 每个文件 SHA256 一致）。顺带修好下载和导入在空数据目录里误跳过的问题（ADR 0012） | |
 
 ## 交接备注
 
@@ -159,4 +160,23 @@ needs_human:
   - 报告（S13）要写清楚：测试 2 的弱点（第 3 节）、区间在新区域覆盖不足、训练区 2012–2013 年在数据集里是估计值（ADR 0009 第 1 条，待人确认）、只有 Terra 的月份误差约是有 Aqua 时的 1.6 倍（ADR 0009 第 2 条）。
   - 年代偏移调查（预注册第 8 节）还没做，在 S13。
   - GFED 合理性检查里 2012–2013 年的 VIIRS 部分只能用盲审同口径的数据，本机没有。
+
+### 会话 5（2026-11-04，qiuxue-yee）
+
+- **S13 验证报告**：`reports/validation.md`，代码 `harmonization/validation.py`（`drift | gfed | figures | all`），6 张核心图和 2 张补充图在 `reports/figures/d1-*.png`，实现细节见 ADR 0010。
+- **S14 交付**：`docs/data-card.md`、`docs/ai-usage.md`，异常指标参考实现 `harmonization/anomaly.py` 和 25 个标准测试用例 `docs/anomaly-cases.json`，`dataset_v1.csv.gz`，HANDOFF 第 6 节；细节见 ADR 0011。本机数据目录 `processed/v1` 已重新打包，包含 CSV、数据说明卡、异常用例和新的 `SHA256SUMS.txt`。
+- **S15 一条命令复现**：`pipeline.py`（仓库根目录）。
+  - 命令：`all --from-release`（从 Release `data-v0` 起步，约 1.5 小时）、`all`（从原始数据起步，要 FIRMS key 和约 50 GB）、`check`、`list`。
+  - 每个阶段在数据目录写 `pipeline_<阶段>.done`，中断后重跑会跳过做完的阶段；加 `--force` 全部重跑。
+  - 期望的数据集哈希在 `results/expected/`。
+  - 验收结果：在 `D:/inspiratio-repro`（全新克隆 + 空数据目录）跑完 37/37 通过，结果写在数据目录 `pipeline_check.json`。这个目录可以删。
+  - 范围、不重跑的步骤和理由见 ADR 0012。
+- **许可证、Release v1、合并 main**（用户 2026-11-04 确认）：
+  - 数据集用 CC BY 4.0，已写进数据说明卡和 ADR 0011。
+  - PR #2 squash-merge 进 main。
+  - 正式版 Release `v1`（tag 打在 main 的合并提交上）：https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1 。文件来自本机 `D:/inspiratio-data/processed/v1`，SHA256 和 `results/expected/dataset-v1.sha256` 一致。和预发布版 `dataset-v1` 比，数据完全相同，多了 CSV、数据说明卡、异常测试用例，接口文档也更新了。下载：`gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026`，再 `sha256sum -c SHA256SUMS.txt`。
+- **给 G-global 会话的提示**：
+  - main 现在是完整的里程碑 B，`feat/data-harmonization` 分支保留。继续在这个分支上工作前，先 `git merge origin/main`，让分支历史和 squash 后的 main 接上，再开新 PR。
+  - 测试 2 的弱点会直接影响全球推广：留出区误差是训练区的 2.5 倍、总量偏低 14–45%、区间覆盖率只有 56%。全球产品必须标明“训练区以外的估计不确定性更大”。
+  - 冻结模型只用 3 个训练区，纬度起了区域标签的作用（S10 审核记录第 5 节）。全球重跑按计划来，不要事后改冻结模型。
 

@@ -16,7 +16,7 @@
 | **Size** | 2,615,808 cell-months (8,384 cells × 312 months). |
 | **Version** | v1, 2026-11-04. Model LightGBM E028, frozen before a one-time blind test. |
 | **Files** | `dataset_v1.parquet` and `dataset_v1.csv.gz` (same table), `region_totals_v1.csv`, one `frontend/<region>.json.gz` per region, `resamples20_v1.parquet`, `meta.json`, `SHA256SUMS.txt`, on the GitHub release of this repository. |
-| **License** | Proposed: CC BY 4.0 (to be confirmed by the team before public release). The input data are NASA FIRMS and GFED products; see "Citation". |
+| **License** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (confirmed by the team, 2026-11-04). The input data are NASA FIRMS and GFED products; see "Citation". |
 
 ## 1. Sources
 
@@ -88,7 +88,7 @@ Scores are MALE, the mean absolute difference of log(count + 1) on random 1°-5�
 
 ## 7. Citation and acknowledgement
 
-- Dataset: Team Inspiratio (2026). *Harmonized MODIS × VIIRS monthly active-fire counts, 0.25°, 2000-11 to 2026-10, version 1.* GitHub release of `team-inspiratio/inspiratio-space-apps-2026`.
+- Dataset: Team Inspiratio (2026). *Harmonized MODIS × VIIRS monthly active-fire counts, 0.25°, 2000-11 to 2026-10, version 1.* GitHub release `v1` of `team-inspiratio/inspiratio-space-apps-2026` (https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1). CC BY 4.0.
 - FIRMS: "We acknowledge the use of data and imagery from NASA's Fire Information for Resource Management System (FIRMS) (https://www.earthdata.nasa.gov/firms), part of NASA's Earth Science Data and Information System (ESDIS)."
 - GFED4.1s: van der Werf, G. R., et al. (2017). Global fire emissions estimates during 1997-2016. *Earth System Science Data*, 9, 697-720.
 - VIIRS 375 m product: Schroeder, W., Oliva, P., Giglio, L., & Csiszar, I. A. (2014). The New VIIRS 375 m active fire detection data product: Algorithm description and initial assessment. *Remote Sensing of Environment*, 143, 85-96.
@@ -104,4 +104,4 @@ Scores are MALE, the mean absolute difference of log(count + 1) on random 1°-5�
 - **有多准**：训练区测试年份 MALE 0.258（简单比例法 0.332），年总量偏差 9% 以内；留出区 0.644，误差是训练区的 2.5 倍，总量偏低 14%–45%（北澳除外）。
 - **区间**：稳定性区间只表示“换一批训练年份估计会变多少”，不是“真实值有 90% 的可能落在其中”；区域区间按事先定的规则乘 5.37 后，训练区覆盖率 95.5%，留出区 55.9%。
 - **适合**：在训练区内比较不同月份、年份的火点活动，做燃烧日历和“这个月火多不多”的判断。**不适合**：数火灾次数、算燃烧面积或排放、判断灾害严重程度，以及不加说明地用在训练区以外。
-- **许可**：建议 CC BY 4.0，公开发布前请团队确认；原始数据来自 NASA FIRMS 和 GFED，引用方式见第 7 节。
+- **许可**：CC BY 4.0（团队 2026-11-04 确认）；原始数据来自 NASA FIRMS 和 GFED，引用方式见第 7 节。

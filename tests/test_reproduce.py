@@ -41,3 +41,24 @@ def test_expected_hashes_present():
         names = {line.split()[1] for line in lines}
         assert f"dataset_{v}.parquet" in names
     assert (ROOT / "results" / "expected" / "dataset-v1-meta.json").exists()
+
+
+def test_region_file_with_skipped_recount_matches_published(tmp_path):
+    import gzip
+    import hashlib
+    import json
+
+    ref = json.loads((ROOT / "results" / "expected" / "dataset-v1-meta.json").read_text("utf-8"))
+    body = {"region": "x", "model": {**ref}, "months": [1.5, None, 3]}
+    published = json.dumps(body, separators=(",", ":")).encode("utf-8")
+    want = tmp_path / "want" / "x.json.gz"
+    want.parent.mkdir()
+    with gzip.GzipFile(want, "wb", mtime=0) as f:
+        f.write(published)
+    body["model"]["acceptance_recount"] = {"skipped": "no cleaned S-NPP points"}
+    got = tmp_path / "x.json.gz"
+    with gzip.GzipFile(got, "wb", mtime=0) as f:
+        f.write(json.dumps(body, separators=(",", ":")).encode("utf-8"))
+    digest = hashlib.sha256(want.read_bytes()).hexdigest()
+    assert pipeline.region_json_with_recount(got, "v1") == digest
+    assert pipeline.region_json_with_recount(want, "v1") is None
