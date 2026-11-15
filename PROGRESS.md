@@ -5,20 +5,22 @@
 
 <!-- STATUS:BEGIN -->
 ```yaml
-current_card: docs/sessions/4-freeze-test.md   # 下一张（或正在做的）任务卡
-status: in_progress                     # ready | in_progress | blocked | done
-claimed_by: "qiuxue-yee"                # 认领人名字；空表示无人认领
-claimed_at: "2026-11-04T03:00:28Z"    # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
-last_pushed_stage: S10                  # 最后一个完成并 push 的阶段
+current_card: docs/sessions/5-report.md        # 下一张（或正在做的）任务卡
+status: ready                           # ready | in_progress | blocked | done
+claimed_by: ""                          # 认领人名字；空表示无人认领
+claimed_at: ""                          # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
+last_pushed_stage: S12                  # 最后一个完成并 push 的阶段
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
-data_release: data-v0                   # gh release download data-v0；SHA256 见交接备注；里程碑 A 数据在 milestone-a
-next_step: "S11 答卷已封存（E028，results/submission.parquet 已进冻结清单）。等人推送 final-test 标签、GitHub 阅卷把 results/final-test/ 提交回本分支后，git pull，写 reports/final-test.md，再做 S12"
+data_release: dataset-v1                # 最终数据集 v1（S12）；处理后的输入在 data-v0，里程碑 A 在 milestone-a；SHA256 见交接备注
+next_step: "开新会话执行任务卡 5-report：S13 验证报告（D1，含最终测试 reports/final-test.md 和年代偏移调查）、S14 交付、S15 里程碑 B"
 needs_human:
-  - "现在由人做：在仓库文件夹运行 git pull，再运行 git tag final-test && git push origin final-test（只能考一次，AI 不能自己推）。阅卷跑完之前不要往 feat/data-harmonization 推任何提交"
+  - "请过目：最终测试成绩 reports/final-test.md（测试 1 比 M1s 好 22%；留出区误差是训练区的 2.5 倍、总量偏低 20–35%，全球阶段 G 前要考虑）"
+  - "通知前端：最终数据集预发布版 dataset-v1 + docs/data-interface.md（v1：来源名改为 model_*，新增 lo_90/hi_90、nrt）"
+  - "待人确认：S12 上线版沿用 2014-01–2021-06 的冻结模型，训练区 2012–2013 年用估计值，因为本机永远没有这两年 S-NPP（docs/decisions/0009 第 1 条）"
   - "请过目：S10 审核记录 reports/model-review.md（结论：前 3 名都通过泄漏审查；风险：纬度在只有 3 个训练区时起了区域标签的作用，留出区可能变差，测试 2 会检验）"
   - "待人决定：NOAA-20 接续的通过标准（docs/decisions/0005 第 4 条；标准是看了检验结果后提出的）"
-  - "待人决定：留出区的 Terra 桥接用训练区合并比例还是当地 MODIS 比例（docs/decisions/0005 第 6 条，影响 S12 上线版）"
+  - "已记录：留出区 Terra 桥接按 ADR 0005 第 6 条建议用当地 MODIS 比例（选项 B），按用户授权由 AI 决定（docs/decisions/0009 第 3 条）"
   - "待人确认：QM 细节、λ 选择、桥接年份、v0 来源规则（docs/decisions/0005 第 1–3、5 条）"
   - "已记录：S10 LightGBM 与实验循环的实现细节（docs/decisions/0006），按用户授权由 AI 决定"
   - "已记录：S10 预算缩减、截止时间和补救重跑是用户的决定（docs/decisions/0007）"
@@ -35,8 +37,8 @@ needs_human:
 | 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | ✅ 完成 |
 | 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09（里程碑 A） | ✅ 完成 |
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ✅ 完成 |
-| 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | 🔄 进行中（qiuxue-yee） |
-| 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15（里程碑 B） | 待开始 |
+| 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | ✅ 完成 |
+| 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15（里程碑 B） | ⏭ 下一张 |
 | G | [`G-global`](docs/sessions/G-global.md) | 全球重跑 | 待开始（S15 之后） |
 
 ## 阶段表
@@ -54,8 +56,8 @@ needs_human:
 | S08 | 保底模型 M0、M1s、QM；桥接与接续 | ✅ done | 2026-11-03 | 两窗口合并 MALE：M1s（λ=20）0.377、QM 0.463、M0 1.795；Terra→Aqua→M1s 链条 0.522；NOAA-20 接续月总量偏差中位数 −0.3%～+3.1%（`reports/scores-v1.md`） | |
 | S09 | ★里程碑 A：数据集 v0、前端导出、预发布版 | ✅ done | 2026-11-03 | 261.6 万格子-月份：S-NPP 观测 55.4 万、NOAA-20 换算 4.7 万、M1s 182 万、Terra 桥接 19.7 万；预发布版 `milestone-a`，下载后 9 个文件 SHA256 全部核对通过 | |
 | S10 | LightGBM 和 AI 实验 | ✅ done | 2026-11-04 | 37 次实验（E000–E036，预算按 ADR 0007 缩减并提前收工）；最佳验证 MALE：E028 两段式 LightGBM 0.2947，比 M1s（0.3766）低 21.8%（差 −0.082 ± 0.016，95% 区间 −0.113～−0.053），比 QM 低 0.169；前 3 名都通过护栏和泄漏审查（`reports/scores-s10.md`、`reports/model-review.md`） | |
-| S11 | 冻结与外部盲审 | 🔄 答卷已封存，等人推 final-test 标签 | | 按预注册选定 E028（5 条门槛全过）；重训 2014-01–2021-06，轮数 766/970；答卷 596,032 行 + 100 列重采样，校准系数 5.37（`docs/decisions/0008`、`results/freeze.json`） | |
-| S12 | 最终数据集 | ⬜ todo | | | |
+| S11 | 冻结与外部盲审 | ✅ done | 2026-11-04 | 选定 E028。测试 MALE：测试 1 **0.258**（M1s 0.332，低 22%），测试 2 留出区 **0.644**（M1s 0.857）；κ 0.69 / 0.53；区域区间覆盖率校准后 95.5% / 55.9%（原始 37.9% / 12.9%）；留出区零火点和低火点指标比 M1s 差、总量偏低 20–35%（`reports/final-test.md`） | 742547e |
+| S12 | 最终数据集 | ✅ done | 2026-11-04 | 上线版 = 冻结评估版 E028（ADR 0009）；261.6 万格子-月份：S-NPP 观测 55.4 万、模型估计 181.7 万、Terra 桥接 19.7 万、NOAA-20 换算 4.7 万；100 次重抽区间，区域区间乘校准系数 5.37；验收：S-NPP 段 426 个区域-月共 1519 万点与观测逐个一致；预发布版 `dataset-v1` | |
 | S13 | 验证报告（D1） | ⬜ todo | | | |
 | S14 | 交付 | ⬜ todo | | | |
 | S15 | ★里程碑 B：一条命令复现、Release v1、合并 main | ⬜ todo | | | |
@@ -130,4 +132,26 @@ needs_human:
 - **S11 做到哪**：按预注册第 4 节选定 LightGBM E028（逐条核对见 `docs/decisions/0008` 第 1 节）。冻结了 `harmonize.py`（默认 `fit()` 改为 `fit_lgb`，其余与 E028 源码相同）、`config/features.json`，然后用冻结程序在训练区 2014-01–2021-06 上重训，100 次整年重抽给稳定性区间，校准系数用两个验证窗口定（5.37）。答卷 `results/submission.parquet`、冻结清单 `results/freeze.json`、生成脚本 `harmonization/freeze.py` 已进 `config/frozen-manifest.json`。封卷前用假答案把冻结的阅卷函数跑通。
 - **下一步**：人推 `final-test` 标签 → GitHub 阅卷（`grader.yml`）把 `results/final-test/` 提交回本分支 → `git pull` → 如实写 `reports/final-test.md`（原始/校准覆盖率按 ADR 0008 第 5 节的规则）→ S12。
 - **阅卷期间不要 push 本分支**：工作流最后一步要往本分支推结果，期间有别的提交会让它推送失败。
-- **S12 半成品**：`harmonization/series_v1.py`（已提交，还没正式运行）：上线版 = 冻结的评估版（本机永远没有 2012–2013 年 S-NPP，红线 1），只有 Terra 的月份用 Terra 造 Aqua 输入再进模型（先在验证窗口上和 v0 的 M1s 链条比，`terra-check`），留出区桥接用当地 MODIS 比例（ADR 0005 第 6 条选项 B），区间按 ADR 0008 第 5 节决定要不要乘校准系数，验收 `recount()` 已在 v0 上试过（426 个区域-月，0 处不一致）。中间结果在数据目录 `s11/`。
+- **S12（已完成）**：`harmonization/series_v1.py`（已提交，还没正式运行）：上线版 = 冻结的评估版（本机永远没有 2012–2013 年 S-NPP，红线 1），只有 Terra 的月份用 Terra 造 Aqua 输入再进模型（先在验证窗口上和 v0 的 M1s 链条比，`terra-check`），留出区桥接用当地 MODIS 比例（ADR 0005 第 6 条选项 B），区间按 ADR 0008 第 5 节决定要不要乘校准系数，验收 `recount()` 已在 v0 上试过（426 个区域-月，0 处不一致）。中间结果在数据目录 `s11/`。
+- **S11 成绩**：测试 1 MALE 0.258（M1s 0.332），测试 2 0.644（M1s 0.857），E028 都更好；但留出区零火点和低火点指标比 M1s 差、总量偏低 20–35%（北澳除外），中西伯利亚 MALE 1.14。区间覆盖率按 ADR 0008 规则用校准后的：95.5% / 55.9%。全文 `reports/final-test.md`。
+- **S12 数据集 v1**（预发布版 `dataset-v1`）：`uv run python -X utf8 -m harmonization.series_v1 build` 生成（重抽结果缓存在数据目录 `s12/`，没有缓存要重训 100 次，约 1 小时）。上线版和评估版是同一个模型（训练区 2014-01–2021-06，轮数 766/970），重训逐位复现答卷的 `est_final`。下载：`gh release download dataset-v1 --repo team-inspiratio/inspiratio-space-apps-2026`，再 `sha256sum -c SHA256SUMS.txt`。
+
+  | 文件 | SHA256 |
+  |---|---|
+  | `data-interface.md` | `535aed67ec0a0e365b263c23e5e83775f42597964e83a94c7e3674420938fcf7` |
+  | `dataset_v1.parquet` | `60d13babfa450b86194ae72fd1d2d8c048085b303a1e381a7685e6d23b5a559e` |
+  | `california.json.gz` | `f206711f9a55bfac7f7256b8b087d7b3bbc7e684c0ef5f7c05e233be0ef98a3f` |
+  | `central_siberia.json.gz` | `08e510de4bf5e5a23062158ae16fd44a3f19a028f50da402b2c98ca8ff4ea426` |
+  | `cordoba.json.gz` | `703ad6f3b2343ff0a47611de6f38c7f925342a630ab512e8e59968a2d9195175` |
+  | `indo_gangetic.json.gz` | `af0e3742caf0f4f253ffa2e175e17eec262e4561d3a73f938043a61e0f58f2d7` |
+  | `north_australia.json.gz` | `c38ae0a87c5d79f138a0b8a5bdf5f9da2d3334a305100fb68f968fe57b963c97` |
+  | `southern_africa.json.gz` | `c7b00890426b6699979f24bd1caffb6c6902d045feca9ed8ca026bce69958dda` |
+  | `meta.json` | `6abc6c3663a45aa093a036b7328c0a5b6ac17652b00a2494d33ddf3290f0b8db` |
+  | `region_totals_v1.csv` | `54e3cfbff46a70cd0c2318c0139b3e9a281e67f397b96cebb5c8de1076e10dda` |
+  | `resamples20_v1.parquet` | `7cd6d799f3aa8a5e94c1eb1de9119eab1dab5251fe264afb0c629a8293f2c56e` |
+
+- **给会话 5 的提示**：
+  - 报告（S13）要写清楚：测试 2 的弱点（第 3 节）、区间在新区域覆盖不足、训练区 2012–2013 年在数据集里是估计值（ADR 0009 第 1 条，待人确认）、只有 Terra 的月份误差约是有 Aqua 时的 1.6 倍（ADR 0009 第 2 条）。
+  - 年代偏移调查（预注册第 8 节）还没做，在 S13。
+  - GFED 合理性检查里 2012–2013 年的 VIIRS 部分只能用盲审同口径的数据，本机没有。
+

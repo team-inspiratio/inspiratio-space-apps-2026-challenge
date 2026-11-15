@@ -1,0 +1,2393 @@
+{
+  "estimates": [
+    "est_final",
+    "est_m0",
+    "est_m1s",
+    "est_qm"
+  ],
+  "test1": {
+    "scores": {
+      "est_final": {
+        "male": 0.2578993179848055,
+        "male_all": 0.31827561162129114,
+        "n_primary": 11018,
+        "n_all": 13200,
+        "n_rectangles": 600,
+        "excluded_share": 0.04347826086956519,
+        "zero_ge1": 0.08121827411167512,
+        "zero_ge5": 0.03553299492385787,
+        "low_mae": 4.025675230138592,
+        "total_bias_mean_abs": 0.04745574067802646,
+        "season_corr_mean": 0.9984760467655311,
+        "male_by_region": {
+          "california": 0.2823883326327503,
+          "cordoba": 0.2982180841912899,
+          "southern_africa": 0.19309153713037625
+        },
+        "season_corr": {
+          "california": 0.9998912142423251,
+          "cordoba": 0.9956662826002237,
+          "southern_africa": 0.9998706434540446
+        },
+        "total_bias": [
+          {
+            "region": "california",
+            "year": "2012",
+            "H": 46424.56574731513,
+            "V": 42767.0,
+            "bias": 0.08552308432471611,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "california",
+            "year": "2013",
+            "H": 44812.33983282587,
+            "V": 42035.0,
+            "bias": 0.06607207881113042,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "cordoba",
+            "year": "2012",
+            "H": 23501.464618767328,
+            "V": 23258.0,
+            "bias": 0.010467994615501297,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "cordoba",
+            "year": "2013",
+            "H": 35614.65880685307,
+            "V": 38889.0,
+            "bias": -0.08419710440347994,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "southern_africa",
+            "year": "2012",
+            "H": 1276005.117358616,
+            "V": 1240265.0,
+            "bias": 0.02881651692067111,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "southern_africa",
+            "year": "2013",
+            "H": 1302805.7100772886,
+            "V": 1290344.0,
+            "bias": 0.009657664992659853,
+            "abs_diff_if_v0": null
+          }
+        ],
+        "units": [
+          {
+            "region": "california",
+            "year": "2012",
+            "male": 0.30257222661765626,
+            "n": 1479
+          },
+          {
+            "region": "california",
+            "year": "2013",
+            "male": 0.26220443864784443,
+            "n": 1706
+          },
+          {
+            "region": "cordoba",
+            "year": "2012",
+            "male": 0.30552770304050214,
+            "n": 1754
+          },
+          {
+            "region": "cordoba",
+            "year": "2013",
+            "male": 0.29090846534207765,
+            "n": 2168
+          },
+          {
+            "region": "southern_africa",
+            "year": "2012",
+            "male": 0.1735113658868939,
+            "n": 1855
+          },
+          {
+            "region": "southern_africa",
+            "year": "2013",
+            "male": 0.21267170837385863,
+            "n": 2056
+          }
+        ]
+      },
+      "est_m0": {
+        "male": 1.8134968694052693,
+        "male_all": 1.6328751588879662,
+        "n_primary": 11018,
+        "n_all": 13200,
+        "n_rectangles": 600,
+        "excluded_share": 0.04347826086956519,
+        "zero_ge1": 0.04187817258883249,
+        "zero_ge5": 0.0012690355329949238,
+        "low_mae": 3.4397417503586802,
+        "total_bias_mean_abs": 0.8219305578765038,
+        "season_corr_mean": 0.9793613177204099,
+        "male_by_region": {
+          "california": 1.8633786457086776,
+          "cordoba": 1.7241337222424842,
+          "southern_africa": 1.8529782402646457
+        },
+        "season_corr": {
+          "california": 0.9990584222227471,
+          "cordoba": 0.9577307367881681,
+          "southern_africa": 0.9812947941503146
+        },
+        "total_bias": [
+          {
+            "region": "california",
+            "year": "2012",
+            "H": 5537.0,
+            "V": 42767.0,
+            "bias": -0.870531016905558,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "california",
+            "year": "2013",
+            "H": 5523.0,
+            "V": 42035.0,
+            "bias": -0.868609492089925,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "cordoba",
+            "year": "2012",
+            "H": 5027.0,
+            "V": 23258.0,
+            "bias": -0.7838593172241809,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "cordoba",
+            "year": "2013",
+            "H": 6693.0,
+            "V": 38889.0,
+            "bias": -0.827894777443493,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "southern_africa",
+            "year": "2012",
+            "H": 263209.0,
+            "V": 1240265.0,
+            "bias": -0.7877800308804973,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "southern_africa",
+            "year": "2013",
+            "H": 267219.0,
+            "V": 1290344.0,
+            "bias": -0.7929087127153689,
+            "abs_diff_if_v0": null
+          }
+        ],
+        "units": [
+          {
+            "region": "california",
+            "year": "2012",
+            "male": 1.8835444924839884,
+            "n": 1479
+          },
+          {
+            "region": "california",
+            "year": "2013",
+            "male": 1.843212798933367,
+            "n": 1706
+          },
+          {
+            "region": "cordoba",
+            "year": "2012",
+            "male": 1.6425173949452052,
+            "n": 1754
+          },
+          {
+            "region": "cordoba",
+            "year": "2013",
+            "male": 1.8057500495397634,
+            "n": 2168
+          },
+          {
+            "region": "southern_africa",
+            "year": "2012",
+            "male": 1.8346499916967403,
+            "n": 1855
+          },
+          {
+            "region": "southern_africa",
+            "year": "2013",
+            "male": 1.8713064888325515,
+            "n": 2056
+          }
+        ]
+      },
+      "est_m1s": {
+        "male": 0.33240192070887575,
+        "male_all": 0.4017057635519683,
+        "n_primary": 11018,
+        "n_all": 13200,
+        "n_rectangles": 600,
+        "excluded_share": 0.04347826086956519,
+        "zero_ge1": 0.04187817258883249,
+        "zero_ge5": 0.031725888324873094,
+        "low_mae": 5.677145101424521,
+        "total_bias_mean_abs": 0.09306309690271021,
+        "season_corr_mean": 0.9954976450378944,
+        "male_by_region": {
+          "california": 0.38731247464914026,
+          "cordoba": 0.3606969324571423,
+          "southern_africa": 0.2491963550203447
+        },
+        "season_corr": {
+          "california": 0.9998446252710922,
+          "cordoba": 0.9872562025197926,
+          "southern_africa": 0.9993921073227983
+        },
+        "total_bias": [
+          {
+            "region": "california",
+            "year": "2012",
+            "H": 50639.435004814826,
+            "V": 42767.0,
+            "bias": 0.18407732608821825,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "california",
+            "year": "2013",
+            "H": 48882.81222570598,
+            "V": 42035.0,
+            "bias": 0.16290739207103555,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "cordoba",
+            "year": "2012",
+            "H": 23905.08792028707,
+            "V": 23258.0,
+            "bias": 0.027822165288806877,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "cordoba",
+            "year": "2013",
+            "H": 33952.83113198603,
+            "V": 38889.0,
+            "bias": -0.12692969394980513,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "southern_africa",
+            "year": "2012",
+            "H": 1289749.4154174887,
+            "V": 1240265.0,
+            "bias": 0.03989825998273644,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "southern_africa",
+            "year": "2013",
+            "H": 1311949.1896539484,
+            "V": 1290344.0,
+            "bias": 0.016743744035659036,
+            "abs_diff_if_v0": null
+          }
+        ],
+        "units": [
+          {
+            "region": "california",
+            "year": "2012",
+            "male": 0.42404773437288573,
+            "n": 1479
+          },
+          {
+            "region": "california",
+            "year": "2013",
+            "male": 0.3505772149253948,
+            "n": 1706
+          },
+          {
+            "region": "cordoba",
+            "year": "2012",
+            "male": 0.3497378263955667,
+            "n": 1754
+          },
+          {
+            "region": "cordoba",
+            "year": "2013",
+            "male": 0.3716560385187179,
+            "n": 2168
+          },
+          {
+            "region": "southern_africa",
+            "year": "2012",
+            "male": 0.2280680677763923,
+            "n": 1855
+          },
+          {
+            "region": "southern_africa",
+            "year": "2013",
+            "male": 0.27032464226429714,
+            "n": 2056
+          }
+        ]
+      },
+      "est_qm": {
+        "male": 0.4306299990582583,
+        "male_all": 0.47854733446747927,
+        "n_primary": 11018,
+        "n_all": 13200,
+        "n_rectangles": 600,
+        "excluded_share": 0.04347826086956519,
+        "zero_ge1": 0.04187817258883249,
+        "zero_ge5": 0.04187817258883249,
+        "low_mae": 4.985652797704447,
+        "total_bias_mean_abs": 0.09293856733509326,
+        "season_corr_mean": 0.9895709752456533,
+        "male_by_region": {
+          "california": 0.4896616328520558,
+          "cordoba": 0.47405010308292905,
+          "southern_africa": 0.32817826123979
+        },
+        "season_corr": {
+          "california": 0.9962565870955253,
+          "cordoba": 0.9732966384702639,
+          "southern_africa": 0.9991597001711705
+        },
+        "total_bias": [
+          {
+            "region": "california",
+            "year": "2012",
+            "H": 39553.858556243424,
+            "V": 42767.0,
+            "bias": -0.0751313265778889,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "california",
+            "year": "2013",
+            "H": 35908.54812684437,
+            "V": 42035.0,
+            "bias": -0.14574644636982592,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "cordoba",
+            "year": "2012",
+            "H": 29195.902883489478,
+            "V": 23258.0,
+            "bias": 0.2553058252424747,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "cordoba",
+            "year": "2013",
+            "H": 40506.38804294131,
+            "V": 38889.0,
+            "bias": 0.041589859418892594,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "southern_africa",
+            "year": "2012",
+            "H": 1280086.2325790194,
+            "V": 1240265.0,
+            "bias": 0.03210703565691153,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "southern_africa",
+            "year": "2013",
+            "H": 1300345.3411737862,
+            "V": 1290344.0,
+            "bias": 0.007750910744565909,
+            "abs_diff_if_v0": null
+          }
+        ],
+        "units": [
+          {
+            "region": "california",
+            "year": "2012",
+            "male": 0.4906306598894792,
+            "n": 1479
+          },
+          {
+            "region": "california",
+            "year": "2013",
+            "male": 0.4886926058146324,
+            "n": 1706
+          },
+          {
+            "region": "cordoba",
+            "year": "2012",
+            "male": 0.47777619160845064,
+            "n": 1754
+          },
+          {
+            "region": "cordoba",
+            "year": "2013",
+            "male": 0.4703240145574074,
+            "n": 2168
+          },
+          {
+            "region": "southern_africa",
+            "year": "2012",
+            "male": 0.309196519288243,
+            "n": 1855
+          },
+          {
+            "region": "southern_africa",
+            "year": "2013",
+            "male": 0.347160003191337,
+            "n": 2056
+          }
+        ]
+      }
+    },
+    "differences": {
+      "est_final_vs_est_m1s": {
+        "diff": 0.07450260272407026,
+        "se": 0.010257399882877499,
+        "ci95": [
+          0.056502170135425786,
+          0.09629283267915727
+        ],
+        "resamples": 2000
+      },
+      "est_final_vs_est_qm": {
+        "diff": 0.1727306810734528,
+        "se": 0.01306071812489349,
+        "ci95": [
+          0.1496436337829088,
+          0.19823335378616555
+        ],
+        "resamples": 2000
+      }
+    },
+    "anomaly_agreement": {
+      "est_final": {
+        "kappa": 0.685787826522971,
+        "confusion_obs_rows_est_cols": [
+          [
+            1109,
+            387,
+            3
+          ],
+          [
+            545,
+            7613,
+            281
+          ],
+          [
+            1,
+            197,
+            954
+          ]
+        ],
+        "n": 11090
+      },
+      "est_m1s": {
+        "kappa": 0.611537183645059,
+        "confusion_obs_rows_est_cols": [
+          [
+            1102,
+            388,
+            9
+          ],
+          [
+            796,
+            7232,
+            411
+          ],
+          [
+            1,
+            229,
+            922
+          ]
+        ],
+        "n": 11090
+      }
+    },
+    "coverage": {
+      "resamples": 100,
+      "region_month_coverage": 0.3787878787878788,
+      "n_region_months": 66,
+      "interval_scale": 5.37,
+      "region_month_coverage_calibrated": 0.9545454545454546,
+      "cell_month_coverage": 0.647191691505216
+    }
+  },
+  "test2": {
+    "scores": {
+      "est_final": {
+        "male": 0.6440240787469766,
+        "male_all": 0.6118929753821903,
+        "n_primary": 46926,
+        "n_all": 66600,
+        "n_rectangles": 600,
+        "excluded_share": 0.017699115044247815,
+        "zero_ge1": 0.11911028100857458,
+        "zero_ge5": 0.09644282197130487,
+        "low_mae": 9.722488550624833,
+        "total_bias_mean_abs": 0.18348247719053826,
+        "season_corr_mean": 0.9716972496670646,
+        "male_by_region": {
+          "central_siberia": 1.1418700828623478,
+          "indo_gangetic": 0.4696031645270929,
+          "north_australia": 0.3205989888514894
+        },
+        "season_corr": {
+          "central_siberia": 0.9981641391266045,
+          "indo_gangetic": 0.9940482775338727,
+          "north_australia": 0.9228793323407166
+        },
+        "total_bias": [
+          {
+            "region": "central_siberia",
+            "year": "2012",
+            "H": 89542.69471206714,
+            "V": 105370.0,
+            "bias": -0.15020694019106828,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2013",
+            "H": 52035.92286143574,
+            "V": 66606.0,
+            "bias": -0.21875021977846232,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2014",
+            "H": 56279.79517244105,
+            "V": 65497.0,
+            "bias": -0.14072712990761327,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2015",
+            "H": 11184.443640872809,
+            "V": 15374.0,
+            "bias": -0.2725091946876018,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2016",
+            "H": 272633.26948130975,
+            "V": 335737.0,
+            "bias": -0.18795584197955617,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2017",
+            "H": 65012.35495681021,
+            "V": 75667.0,
+            "bias": -0.14080966660750116,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2018",
+            "H": 122943.5060423757,
+            "V": 146079.0,
+            "bias": -0.15837659045875385,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2019",
+            "H": 245840.0266824038,
+            "V": 284555.0,
+            "bias": -0.13605444753244955,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2020",
+            "H": 31158.238589219298,
+            "V": 56900.0,
+            "bias": -0.45240353973252556,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2021",
+            "H": 1739.6155792701607,
+            "V": 2673.0,
+            "bias": -0.3491898319228729,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2012",
+            "H": 124905.27265198418,
+            "V": 168427.0,
+            "bias": -0.25840113133889353,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2013",
+            "H": 103169.75310649782,
+            "V": 131945.0,
+            "bias": -0.2180851634658545,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2014",
+            "H": 109912.25430099797,
+            "V": 161453.0,
+            "bias": -0.3192306473029428,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2015",
+            "H": 93963.4252872676,
+            "V": 134282.0,
+            "bias": -0.30025301017807593,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2016",
+            "H": 147106.42566039172,
+            "V": 214323.0,
+            "bias": -0.31362277655505144,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2017",
+            "H": 109289.20902543949,
+            "V": 144061.0,
+            "bias": -0.24136852426791788,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2018",
+            "H": 117549.47331553287,
+            "V": 159184.0,
+            "bias": -0.26154969522355975,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2019",
+            "H": 114947.67401665263,
+            "V": 156761.0,
+            "bias": -0.26673296281184333,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2020",
+            "H": 109971.27457911789,
+            "V": 149986.0,
+            "bias": -0.2667897365146221,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2021",
+            "H": 70613.62039917891,
+            "V": 109025.0,
+            "bias": -0.3523171712985196,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2012",
+            "H": 558752.3099969462,
+            "V": 567800.0,
+            "bias": -0.01593464248512455,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2013",
+            "H": 258704.76481450748,
+            "V": 261046.0,
+            "bias": -0.008968669067875079,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2014",
+            "H": 410902.01559189206,
+            "V": 419156.0,
+            "bias": -0.019691915201280552,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2015",
+            "H": 396116.9496389223,
+            "V": 407239.0,
+            "bias": -0.027310867478502088,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2016",
+            "H": 267314.4271897784,
+            "V": 264796.0,
+            "bias": 0.009510820366540385,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2017",
+            "H": 361698.9793236361,
+            "V": 366480.0,
+            "bias": -0.01304578879164997,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2018",
+            "H": 416171.87572964776,
+            "V": 435738.0,
+            "bias": -0.04490341505756268,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2019",
+            "H": 313620.60793027433,
+            "V": 313966.0,
+            "bias": -0.0011000938627929724,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2020",
+            "H": 159146.92870034973,
+            "V": 183353.0,
+            "bias": -0.13201895414664755,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2021",
+            "H": 103557.09196799707,
+            "V": 133908.0,
+            "bias": -0.22665492750248628,
+            "abs_diff_if_v0": null
+          }
+        ],
+        "units": [
+          {
+            "region": "central_siberia",
+            "year": "2012",
+            "male": 0.6717707368849092,
+            "n": 962
+          },
+          {
+            "region": "central_siberia",
+            "year": "2013",
+            "male": 0.7590560101361605,
+            "n": 941
+          },
+          {
+            "region": "central_siberia",
+            "year": "2014",
+            "male": 0.8680777117841026,
+            "n": 993
+          },
+          {
+            "region": "central_siberia",
+            "year": "2015",
+            "male": 1.1427194706581085,
+            "n": 819
+          },
+          {
+            "region": "central_siberia",
+            "year": "2016",
+            "male": 1.0470085528312518,
+            "n": 1219
+          },
+          {
+            "region": "central_siberia",
+            "year": "2017",
+            "male": 1.1711784832772485,
+            "n": 1167
+          },
+          {
+            "region": "central_siberia",
+            "year": "2018",
+            "male": 1.3836104328055572,
+            "n": 1285
+          },
+          {
+            "region": "central_siberia",
+            "year": "2019",
+            "male": 1.2017112194518786,
+            "n": 1350
+          },
+          {
+            "region": "central_siberia",
+            "year": "2020",
+            "male": 1.3248890379487321,
+            "n": 1282
+          },
+          {
+            "region": "central_siberia",
+            "year": "2021",
+            "male": 1.8486791728455303,
+            "n": 548
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2012",
+            "male": 0.42516606799658524,
+            "n": 1515
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2013",
+            "male": 0.4431954783678863,
+            "n": 1750
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2014",
+            "male": 0.5135272389010719,
+            "n": 1867
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2015",
+            "male": 0.4384155950595259,
+            "n": 1853
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2016",
+            "male": 0.43652436905394054,
+            "n": 1641
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2017",
+            "male": 0.44455702127370655,
+            "n": 1906
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2018",
+            "male": 0.5200263443932913,
+            "n": 1901
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2019",
+            "male": 0.40240883483070955,
+            "n": 1890
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2020",
+            "male": 0.5067652537127811,
+            "n": 1966
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2021",
+            "male": 0.5654454416814308,
+            "n": 1097
+          },
+          {
+            "region": "north_australia",
+            "year": "2012",
+            "male": 0.24924948020872006,
+            "n": 1852
+          },
+          {
+            "region": "north_australia",
+            "year": "2013",
+            "male": 0.2786263408468225,
+            "n": 2142
+          },
+          {
+            "region": "north_australia",
+            "year": "2014",
+            "male": 0.29059865909159044,
+            "n": 2059
+          },
+          {
+            "region": "north_australia",
+            "year": "2015",
+            "male": 0.2920921497150551,
+            "n": 2071
+          },
+          {
+            "region": "north_australia",
+            "year": "2016",
+            "male": 0.32752927692145367,
+            "n": 1972
+          },
+          {
+            "region": "north_australia",
+            "year": "2017",
+            "male": 0.33620016097233246,
+            "n": 1893
+          },
+          {
+            "region": "north_australia",
+            "year": "2018",
+            "male": 0.310709927316439,
+            "n": 2069
+          },
+          {
+            "region": "north_australia",
+            "year": "2019",
+            "male": 0.35092136555777204,
+            "n": 2119
+          },
+          {
+            "region": "north_australia",
+            "year": "2020",
+            "male": 0.4705721492131988,
+            "n": 1950
+          },
+          {
+            "region": "north_australia",
+            "year": "2021",
+            "male": 0.2994903786715097,
+            "n": 847
+          }
+        ]
+      },
+      "est_m0": {
+        "male": 2.2625290263552853,
+        "male_all": 1.7215072004834917,
+        "n_primary": 46926,
+        "n_all": 66600,
+        "n_rectangles": 600,
+        "excluded_share": 0.017699115044247815,
+        "zero_ge1": 0.029374310213091094,
+        "zero_ge5": 0.001358349605229646,
+        "low_mae": 3.550728309056365,
+        "total_bias_mean_abs": 0.877825383139371,
+        "season_corr_mean": 0.9763127468732028,
+        "male_by_region": {
+          "central_siberia": 2.4855466151257692,
+          "indo_gangetic": 2.2361336756853865,
+          "north_australia": 2.065906788254699
+        },
+        "season_corr": {
+          "central_siberia": 0.9906493551008314,
+          "indo_gangetic": 0.9437611663267449,
+          "north_australia": 0.9945277191920318
+        },
+        "total_bias": [
+          {
+            "region": "central_siberia",
+            "year": "2012",
+            "H": 10356.0,
+            "V": 105370.0,
+            "bias": -0.9017177564771757,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2013",
+            "H": 5453.0,
+            "V": 66606.0,
+            "bias": -0.918130498753866,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2014",
+            "H": 8363.0,
+            "V": 65497.0,
+            "bias": -0.8723147625082065,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2015",
+            "H": 2001.0,
+            "V": 15374.0,
+            "bias": -0.8698451931832965,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2016",
+            "H": 27690.0,
+            "V": 335737.0,
+            "bias": -0.9175247291778982,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2017",
+            "H": 7595.0,
+            "V": 75667.0,
+            "bias": -0.8996259928370359,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2018",
+            "H": 11857.0,
+            "V": 146079.0,
+            "bias": -0.91883159112535,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2019",
+            "H": 24678.0,
+            "V": 284555.0,
+            "bias": -0.9132751137741386,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2020",
+            "H": 3906.0,
+            "V": 56900.0,
+            "bias": -0.931353251318102,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2021",
+            "H": 337.0,
+            "V": 2673.0,
+            "bias": -0.873924429479985,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2012",
+            "H": 24570.0,
+            "V": 168427.0,
+            "bias": -0.8541207763600848,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2013",
+            "H": 20718.0,
+            "V": 131945.0,
+            "bias": -0.8429800295577703,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2014",
+            "H": 22327.0,
+            "V": 161453.0,
+            "bias": -0.8617120771989372,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2015",
+            "H": 18666.0,
+            "V": 134282.0,
+            "bias": -0.8609940274943775,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2016",
+            "H": 29392.0,
+            "V": 214323.0,
+            "bias": -0.8628611954853189,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2017",
+            "H": 20637.0,
+            "V": 144061.0,
+            "bias": -0.856748183061342,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2018",
+            "H": 23005.0,
+            "V": 159184.0,
+            "bias": -0.8554817067041913,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2019",
+            "H": 20442.0,
+            "V": 156761.0,
+            "bias": -0.8695976677872685,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2020",
+            "H": 24014.0,
+            "V": 149986.0,
+            "bias": -0.8398917232275013,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2021",
+            "H": 10112.0,
+            "V": 109025.0,
+            "bias": -0.9072506305893144,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2012",
+            "H": 67469.0,
+            "V": 567800.0,
+            "bias": -0.88117470940472,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2013",
+            "H": 34040.0,
+            "V": 261046.0,
+            "bias": -0.8696015261678018,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2014",
+            "H": 54225.0,
+            "V": 419156.0,
+            "bias": -0.8706328908568648,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2015",
+            "H": 51499.0,
+            "V": 407239.0,
+            "bias": -0.8735410901215257,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2016",
+            "H": 34456.0,
+            "V": 264796.0,
+            "bias": -0.8698771884771673,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2017",
+            "H": 48366.0,
+            "V": 366480.0,
+            "bias": -0.8680255402750491,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2018",
+            "H": 52879.0,
+            "V": 435738.0,
+            "bias": -0.8786449655526946,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2019",
+            "H": 38782.0,
+            "V": 313966.0,
+            "bias": -0.8764770707656243,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2020",
+            "H": 23981.0,
+            "V": 183353.0,
+            "bias": -0.8692085758073225,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2021",
+            "H": 20167.0,
+            "V": 133908.0,
+            "bias": -0.8493966006511934,
+            "abs_diff_if_v0": null
+          }
+        ],
+        "units": [
+          {
+            "region": "central_siberia",
+            "year": "2012",
+            "male": 2.210635686587209,
+            "n": 962
+          },
+          {
+            "region": "central_siberia",
+            "year": "2013",
+            "male": 2.29908428198105,
+            "n": 941
+          },
+          {
+            "region": "central_siberia",
+            "year": "2014",
+            "male": 2.2517799466924915,
+            "n": 993
+          },
+          {
+            "region": "central_siberia",
+            "year": "2015",
+            "male": 2.4137481097346627,
+            "n": 819
+          },
+          {
+            "region": "central_siberia",
+            "year": "2016",
+            "male": 2.5191451725168448,
+            "n": 1219
+          },
+          {
+            "region": "central_siberia",
+            "year": "2017",
+            "male": 2.466605385611375,
+            "n": 1167
+          },
+          {
+            "region": "central_siberia",
+            "year": "2018",
+            "male": 2.680545480008086,
+            "n": 1285
+          },
+          {
+            "region": "central_siberia",
+            "year": "2019",
+            "male": 2.7065721749951352,
+            "n": 1350
+          },
+          {
+            "region": "central_siberia",
+            "year": "2020",
+            "male": 2.6308784420889397,
+            "n": 1282
+          },
+          {
+            "region": "central_siberia",
+            "year": "2021",
+            "male": 2.6764714710418995,
+            "n": 548
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2012",
+            "male": 2.1791437010699206,
+            "n": 1515
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2013",
+            "male": 2.2186762102623425,
+            "n": 1750
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2014",
+            "male": 2.164088668446498,
+            "n": 1867
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2015",
+            "male": 2.2314711084165277,
+            "n": 1853
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2016",
+            "male": 2.148520322134672,
+            "n": 1641
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2017",
+            "male": 2.1351809637126626,
+            "n": 1906
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2018",
+            "male": 2.34734827943831,
+            "n": 1901
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2019",
+            "male": 2.1793890468860746,
+            "n": 1890
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2020",
+            "male": 2.319306270743904,
+            "n": 1966
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2021",
+            "male": 2.4382121857429526,
+            "n": 1097
+          },
+          {
+            "region": "north_australia",
+            "year": "2012",
+            "male": 2.1475078331809887,
+            "n": 1852
+          },
+          {
+            "region": "north_australia",
+            "year": "2013",
+            "male": 2.0596028172577436,
+            "n": 2142
+          },
+          {
+            "region": "north_australia",
+            "year": "2014",
+            "male": 2.0005661696934958,
+            "n": 2059
+          },
+          {
+            "region": "north_australia",
+            "year": "2015",
+            "male": 2.0883262396685547,
+            "n": 2071
+          },
+          {
+            "region": "north_australia",
+            "year": "2016",
+            "male": 2.0667845480065092,
+            "n": 1972
+          },
+          {
+            "region": "north_australia",
+            "year": "2017",
+            "male": 2.023510452285447,
+            "n": 1893
+          },
+          {
+            "region": "north_australia",
+            "year": "2018",
+            "male": 2.0893859628738927,
+            "n": 2069
+          },
+          {
+            "region": "north_australia",
+            "year": "2019",
+            "male": 2.140968584467129,
+            "n": 2119
+          },
+          {
+            "region": "north_australia",
+            "year": "2020",
+            "male": 2.090110197260665,
+            "n": 1950
+          },
+          {
+            "region": "north_australia",
+            "year": "2021",
+            "male": 1.952305077852564,
+            "n": 847
+          }
+        ]
+      },
+      "est_m1s": {
+        "male": 0.8570606271879427,
+        "male_all": 0.7046099935824176,
+        "n_primary": 46926,
+        "n_all": 66600,
+        "n_rectangles": 600,
+        "excluded_share": 0.017699115044247815,
+        "zero_ge1": 0.029374310213091094,
+        "zero_ge5": 0.02478988029544104,
+        "low_mae": 4.869859510298481,
+        "total_bias_mean_abs": 0.3405922638359067,
+        "season_corr_mean": 0.9292167785645226,
+        "male_by_region": {
+          "central_siberia": 1.3807248215268682,
+          "indo_gangetic": 0.7669107743873165,
+          "north_australia": 0.4235462856496441
+        },
+        "season_corr": {
+          "central_siberia": 0.994977671292412,
+          "indo_gangetic": 0.8962036481192298,
+          "north_australia": 0.8964690162819261
+        },
+        "total_bias": [
+          {
+            "region": "central_siberia",
+            "year": "2012",
+            "H": 47163.11474269889,
+            "V": 105370.0,
+            "bias": -0.5524047191544188,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2013",
+            "H": 27098.376202831394,
+            "V": 66606.0,
+            "bias": -0.5931541272132932,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2014",
+            "H": 38049.2898561297,
+            "V": 65497.0,
+            "bias": -0.41906820379361354,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2015",
+            "H": 9883.025299948986,
+            "V": 15374.0,
+            "bias": -0.357159795762392,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2016",
+            "H": 135383.84059426727,
+            "V": 335737.0,
+            "bias": -0.5967562687631471,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2017",
+            "H": 38735.15741348573,
+            "V": 75667.0,
+            "bias": -0.4880838752232053,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2018",
+            "H": 56523.392455404726,
+            "V": 146079.0,
+            "bias": -0.6130628464364849,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2019",
+            "H": 116516.54562075106,
+            "V": 284555.0,
+            "bias": -0.5905306685148703,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2020",
+            "H": 19958.313797274874,
+            "V": 56900.0,
+            "bias": -0.6492387733343608,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2021",
+            "H": 1525.5493151122957,
+            "V": 2673.0,
+            "bias": -0.42927447994302437,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2012",
+            "H": 199130.345233859,
+            "V": 168427.0,
+            "bias": 0.18229467504532537,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2013",
+            "H": 172992.7563456257,
+            "V": 131945.0,
+            "bias": 0.31109747505116303,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2014",
+            "H": 193249.5237442293,
+            "V": 161453.0,
+            "bias": 0.19693981371810554,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2015",
+            "H": 158737.21838276283,
+            "V": 134282.0,
+            "bias": 0.18211836569877438,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2016",
+            "H": 245088.44385883657,
+            "V": 214323.0,
+            "bias": 0.14354709414685574,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2017",
+            "H": 166946.17578147005,
+            "V": 144061.0,
+            "bias": 0.15885753799758473,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2018",
+            "H": 192816.3272631322,
+            "V": 159184.0,
+            "bias": 0.21127957120773577,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2019",
+            "H": 154232.31744424207,
+            "V": 156761.0,
+            "bias": -0.016130814142279792,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2020",
+            "H": 210625.22060834046,
+            "V": 149986.0,
+            "bias": 0.4042992053147658,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2021",
+            "H": 61127.51896783133,
+            "V": 109025.0,
+            "bias": -0.439325668719731,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2012",
+            "H": 395946.4276466262,
+            "V": 567800.0,
+            "bias": -0.30266567867800953,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2013",
+            "H": 193768.0853737105,
+            "V": 261046.0,
+            "bias": -0.2577243651551432,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2014",
+            "H": 319483.51447605266,
+            "V": 419156.0,
+            "bias": -0.23779329300772822,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2015",
+            "H": 305939.8683085681,
+            "V": 407239.0,
+            "bias": -0.24874614585398724,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2016",
+            "H": 202067.21370432083,
+            "V": 264796.0,
+            "bias": -0.2368947653879936,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2017",
+            "H": 283085.28070471797,
+            "V": 366480.0,
+            "bias": -0.2275559902185168,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2018",
+            "H": 312386.434431293,
+            "V": 435738.0,
+            "bias": -0.2830865464308988,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2019",
+            "H": 227275.77279898964,
+            "V": 313966.0,
+            "bias": -0.27611342374973835,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2020",
+            "H": 122720.75718935531,
+            "V": 183353.0,
+            "bias": -0.33068585084860724,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2021",
+            "H": 96162.29730487446,
+            "V": 133908.0,
+            "bias": -0.2818778765654445,
+            "abs_diff_if_v0": null
+          }
+        ],
+        "units": [
+          {
+            "region": "central_siberia",
+            "year": "2012",
+            "male": 0.8955556010123609,
+            "n": 962
+          },
+          {
+            "region": "central_siberia",
+            "year": "2013",
+            "male": 1.0943981164891075,
+            "n": 941
+          },
+          {
+            "region": "central_siberia",
+            "year": "2014",
+            "male": 1.0218046937378709,
+            "n": 993
+          },
+          {
+            "region": "central_siberia",
+            "year": "2015",
+            "male": 1.3202745726486782,
+            "n": 819
+          },
+          {
+            "region": "central_siberia",
+            "year": "2016",
+            "male": 1.3562365316785272,
+            "n": 1219
+          },
+          {
+            "region": "central_siberia",
+            "year": "2017",
+            "male": 1.4492963947464648,
+            "n": 1167
+          },
+          {
+            "region": "central_siberia",
+            "year": "2018",
+            "male": 1.6373041699529058,
+            "n": 1285
+          },
+          {
+            "region": "central_siberia",
+            "year": "2019",
+            "male": 1.558310022531979,
+            "n": 1350
+          },
+          {
+            "region": "central_siberia",
+            "year": "2020",
+            "male": 1.5606103633816995,
+            "n": 1282
+          },
+          {
+            "region": "central_siberia",
+            "year": "2021",
+            "male": 1.9134577490890847,
+            "n": 548
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2012",
+            "male": 0.7362197581883245,
+            "n": 1515
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2013",
+            "male": 0.7703875710095864,
+            "n": 1750
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2014",
+            "male": 0.7052756961256292,
+            "n": 1867
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2015",
+            "male": 0.7681694349306407,
+            "n": 1853
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2016",
+            "male": 0.6825578842976074,
+            "n": 1641
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2017",
+            "male": 0.6702234089356849,
+            "n": 1906
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2018",
+            "male": 0.8263095539519992,
+            "n": 1901
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2019",
+            "male": 0.7293728116015034,
+            "n": 1890
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2020",
+            "male": 0.8704401687704131,
+            "n": 1966
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2021",
+            "male": 0.9101514560617746,
+            "n": 1097
+          },
+          {
+            "region": "north_australia",
+            "year": "2012",
+            "male": 0.4341355619400625,
+            "n": 1852
+          },
+          {
+            "region": "north_australia",
+            "year": "2013",
+            "male": 0.369995403909754,
+            "n": 2142
+          },
+          {
+            "region": "north_australia",
+            "year": "2014",
+            "male": 0.3681461300556601,
+            "n": 2059
+          },
+          {
+            "region": "north_australia",
+            "year": "2015",
+            "male": 0.4300189876367685,
+            "n": 2071
+          },
+          {
+            "region": "north_australia",
+            "year": "2016",
+            "male": 0.3911626743462533,
+            "n": 1972
+          },
+          {
+            "region": "north_australia",
+            "year": "2017",
+            "male": 0.4206896733645194,
+            "n": 1893
+          },
+          {
+            "region": "north_australia",
+            "year": "2018",
+            "male": 0.4528940138623591,
+            "n": 2069
+          },
+          {
+            "region": "north_australia",
+            "year": "2019",
+            "male": 0.4441332200443007,
+            "n": 2119
+          },
+          {
+            "region": "north_australia",
+            "year": "2020",
+            "male": 0.5032372125138866,
+            "n": 1950
+          },
+          {
+            "region": "north_australia",
+            "year": "2021",
+            "male": 0.42104997882287687,
+            "n": 847
+          }
+        ]
+      },
+      "est_qm": {
+        "male": 0.8655846452430982,
+        "male_all": 0.7144623717753896,
+        "n_primary": 46926,
+        "n_all": 66600,
+        "n_rectangles": 600,
+        "excluded_share": 0.017699115044247815,
+        "zero_ge1": 0.029374310213091094,
+        "zero_ge5": 0.029374310213091094,
+        "low_mae": 4.838854001509865,
+        "total_bias_mean_abs": 0.31527757721512245,
+        "season_corr_mean": 0.9435987624271993,
+        "male_by_region": {
+          "central_siberia": 1.3525650196555363,
+          "indo_gangetic": 0.7981375060093259,
+          "north_australia": 0.4460514100644325
+        },
+        "season_corr": {
+          "central_siberia": 0.9963752299858971,
+          "indo_gangetic": 0.9032024100001054,
+          "north_australia": 0.9312186472955957
+        },
+        "total_bias": [
+          {
+            "region": "central_siberia",
+            "year": "2012",
+            "H": 51163.79174290276,
+            "V": 105370.0,
+            "bias": -0.5144368250649829,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2013",
+            "H": 27631.313597775203,
+            "V": 66606.0,
+            "bias": -0.5851527850677836,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2014",
+            "H": 38451.498947965454,
+            "V": 65497.0,
+            "bias": -0.41292732571010193,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2015",
+            "H": 10153.646646754227,
+            "V": 15374.0,
+            "bias": -0.33955726247208096,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2016",
+            "H": 141522.83068876364,
+            "V": 335737.0,
+            "bias": -0.5784711524533679,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2017",
+            "H": 39755.4097856505,
+            "V": 75667.0,
+            "bias": -0.47460042309526607,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2018",
+            "H": 58534.56805977386,
+            "V": 146079.0,
+            "bias": -0.5992951207238969,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2019",
+            "H": 126182.01624479065,
+            "V": 284555.0,
+            "bias": -0.5565637003574331,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2020",
+            "H": 20648.495429189432,
+            "V": 56900.0,
+            "bias": -0.6371090434237359,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "central_siberia",
+            "year": "2021",
+            "H": 1611.5086930071702,
+            "V": 2673.0,
+            "bias": -0.39711608940996246,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2012",
+            "H": 180661.94428197097,
+            "V": 168427.0,
+            "bias": 0.07264241648887038,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2013",
+            "H": 159533.87276468737,
+            "V": 131945.0,
+            "bias": 0.20909373424296018,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2014",
+            "H": 172044.86551876765,
+            "V": 161453.0,
+            "bias": 0.06560339862850273,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2015",
+            "H": 143832.61893275805,
+            "V": 134282.0,
+            "bias": 0.07112359759877007,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2016",
+            "H": 226759.7603101728,
+            "V": 214323.0,
+            "bias": 0.05802811788829376,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2017",
+            "H": 156521.21925325607,
+            "V": 144061.0,
+            "bias": 0.08649266111755494,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2018",
+            "H": 166389.62329872363,
+            "V": 159184.0,
+            "bias": 0.0452660022283875,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2019",
+            "H": 145358.31263639109,
+            "V": 156761.0,
+            "bias": -0.07273931247956389,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2020",
+            "H": 184197.86097961,
+            "V": 149986.0,
+            "bias": 0.22810036256457278,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2021",
+            "H": 56517.471078859024,
+            "V": 109025.0,
+            "bias": -0.4816099878114284,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2012",
+            "H": 380627.81756288983,
+            "V": 567800.0,
+            "bias": -0.32964456223513594,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2013",
+            "H": 188864.4756487549,
+            "V": 261046.0,
+            "bias": -0.27650883120693326,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2014",
+            "H": 306697.31539365416,
+            "V": 419156.0,
+            "bias": -0.2682979239384521,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2015",
+            "H": 295903.49610306567,
+            "V": 407239.0,
+            "bias": -0.2733910649445027,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2016",
+            "H": 194652.04341492432,
+            "V": 264796.0,
+            "bias": -0.2648980973469225,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2017",
+            "H": 266531.1736931884,
+            "V": 366480.0,
+            "bias": -0.27272655071712393,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2018",
+            "H": 297684.0384855569,
+            "V": 435738.0,
+            "bias": -0.3168279138253792,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2019",
+            "H": 216176.62246999348,
+            "V": 313966.0,
+            "bias": -0.3114648641254356,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2020",
+            "H": 120018.02387071453,
+            "V": 183353.0,
+            "bias": -0.3454264513222335,
+            "abs_diff_if_v0": null
+          },
+          {
+            "region": "north_australia",
+            "year": "2021",
+            "H": 91966.44259271144,
+            "V": 133908.0,
+            "bias": -0.3132117379640392,
+            "abs_diff_if_v0": null
+          }
+        ],
+        "units": [
+          {
+            "region": "central_siberia",
+            "year": "2012",
+            "male": 0.8395400360375819,
+            "n": 962
+          },
+          {
+            "region": "central_siberia",
+            "year": "2013",
+            "male": 1.0390712162098397,
+            "n": 941
+          },
+          {
+            "region": "central_siberia",
+            "year": "2014",
+            "male": 0.9951618171419867,
+            "n": 993
+          },
+          {
+            "region": "central_siberia",
+            "year": "2015",
+            "male": 1.2834951052691286,
+            "n": 819
+          },
+          {
+            "region": "central_siberia",
+            "year": "2016",
+            "male": 1.3273028524611128,
+            "n": 1219
+          },
+          {
+            "region": "central_siberia",
+            "year": "2017",
+            "male": 1.426730655444609,
+            "n": 1167
+          },
+          {
+            "region": "central_siberia",
+            "year": "2018",
+            "male": 1.611885449166217,
+            "n": 1285
+          },
+          {
+            "region": "central_siberia",
+            "year": "2019",
+            "male": 1.5461861785489106,
+            "n": 1350
+          },
+          {
+            "region": "central_siberia",
+            "year": "2020",
+            "male": 1.5435218603858625,
+            "n": 1282
+          },
+          {
+            "region": "central_siberia",
+            "year": "2021",
+            "male": 1.9127550258901147,
+            "n": 548
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2012",
+            "male": 0.7229250180504397,
+            "n": 1515
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2013",
+            "male": 0.8135020260034349,
+            "n": 1750
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2014",
+            "male": 0.7521246045127407,
+            "n": 1867
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2015",
+            "male": 0.7944174496004104,
+            "n": 1853
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2016",
+            "male": 0.6844318192520193,
+            "n": 1641
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2017",
+            "male": 0.6980039864270622,
+            "n": 1906
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2018",
+            "male": 0.8693792858652445,
+            "n": 1901
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2019",
+            "male": 0.7584977679016586,
+            "n": 1890
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2020",
+            "male": 0.9082343530592669,
+            "n": 1966
+          },
+          {
+            "region": "indo_gangetic",
+            "year": "2021",
+            "male": 0.979858749420982,
+            "n": 1097
+          },
+          {
+            "region": "north_australia",
+            "year": "2012",
+            "male": 0.45779256830925985,
+            "n": 1852
+          },
+          {
+            "region": "north_australia",
+            "year": "2013",
+            "male": 0.3957800990448253,
+            "n": 2142
+          },
+          {
+            "region": "north_australia",
+            "year": "2014",
+            "male": 0.3760794177204245,
+            "n": 2059
+          },
+          {
+            "region": "north_australia",
+            "year": "2015",
+            "male": 0.4462880565623946,
+            "n": 2071
+          },
+          {
+            "region": "north_australia",
+            "year": "2016",
+            "male": 0.4063899072325767,
+            "n": 1972
+          },
+          {
+            "region": "north_australia",
+            "year": "2017",
+            "male": 0.4445978688533811,
+            "n": 1893
+          },
+          {
+            "region": "north_australia",
+            "year": "2018",
+            "male": 0.46444746813248294,
+            "n": 2069
+          },
+          {
+            "region": "north_australia",
+            "year": "2019",
+            "male": 0.4947621797987516,
+            "n": 2119
+          },
+          {
+            "region": "north_australia",
+            "year": "2020",
+            "male": 0.49240850335772807,
+            "n": 1950
+          },
+          {
+            "region": "north_australia",
+            "year": "2021",
+            "male": 0.4819680316325002,
+            "n": 847
+          }
+        ]
+      }
+    },
+    "differences": {
+      "est_final_vs_est_m1s": {
+        "diff": 0.21303654844096603,
+        "se": 0.019106352941299413,
+        "ci95": [
+          0.1739208265485114,
+          0.25015578612094197
+        ],
+        "resamples": 2000
+      },
+      "est_final_vs_est_qm": {
+        "diff": 0.22156056649612152,
+        "se": 0.019802320565282045,
+        "ci95": [
+          0.1816634043127299,
+          0.26122573570316127
+        ],
+        "resamples": 2000
+      }
+    },
+    "anomaly_agreement": {
+      "est_final": {
+        "kappa": 0.5334917862535905,
+        "confusion_obs_rows_est_cols": [
+          [
+            4214,
+            1107,
+            100
+          ],
+          [
+            4946,
+            31160,
+            1295
+          ],
+          [
+            142,
+            1661,
+            3253
+          ]
+        ],
+        "n": 47878
+      },
+      "est_m1s": {
+        "kappa": 0.41531672568579897,
+        "confusion_obs_rows_est_cols": [
+          [
+            4687,
+            679,
+            55
+          ],
+          [
+            8010,
+            27925,
+            1466
+          ],
+          [
+            239,
+            2317,
+            2500
+          ]
+        ],
+        "n": 47878
+      }
+    },
+    "coverage": {
+      "resamples": 100,
+      "region_month_coverage": 0.12912912912912913,
+      "n_region_months": 333,
+      "interval_scale": 5.37,
+      "region_month_coverage_calibrated": 0.5585585585585585,
+      "cell_month_coverage": 0.7347651222651223
+    }
+  },
+  "settings_seed_bootstrap": 7
+}
