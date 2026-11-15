@@ -5,19 +5,23 @@
 
 <!-- STATUS:BEGIN -->
 ```yaml
-current_card: docs/sessions/3-model.md   # next (or current) task card
-status: ready                           # ready | in_progress | blocked | done
-claimed_by: ""                          # claimant's name; empty means unclaimed
-claimed_at: ""                          # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
-last_pushed_stage: S09                  # last stage completed and pushed
-last_pushed_at: 2026-11-03
+current_card: docs/sessions/4-freeze-test.md   # next (or current) task card
+status: in_progress                     # ready | in_progress | blocked | done
+claimed_by: "qiuxue-yee"                # claimant's name; empty means unclaimed
+claimed_at: "2026-11-04T03:00:28Z"    # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
+last_pushed_stage: S10                  # last stage completed and pushed
+last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
 data_release: data-v0                   # gh release download data-v0; SHA256 in the handover notes; milestone A data is in milestone-a
-next_step: "Start a new session for task card 3-model: S10 first LightGBM version + AI-driven automated experiments + independent review"
+next_step: "S11 answer sheet sealed (E028; results/submission.parquet is in the frozen manifest). Wait for a person to push the final-test tag and for the GitHub grader to commit results/final-test/ back to this branch, then git pull, write reports/final-test.md, then do S12"
 needs_human:
+  - "For a person to do now: in the repository folder run git pull, then git tag final-test && git push origin final-test (the test can be taken only once; an AI may not push it itself). Do not push any commits to feat/data-harmonization until the grading run finishes"
+  - "Please look over: the S10 review notes reports/model-review.md (conclusion: all top 3 pass the leakage review; risk: with only 3 training regions, latitude acts as a region label, so the holdout regions may do worse; Test 2 will check this)"
   - "Awaiting a person's decision: the pass criterion for the NOAA-20 continuation (docs/decisions/0005 item 4; the criterion was proposed after seeing the test results)"
   - "Awaiting a person's decision: whether the Terra bridge in the holdout regions uses the training regions' pooled ratio or the local MODIS ratio (docs/decisions/0005 item 6; affects the S12 production version)"
   - "Awaiting human confirmation: QM details, choice of λ, bridge years, v0 source rules (docs/decisions/0005 items 1–3 and 5)"
+  - "Recorded: implementation details of the S10 LightGBM and experiment loop (docs/decisions/0006), decided by the AI under the user's authorization"
+  - "Recorded: the S10 budget cut, deadline and remedy reruns were the user's decisions (docs/decisions/0007)"
   - "Tell the front end: the milestone-a pre-release + docs/data-interface.md are available (comment already left on PR #2)"
   - "GitHub CLI login: can be skipped on this already-logged-in computer; when taking over on another computer, first run gh auth login --web (needed to download the Release data)"
 ```
@@ -30,8 +34,8 @@ needs_human:
 | 0 | (repository setup) | S00 | ✅ done |
 | 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | ✅ done |
 | 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09 (milestone A) | ✅ done |
-| 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ⏭ next |
-| 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | not started |
+| 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ✅ done |
+| 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | 🔄 in progress (qiuxue-yee) |
 | 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15 (milestone B) | not started |
 | G | [`G-global`](docs/sessions/G-global.md) | Global rerun | not started (after S15) |
 
@@ -49,8 +53,8 @@ needs_human:
 | S07 | Grader (prepare, evaluate) | ✅ done | 2026-11-03 | Dummy methods: always 0, combined MALE 5.90; MODIS as is, 1.79; SHA256 identical over two runs (`reports/judge-check.md`) | |
 | S08 | Fallback models M0, M1s, QM; bridge and continuation | ✅ done | 2026-11-03 | Combined MALE over both windows: M1s (λ=20) 0.377, QM 0.463, M0 1.795; Terra→Aqua→M1s chain 0.522; NOAA-20 continuation median monthly total bias −0.3% to +3.1% (`reports/scores-v1.md`) | |
 | S09 | ★Milestone A: dataset v0, front-end export, pre-release | ✅ done | 2026-11-03 | 2.616 million cell-months: 554,000 S-NPP observed, 47,000 NOAA-20 converted, 1.82 million M1s, 197,000 Terra bridge; pre-release `milestone-a`, SHA256 of all 9 files checked after download | |
-| S10 | LightGBM and AI experiments | ⬜ todo | | | |
-| S11 | Freeze and external blind grading | ⬜ todo | | | |
+| S10 | LightGBM and AI experiments | ✅ done | 2026-11-04 | 37 experiments (E000–E036; budget cut and wrapped up early per ADR 0007); best validation MALE: E028 two-stage LightGBM 0.2947, 21.8% lower than M1s (0.3766) (difference −0.082 ± 0.016, 95% interval −0.113 to −0.053), 0.169 lower than QM; all top 3 pass the guardrails and the leakage review (`reports/scores-s10.md`, `reports/model-review.md`) | |
+| S11 | Freeze and external blind grading | 🔄 answer sheet sealed; waiting for a person to push the final-test tag | | E028 selected by the pre-registration (passes all 5 thresholds); retrained on 2014-01–2021-06, trees 766/970; answer sheet 596,032 rows + 100 resampling columns, calibration factor 5.37 (`docs/decisions/0008`, `results/freeze.json`) | |
 | S12 | Final dataset | ⬜ todo | | | |
 | S13 | Validation report (D1) | ⬜ todo | | | |
 | S14 | Delivery | ⬜ todo | | | |
@@ -107,3 +111,23 @@ needs_human:
   - M1s baseline: `harmonize.fit_m1s(t, 20.0)`; it is the reference for the selection rule. Only `harmonization/harmonize.py` may be changed.
   - Finding: the Terra bridge segment in the holdout regions (2000-11 to 2002-06) may be 1.5–2× too high (ADR 0005 item 6, awaiting a person's decision). This does not affect model selection in S10.
   - When generating Release files, fix the gzip timestamp and use LF line endings throughout, otherwise the hashes differ between Windows and Linux (`series.py` already does this).
+
+### Session 3 (2026-11-03 to 04, qiuxue-yee)
+
+- **Done**: S10. LightGBM is `fit_lgb()` in `harmonization/harmonize.py`; this file is now exactly the source of the top experiment E028 (its SHA256 matches the E028 row in `experiments.csv`). The default `fit()` is still M1s, to be changed after S11 decides by the selection rule.
+- **Experiments**: `harmonization/experiments.csv` (37 rows, each with a one-sentence hypothesis, all metrics, whether it passes the guardrails and whether it was kept); each experiment's source is in `harmonization/variants/E###.py` on branch `exp/lightgbm` (pushed; this machine also has a worktree `../inspiratio-exp`). Runner `harmonization/autoexp.py`; rules in `harmonization/program.md`, ADR 0006 (awaiting human confirmation) and ADR 0007 (the user's decision to speed things up).
+- **How it went**: a single LightGBM reaches a combined MALE of 0.23, but it sprinkles small positive estimates over every cell and badly fails the zero-hotspot guardrail (94% versus 6%). E001–E014 tried various zeroing and discounting rules, none of which passed. After the user asked to speed things up, the approach switched to a "two-stage" model: first decide whether there is any fire, and estimate the count only if there is. E016 was the first to pass every guardrail. After that, ablations and derived features were tried around it, all scoring between 0.293 and 0.305. The two closest were rerun with 30 Optuna trials (E035 fails, E036 passes), and by the rule the rerun scores replace the original ones.
+- **Top 3** (`reports/scores-s10.md`): E028 0.2947, E018 0.2950, E032 0.2954. All three pass pre-registration section 4, items 1–4, and the review subagent judged that they also pass item 5, the leakage review. The differences among the three are far smaller than the standard error; they are effectively equally good.
+- **Tips for session 4**:
+  - By the pre-registration, the top experiment **E028** meets items 1–5 and should be selected. What gets frozen is E028's features, parameters (the parameters tuned in each window are in `experiments/E028.json` in the data directory) and number of trees. The numbers of trees tuned in the main and auxiliary windows differ by 2–4×. Retraining uses 2014-01–2021-06; first write down clearly how the number of trees and the parameters are determined, and do not change them after seeing the test results (section 4 of the review notes).
+  - **Risk** (section 5 of the review notes): the latitudes of the 3 training regions do not overlap at all, so latitude acts as a label for "which region this is". A new region gets the conversion of the training region nearest in latitude. Test 2 (holdout regions) checks exactly this. **Do not remove latitude before the test because of this**; that would be changing the method after seeing validation results.
+  - The model relies heavily on Terra inputs, and Terra drifts after 2020 (item 7 of `reports/findings.md`); this must be stated in the report.
+  - In the two-stage setup, `zero_rule` in the configuration has no effect (section 1.1 of the review notes); don't misread the code.
+  - Months before Aqua came online in 2002 (Terra only) are outside the S10 evaluation; check them before S12 generates the series.
+
+### Session 4 (2026-11-04, qiuxue-yee)
+
+- **Where S11 stands**: LightGBM E028 was selected by pre-registration section 4 (item-by-item check in section 1 of `docs/decisions/0008`). `harmonize.py` (default `fit()` changed to `fit_lgb`, otherwise identical to E028's source) and `config/features.json` were frozen, then the frozen procedure was retrained on the training regions over 2014-01–2021-06, with 100 whole-year resamples for the stability intervals and the calibration factor set from the two validation windows (5.37). The answer sheet `results/submission.parquet`, the freeze record `results/freeze.json` and the generating script `harmonization/freeze.py` are in `config/frozen-manifest.json`. Before sealing, the frozen grading function was run end to end on fake answers.
+- **Next**: a person pushes the `final-test` tag → the GitHub grader (`grader.yml`) commits `results/final-test/` back to this branch → `git pull` → write `reports/final-test.md` truthfully (raw/calibrated coverage according to the rule in ADR 0008 section 5) → S12.
+- **Do not push to this branch during grading**: the workflow's last step pushes results to this branch, and any other commit in the meantime would make that push fail.
+- **S12 work in progress**: `harmonization/series_v1.py` (committed, not yet run for real): production version = the frozen evaluation version (this machine never has S-NPP for 2012–2013, red line 1); Terra-only months build Aqua inputs from Terra before going into the model (first compared with v0's M1s chain on the validation windows, `terra-check`); the holdout-region bridge uses the local MODIS ratio (ADR 0005 item 6, option B); whether intervals are multiplied by the calibration factor is decided by ADR 0008 section 5; the acceptance check `recount()` has been tried on v0 (426 region-months, 0 mismatches). Intermediate results are in `s11/` in the data directory.

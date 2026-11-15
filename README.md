@@ -1,7 +1,7 @@
 # MODIS × VIIRS Hotspot Harmonization
 
 <!-- PROGRESS-BOX:BEGIN -->
-> **Status**: S00–S09 are done and ★milestone A is reached. The grader is frozen; dataset v0, produced by the fallback model M1s, and the front-end files are in the pre-release `milestone-a`, with the interface spec in [docs/data-interface.md](docs/data-interface.md), so the front end can start work. Next: session 3 of 5, task card [`3-model`](docs/sessions/3-model.md) (LightGBM and AI-driven automated experiments).
+> **Status**: S00–S10 are done. Dataset v0 from ★milestone A (M1s) is in the pre-release `milestone-a`, with the interface spec in [docs/data-interface.md](docs/data-interface.md). S10 ran 37 LightGBM experiments; the top one (two-stage LightGBM) has a validation MALE about 22% lower than M1s; see [reports/scores-s10.md](reports/scores-s10.md) and the [review notes](reports/model-review.md). Next: session 4 of 5, task card [`4-freeze-test`](docs/sessions/4-freeze-test.md) (freeze the model and run the external blind grading; pushing the `final-test` tag is a person's decision).
 >
 > **Take over in 3 steps**: ① set up your environment and fill in `.env` following [HANDOFF.md](HANDOFF.md); ② copy the "universal relay prompt" from HANDOFF into Claude Code or Codex; ③ do whatever the AI says needs doing by you in person. Detailed progress is in [PROGRESS.md](PROGRESS.md).
 <!-- PROGRESS-BOX:END -->
