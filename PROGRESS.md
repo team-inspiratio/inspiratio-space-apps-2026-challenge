@@ -35,8 +35,24 @@ needs_human:
   - "已记录：S10 预算缩减、截止时间和补救重跑是用户的决定（docs/decisions/0007）"
   - "通知前端：milestone-a 预发布版 + docs/data-interface.md 已可用（PR #2 已留言）"
   - "GitHub CLI 登录：这台电脑已登录可跳过；换电脑接力先运行 gh auth login --web（下载 Release 数据要用）"
+  - "待人处理：按 docs/review-packet.md 开一次 1 小时审核会，优先 X1（PR #4/#5 未合并）、X2（仓库私有且无 LICENSE）"
+  - "待人确认：是否解锁 2012–2013 年 S-NPP 观测值替换训练区估计值（docs/decisions/0014，建议只替换不重训、云端汇总；要由人提交 [unfreeze]）"
+  - "待人确认：全球产品的置信度等级、M1s 回退、网页标注（docs/decisions/0015，建议分级细化、不回退）"
+  - "待人确认：网站部署方案（docs/decisions/0016，建议先用现有 Sites 重新发布修复版，仓库公开后改 GitHub Pages）"
+  - "待人处理：11/13 官方指南发布后逐项核对 docs/submission/ 的全部草稿，并填写方括号项"
+  - "待人决定：是否需要“一键直达某区域某月”的入口（现在预设按钮只能一键进区域，路线要 1–3 次点击；这是新功能，没有做）"
 ```
 <!-- STATUS:END -->
+
+## 提交准备（非数据线）
+
+> 这一节记录比赛提交准备工作。不改数据线状态块，也不认领 G-global。
+
+- 任务 1 完成：人工审核包 `docs/review-packet.md`（覆盖数据分支 `5dbc2e2` 的 20 条 needs_human，另加 X1、X2 两条盘点发现）。
+- 任务 2 完成：提案 ADR 0014（解锁 2012–2013 年 S-NPP 观测值）、ADR 0015（全球置信度等级、M1s 回退、网页标注），都只写提案，没有实现。
+- 任务 3 完成：部署方案对比草稿 ADR 0016（chatgpt.site、Vercel、Netlify、GitHub Pages），没有部署任何东西。
+- 任务 4 完成：提交材料草稿 `docs/submission/`（`project-page.md`、`demo-script.md`、`checklist.md`），全部标注 11/13 官方指南发布后逐项核对。
+- 任务 5 完成：三条演示路线已在 PR #5 构建上实测，写入 `docs/submission/demo-script.md`。没有发现阻碍演示的 bug，所以没有改网页代码。
 
 ## 会话总览
 
