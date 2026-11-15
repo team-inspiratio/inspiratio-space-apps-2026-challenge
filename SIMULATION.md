@@ -42,7 +42,7 @@ Planned times are US Central Time (CST, UTC-6). The commit log has the actual pu
 | P10 | A | 11-14 20:31 | 11-15 02:31 | S13-S14: validation report, data card, AI usage statement, anomaly reference implementation; first pipeline.py | `c856c50` | 2026-11-04 00:18 | pushed |
 | P11 | A | 11-14 20:52 | 11-15 02:52 | S15: one-command reproduction; milestone B | `e8a260e` | 2026-11-04 01:56 | pushed |
 | P12 | A | 11-14 21:13 | 11-15 03:13 | G: global rerun (global validation scores, interval calibration, global dataset) | `5b2f73b` | 2026-11-04 17:51 | pushed |
-| P13 | B | 11-14 21:34 | 11-15 03:34 | Submission prep: review packet, ADRs 0014-0016, submission drafts, demo routes | `39a0298` | 2026-11-04 17:12 | planned |
+| P13 | B | 11-14 21:34 | 11-15 03:34 | Submission prep: review packet, ADRs 0014-0016, submission drafts, demo routes | `39a0298` | 2026-11-04 17:12 | pushed |
 | P14 | B | 11-14 21:57 | 11-15 03:57 | Web v1 (Fire Atlas): source, fixes, methods and validation page | `1ecdb87` | 2026-11-04 17:53 | planned |
 | P15 | C | 11-14 22:18 | 11-15 04:18 | Web V2 and final README | `35e8bd0` | 2026-11-08 17:09 | planned |
 
