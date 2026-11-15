@@ -93,7 +93,7 @@ Scores are MALE, the mean absolute difference of log(count + 1) on random 1°-5�
 
 ## 7. Citation and acknowledgement
 
-- Dataset: Team Inspiratio (2026). *Harmonized MODIS × VIIRS monthly active-fire counts, 0.25°, 2000-11 to 2026-10, version 1.* GitHub release `v1` of `team-inspiratio/inspiratio-space-apps-2026` (https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1). CC BY 4.0.
+- Dataset: Team Inspiratio (2026). *Harmonized MODIS × VIIRS monthly active-fire counts, 0.25°, 2000-11 to 2026-10, version 1.* GitHub release `v1` of `team-inspiratio/inspiratio-space-apps-2026-challenge` (https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/releases/tag/v1). CC BY 4.0.
 - FIRMS: "We acknowledge the use of data and imagery from NASA's Fire Information for Resource Management System (FIRMS) (https://www.earthdata.nasa.gov/firms), part of NASA's Earth Science Data and Information System (ESDIS)."
 - GFED4.1s: van der Werf, G. R., et al. (2017). Global fire emissions estimates during 1997-2016. *Earth System Science Data*, 9, 697-720.
 - VIIRS 375 m product: Schroeder, W., Oliva, P., Giglio, L., & Csiszar, I. A. (2014). The New VIIRS 375 m active fire detection data product: Algorithm description and initial assessment. *Remote Sensing of Environment*, 143, 85-96.

@@ -51,7 +51,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PY = [sys.executable, "-X", "utf8", "-m"]
-REPO = "team-inspiratio/inspiratio-space-apps-2026"
+REPO = "team-inspiratio/inspiratio-space-apps-2026-challenge"
 RELEASE_FILES = {  # data-v0 asset -> place in the data folder
     "grid_regions.parquet": "processed/grid/regions.parquet",
     "grid_month_status.parquet": "processed/grid/month_status.parquet",

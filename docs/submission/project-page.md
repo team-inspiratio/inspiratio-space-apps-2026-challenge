@@ -99,10 +99,10 @@ Space Apps asks every team to describe how it used Super Intelligence (SI) tools
 ## Links and references
 
 - **Web page:** [final URL, see ADR 0016]
-- **Code:** [repository URL; the repository is private today]
-- **Dataset:** [Release v1 and global-v1 URLs], CC BY 4.0
+- **Code:** <https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge>
+- **Dataset:** <https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/releases/tag/global-v1> (global) and <https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/releases/tag/v1> (six study regions), CC BY 4.0
 - **Code license:** [none yet; the team must choose one]
-- **Validation report:** [URL of `reports/validation.md`]
+- **Validation report:** <https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/blob/main/reports/validation.md>
 
 **Data acknowledgement.** We acknowledge the use of data and imagery from NASA's Fire Information for Resource Management System (FIRMS) (<https://www.earthdata.nasa.gov/firms>), part of NASA's Earth Science Data and Information System (ESDIS).
 

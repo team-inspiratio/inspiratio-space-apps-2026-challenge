@@ -1,6 +1,6 @@
 // Pieces shared by the atlas page and the method page.
 export const REPO =
-  "https://github.com/team-inspiratio/inspiratio-space-apps-2026";
+  "https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge";
 
 const icons = {
   arrow: "M7 17 17 7M7 7h10v10",

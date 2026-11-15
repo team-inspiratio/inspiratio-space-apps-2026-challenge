@@ -43,7 +43,7 @@ The repository root's Python tests and pre-commit run separately as described in
 
 ## Data sources, when data is fetched, and the Git boundary
 
-The data comes from the [full Release v1](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1). **The scientific data is not in the source repository, and it is not fetched automatically at build time.** `npm run data:prepare` calls `scripts/prepare-data.mjs`, which fetches through the GitHub CLI login the person taking over already has:
+The data comes from the [full Release v1](https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/releases/tag/v1). **The scientific data is not in the source repository, and it is not fetched automatically at build time.** `npm run data:prepare` calls `scripts/prepare-data.mjs`, which fetches through the GitHub CLI login the person taking over already has:
 
 | Release file | Purpose / local location |
 | --- | --- |

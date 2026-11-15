@@ -14,11 +14,11 @@ branch: feat/data-harmonization
 data_release: global-v1               # full Release v1 (CC BY 4.0, S15); the global version is Release global-v1 (stage G); v1 for the 6 regions is still Release v1; processed inputs are in data-v0, milestone A in milestone-a; SHA256 in results/expected/
 next_step: "All task cards are done. The global Release global-v1 is published (docs/data-interface-global.md); waiting for the PR to be merged into main"
 needs_human:
-  - "Tell the front end: the global Release global-v1 is published (CC BY 4.0): gh release download global-v1 --repo team-inspiratio/inspiratio-space-apps-2026; the interface is in docs/data-interface-global.md (interval widening factor 16.75; the web page must explain that the intervals are very wide)"
+  - "Tell the front end: the global Release global-v1 is published (CC BY 4.0): gh release download global-v1 --repo team-inspiratio/inspiratio-space-apps-2026-challenge; the interface is in docs/data-interface-global.md (interval widening factor 16.75; the web page must explain that the intervals are very wide)"
   - "Please merge: the G-global PR (feat/data-harmonization → main)"
   - "Confirmed (by the user on 2026-11-04 together with approving the global-v1 release): the G-global production version uses the globally retrained model, and the interval factor is re-derived on the global validation windows (docs/decisions/0013 items 3 and 5)"
   - "Awaiting human confirmation (a look-over is enough; not blocking): S15 acceptance used the pipeline.py all --from-release entry point (starting from the grid tables in Release data-v0), not a full rerun from raw data (docs/decisions/0012 item 1)"
-  - "Tell the front end: the full Release v1 is published (CC BY 4.0): gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026; same data as the pre-release dataset-v1, plus the CSV, the data card and the anomaly test cases"
+  - "Tell the front end: the full Release v1 is published (CC BY 4.0): gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026-challenge; same data as the pre-release dataset-v1, plus the CSV, the data card and the anomaly test cases"
   - "Tell the front end: the anomaly indicator reference implementation harmonization/anomaly.py + 25 standard test cases docs/anomaly-cases.json (check answers field by field; extra details in docs/data-interface.md section 6 and docs/decisions/0011 item 1); the dataset now also has a CSV version"
   - "Please read through: the data card docs/data-card.md and the AI usage statement docs/ai-usage.md"
   - "Please read through: the validation report reports/validation.md (6 core figures + limitations; conclusion: trustworthy in the training regions; in the holdout regions the error is 2.5 times larger and totals are 14–45% too low)"
@@ -52,6 +52,7 @@ needs_human:
 - Task 3 done: draft comparison of deployment options, ADR 0016 (chatgpt.site, Vercel, Netlify, GitHub Pages); nothing was deployed.
 - Task 4 done: draft submission materials `docs/submission/` (`project-page.md`, `demo-script.md`, `checklist.md`), all marked to be checked item by item after the official guides are released on 11/13.
 - Task 5 done: the three demo routes were tested on the PR #5 build and written into `docs/submission/demo-script.md`. No bugs blocking the demo were found, so the web code was not changed.
+- Public data Releases (2026-11-15): the public repository `inspiratio-space-apps-2026-challenge` had no Releases, so every download link pointed at the private development repository. Added `.github/workflows/mirror-releases.yml`, which copies `data-v0`, `v1` and `global-v1` unchanged (each file checked against the source SHA256 digest before and after upload), and pointed the README, HANDOFF, data card, front-end brief, `pipeline.py` and both front ends at the public repository. Needs a person to add the `SOURCE_REPO_TOKEN` secret and run the workflow; the live V2 site must be rebuilt and redeployed to pick up the new links.
 
 ## Sessions overview
 

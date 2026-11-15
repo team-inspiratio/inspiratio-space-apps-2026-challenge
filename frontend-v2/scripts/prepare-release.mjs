@@ -44,7 +44,7 @@ for (const name of assets) {
       "download",
       "global-v1",
       "--repo",
-      "team-inspiratio/inspiratio-space-apps-2026",
+      "team-inspiratio/inspiratio-space-apps-2026-challenge",
       "--pattern",
       name,
       "--dir",

@@ -60,4 +60,4 @@ Following the rules in AGENTS.md, execute docs/sessions/3-model.md.
 | Decisions still open | `needs_human` in the `PROGRESS.md` status block; details in [`docs/decisions/`](docs/decisions/) |
 | What next | After milestone B comes task card [`G-global`](docs/sessions/G-global.md) (global rerun). Before starting, read section 9 "Limitations" of the validation report: the error in the holdout regions is 2.5 times that in the training regions, so the global stage needs more training regions or must mark everything outside them as low confidence |
 
-**Data only, no code**: with `gh` installed and logged in, run `gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026 -D <folder>` and read `data-card.md`; no FIRMS key is needed.
+**Data only, no code**: with `gh` installed and logged in, run `gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026-challenge -D <folder>` and read `data-card.md`; no FIRMS key is needed.

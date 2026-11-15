@@ -29,7 +29,7 @@ No fire forecasting.
 Download:
 
 ```bash
-gh release download global-v1 --repo team-inspiratio/inspiratio-space-apps-2026 -D data/global-v1
+gh release download global-v1 --repo team-inspiratio/inspiratio-space-apps-2026-challenge -D data/global-v1
 ```
 
 After downloading, check with `sha256sum -c SHA256SUMS.txt`. No FIRMS key and no Python needed.
