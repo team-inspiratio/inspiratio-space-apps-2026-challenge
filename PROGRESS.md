@@ -5,16 +5,20 @@
 
 <!-- STATUS:BEGIN -->
 ```yaml
-current_card: docs/sessions/2-baselines.md   # 下一张（或正在做的）任务卡
-status: in_progress                     # ready | in_progress | blocked | done
-claimed_by: "qiuxue-yee"                # 认领人名字；空表示无人认领
-claimed_at: "2026-11-03T21:58:00Z"      # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
-last_pushed_stage: S07                  # 最后一个完成并 push 的阶段
+current_card: docs/sessions/3-model.md   # 下一张（或正在做的）任务卡
+status: ready                           # ready | in_progress | blocked | done
+claimed_by: ""                          # 认领人名字；空表示无人认领
+claimed_at: ""                          # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
+last_pushed_stage: S09                  # 最后一个完成并 push 的阶段
 last_pushed_at: 2026-11-03
 branch: feat/data-harmonization
-data_release: data-v0                   # gh release download data-v0；SHA256 见交接备注
-next_step: "S08 保底模型 M0、M1s、QM，Terra→Aqua 桥接，NOAA-20 接续检验，分数表 v1"
+data_release: data-v0                   # gh release download data-v0；SHA256 见交接备注；里程碑 A 数据在 milestone-a
+next_step: "开新会话执行任务卡 3-model：S10 LightGBM 初版 + AI 自动实验 + 独立审核"
 needs_human:
+  - "待人决定：NOAA-20 接续的通过标准（docs/decisions/0005 第 4 条；标准是看了检验结果后提出的）"
+  - "待人决定：留出区的 Terra 桥接用训练区合并比例还是当地 MODIS 比例（docs/decisions/0005 第 6 条，影响 S12 上线版）"
+  - "待人确认：QM 细节、λ 选择、桥接年份、v0 来源规则（docs/decisions/0005 第 1–3、5 条）"
+  - "通知前端：milestone-a 预发布版 + docs/data-interface.md 已可用（PR #2 已留言）"
   - "GitHub CLI 登录：这台电脑已登录可跳过；换电脑接力先运行 gh auth login --web（下载 Release 数据要用）"
 ```
 <!-- STATUS:END -->
@@ -25,8 +29,8 @@ needs_human:
 |---|---|---|---|
 | 0 | （本仓库搭建） | S00 | ✅ 完成 |
 | 1 | [`1-data`](docs/sessions/1-data.md) | S01–S06 | ✅ 完成 |
-| 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09（里程碑 A） | ⏭ 下一张 |
-| 3 | [`3-model`](docs/sessions/3-model.md) | S10 | 待开始 |
+| 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09（里程碑 A） | ✅ 完成 |
+| 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ⏭ 下一张 |
 | 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | 待开始 |
 | 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15（里程碑 B） | 待开始 |
 | G | [`G-global`](docs/sessions/G-global.md) | 全球重跑 | 待开始（S15 之后） |
@@ -43,8 +47,8 @@ needs_human:
 | S05 | 网格化与特征 | ✅ done | 2026-11-03 | 总数守恒（各卫星格子计数和 = 清洗后点数）；区域稠密表 261.6 万行；20 个特征 | 0ec693d |
 | S06 | 数据体检（A5） | ✅ done | 2026-11-03 | S-NPP/Aqua 年比约 4.6–10；NOAA-20/S-NPP 中位数 0.98–1.00；Terra/Aqua 2020 年后骤降 | 6603ac1 |
 | S07 | 判卷机器（prepare、evaluate） | ✅ done | 2026-11-03 | 假方法：永远 0 合并 MALE 5.90，直接用 MODIS 1.79；两次运行 SHA256 一致（`reports/judge-check.md`） | |
-| S08 | 保底模型 M0、M1s、QM；桥接与接续 | ⬜ todo | | | |
-| S09 | ★里程碑 A：数据集 v0、前端导出、预发布版 | ⬜ todo | | | |
+| S08 | 保底模型 M0、M1s、QM；桥接与接续 | ✅ done | 2026-11-03 | 两窗口合并 MALE：M1s（λ=20）0.377、QM 0.463、M0 1.795；Terra→Aqua→M1s 链条 0.522；NOAA-20 接续月总量偏差中位数 −0.3%～+3.1%（`reports/scores-v1.md`） | |
+| S09 | ★里程碑 A：数据集 v0、前端导出、预发布版 | ✅ done | 2026-11-03 | 261.6 万格子-月份：S-NPP 观测 55.4 万、NOAA-20 换算 4.7 万、M1s 182 万、Terra 桥接 19.7 万；预发布版 `milestone-a`，下载后 9 个文件 SHA256 全部核对通过 | |
 | S10 | LightGBM 和 AI 实验 | ⬜ todo | | | |
 | S11 | 冻结与外部盲审 | ⬜ todo | | | |
 | S12 | 最终数据集 | ⬜ todo | | | |
@@ -84,3 +88,22 @@ needs_human:
   - Terra/Aqua 比例 2020 年后骤降，Terra→Aqua 桥接只能用比例稳定的年份（`reports/findings.md` 第 7 条）。
   - 本机跑护栏和测试要加 `-X utf8`：`uv run python -X utf8 -m pytest`（`docs/decisions/0002`，已确认不解冻）。
   - Claude 钩子会把提交信息里同时出现“锁定年份 + 下载”字样的命令误拦，提交信息别这样写；代码注释同理（CI 扫描）。
+
+### 会话 2（2026-11-03，qiuxue-yee）
+
+- **完成**：S07–S09 全部完成并 push。判卷机器 `prepare.py`、`evaluate.py`、`final_test.py` 经人过目后冻结（`e19f26c`），实现细节见 `docs/decisions/0004`（已确认）。
+- **分数表 v1**：`reports/scores-v1.md`。两窗口合并 MALE：M1s（λ = 20，从 {0, 5, 20, 50, 100} 中按验证集选出）0.377，QM 0.463，M0 1.795；QM 比 M1s 差 0.087（95% 区间 0.074–0.100）。判卷检查（假方法、可重复性）在 `reports/judge-check.md`。
+- **里程碑 A 预发布版 `milestone-a`**：https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/milestone-a 。下载：`gh release download milestone-a --repo team-inspiratio/inspiratio-space-apps-2026`，再用 `sha256sum -c SHA256SUMS.txt` 核对。生成：`uv run python -m harmonization.series`（同一输入重跑，字节完全相同）。
+
+  | 文件 | SHA256 |
+  |---|---|
+  | `dataset_v0.parquet` | `66c1696d3a1cdc953ebcc4064054263daf973853ef824ee4b2d01b14aeb43ae8` |
+  | `region_totals_v0.csv` | `6d5343c520d18164fd31bd7c908d7ecfe88406c7fab472bc3ccea5aec35d1dab` |
+  | `data-interface.md` | `6f00419f11c2855c0e9c76f0b2f8c05e375de00e50dbc3c02720571f3363823e` |
+  | `<region>.json.gz` × 6 | 见 Release 里的 `SHA256SUMS.txt` |
+
+- **给会话 3 的提示**：
+  - 模型接口：`fit(train_table) -> predict`，`predict(feature_table) -> 估计值`，打分用 `evaluate.evaluate(fit)` 和 `evaluate.bootstrap_diff(m1s结果, 新结果)`。predict 拿到的表有格子编号 `lat_idx`、`lon_idx`，**LightGBM 不能把它们当特征**，特征只能来自 `config/features.json`（ADR 0004 第 4 条）。
+  - M1s 对照：`harmonize.fit_m1s(t, 20.0)`；选定规则比较的基准是它。只能改 `harmonization/harmonize.py`。
+  - 发现：留出区的 Terra 桥接段（2000-11 至 2002-06）可能偏高 1.5–2 倍（ADR 0005 第 6 条，待人决定）。这不影响 S10 选模型。
+  - 生成 Release 文件时要固定 gzip 时间戳、统一用 LF 换行，否则 Windows 和 Linux 上的哈希会不一样（`series.py` 已经这样做了）。
