@@ -53,6 +53,11 @@ development machine: they are the locked test set, graded once on GitHub Actions
 - **Stability interval** (`lo_90`, `hi_90`): the training years were resampled as whole calendar years 100 times and the model refitted each time; the interval is the 5th-95th percentile of the estimates. It answers "how much would the estimate move with another set of training years". It is **not** a 90% interval for the true value and does not include detection gaps (cloud, smoke, overpass time), long-term change, the Terra bridge or the NOAA-20 continuation.
 - **Calibration**: region-month intervals were too narrow (38% coverage on the blind test), so, by a rule fixed before the test, they are widened around the estimate by a factor of 5.37 chosen on the validation years. After that, blind-test coverage of the true region-month totals was **95.5% in the training regions but only 55.9% in the holdout regions**. Cell-level intervals are not calibrated.
 - Observed months carry no model interval (`lo_90 = hi_90 = est`).
+- **Global release (`global-v1`)**: intervals come from the **first 50** of the same sealed year-block resamples, not all 100. This was done to save run time and is an approximation: the 5th–95th percentiles are a little noisier than with 100. The calibration factor was re-derived the same way on the global validation windows, again from 50 resamples each.
+  - The factor is **16.75**, against 5.37 in v1.
+  - Before widening, 14% of the true validation region-month totals fell inside the interval; after widening, 90%.
+  - Global region intervals are therefore much wider than in v1.
+  - See `docs/decisions/0013` item 5 addendum and `meta.json` `interval`.
 
 ## 4. Validation (summary of reports/validation.md)
 

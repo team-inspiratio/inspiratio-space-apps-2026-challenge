@@ -77,6 +77,8 @@ Following the rules in AGENTS.md, execute docs/sessions/3-model.md.
 | 数据集 / The dataset | GitHub Release 正式版 `v1`（CC BY 4.0；同样内容的预发布版 `dataset-v1` 保留作历史记录）：`dataset_v1.parquet`、`dataset_v1.csv.gz`、`region_totals_v1.csv`、前端 `<region>.json.gz`。下载后用 `sha256sum -c SHA256SUMS.txt` 核对 |
 | 数据说明卡 / Data card | [`docs/data-card.md`](docs/data-card.md)（英文，附中文摘要） |
 | 前端接口 / Front-end interface | [`docs/data-interface.md`](docs/data-interface.md) |
+| **做网页的 agent 先读 / Start here for a web agent** | [`docs/frontend-agent-brief.md`](docs/frontend-agent-brief.md)（含开场提示词 / includes a starter prompt） |
+| 项目经过和每个决定的理由 / Project story and why | [`docs/project-journey.md`](docs/project-journey.md) |
 | 异常指标怎么算、怎么对答案 / Anomaly indicator | 参考实现 [`harmonization/anomaly.py`](harmonization/anomaly.py)，标准测试用例 [`docs/anomaly-cases.json`](docs/anomaly-cases.json)（25 个，前端逐项对） |
 | AI 用在哪 / AI usage statement | [`docs/ai-usage.md`](docs/ai-usage.md) |
 | 还要人决定的事 / Open decisions | `PROGRESS.md` 状态块的 `needs_human`，详情在 [`docs/decisions/`](docs/decisions/) |
