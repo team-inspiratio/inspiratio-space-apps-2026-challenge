@@ -24,7 +24,7 @@ const REGIONS = [
   "indo_gangetic",
 ];
 
-export function buildMethodsData(repoRoot = path.resolve(here, "../..")) {
+export function buildMethodsData(repoRoot = path.resolve(here, "../../../..")) {
   // Text mode: a Windows checkout (core.autocrlf) must hash like the committed LF file.
   const read = (rel) =>
     fs.readFileSync(path.join(repoRoot, rel), "utf8").replaceAll("\r\n", "\n");

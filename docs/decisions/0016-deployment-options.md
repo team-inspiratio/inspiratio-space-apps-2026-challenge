@@ -12,7 +12,7 @@ Current state (tested on 2026-11-04):
 |---|---|
 | Live address | <https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site> |
 | Live version | The old version from before the fixes; `/methods.html` only falls back to the home page; PR #5 is not live |
-| Access scope | `web/README.md` says "Sites private access", but the home page and data files open without logging in; **the two disagree, and a person must confirm** |
+| Access scope | `web/archive/website-v1/README.md` says "Sites private access", but the home page and data files open without logging in; **the two disagree, and a person must confirm** |
 | Public source | `team-inspiratio/inspiratio-space-apps-2026-challenge`; current bundled assets are listed in `docs/public-data.md` |
 | Members | 3 repository admins (terrywaio, QinqiXie, De1Ta-X), 1 with write access (qiuxue-yee) |
 | Site size | The six-region `dist/` is about 44 MB. Adding the global version adds about 33 MB of front-end JSON (largest single file about 5 MB). The 663 MB `resamples20` is not suitable for a static site |
@@ -39,7 +39,7 @@ Prices and limits in the table below were taken from the official pages on 2026-
 
 ### A Keep using chatgpt.site
 
-1. After PRs #4 and #5 are merged, someone with Sites access publishes following "Existing deployment and how to redeploy" in `web/README.md`.
+1. After PRs #4 and #5 are merged, someone with Sites access publishes following "Existing deployment and how to redeploy" in `web/archive/website-v1/README.md`.
 2. Confirm in a private browsing window that the home page, `/methods.html` and the data files all open.
 3. Confirm the access scope and update the README.
 
@@ -47,13 +47,13 @@ Prices and limits in the table below were taken from the official pages on 2026-
 
 1. One team member signs up and confirms whether an organization project fits the Hobby terms.
 2. Locally run `npm ci`, `npm run data:prepare`, `npm test`, `npm run build`.
-3. Upload `web/dist` with the Vercel CLI and confirm the production address.
+3. Upload `web/archive/website-v1/dist` with the Vercel CLI and confirm the production address.
 4. Confirm the deployment retention policy, so it is not cleaned up during judging.
 
 ### C Netlify (manual upload of the build output)
 
 1. One team member signs up and confirms the new project is published as public (new projects are private by default).
-2. As in step 2 of B, then upload `web/dist`.
+2. As in step 2 of B, then upload `web/archive/website-v1/dist`.
 3. Turn on usage alerts and estimate traffic during judging.
 
 ### D GitHub Pages

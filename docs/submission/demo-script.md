@@ -61,7 +61,7 @@ On 2026-11-04 all three routes were walked through with real mouse clicks on the
 - Use only these three training regions. Do not tell stories with the holdout regions; every month there is a low-confidence estimate.
 - Once the global version is added, the numbers above may differ (the global model's values differ from v1), so walk the routes again.
 
-**Sources of the numbers**: the values in the routes are the Release v1 data shown on the web page, and the comparison of California 2020-09 with 2020-05 is also in `web/test/scale.test.mjs`; for southern Africa's jump factor, `reports/validation.md` prevails.
+**Sources of the numbers**: the values in the routes are the Release v1 data shown on the web page, and the comparison of California 2020-09 with 2020-05 is also in `web/archive/website-v1/test/scale.test.mjs`; for southern Africa's jump factor, `reports/validation.md` prevails.
 
 ## Backup: slide outline (7 slides maximum)
 

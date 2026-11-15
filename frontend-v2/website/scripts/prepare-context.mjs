@@ -1,7 +1,7 @@
 // Read scientific source documents only. Never import the previous frontend.
 import fs from "node:fs";
 const read = (p) =>
-  JSON.parse(fs.readFileSync(new URL("../../" + p, import.meta.url)));
+  JSON.parse(fs.readFileSync(new URL("../../../" + p, import.meta.url)));
 const regions = read("config/regions.json").regions;
 const cases = read("docs/anomaly-cases.json").cases;
 const examples = regions

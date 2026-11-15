@@ -4,9 +4,9 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { pathToFileURL } from "node:url";
 
-export function prepareAssets(root = path.resolve(import.meta.dirname, "../..")) {
+export function prepareAssets(root = path.resolve(import.meta.dirname, "../../..")) {
   const source = path.join(root, "inspiratio-site/public/data/global-v1");
-  const out = path.join(root, "frontend-v2/public/data/global-v1");
+  const out = path.join(root, "frontend-v2/website/public/data/global-v1");
   fs.mkdirSync(out, { recursive: true });
   // A failed refresh must never leave the app advertising a complete catalog.
   fs.rmSync(path.join(out, "ready.json"), { force: true });
