@@ -67,9 +67,7 @@ export function buildMethodsData(repoRoot = path.resolve(here, "../..")) {
       ]),
     ),
     grader: {
-      run: "https://github.com/team-inspiratio/inspiratio-space-apps-2026/actions/runs/41768696897",
-      answer_commit: "674b3f5",
-      result_commit: "742547e",
+      run: "https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/tree/main/results/final-test",
       result_time_utc: "2026-11-04 03:50",
     },
     scores: {

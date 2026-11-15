@@ -15,7 +15,7 @@
 | **When** | 2000-11 to 2026-10, calendar months (UTC), 312 months. |
 | **Size** | 2,615,808 cell-months (8,384 cells × 312 months). |
 | **Version** | v1. Model LightGBM E028, frozen before a one-time blind test. |
-| **Files** | `dataset_v1.parquet` and `dataset_v1.csv.gz` (same table), `region_totals_v1.csv`, one `frontend/<region>.json.gz` per region, `resamples20_v1.parquet`, `meta.json`, `SHA256SUMS.txt`, on the GitHub release of this repository. |
+| **Files** | `dataset_v1.parquet` and `dataset_v1.csv.gz` (same table), `region_totals_v1.csv`, one `frontend/<region>.json.gz` per region, `resamples20_v1.parquet`, `meta.json`, `SHA256SUMS.txt`, described by this data contract. See [public data availability](public-data.md) for which files are included here. |
 | **License** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (confirmed by the team). The input data are NASA FIRMS and GFED products; see "Citation". |
 
 ## 1. Sources
@@ -93,7 +93,7 @@ Scores are MALE, the mean absolute difference of log(count + 1) on random 1°-5�
 
 ## 7. Citation and acknowledgement
 
-- Dataset: Team Inspiratio (2026). *Harmonized MODIS × VIIRS monthly active-fire counts, 0.25°, 2000-11 to 2026-10, version 1.* GitHub release `v1` of `team-inspiratio/inspiratio-space-apps-2026` (https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1). CC BY 4.0.
+- Dataset: Team Inspiratio (2026). *Harmonized MODIS × VIIRS monthly active-fire counts, 0.25°, 2000-11 to 2026-10, version 1.* Public documentation: [data card](data-card.md), [data interface](data-interface.md), and [available public files](public-data.md). The global frontend subset is committed in `inspiratio-site/public/data/global-v1/`; this repository currently has no Release assets. CC BY 4.0.
 - FIRMS: "We acknowledge the use of data and imagery from NASA's Fire Information for Resource Management System (FIRMS) (https://www.earthdata.nasa.gov/firms), part of NASA's Earth Science Data and Information System (ESDIS)."
 - GFED4.1s: van der Werf, G. R., et al. (2017). Global fire emissions estimates during 1997-2016. *Earth System Science Data*, 9, 697-720.
 - VIIRS 375 m product: Schroeder, W., Oliva, P., Giglio, L., & Csiszar, I. A. (2014). The New VIIRS 375 m active fire detection data product: Algorithm description and initial assessment. *Remote Sensing of Environment*, 143, 85-96.

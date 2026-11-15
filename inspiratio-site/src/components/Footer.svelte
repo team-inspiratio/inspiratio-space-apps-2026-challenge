@@ -1,6 +1,6 @@
 <script lang="ts">
   import { AS_OF } from '../lib/store.svelte'
-  const REPO = 'https://github.com/team-inspiratio/inspiratio-space-apps-2026'
+  const REPO = 'https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge'
   const data = [
     {
       name: 'MODIS Collection 6.1 Active Fire, Terra and Aqua',
@@ -43,7 +43,7 @@
     <section>
       <h2>Data and code</h2>
       <ul class="plain small">
-        <li><a href="{REPO}/releases/tag/global-v1" target="_blank" rel="noreferrer">Dataset release global-v1</a> <span class="faint">· CC BY 4.0 · monthly, 0.25°, Nov 2000 – Oct 2026</span></li>
+        <li><a href="{REPO}/tree/main/inspiratio-site/public/data/global-v1" target="_blank" rel="noreferrer">Public global-v1 data files</a> <span class="faint">· CC BY 4.0 · monthly, 0.25°, Nov 2000 – Oct 2026</span></li>
         <li><a href={REPO} target="_blank" rel="noreferrer">Source code and reports</a> <span class="faint">· validation, final test, decisions</span></li>
         <li class="muted">Reproducible: one command rebuilds the dataset from the FIRMS archives in about 87 minutes, and 37 checks match bit for bit.</li>
         <li class="muted">Values are monthly counts of fire detections at VIIRS S-NPP 375 m scale. They are not fire events, burned area or fire danger.</li>

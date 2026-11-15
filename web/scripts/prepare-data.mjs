@@ -16,7 +16,7 @@ const root = path.resolve(import.meta.dirname, ".."),
 const raw = path.join(root, ".source-data");
 fs.mkdirSync(out, { recursive: true });
 fs.mkdirSync(raw, { recursive: true });
-const repo = "team-inspiratio/inspiratio-space-apps-2026";
+const repo = "team-inspiratio/inspiratio-space-apps-2026-challenge";
 const regions = [
   "california",
   "cordoba",

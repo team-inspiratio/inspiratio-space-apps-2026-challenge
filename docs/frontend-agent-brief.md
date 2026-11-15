@@ -26,13 +26,7 @@ No fire forecasting.
 | **Main data: world map + any area** | `global-v1` (CC BY 4.0) | [`docs/data-interface-global.md`](data-interface-global.md) |
 | Demo-region version (6 regions, the model that went through the external blind grading once) | `v1` (CC BY 4.0) | [`docs/data-interface.md`](data-interface.md) |
 
-Download:
-
-```bash
-gh release download global-v1 --repo team-inspiratio/inspiratio-space-apps-2026 -D data/global-v1
-```
-
-After downloading, check with `sha256sum -c SHA256SUMS.txt`. No FIRMS key and no Python needed.
+Use the bundled public frontend files in `inspiratio-site/public/data/global-v1/`. For V2, run `npm run data:prepare` inside `frontend-v2/`; it verifies the required files against `results/expected/dataset-global-v1.sha256` and copies them locally. No account, API key, Python or network download is needed. See [public data availability](public-data.md) for files that are not included.
 
 **The web page usually needs only these files:**
 

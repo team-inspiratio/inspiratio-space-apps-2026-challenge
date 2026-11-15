@@ -14,11 +14,11 @@ branch: feat/data-harmonization
 data_release: global-v1               # full Release v1 (CC BY 4.0, S15); the global version is Release global-v1 (stage G); v1 for the 6 regions is still Release v1; processed inputs are in data-v0, milestone A in milestone-a; SHA256 in results/expected/
 next_step: "All task cards are done. The global Release global-v1 is published (docs/data-interface-global.md); waiting for the PR to be merged into main"
 needs_human:
-  - "Tell the front end: the global Release global-v1 is published (CC BY 4.0): gh release download global-v1 --repo team-inspiratio/inspiratio-space-apps-2026; the interface is in docs/data-interface-global.md (interval widening factor 16.75; the web page must explain that the intervals are very wide)"
+  - "Tell the front end: public global-v1 frontend assets are bundled in inspiratio-site/public/data/global-v1/ (CC BY 4.0); setup and availability are in docs/public-data.md; interface in docs/data-interface-global.md (interval factor 16.75; explain that intervals are very wide)"
   - "Please merge: the G-global PR (feat/data-harmonization → main)"
   - "Confirmed (by the user on 2026-11-04 together with approving the global-v1 release): the G-global production version uses the globally retrained model, and the interval factor is re-derived on the global validation windows (docs/decisions/0013 items 3 and 5)"
   - "Awaiting human confirmation (a look-over is enough; not blocking): S15 acceptance used the pipeline.py all --from-release entry point (starting from the grid tables in Release data-v0), not a full rerun from raw data (docs/decisions/0012 item 1)"
-  - "Tell the front end: the full Release v1 is published (CC BY 4.0): gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026; same data as the pre-release dataset-v1, plus the CSV, the data card and the anomaly test cases"
+  - "Tell the front end: this public repository currently has no Release assets; bundled global frontend data and availability are documented in docs/public-data.md"
   - "Tell the front end: the anomaly indicator reference implementation harmonization/anomaly.py + 25 standard test cases docs/anomaly-cases.json (check answers field by field; extra details in docs/data-interface.md section 6 and docs/decisions/0011 item 1); the dataset now also has a CSV version"
   - "Please read through: the data card docs/data-card.md and the AI usage statement docs/ai-usage.md"
   - "Please read through: the validation report reports/validation.md (6 core figures + limitations; conclusion: trustworthy in the training regions; in the holdout regions the error is 2.5 times larger and totals are 14–45% too low)"
@@ -93,3 +93,8 @@ needs_human:
 ## Handover notes
 
 No active handover. See the status block for outstanding review items.
+
+## Public website source maintenance
+
+- V2 documentation and evidence links use this public repository. Data preparation verifies and copies the bundled global frontend files without credentials or downloads.
+- Public data availability and hosting requirements are documented in `docs/public-data.md`. No scientific results, frozen files or data-stage claims changed.

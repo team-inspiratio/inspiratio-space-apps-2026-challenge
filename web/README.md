@@ -6,7 +6,7 @@ Current address: <https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site> 
 
 ## Running, building and testing locally
 
-Requires **Node.js 22.16+** and npm. The source code in this repository is public. Preparing the full dataset also requires GitHub CLI: run `gh auth login` with an account that can access the repository hosting the Release v1 assets (see "Data sources" below). The front end needs no Python, FIRMS MAP_KEY, GPU or database.
+Requires **Node.js 22.16+** and npm. The source code in this repository is public. This legacy version needs v1 assets that are not currently included or published as a Release here. Use the self-contained V2 setup in `../frontend-v2/README.md`; see `../docs/public-data.md` for availability. The legacy preparation script targets only this public repository and will require a future public v1 Release. The front end needs no Python, FIRMS MAP_KEY, GPU or database.
 
 ```sh
 git clone https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge.git
@@ -43,7 +43,7 @@ The repository root's Python tests and pre-commit run separately as described in
 
 ## Data sources, when data is fetched, and the Git boundary
 
-The data comes from the [full Release v1](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1). **The scientific data is not in the source repository, and it is not fetched automatically at build time.** `npm run data:prepare` calls `scripts/prepare-data.mjs`, which fetches through the GitHub CLI login the person taking over already has:
+The legacy data contract uses v1 assets. **Those assets are not currently published in this public repository.** `npm run data:prepare` targets a future public v1 Release with the GitHub CLI; it has no alternate repository source. The files needed by this legacy version are listed below. For currently available global frontend data and V2, see [public data availability](../docs/public-data.md):
 
 | Release file | Purpose / local location |
 | --- | --- |
