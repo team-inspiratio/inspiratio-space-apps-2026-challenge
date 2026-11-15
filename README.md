@@ -1,8 +1,8 @@
 # MODIS × VIIRS 火点协调
 
 <!-- PROGRESS-BOX:BEGIN -->
-> **当前进度 / Status**：S00–S09 已完成，★里程碑 A 达成。判卷机器已冻结；保底模型 M1s 生成的数据集 v0 和前端文件在预发布版 `milestone-a`，接口规范见 [docs/data-interface.md](docs/data-interface.md)，前端可以开工。下一步：会话 3/5，任务卡 [`3-model`](docs/sessions/3-model.md)（LightGBM 和 AI 自动实验）。
-> Next: session 3 of 5, task card `3-model` (LightGBM + AI experiment loop). Milestone A reached: dataset v0 (M1s baseline) and front-end files in release `milestone-a`.
+> **当前进度 / Status**：S00–S10 已完成。★里程碑 A 的数据集 v0（M1s）在预发布版 `milestone-a`，接口规范见 [docs/data-interface.md](docs/data-interface.md)。S10 跑了 37 次 LightGBM 实验，第 1 名（两段式 LightGBM）的验证 MALE 比 M1s 低约 22%，见 [reports/scores-s10.md](reports/scores-s10.md) 和 [审核记录](reports/model-review.md)。下一步：会话 4/5，任务卡 [`4-freeze-test`](docs/sessions/4-freeze-test.md)（冻结模型、外部盲审，推送 `final-test` 标签要由人决定）。
+> Next: session 4 of 5, task card `4-freeze-test` (freeze the model, external blind test; a human pushes the `final-test` tag). S10 done: best LightGBM (two-stage) is about 22% better than M1s on validation.
 >
 > **接力三步 / Take over in 3 steps**：① 按 [HANDOFF.md](HANDOFF.md) 装好环境、填好 `.env`；② 把 HANDOFF 里的“通用接力提示词”复制给 Claude Code 或 Codex；③ 按 AI 的提示做需要你本人做的事。详细进度见 [PROGRESS.md](PROGRESS.md)。
 <!-- PROGRESS-BOX:END -->

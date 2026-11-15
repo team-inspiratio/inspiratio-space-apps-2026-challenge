@@ -1,0 +1,543 @@
+{
+  "top3": [
+    {
+      "exp_id": "E028",
+      "hypothesis": "Two-stage (E016 setup) without the no-detection flags: they duplicate count == 0 and only add split candidates",
+      "combined_male": 0.2946643566587328,
+      "csv_combined_male": 0.2947,
+      "reproduced": true,
+      "vs_m1s": {
+        "diff": -0.08197132944856397,
+        "se": 0.015528275153234674,
+        "ci95": [
+          -0.11266104014902222,
+          -0.0530667658007854
+        ],
+        "resamples": 2000
+      },
+      "vs_qm": {
+        "diff": -0.16882943199531605,
+        "se": 0.013716263471498789,
+        "ci95": [
+          -0.19660825374648455,
+          -0.14267861151884395
+        ],
+        "resamples": 2000
+      },
+      "selection": {
+        "1_improvement_10pct": true,
+        "2_more_than_1_se": true,
+        "3_4_guardrails": true,
+        "guardrail_failures": []
+      },
+      "windows": {
+        "main": {
+          "male": 0.3002693329783653,
+          "male_all": 0.36408060797721276,
+          "n_primary": 11727,
+          "n_all": 14400,
+          "n_rectangles": 600,
+          "excluded_share": 0.0,
+          "zero_ge1": 0.09601634320735444,
+          "zero_ge5": 0.028600612870275793,
+          "low_mae": 4.198107315739847,
+          "total_bias_mean_abs": 0.053443298422841366,
+          "season_corr_mean": 0.9978886483059405,
+          "male_by_region": {
+            "california": 0.30985393952706425,
+            "cordoba": 0.318332012212723,
+            "southern_africa": 0.2726220471953088
+          },
+          "season_corr": {
+            "california": 0.9988394139352493,
+            "cordoba": 0.9956920246996696,
+            "southern_africa": 0.9991345062829025
+          },
+          "total_bias": [
+            {
+              "region": "california",
+              "year": "2014",
+              "H": 32916.24832098758,
+              "V": 36725.0,
+              "bias": -0.10371005252586574,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "california",
+              "year": "2015",
+              "H": 46326.67119800974,
+              "V": 50586.0,
+              "bias": -0.08419975491223386,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2014",
+              "H": 14707.728274693942,
+              "V": 15275.0,
+              "bias": -0.03713726515915272,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2015",
+              "H": 25602.292799086128,
+              "V": 26631.0,
+              "bias": -0.03862818523201805,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2014",
+              "H": 1229961.9820889786,
+              "V": 1195314.0,
+              "bias": 0.02898651073189029,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2015",
+              "H": 1330620.0796851492,
+              "V": 1294380.0,
+              "bias": 0.02799802197588752,
+              "abs_diff_if_v0": null
+            }
+          ]
+        },
+        "aux": {
+          "male": 0.28905938033910034,
+          "male_all": 0.3485293559282372,
+          "n_primary": 11407,
+          "n_all": 13800,
+          "n_rectangles": 600,
+          "excluded_share": 0.04166666666666663,
+          "zero_ge1": 0.07936507936507936,
+          "zero_ge5": 0.037037037037037035,
+          "low_mae": 5.69891052993591,
+          "total_bias_mean_abs": 0.06103896609898377,
+          "season_corr_mean": 0.9957713084627705,
+          "male_by_region": {
+            "california": 0.2810257813975528,
+            "cordoba": 0.31600621475742585,
+            "southern_africa": 0.27014614486232236
+          },
+          "season_corr": {
+            "california": 0.9951220626399676,
+            "cordoba": 0.9925835265078746,
+            "southern_africa": 0.9996083362404696
+          },
+          "total_bias": [
+            {
+              "region": "california",
+              "year": "2016",
+              "H": 36084.971752114136,
+              "V": 32798.0,
+              "bias": 0.10021866431227933,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "california",
+              "year": "2017",
+              "H": 83880.01293931388,
+              "V": 78183.0,
+              "bias": 0.07286766866599992,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2016",
+              "H": 31024.27244480956,
+              "V": 28394.0,
+              "bias": 0.09263479766181448,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2017",
+              "H": 38866.698243962055,
+              "V": 38433.0,
+              "bias": 0.011284527462390503,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2016",
+              "H": 1330825.2003031806,
+              "V": 1281323.0,
+              "bias": 0.03863366247478628,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2017",
+              "H": 1274440.438643592,
+              "V": 1213066.0,
+              "bias": 0.05059447601663214,
+              "abs_diff_if_v0": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "exp_id": "E018",
+      "hypothesis": "Two-stage with summed MODIS count and log Aqua count as extra monotone inputs for both stages",
+      "combined_male": 0.29496559636655095,
+      "csv_combined_male": 0.295,
+      "reproduced": true,
+      "vs_m1s": {
+        "diff": -0.08167008974074583,
+        "se": 0.015089636450322368,
+        "ci95": [
+          -0.1119365963135875,
+          -0.052962517113620836
+        ],
+        "resamples": 2000
+      },
+      "vs_qm": {
+        "diff": -0.16852819228749794,
+        "se": 0.013002368227316676,
+        "ci95": [
+          -0.19449522226196284,
+          -0.14214506136016536
+        ],
+        "resamples": 2000
+      },
+      "selection": {
+        "1_improvement_10pct": true,
+        "2_more_than_1_se": true,
+        "3_4_guardrails": true,
+        "guardrail_failures": []
+      },
+      "windows": {
+        "main": {
+          "male": 0.30208459888515776,
+          "male_all": 0.3644464218181038,
+          "n_primary": 11727,
+          "n_all": 14400,
+          "n_rectangles": 600,
+          "excluded_share": 0.0,
+          "zero_ge1": 0.09908069458631256,
+          "zero_ge5": 0.028600612870275793,
+          "low_mae": 3.9863152682960616,
+          "total_bias_mean_abs": 0.061072148348026746,
+          "season_corr_mean": 0.9981019687342254,
+          "male_by_region": {
+            "california": 0.3240949730110815,
+            "cordoba": 0.31017800262928436,
+            "southern_africa": 0.2719808210151076
+          },
+          "season_corr": {
+            "california": 0.998620371448395,
+            "cordoba": 0.9964015145110774,
+            "southern_africa": 0.999284020243204
+          },
+          "total_bias": [
+            {
+              "region": "california",
+              "year": "2014",
+              "H": 32406.398393855623,
+              "V": 36725.0,
+              "bias": -0.11759296408834241,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "california",
+              "year": "2015",
+              "H": 45715.5579971507,
+              "V": 50586.0,
+              "bias": -0.09628043337779812,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2014",
+              "H": 14481.951385109951,
+              "V": 15275.0,
+              "bias": -0.05191807626121436,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2015",
+              "H": 25436.27542617931,
+              "V": 26631.0,
+              "bias": -0.04486217467690623,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2014",
+              "H": 1229855.9139232235,
+              "V": 1195314.0,
+              "bias": 0.028897774077124128,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2015",
+              "H": 1329174.8340408576,
+              "V": 1294380.0,
+              "bias": 0.026881467606775233,
+              "abs_diff_if_v0": null
+            }
+          ]
+        },
+        "aux": {
+          "male": 0.28784659384794414,
+          "male_all": 0.35038629909913643,
+          "n_primary": 11407,
+          "n_all": 13800,
+          "n_rectangles": 600,
+          "excluded_share": 0.04166666666666663,
+          "zero_ge1": 0.09735449735449736,
+          "zero_ge5": 0.04126984126984127,
+          "low_mae": 6.103562397055059,
+          "total_bias_mean_abs": 0.07163452929792995,
+          "season_corr_mean": 0.9958269561534533,
+          "male_by_region": {
+            "california": 0.27666987565594314,
+            "cordoba": 0.3235540042835547,
+            "southern_africa": 0.2633159016043346
+          },
+          "season_corr": {
+            "california": 0.9955341782940211,
+            "cordoba": 0.9924291579953342,
+            "southern_africa": 0.9995175321710047
+          },
+          "total_bias": [
+            {
+              "region": "california",
+              "year": "2016",
+              "H": 36513.60213494634,
+              "V": 32798.0,
+              "bias": 0.11328746066669737,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "california",
+              "year": "2017",
+              "H": 83232.85644523823,
+              "V": 78183.0,
+              "bias": 0.06459021072660587,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2016",
+              "H": 31821.339753246408,
+              "V": 28394.0,
+              "bias": 0.12070647859570349,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2017",
+              "H": 39764.14540394479,
+              "V": 38433.0,
+              "bias": 0.034635480028745835,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2016",
+              "H": 1334245.9980894728,
+              "V": 1281323.0,
+              "bias": 0.04130340131994248,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2017",
+              "H": 1280129.3159712437,
+              "V": 1213066.0,
+              "bias": 0.05528414444988461,
+              "abs_diff_if_v0": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "exp_id": "E032",
+      "hypothesis": "Two-stage (E016 setup) without the fire-day counts: monthly counts may already carry the persistence information",
+      "combined_male": 0.2954294608685658,
+      "csv_combined_male": 0.2954,
+      "reproduced": true,
+      "vs_m1s": {
+        "diff": -0.081206225238731,
+        "se": 0.014886877548384648,
+        "ci95": [
+          -0.1102744434520733,
+          -0.053569652723945156
+        ],
+        "resamples": 2000
+      },
+      "vs_qm": {
+        "diff": -0.16806432778548308,
+        "se": 0.013314364426432667,
+        "ci95": [
+          -0.19474823674063446,
+          -0.14292237806865218
+        ],
+        "resamples": 2000
+      },
+      "selection": {
+        "1_improvement_10pct": true,
+        "2_more_than_1_se": true,
+        "3_4_guardrails": true,
+        "guardrail_failures": []
+      },
+      "windows": {
+        "main": {
+          "male": 0.3020151810680561,
+          "male_all": 0.36655602117805347,
+          "n_primary": 11727,
+          "n_all": 14400,
+          "n_rectangles": 600,
+          "excluded_share": 0.0,
+          "zero_ge1": 0.10112359550561797,
+          "zero_ge5": 0.031664964249233915,
+          "low_mae": 4.347365117146882,
+          "total_bias_mean_abs": 0.04591953625463093,
+          "season_corr_mean": 0.9979016539757436,
+          "male_by_region": {
+            "california": 0.3083169055898017,
+            "cordoba": 0.3220321085517265,
+            "southern_africa": 0.27569652906264014
+          },
+          "season_corr": {
+            "california": 0.9996577547438269,
+            "cordoba": 0.9951282246391133,
+            "southern_africa": 0.9989189825442905
+          },
+          "total_bias": [
+            {
+              "region": "california",
+              "year": "2014",
+              "H": 35127.72876972502,
+              "V": 36725.0,
+              "bias": -0.04349274963308314,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "california",
+              "year": "2015",
+              "H": 45072.15482446078,
+              "V": 50586.0,
+              "bias": -0.10899943018896974,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2014",
+              "H": 14714.548633260809,
+              "V": 15275.0,
+              "bias": -0.036690760506657316,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2015",
+              "H": 25889.237722996768,
+              "V": 26631.0,
+              "bias": -0.027853339228839813,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2014",
+              "H": 1232296.0454190318,
+              "V": 1195314.0,
+              "bias": 0.030939188714456334,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2015",
+              "H": 1330029.4894016956,
+              "V": 1294380.0,
+              "bias": 0.027541749255779235,
+              "abs_diff_if_v0": null
+            }
+          ]
+        },
+        "aux": {
+          "male": 0.28884374066907553,
+          "male_all": 0.3502547499251107,
+          "n_primary": 11407,
+          "n_all": 13800,
+          "n_rectangles": 600,
+          "excluded_share": 0.04166666666666663,
+          "zero_ge1": 0.09947089947089947,
+          "zero_ge5": 0.04656084656084656,
+          "low_mae": 5.978614699280858,
+          "total_bias_mean_abs": 0.07561263488302832,
+          "season_corr_mean": 0.9950414907127417,
+          "male_by_region": {
+            "california": 0.28624219357351943,
+            "cordoba": 0.31961361094765045,
+            "southern_africa": 0.2606754174860566
+          },
+          "season_corr": {
+            "california": 0.9943145047145094,
+            "cordoba": 0.991416951026807,
+            "southern_africa": 0.9993930163969088
+          },
+          "total_bias": [
+            {
+              "region": "california",
+              "year": "2016",
+              "H": 36974.00961547388,
+              "V": 32798.0,
+              "bias": 0.12732513005286528,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "california",
+              "year": "2017",
+              "H": 84967.6571366787,
+              "V": 78183.0,
+              "bias": 0.08677918648144356,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2016",
+              "H": 31492.448537036504,
+              "V": 28394.0,
+              "bias": 0.10912335482977054,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "cordoba",
+              "year": "2017",
+              "H": 39472.424585020286,
+              "V": 38433.0,
+              "bias": 0.02704510667968374,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2016",
+              "H": 1339113.2028993426,
+              "V": 1281323.0,
+              "bias": 0.04510197889161649,
+              "abs_diff_if_v0": null
+            },
+            {
+              "region": "southern_africa",
+              "year": "2017",
+              "H": 1283789.0243855205,
+              "V": 1213066.0,
+              "bias": 0.05830105236279026,
+              "abs_diff_if_v0": null
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "m1s_combined": 0.3766356861072968,
+  "qm_combined": 0.4634937886540489
+}

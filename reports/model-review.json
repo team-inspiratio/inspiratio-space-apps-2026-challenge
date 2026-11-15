@@ -1,0 +1,2214 @@
+{
+  "m1s": {
+    "combined": 0.3766356861072968,
+    "male_main": 0.3932619941320182,
+    "zero_ge1_main": 0.056179775280898875,
+    "zero_ge5_main": 0.05209397344228805,
+    "low_mae_main": 6.7245331506054375,
+    "male_by_region_main": {
+      "california": 0.4430548848604067,
+      "cordoba": 0.4304433928200031,
+      "southern_africa": 0.3062877047156448
+    },
+    "male_aux": 0.36000937808257544,
+    "zero_ge1_aux": 0.06455026455026455,
+    "zero_ge5_aux": 0.06455026455026455,
+    "low_mae_aux": 7.8827859385278405,
+    "male_by_region_aux": {
+      "california": 0.43107355147237447,
+      "cordoba": 0.3685844077548308,
+      "southern_africa": 0.2803701750205209
+    },
+    "guardrail_failures": []
+  },
+  "candidates": {
+    "E028": {
+      "summary": {
+        "combined": 0.2946643566587328,
+        "male_main": 0.3002693329783653,
+        "zero_ge1_main": 0.09601634320735444,
+        "zero_ge5_main": 0.028600612870275793,
+        "low_mae_main": 4.198107315739847,
+        "male_by_region_main": {
+          "california": 0.30985393952706425,
+          "cordoba": 0.318332012212723,
+          "southern_africa": 0.2726220471953088
+        },
+        "male_aux": 0.28905938033910034,
+        "zero_ge1_aux": 0.07936507936507936,
+        "zero_ge5_aux": 0.037037037037037035,
+        "low_mae_aux": 5.69891052993591,
+        "male_by_region_aux": {
+          "california": 0.2810257813975528,
+          "cordoba": 0.31600621475742585,
+          "southern_africa": 0.27014614486232236
+        },
+        "guardrail_failures": []
+      },
+      "csv_combined": 0.2947,
+      "reproduced": true,
+      "leakage": {
+        "windows": {
+          "main": {
+            "feature_names": {
+              "clf": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_fire_days",
+                "terra_nbr_count",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_fire_days",
+                "aqua_nbr_count"
+              ],
+              "reg": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_fire_days",
+                "terra_nbr_count",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_fire_days",
+                "aqua_nbr_count"
+              ]
+            },
+            "not_allowed": [],
+            "forbidden": [],
+            "rounds_refit": {
+              "clf": 534,
+              "reg": 592
+            },
+            "rounds_json": {
+              "clf": 534,
+              "reg": 592
+            },
+            "train_months": [
+              "2016-01",
+              "2021-06"
+            ],
+            "inner_held_months": [
+              "2016-01",
+              "2018-01"
+            ],
+            "key_scramble_max_abs_diff": 0.0
+          },
+          "aux": {
+            "feature_names": {
+              "clf": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_fire_days",
+                "terra_nbr_count",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_fire_days",
+                "aqua_nbr_count"
+              ],
+              "reg": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_fire_days",
+                "terra_nbr_count",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_fire_days",
+                "aqua_nbr_count"
+              ]
+            },
+            "not_allowed": [],
+            "forbidden": [],
+            "rounds_refit": {
+              "clf": 184,
+              "reg": 224
+            },
+            "rounds_json": {
+              "clf": 184,
+              "reg": 224
+            },
+            "train_months": [
+              "2018-01",
+              "2021-06"
+            ],
+            "inner_held_months": [
+              "2018-01",
+              "2019-12"
+            ],
+            "key_scramble_max_abs_diff": 0.0
+          }
+        },
+        "source_diff_vs_E028": []
+      },
+      "stability": {
+        "combined": 0.2946643566587328,
+        "male": {
+          "main": 0.3002693329783653,
+          "aux": 0.28905938033910034
+        },
+        "male_by_region": {
+          "main": {
+            "california": 0.30985393952706425,
+            "cordoba": 0.318332012212723,
+            "southern_africa": 0.2726220471953088
+          },
+          "aux": {
+            "california": 0.2810257813975528,
+            "cordoba": 0.31600621475742585,
+            "southern_africa": 0.27014614486232236
+          }
+        },
+        "zero_ge1": {
+          "main": 0.09601634320735444,
+          "aux": 0.07936507936507936
+        },
+        "units": {
+          "main": {
+            "california:2014": 0.32991514060911653,
+            "california:2015": 0.28979273844501197,
+            "cordoba:2014": 0.3150520424413701,
+            "cordoba:2015": 0.3216119819840759,
+            "southern_africa:2014": 0.3010882058496121,
+            "southern_africa:2015": 0.24415588854100545
+          },
+          "aux": {
+            "california:2016": 0.28195432765915207,
+            "california:2017": 0.2800972351359535,
+            "cordoba:2016": 0.30568030587571815,
+            "cordoba:2017": 0.3263321236391335,
+            "southern_africa:2016": 0.2475828806725868,
+            "southern_africa:2017": 0.2927094090520579
+          }
+        },
+        "params_main_aux": {
+          "variance_power": [
+            1.2248149123539493,
+            1.1947518270753914
+          ],
+          "num_leaves": [
+            21,
+            27
+          ],
+          "min_data_in_leaf": [
+            447,
+            369
+          ],
+          "lambda_l2": [
+            1.893327030371083,
+            0.8406983300706797
+          ],
+          "feature_fraction": [
+            0.7993292420985183,
+            0.8437951565071615
+          ],
+          "p_fire": [
+            0.30919616423534185,
+            0.3280898000350162
+          ],
+          "rounds": [
+            {
+              "clf": 534,
+              "reg": 592
+            },
+            {
+              "clf": 184,
+              "reg": 224
+            }
+          ]
+        }
+      }
+    },
+    "E018": {
+      "summary": {
+        "combined": 0.29496559636655095,
+        "male_main": 0.30208459888515776,
+        "zero_ge1_main": 0.09908069458631256,
+        "zero_ge5_main": 0.028600612870275793,
+        "low_mae_main": 3.9863152682960616,
+        "male_by_region_main": {
+          "california": 0.3240949730110815,
+          "cordoba": 0.31017800262928436,
+          "southern_africa": 0.2719808210151076
+        },
+        "male_aux": 0.28784659384794414,
+        "zero_ge1_aux": 0.09735449735449736,
+        "zero_ge5_aux": 0.04126984126984127,
+        "low_mae_aux": 6.103562397055059,
+        "male_by_region_aux": {
+          "california": 0.27666987565594314,
+          "cordoba": 0.3235540042835547,
+          "southern_africa": 0.2633159016043346
+        },
+        "guardrail_failures": []
+      },
+      "csv_combined": 0.295,
+      "reproduced": true,
+      "leakage": {
+        "windows": {
+          "main": {
+            "feature_names": {
+              "clf": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_fire_days",
+                "terra_nbr_count",
+                "terra_no_detection",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_fire_days",
+                "aqua_nbr_count",
+                "aqua_no_detection",
+                "modis_count",
+                "log_aqua"
+              ],
+              "reg": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_fire_days",
+                "terra_nbr_count",
+                "terra_no_detection",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_fire_days",
+                "aqua_nbr_count",
+                "aqua_no_detection",
+                "modis_count",
+                "log_aqua"
+              ]
+            },
+            "not_allowed": [],
+            "forbidden": [],
+            "rounds_refit": {
+              "clf": 561,
+              "reg": 846
+            },
+            "rounds_json": {
+              "clf": 561,
+              "reg": 846
+            },
+            "train_months": [
+              "2016-01",
+              "2021-06"
+            ],
+            "inner_held_months": [
+              "2016-01",
+              "2018-01"
+            ],
+            "key_scramble_max_abs_diff": 0.0
+          },
+          "aux": {
+            "feature_names": {
+              "clf": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_fire_days",
+                "terra_nbr_count",
+                "terra_no_detection",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_fire_days",
+                "aqua_nbr_count",
+                "aqua_no_detection",
+                "modis_count",
+                "log_aqua"
+              ],
+              "reg": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_fire_days",
+                "terra_nbr_count",
+                "terra_no_detection",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_fire_days",
+                "aqua_nbr_count",
+                "aqua_no_detection",
+                "modis_count",
+                "log_aqua"
+              ]
+            },
+            "not_allowed": [],
+            "forbidden": [],
+            "rounds_refit": {
+              "clf": 262,
+              "reg": 189
+            },
+            "rounds_json": {
+              "clf": 262,
+              "reg": 189
+            },
+            "train_months": [
+              "2018-01",
+              "2021-06"
+            ],
+            "inner_held_months": [
+              "2018-01",
+              "2019-12"
+            ],
+            "key_scramble_max_abs_diff": 0.0
+          }
+        },
+        "source_diff_vs_E028": [
+          "-    \"drop\": (",
+          "-        \"terra_no_detection\",",
+          "-        \"aqua_no_detection\",",
+          "-    ),  # features of config/features.json left out",
+          "-    \"derived\": (),  # extra inputs computed from the features only (DERIVED)",
+          "+    \"drop\": (),  # features of config/features.json left out",
+          "+    \"derived\": (",
+          "+        \"modis_count\",",
+          "+        \"log_aqua\",",
+          "+    ),  # extra inputs computed from the features only (DERIVED)"
+        ]
+      },
+      "stability": {
+        "combined": 0.29496559636655095,
+        "male": {
+          "main": 0.30208459888515776,
+          "aux": 0.28784659384794414
+        },
+        "male_by_region": {
+          "main": {
+            "california": 0.3240949730110815,
+            "cordoba": 0.31017800262928436,
+            "southern_africa": 0.2719808210151076
+          },
+          "aux": {
+            "california": 0.27666987565594314,
+            "cordoba": 0.3235540042835547,
+            "southern_africa": 0.2633159016043346
+          }
+        },
+        "zero_ge1": {
+          "main": 0.09908069458631256,
+          "aux": 0.09735449735449736
+        },
+        "units": {
+          "main": {
+            "california:2014": 0.3445656009203549,
+            "california:2015": 0.303624345101808,
+            "cordoba:2014": 0.30403643063839497,
+            "cordoba:2015": 0.31631957462017374,
+            "southern_africa:2014": 0.30377829556560193,
+            "southern_africa:2015": 0.24018334646461334
+          },
+          "aux": {
+            "california:2016": 0.2887439338077544,
+            "california:2017": 0.2645958175041318,
+            "cordoba:2016": 0.3175736336586263,
+            "cordoba:2017": 0.3295343749084831,
+            "southern_africa:2016": 0.23944854558283787,
+            "southern_africa:2017": 0.28718325762583136
+          }
+        },
+        "params_main_aux": {
+          "variance_power": [
+            1.170707451196674,
+            1.2248149123539493
+          ],
+          "num_leaves": [
+            19,
+            21
+          ],
+          "min_data_in_leaf": [
+            471,
+            447
+          ],
+          "lambda_l2": [
+            1.756928189739281,
+            1.893327030371083
+          ],
+          "feature_fraction": [
+            0.9285283967321423,
+            0.7993292420985183
+          ],
+          "p_fire": [
+            0.3225676125899785,
+            0.30919616423534185
+          ],
+          "rounds": [
+            {
+              "clf": 561,
+              "reg": 846
+            },
+            {
+              "clf": 262,
+              "reg": 189
+            }
+          ]
+        }
+      }
+    },
+    "E032": {
+      "summary": {
+        "combined": 0.2954294608685658,
+        "male_main": 0.3020151810680561,
+        "zero_ge1_main": 0.10112359550561797,
+        "zero_ge5_main": 0.031664964249233915,
+        "low_mae_main": 4.347365117146882,
+        "male_by_region_main": {
+          "california": 0.3083169055898017,
+          "cordoba": 0.3220321085517265,
+          "southern_africa": 0.27569652906264014
+        },
+        "male_aux": 0.28884374066907553,
+        "zero_ge1_aux": 0.09947089947089947,
+        "zero_ge5_aux": 0.04656084656084656,
+        "low_mae_aux": 5.978614699280858,
+        "male_by_region_aux": {
+          "california": 0.28624219357351943,
+          "cordoba": 0.31961361094765045,
+          "southern_africa": 0.2606754174860566
+        },
+        "guardrail_failures": []
+      },
+      "csv_combined": 0.2954,
+      "reproduced": true,
+      "leakage": {
+        "windows": {
+          "main": {
+            "feature_names": {
+              "clf": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_nbr_count",
+                "terra_no_detection",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_nbr_count",
+                "aqua_no_detection"
+              ],
+              "reg": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_nbr_count",
+                "terra_no_detection",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_nbr_count",
+                "aqua_no_detection"
+              ]
+            },
+            "not_allowed": [],
+            "forbidden": [],
+            "rounds_refit": {
+              "clf": 488,
+              "reg": 592
+            },
+            "rounds_json": {
+              "clf": 488,
+              "reg": 592
+            },
+            "train_months": [
+              "2016-01",
+              "2021-06"
+            ],
+            "inner_held_months": [
+              "2016-01",
+              "2018-01"
+            ],
+            "key_scramble_max_abs_diff": 0.0
+          },
+          "aux": {
+            "feature_names": {
+              "clf": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_nbr_count",
+                "terra_no_detection",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_nbr_count",
+                "aqua_no_detection"
+              ],
+              "reg": [
+                "lat",
+                "cal_month",
+                "terra_count",
+                "terra_frp_median",
+                "terra_frp_p75",
+                "terra_low_frp_share",
+                "terra_pixel_area_mean",
+                "terra_night_share",
+                "terra_nbr_count",
+                "terra_no_detection",
+                "aqua_count",
+                "aqua_frp_median",
+                "aqua_frp_p75",
+                "aqua_low_frp_share",
+                "aqua_pixel_area_mean",
+                "aqua_night_share",
+                "aqua_nbr_count",
+                "aqua_no_detection"
+              ]
+            },
+            "not_allowed": [],
+            "forbidden": [],
+            "rounds_refit": {
+              "clf": 218,
+              "reg": 284
+            },
+            "rounds_json": {
+              "clf": 218,
+              "reg": 284
+            },
+            "train_months": [
+              "2018-01",
+              "2021-06"
+            ],
+            "inner_held_months": [
+              "2018-01",
+              "2019-12"
+            ],
+            "key_scramble_max_abs_diff": 0.0
+          }
+        },
+        "source_diff_vs_E028": [
+          "-    \"drop\": (",
+          "-        \"terra_no_detection\",",
+          "-        \"aqua_no_detection\",",
+          "-    ),  # features of config/features.json left out",
+          "+    \"drop\": (\"terra_fire_days\", \"aqua_fire_days\"),  # features of config/features.json left out"
+        ]
+      },
+      "stability": {
+        "combined": 0.2954294608685658,
+        "male": {
+          "main": 0.3020151810680561,
+          "aux": 0.28884374066907553
+        },
+        "male_by_region": {
+          "main": {
+            "california": 0.3083169055898017,
+            "cordoba": 0.3220321085517265,
+            "southern_africa": 0.27569652906264014
+          },
+          "aux": {
+            "california": 0.28624219357351943,
+            "cordoba": 0.31961361094765045,
+            "southern_africa": 0.2606754174860566
+          }
+        },
+        "zero_ge1": {
+          "main": 0.10112359550561797,
+          "aux": 0.09947089947089947
+        },
+        "units": {
+          "main": {
+            "california:2014": 0.3387822277300856,
+            "california:2015": 0.27785158344951777,
+            "cordoba:2014": 0.31541237802134314,
+            "cordoba:2015": 0.3286518390821099,
+            "southern_africa:2014": 0.30094852460103216,
+            "southern_africa:2015": 0.2504445335242481
+          },
+          "aux": {
+            "california:2016": 0.288902273945511,
+            "california:2017": 0.28358211320152793,
+            "cordoba:2016": 0.3125970474896602,
+            "cordoba:2017": 0.3266301744056407,
+            "southern_africa:2016": 0.2382705873463424,
+            "southern_africa:2017": 0.28308024762577083
+          }
+        },
+        "params_main_aux": {
+          "variance_power": [
+            1.5625103284198771,
+            1.2248149123539493
+          ],
+          "num_leaves": [
+            20,
+            21
+          ],
+          "min_data_in_leaf": [
+            446,
+            447
+          ],
+          "lambda_l2": [
+            0.021705165406670186,
+            1.893327030371083
+          ],
+          "feature_fraction": [
+            0.8839783259111228,
+            0.7993292420985183
+          ],
+          "p_fire": [
+            0.294273889100275,
+            0.30919616423534185
+          ],
+          "rounds": [
+            {
+              "clf": 488,
+              "reg": 592
+            },
+            {
+              "clf": 218,
+              "reg": 284
+            }
+          ]
+        }
+      }
+    }
+  },
+  "ablation": {
+    "baseline": {
+      "combined": 0.2946643566587328,
+      "male_main": 0.3002693329783653,
+      "zero_ge1_main": 0.09601634320735444,
+      "zero_ge5_main": 0.028600612870275793,
+      "low_mae_main": 4.198107315739847,
+      "male_by_region_main": {
+        "california": 0.30985393952706425,
+        "cordoba": 0.318332012212723,
+        "southern_africa": 0.2726220471953088
+      },
+      "male_aux": 0.28905938033910034,
+      "zero_ge1_aux": 0.07936507936507936,
+      "zero_ge5_aux": 0.037037037037037035,
+      "low_mae_aux": 5.69891052993591,
+      "male_by_region_aux": {
+        "california": 0.2810257813975528,
+        "cordoba": 0.31600621475742585,
+        "southern_africa": 0.27014614486232236
+      },
+      "guardrail_failures": []
+    },
+    "aqua_count": {
+      "combined": 0.3041725882970687,
+      "male_main": 0.30582326485742173,
+      "zero_ge1_main": 0.09703779366700716,
+      "zero_ge5_main": 0.026557711950970377,
+      "low_mae_main": 4.136136972201419,
+      "male_by_region_main": {
+        "california": 0.3298490515439937,
+        "cordoba": 0.31138018835437253,
+        "southern_africa": 0.27624055467389896
+      },
+      "male_aux": 0.30252191173671567,
+      "zero_ge1_aux": 0.07830687830687831,
+      "zero_ge5_aux": 0.039153439153439155,
+      "low_mae_aux": 5.80804739121229,
+      "male_by_region_aux": {
+        "california": 0.29695702259199375,
+        "cordoba": 0.3209306807147371,
+        "southern_africa": 0.289678031903416
+      },
+      "guardrail_failures": [],
+      "dropped": [
+        "aqua_count",
+        "aqua_no_detection",
+        "terra_no_detection"
+      ]
+    },
+    "terra_all": {
+      "combined": 0.36711366035286896,
+      "male_main": 0.3815318884898477,
+      "zero_ge1_main": 0.0745658835546476,
+      "zero_ge5_main": 0.04187946884576098,
+      "low_mae_main": 5.2529031431789885,
+      "male_by_region_main": {
+        "california": 0.4078108650312903,
+        "cordoba": 0.413888710236616,
+        "southern_africa": 0.3228960902016368
+      },
+      "male_aux": 0.35269543221589017,
+      "zero_ge1_aux": 0.08677248677248678,
+      "zero_ge5_aux": 0.06455026455026455,
+      "low_mae_aux": 5.674247139630499,
+      "male_by_region_aux": {
+        "california": 0.3842251860529883,
+        "cordoba": 0.3713253918567554,
+        "southern_africa": 0.30253571873792684
+      },
+      "guardrail_failures": [
+        "main:southern_africa>1.05xm1s",
+        "aux:southern_africa>1.05xm1s"
+      ],
+      "dropped": [
+        "aqua_no_detection",
+        "terra_count",
+        "terra_fire_days",
+        "terra_frp_median",
+        "terra_frp_p75",
+        "terra_low_frp_share",
+        "terra_nbr_count",
+        "terra_night_share",
+        "terra_no_detection",
+        "terra_pixel_area_mean"
+      ]
+    },
+    "frp": {
+      "combined": 0.2942776027264377,
+      "male_main": 0.29861318119885494,
+      "zero_ge1_main": 0.10725229826353422,
+      "zero_ge5_main": 0.03575076608784474,
+      "low_mae_main": 4.333540620128481,
+      "male_by_region_main": {
+        "california": 0.3069377786096972,
+        "cordoba": 0.31795734134570075,
+        "southern_africa": 0.2709444236411669
+      },
+      "male_aux": 0.2899420242540205,
+      "zero_ge1_aux": 0.09312169312169312,
+      "zero_ge5_aux": 0.039153439153439155,
+      "low_mae_aux": 6.051521360610038,
+      "male_by_region_aux": {
+        "california": 0.28496636241097917,
+        "cordoba": 0.32032437982783357,
+        "southern_africa": 0.2645353305232486
+      },
+      "guardrail_failures": [
+        "main:zero_ge1+0.051"
+      ],
+      "dropped": [
+        "aqua_frp_median",
+        "aqua_frp_p75",
+        "aqua_low_frp_share",
+        "aqua_no_detection",
+        "terra_frp_median",
+        "terra_frp_p75",
+        "terra_low_frp_share",
+        "terra_no_detection"
+      ]
+    },
+    "pixel_area": {
+      "combined": 0.2937795715168209,
+      "male_main": 0.2975476422597006,
+      "zero_ge1_main": 0.09703779366700716,
+      "zero_ge5_main": 0.026557711950970377,
+      "low_mae_main": 4.072059471857285,
+      "male_by_region_main": {
+        "california": 0.3167267174672236,
+        "cordoba": 0.3052409674492622,
+        "southern_africa": 0.2706752418626159
+      },
+      "male_aux": 0.29001150077394117,
+      "zero_ge1_aux": 0.08148148148148149,
+      "zero_ge5_aux": 0.04973544973544974,
+      "low_mae_aux": 5.866948623287832,
+      "male_by_region_aux": {
+        "california": 0.27932455394534383,
+        "cordoba": 0.32211487254948334,
+        "southern_africa": 0.26859507582699643
+      },
+      "guardrail_failures": [],
+      "dropped": [
+        "aqua_no_detection",
+        "aqua_pixel_area_mean",
+        "terra_no_detection",
+        "terra_pixel_area_mean"
+      ]
+    },
+    "night_share": {
+      "combined": 0.30248796401945205,
+      "male_main": 0.3028568666044615,
+      "zero_ge1_main": 0.10112359550561797,
+      "zero_ge5_main": 0.03677221654749745,
+      "low_mae_main": 4.4347809158004345,
+      "male_by_region_main": {
+        "california": 0.3169720486381319,
+        "cordoba": 0.3191973745950806,
+        "southern_africa": 0.2724011765801719
+      },
+      "male_aux": 0.3021190614344426,
+      "zero_ge1_aux": 0.08253968253968254,
+      "zero_ge5_aux": 0.037037037037037035,
+      "low_mae_aux": 6.291757876957293,
+      "male_by_region_aux": {
+        "california": 0.3019840005510753,
+        "cordoba": 0.33366931630659397,
+        "southern_africa": 0.27070386744565844
+      },
+      "guardrail_failures": [],
+      "dropped": [
+        "aqua_night_share",
+        "aqua_no_detection",
+        "terra_night_share",
+        "terra_no_detection"
+      ]
+    },
+    "fire_days": {
+      "combined": 0.2961140789705147,
+      "male_main": 0.30483199286783685,
+      "zero_ge1_main": 0.10112359550561797,
+      "zero_ge5_main": 0.03268641470888662,
+      "low_mae_main": 4.2388992738375215,
+      "male_by_region_main": {
+        "california": 0.3161759480790098,
+        "cordoba": 0.3242534109081844,
+        "southern_africa": 0.2740666196163165
+      },
+      "male_aux": 0.2873961650731926,
+      "zero_ge1_aux": 0.08042328042328042,
+      "zero_ge5_aux": 0.039153439153439155,
+      "low_mae_aux": 5.84311436032025,
+      "male_by_region_aux": {
+        "california": 0.275029366639442,
+        "cordoba": 0.3177833418154261,
+        "southern_africa": 0.2693757867647098
+      },
+      "guardrail_failures": [],
+      "dropped": [
+        "aqua_fire_days",
+        "aqua_no_detection",
+        "terra_fire_days",
+        "terra_no_detection"
+      ]
+    },
+    "nbr_count": {
+      "combined": 0.2961719012125835,
+      "male_main": 0.3071189951954489,
+      "zero_ge1_main": 0.1041879468845761,
+      "zero_ge5_main": 0.0449438202247191,
+      "low_mae_main": 4.555102947742885,
+      "male_by_region_main": {
+        "california": 0.3229643787627041,
+        "cordoba": 0.28603693237160355,
+        "southern_africa": 0.3123556744520389
+      },
+      "male_aux": 0.28522480722971816,
+      "zero_ge1_aux": 0.08148148148148149,
+      "zero_ge5_aux": 0.047619047619047616,
+      "low_mae_aux": 6.471010028379629,
+      "male_by_region_aux": {
+        "california": 0.27010623367637787,
+        "cordoba": 0.29408373424347783,
+        "southern_africa": 0.291484453769299
+      },
+      "guardrail_failures": [],
+      "dropped": [
+        "aqua_nbr_count",
+        "aqua_no_detection",
+        "terra_nbr_count",
+        "terra_no_detection"
+      ]
+    },
+    "no_detection_add_back": {
+      "combined": 0.29357283199233863,
+      "male_main": 0.30106709514416485,
+      "zero_ge1_main": 0.09805924412665985,
+      "zero_ge5_main": 0.027579162410623085,
+      "low_mae_main": 4.138087405822188,
+      "male_by_region_main": {
+        "california": 0.3109203428551345,
+        "cordoba": 0.3178031710701651,
+        "southern_africa": 0.27447777150719505
+      },
+      "male_aux": 0.28607856884051236,
+      "zero_ge1_aux": 0.08783068783068783,
+      "zero_ge5_aux": 0.0380952380952381,
+      "low_mae_aux": 5.834427080149277,
+      "male_by_region_aux": {
+        "california": 0.2783034018521492,
+        "cordoba": 0.3187279737684197,
+        "southern_africa": 0.2612043309009682
+      },
+      "guardrail_failures": [],
+      "dropped": []
+    },
+    "lat": {
+      "combined": 0.37590557393681256,
+      "male_main": 0.3799475330026268,
+      "zero_ge1_main": 0.12870275791624106,
+      "zero_ge5_main": 0.054136874361593465,
+      "low_mae_main": 5.912335204944525,
+      "male_by_region_main": {
+        "california": 0.4137056403900272,
+        "cordoba": 0.40786032439986797,
+        "southern_africa": 0.31827663421798535
+      },
+      "male_aux": 0.37186361487099834,
+      "zero_ge1_aux": 0.11005291005291006,
+      "zero_ge5_aux": 0.05396825396825397,
+      "low_mae_aux": 7.042797301518607,
+      "male_by_region_aux": {
+        "california": 0.37645670384139673,
+        "cordoba": 0.4385384234593471,
+        "southern_africa": 0.3005957173122511
+      },
+      "guardrail_failures": [
+        "main:zero_ge1+0.073",
+        "aux:male>m1s",
+        "aux:cordoba>1.05xm1s",
+        "aux:southern_africa>1.05xm1s"
+      ],
+      "dropped": [
+        "aqua_no_detection",
+        "lat",
+        "terra_no_detection"
+      ]
+    },
+    "cal_month": {
+      "combined": 0.289583086152851,
+      "male_main": 0.3047131867388441,
+      "zero_ge1_main": 0.12155260469867211,
+      "zero_ge5_main": 0.03881511746680286,
+      "low_mae_main": 4.619092295000221,
+      "male_by_region_main": {
+        "california": 0.31902781058275764,
+        "cordoba": 0.3297881556940646,
+        "southern_africa": 0.2653235939397101
+      },
+      "male_aux": 0.2744529855668578,
+      "zero_ge1_aux": 0.1037037037037037,
+      "zero_ge5_aux": 0.04656084656084656,
+      "low_mae_aux": 5.662561977078722,
+      "male_by_region_aux": {
+        "california": 0.27065162661065456,
+        "cordoba": 0.3158335382812033,
+        "southern_africa": 0.2368737918087156
+      },
+      "guardrail_failures": [
+        "main:zero_ge1+0.065"
+      ],
+      "dropped": [
+        "aqua_no_detection",
+        "cal_month",
+        "terra_no_detection"
+      ]
+    }
+  },
+  "lat_tests": {
+    "unchanged": {
+      "main": {
+        "male": 0.3002693329783653,
+        "male_by_region": {
+          "california": 0.30985393952706425,
+          "cordoba": 0.318332012212723,
+          "southern_africa": 0.2726220471953088
+        }
+      },
+      "aux": {
+        "male": 0.28905938033910034,
+        "male_by_region": {
+          "california": 0.2810257813975528,
+          "cordoba": 0.31600621475742585,
+          "southern_africa": 0.27014614486232236
+        }
+      },
+      "combined": 0.2946643566587328
+    },
+    "region_median": {
+      "main": {
+        "male": 0.3320720300461137,
+        "male_by_region": {
+          "california": 0.3304835439260344,
+          "cordoba": 0.3637946172066229,
+          "southern_africa": 0.3019379290056837
+        }
+      },
+      "aux": {
+        "male": 0.3316393744166623,
+        "male_by_region": {
+          "california": 0.3041056909972958,
+          "cordoba": 0.39733287733019934,
+          "southern_africa": 0.2934795549224918
+        }
+      },
+      "combined": 0.331855702231388
+    },
+    "region_swapped": {
+      "main": {
+        "male": 0.5771435556188577,
+        "male_by_region": {
+          "california": 0.38692392290137106,
+          "cordoba": 0.9240092004760145,
+          "southern_africa": 0.42049754347918744
+        }
+      },
+      "aux": {
+        "male": 0.5440331523180334,
+        "male_by_region": {
+          "california": 0.38129076872308626,
+          "cordoba": 0.8561953670255307,
+          "southern_africa": 0.3946133212054833
+        }
+      },
+      "combined": 0.5605883539684455
+    }
+  },
+  "lat_context": {
+    "E016": {
+      "combined": 0.29357283199233863,
+      "male_by_region": {
+        "main": {
+          "california": 0.3109203428551345,
+          "cordoba": 0.3178031710701651,
+          "southern_africa": 0.27447777150719505
+        },
+        "aux": {
+          "california": 0.2783034018521492,
+          "cordoba": 0.3187279737684197,
+          "southern_africa": 0.2612043309009682
+        }
+      }
+    },
+    "E036": {
+      "combined": 0.29966547668597787,
+      "male_by_region": {
+        "main": {
+          "california": 0.3109203428551345,
+          "cordoba": 0.3178031710701651,
+          "southern_africa": 0.27447777150719505
+        },
+        "aux": {
+          "california": 0.29992191704349636,
+          "cordoba": 0.33255978739665615,
+          "southern_africa": 0.26230987024322017
+        }
+      }
+    },
+    "E022": {
+      "combined": 0.36599419235867414,
+      "male_by_region": {
+        "main": {
+          "california": 0.40784593803215663,
+          "cordoba": 0.39410164399218184,
+          "southern_africa": 0.33371648581980873
+        },
+        "aux": {
+          "california": 0.34808043954906376,
+          "cordoba": 0.3822013751467084,
+          "southern_africa": 0.33001927161212535
+        }
+      }
+    },
+    "E034": {
+      "combined": 0.36868777099262706,
+      "male_by_region": {
+        "main": {
+          "california": 0.4100536676689145,
+          "cordoba": 0.39428916053701535,
+          "southern_africa": 0.3390453378431942
+        },
+        "aux": {
+          "california": 0.34805646114042554,
+          "cordoba": 0.40914213826833146,
+          "southern_africa": 0.3115398604978815
+        }
+      }
+    },
+    "E012": {
+      "combined": 0.31775192132259655,
+      "male_by_region": {
+        "main": {
+          "california": 0.3347568602263003,
+          "cordoba": 0.3366239434390631,
+          "southern_africa": 0.2859468199498164
+        },
+        "aux": {
+          "california": 0.2894903918480765,
+          "cordoba": 0.32098215812451114,
+          "southern_africa": 0.3387113543478118
+        }
+      }
+    },
+    "E000": {
+      "combined": 0.23078857402486175,
+      "male_by_region": {
+        "main": {
+          "california": 0.2561915080571965,
+          "cordoba": 0.267302791771558,
+          "southern_africa": 0.17843506770092887
+        },
+        "aux": {
+          "california": 0.2051664335483614,
+          "cordoba": 0.29951388023510206,
+          "southern_africa": 0.17812176283602366
+        }
+      }
+    }
+  },
+  "pd": {
+    "aqua_count": {
+      "grid": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        7.0,
+        10.0,
+        15.0,
+        20.0,
+        30.0,
+        50.0,
+        75.0,
+        100.0,
+        150.0,
+        200.0,
+        300.0
+      ],
+      "mean_est": [
+        35.76592918651791,
+        38.429896367204016,
+        41.90348622057261,
+        46.331256626744484,
+        52.58745682623809,
+        56.25687950509921,
+        66.07562855967386,
+        81.55648331614391,
+        97.20910229369059,
+        126.24243045090492,
+        175.03849458977845,
+        238.6406999599094,
+        287.5686276251458,
+        363.5038183304246,
+        490.60255357146076,
+        559.0179882141713
+      ],
+      "ratio": [
+        35.76592918651791,
+        19.214948183602008,
+        13.96782874019087,
+        11.582814156686121,
+        10.517491365247619,
+        8.036697072157029,
+        6.607562855967386,
+        5.437098887742928,
+        4.860455114684529,
+        4.208081015030164,
+        3.500769891795569,
+        3.1818759994654586,
+        2.8756862762514577,
+        2.4233587888694976,
+        2.4530127678573037,
+        1.8633932940472375
+      ]
+    },
+    "aqua_pixel_area_mean": {
+      "grid": [
+        1.0,
+        1.0,
+        1.100000023841858,
+        1.159999966621399,
+        1.2366666793823242,
+        1.3200000524520874,
+        1.4129999876022339,
+        1.4800000190734863,
+        1.5892325802644094,
+        1.6799999475479126,
+        1.743522495627403,
+        1.8092260667681694,
+        1.8889436721801758,
+        1.957296221355597,
+        2.033060172001521,
+        2.1094254529476166,
+        2.196000099182129,
+        2.2734161525964733,
+        2.36020980477333,
+        2.4699997901916504,
+        2.5977959569295246,
+        2.7746303290128695,
+        3.025515502691269,
+        3.4959187360604673,
+        5.440000057220459
+      ],
+      "mean_est": [
+        125.03008939257192,
+        125.03008939257192,
+        124.66926247555631,
+        125.21987569593631,
+        123.63066499495615,
+        123.36134157005763,
+        123.13543566199687,
+        121.71535390516001,
+        120.67778737892989,
+        121.02586308651696,
+        120.60050784279724,
+        120.38233765591615,
+        120.2970544168544,
+        120.15728897264403,
+        120.92871557793238,
+        121.0359990509769,
+        120.16046167472584,
+        119.68396530143843,
+        119.52142554772934,
+        118.99696268576184,
+        117.65257532921127,
+        118.11739017306027,
+        117.95476558819281,
+        118.46112817544909,
+        116.18714605177395
+      ],
+      "ratio": [
+        5.131158722275713,
+        5.131158722275713,
+        5.116350605353848,
+        5.138947436581267,
+        5.073727197281393,
+        5.062674327948138,
+        5.0534032870635714,
+        4.995123996627657,
+        4.952542898294672,
+        4.96682771334739,
+        4.949371393196924,
+        4.940417821598326,
+        4.93691784940682,
+        4.931181960697014,
+        4.962840838760298,
+        4.967243687155775,
+        4.931312166458198,
+        4.911757045496478,
+        4.905086512994959,
+        4.883562876550577,
+        4.828390038202664,
+        4.84746575631057,
+        4.840791742389976,
+        4.861572554583721,
+        4.76824971313906
+      ]
+    },
+    "lat": {
+      "grid": [
+        -40.0,
+        -39.5,
+        -39.0,
+        -38.5,
+        -38.0,
+        -37.5,
+        -37.0,
+        -36.5,
+        -36.0,
+        -35.5,
+        -35.0,
+        -34.5,
+        -34.0,
+        -33.5,
+        -33.0,
+        -32.5,
+        -32.0,
+        -31.5,
+        -31.0,
+        -30.5,
+        -30.0,
+        -29.5,
+        -29.0,
+        -28.5,
+        -28.0,
+        -27.5,
+        -27.0,
+        -26.5,
+        -26.0,
+        -25.5,
+        -25.0,
+        -24.5,
+        -24.0,
+        -23.5,
+        -23.0,
+        -22.5,
+        -22.0,
+        -21.5,
+        -21.0,
+        -20.5,
+        -20.0,
+        -19.5,
+        -19.0,
+        -18.5,
+        -18.0,
+        -17.5,
+        -17.0,
+        -16.5,
+        -16.0,
+        -15.5,
+        -15.0,
+        -14.5,
+        -14.0,
+        -13.5,
+        -13.0,
+        -12.5,
+        -12.0,
+        -11.5,
+        -11.0,
+        -10.5,
+        -10.0,
+        -9.5,
+        -9.0,
+        -8.5,
+        -8.0,
+        -7.5,
+        -7.0,
+        -6.5,
+        -6.0,
+        -5.5,
+        -5.0,
+        -4.5,
+        -4.0,
+        -3.5,
+        -3.0,
+        -2.5,
+        -2.0,
+        -1.5,
+        -1.0,
+        -0.5,
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0,
+        12.5,
+        13.0,
+        13.5,
+        14.0,
+        14.5,
+        15.0,
+        15.5,
+        16.0,
+        16.5,
+        17.0,
+        17.5,
+        18.0,
+        18.5,
+        19.0,
+        19.5,
+        20.0,
+        20.5,
+        21.0,
+        21.5,
+        22.0,
+        22.5,
+        23.0,
+        23.5,
+        24.0,
+        24.5,
+        25.0,
+        25.5,
+        26.0,
+        26.5,
+        27.0,
+        27.5,
+        28.0,
+        28.5,
+        29.0,
+        29.5,
+        30.0,
+        30.5,
+        31.0,
+        31.5,
+        32.0,
+        32.5,
+        33.0,
+        33.5,
+        34.0,
+        34.5,
+        35.0,
+        35.5,
+        36.0,
+        36.5,
+        37.0,
+        37.5,
+        38.0,
+        38.5,
+        39.0,
+        39.5,
+        40.0,
+        40.5,
+        41.0,
+        41.5,
+        42.0,
+        42.5,
+        43.0,
+        43.5,
+        44.0,
+        44.5,
+        45.0,
+        45.5,
+        46.0,
+        46.5,
+        47.0,
+        47.5,
+        48.0,
+        48.5,
+        49.0,
+        49.5,
+        50.0,
+        50.5,
+        51.0,
+        51.5,
+        52.0,
+        52.5,
+        53.0,
+        53.5,
+        54.0,
+        54.5,
+        55.0,
+        55.5,
+        56.0,
+        56.5,
+        57.0,
+        57.5,
+        58.0,
+        58.5,
+        59.0,
+        59.5,
+        60.0,
+        60.5,
+        61.0,
+        61.5,
+        62.0,
+        62.5,
+        63.0,
+        63.5,
+        64.0,
+        64.5,
+        65.0,
+        65.5,
+        66.0
+      ],
+      "mean_est": [
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.394589316642502,
+        24.40069938956959,
+        24.35242043588832,
+        24.375559075636644,
+        25.444141835548265,
+        30.731352795611077,
+        31.354856873109878,
+        32.84872918594416,
+        24.838168752400374,
+        24.939747694404176,
+        25.22161777358739,
+        25.141493795853854,
+        24.50319847021572,
+        24.593456344318426,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        24.725921300923762,
+        27.574045230600547,
+        27.574045230600547,
+        27.574045230600547,
+        27.574045230600547,
+        27.574045230600547,
+        27.574045230600547,
+        27.574045230600547,
+        27.574045230600547,
+        27.574045230600547,
+        27.574045230600547,
+        27.901245140335785,
+        28.38329739420893,
+        28.80212617195419,
+        29.47975022757602,
+        29.856677928002746,
+        29.826295771978593,
+        29.791814101612303,
+        29.49028768874077,
+        29.267440252773163,
+        29.322975368453104,
+        28.79466372451168,
+        29.25902285867294,
+        29.36717385778141,
+        28.87029450194359,
+        28.850939504210114,
+        28.686640678701107,
+        28.526304657378926,
+        28.694340827773175,
+        28.52640142470835,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.50173148422079,
+        29.186102130514875,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        24.97243426344145,
+        23.602927690036662,
+        23.233672334143034,
+        23.391800914910196,
+        23.156334385163955,
+        22.723318755017825,
+        22.7346798875087,
+        22.7143687686357,
+        23.227471995114815,
+        23.85820020897437,
+        27.68553728167956,
+        28.778702874962498,
+        28.697295250648324,
+        23.858143963545746,
+        23.80193294731801,
+        23.09180912297349,
+        22.748617424348573,
+        22.959113194057917,
+        23.242111505341402,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453,
+        23.23601912106453
+      ],
+      "ratio": [
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.278521548030392,
+        4.271126326391386,
+        4.271337351311212,
+        4.468938267190803,
+        5.414285332881471,
+        5.520993789206099,
+        5.780691472255073,
+        4.344599390061823,
+        4.361697692652573,
+        4.398916127079376,
+        4.386070691493651,
+        4.282367425382029,
+        4.292450331025609,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.303918180638974,
+        4.685669226871375,
+        4.685669226871375,
+        4.685669226871375,
+        4.685669226871375,
+        4.685669226871375,
+        4.685669226871375,
+        4.685669226871375,
+        4.685669226871375,
+        4.685669226871375,
+        4.685669226871375,
+        4.76307655789581,
+        4.805944475007058,
+        4.887297315177211,
+        5.0105521943300655,
+        5.060574113207833,
+        5.070000829221252,
+        5.063910598570734,
+        5.01909885062412,
+        4.988908840191845,
+        5.001084686554395,
+        4.976144129655249,
+        5.051217542537929,
+        5.052408533519134,
+        4.976951195658986,
+        4.972638880427486,
+        4.955274487651731,
+        4.931612510426392,
+        4.970961693698817,
+        4.940532342231596,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.096330133507682,
+        5.036201048319358,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.307049369848157,
+        4.151528787728485,
+        4.08633821638531,
+        4.107443345350538,
+        4.0646826769897,
+        3.9974511646692505,
+        3.998946006227531,
+        3.996158741199455,
+        4.087186358272508,
+        4.1875466519470645,
+        4.860859363947987,
+        5.046731036773855,
+        5.03625808499694,
+        4.174186473330382,
+        4.175889320593741,
+        4.062909091727451,
+        4.0002374141756025,
+        4.033593066929348,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719,
+        4.085250892590719
+      ]
+    },
+    "cal_month": {
+      "grid": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "mean_est": [
+        30.426719084707738,
+        30.343440694679195,
+        30.361476518607205,
+        29.882308766576664,
+        26.65484573508729,
+        25.501561188713335,
+        26.88394580909349,
+        30.37968592724573,
+        30.068864271440845,
+        30.179651862105686,
+        35.91230944363819,
+        31.910459826470465
+      ],
+      "ratio": [
+        5.346066707008878,
+        5.331694818497252,
+        5.330018530333547,
+        5.242156749238298,
+        4.651882150097315,
+        4.446514700391699,
+        4.659732713727873,
+        5.273134535663252,
+        5.225582198004357,
+        5.2093624369100535,
+        6.2284967582729,
+        5.566394904832124
+      ]
+    }
+  },
+  "pd_lat_summary": {
+    "california": {
+      "role": "train",
+      "mean_est_min_max": [
+        22.7143687686357,
+        28.778702874962498
+      ],
+      "ratio_min_max": [
+        3.996158741199455,
+        5.046731036773855
+      ]
+    },
+    "cordoba": {
+      "role": "train",
+      "mean_est_min_max": [
+        24.35242043588832,
+        32.84872918594416
+      ],
+      "ratio_min_max": [
+        4.271126326391386,
+        5.780691472255073
+      ]
+    },
+    "southern_africa": {
+      "role": "train",
+      "mean_est_min_max": [
+        27.574045230600547,
+        29.856677928002746
+      ],
+      "ratio_min_max": [
+        4.685669226871375,
+        5.096330133507682
+      ]
+    },
+    "north_australia": {
+      "role": "holdout",
+      "mean_est_min_max": [
+        27.574045230600547,
+        29.856677928002746
+      ],
+      "ratio_min_max": [
+        4.685669226871375,
+        5.070000829221252
+      ]
+    },
+    "central_siberia": {
+      "role": "holdout",
+      "mean_est_min_max": [
+        23.23601912106453,
+        23.23601912106453
+      ],
+      "ratio_min_max": [
+        4.085250892590719,
+        4.085250892590719
+      ]
+    },
+    "indo_gangetic": {
+      "role": "holdout",
+      "mean_est_min_max": [
+        24.97243426344145,
+        24.97243426344145
+      ],
+      "ratio_min_max": [
+        4.307049369848157,
+        4.307049369848157
+      ]
+    },
+    "overall_mean_est_min_max": [
+      22.7143687686357,
+      32.84872918594416
+    ]
+  },
+  "pixel_area_binned": {
+    "x": [
+      1.0353267192840576,
+      1.2358983755111694,
+      1.4122463464736938,
+      1.612602710723877,
+      1.7991857528686523,
+      1.9764665365219116,
+      2.164747953414917,
+      2.3798437118530273,
+      2.7055346965789795,
+      3.9584691524505615
+    ],
+    "pred": [
+      6.579369335452764,
+      6.334200929970401,
+      5.730153864696921,
+      5.247159330062004,
+      4.920882623178703,
+      4.855723287987496,
+      4.823179238274597,
+      4.7108911160310045,
+      4.705501384842636,
+      5.014589531057159
+    ],
+    "obs": [
+      6.29608938547486,
+      6.0295888781503235,
+      5.559862709469009,
+      5.1491453468886155,
+      4.8338787382965185,
+      4.730666413202324,
+      4.721887316125451,
+      4.575812091705364,
+      4.645011886725054,
+      4.893032284429914
+    ]
+  },
+  "importance_main": {
+    "clf": {
+      "aqua_count": 44.11,
+      "aqua_frp_median": 15.44,
+      "aqua_nbr_count": 11.91,
+      "aqua_frp_p75": 11.21,
+      "lat": 5.24,
+      "terra_nbr_count": 3.51,
+      "cal_month": 1.9,
+      "terra_count": 1.43,
+      "terra_frp_p75": 1.1,
+      "aqua_low_frp_share": 1.07,
+      "aqua_fire_days": 1.05,
+      "terra_pixel_area_mean": 1.04,
+      "terra_frp_median": 0.57,
+      "aqua_pixel_area_mean": 0.14,
+      "terra_low_frp_share": 0.12,
+      "terra_night_share": 0.07,
+      "terra_fire_days": 0.07,
+      "aqua_night_share": 0.01
+    },
+    "reg": {
+      "aqua_count": 68.13,
+      "aqua_fire_days": 19.99,
+      "terra_count": 5.46,
+      "terra_nbr_count": 1.22,
+      "terra_fire_days": 0.93,
+      "aqua_nbr_count": 0.79,
+      "lat": 0.61,
+      "aqua_frp_p75": 0.6,
+      "cal_month": 0.52,
+      "aqua_low_frp_share": 0.47,
+      "terra_frp_p75": 0.38,
+      "terra_night_share": 0.3,
+      "terra_frp_median": 0.19,
+      "aqua_night_share": 0.14,
+      "aqua_frp_median": 0.12,
+      "terra_pixel_area_mean": 0.05,
+      "aqua_pixel_area_mean": 0.05,
+      "terra_low_frp_share": 0.04
+    }
+  }
+}
