@@ -182,8 +182,12 @@ def build_counts() -> pd.DataFrame:
     return counts
 
 
-def dense_regions(counts: pd.DataFrame, status: pd.DataFrame) -> pd.DataFrame:
-    cells = region_cells()
+def dense_regions(
+    counts: pd.DataFrame, status: pd.DataFrame, cells: pd.DataFrame | None = None
+) -> pd.DataFrame:
+    """Dense cell x month table of `cells` (lat_idx, lon_idx, region, role); default: the cells
+    of config/regions.json. Stage G passes the global cells (harmonization/global_grid.py)."""
+    cells = region_cells() if cells is None else cells
     months = month_range()
     cell = settings()["grid"]["cell_deg"]
     base = cells.merge(pd.DataFrame({"month": months}), how="cross")

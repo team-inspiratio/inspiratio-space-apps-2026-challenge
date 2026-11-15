@@ -6,15 +6,18 @@
 <!-- STATUS:BEGIN -->
 ```yaml
 current_card: docs/sessions/G-global.md        # 下一张（或正在做的）任务卡
-status: ready                           # ready | in_progress | blocked | done
+status: done                            # ready | in_progress | blocked | done
 claimed_by: ""                          # 认领人名字；空表示无人认领
 claimed_at: ""                          # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
-last_pushed_stage: S15                  # 最后一个完成并 push 的阶段
+last_pushed_stage: G4                   # 最后一个完成并 push 的阶段
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
-data_release: v1                        # 正式版 Release v1（CC BY 4.0，S15）；处理后的输入在 data-v0，里程碑 A 在 milestone-a；SHA256 见交接备注和 results/expected/
-next_step: "里程碑 B 完成（S13–S15，main 已合并，Release v1 已发布）。下一张卡 G-global：全球重跑（计划内，2026-11-03 用户已同意扩展到全球）"
+data_release: global-v1               # 正式版 Release v1（CC BY 4.0，S15）；全球版在 Release global-v1（阶段 G）；6 个区的 v1 仍是 Release v1；处理后的输入在 data-v0，里程碑 A 在 milestone-a；SHA256 见交接备注和 results/expected/
+next_step: "全部任务卡已完成。全球版 Release global-v1 已发布（docs/data-interface-global.md）；等 PR 合并进 main"
 needs_human:
+  - "通知前端：全球版 Release global-v1 已发布（CC BY 4.0）：gh release download global-v1 --repo team-inspiratio/inspiratio-space-apps-2026；接口见 docs/data-interface-global.md（区间放大系数 16.75，网页上要说明区间很宽）"
+  - "请合并：G-global 的 PR（feat/data-harmonization → main）"
+  - "已确认（用户 2026-11-04 批准发布 global-v1 时一并确认）：G-global 上线版用全球重训模型，区间系数在全球验证窗口上重新求（docs/decisions/0013 第 3、5 条）"
   - "待人确认（过目即可，不阻塞）：S15 验收用 pipeline.py all --from-release 入口（从 Release data-v0 网格表起步），没有从原始数据完整重跑（docs/decisions/0012 第 1 条）"
   - "通知前端：正式版 Release v1 已发布（CC BY 4.0）：gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026，数据与预发布版 dataset-v1 相同，多了 CSV、数据说明卡、异常测试用例"
   - "通知前端：异常指标参考实现 harmonization/anomaly.py + 25 个标准测试用例 docs/anomaly-cases.json（逐字段对答案；补充细节见 docs/data-interface.md 第 6 节、docs/decisions/0011 第 1 条）；数据集新增 CSV 版"
@@ -45,7 +48,7 @@ needs_human:
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ✅ 完成 |
 | 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | ✅ 完成 |
 | 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15（里程碑 B） | ✅ 完成 |
-| G | [`G-global`](docs/sessions/G-global.md) | 全球重跑 | ⏭ 下一张 |
+| G | [`G-global`](docs/sessions/G-global.md) | 全球重跑 | ✅ 完成 |
 
 ## 阶段表
 
@@ -67,6 +70,10 @@ needs_human:
 | S13 | 验证报告（D1） | ✅ done | 2026-11-04 | 第 3 节 1–7 全部完成（`reports/validation.md`）。新做的两项：年代偏移 AUC 0.57（训练区）/ 0.56（留出区），对照 2022–2026 年 0.75 / 0.70（Terra 漂移）；GFED 每 km² 燃烧面积火点数 2012 年前后不变（南部非洲 2.77 → 2.92，科尔多瓦 5.90 → 5.86），直接拼接跳约 5 倍。6 张核心图 `reports/figures/d1-*.png` | |
 | S14 | 交付 | ✅ done | 2026-11-04 | 数据集 CSV 版 `dataset_v1.csv.gz`（18 MB，和 Parquet 逐列核对，相对误差 < 5×10⁻⁶）；数据说明卡 `docs/data-card.md`；AI 使用说明 `docs/ai-usage.md`；异常指标参考实现 `harmonization/anomaly.py` + 25 个标准测试用例 `docs/anomaly-cases.json`（19 个手算边界 + 6 个真实数据）；HANDOFF 第 6 节“成果在哪”；ADR 0011 | |
 | S15 | ★里程碑 B：一条命令复现、Release v1、合并 main | ✅ done | 2026-11-04 | 用户确认后 squash-merge 进 main、发布正式版 Release `v1`（CC BY 4.0）。全新克隆 + 空数据目录运行 `pipeline.py all --from-release`：87 分钟，`pipeline.py check` 37 项全过（成绩文件逐字相同；两个验证窗口分数等于 freeze.json 和 E028；测试集 est_final 和 100 次重抽与封存答卷逐位相同；数据集 v0、v1 每个文件 SHA256 一致）。顺带修好下载和导入在空数据目录里误跳过的问题（ADR 0012） | |
+| G1 | 全球配置与全球稠密表 | ✅ done | 2026-11-04 | `config/regions-global.json`：GFED 14 区 + 3 个留出框，278,192 个格子（训练 273,712、留出 4,480），8,680 万格子-月份；按 10° 纬度带分块；一次全球训练约 4 分钟（2,436 万行） | |
+| G2 | 全球验证分数（按 GFED 区，只报告） | ✅ done | 2026-11-04 | 两窗口合并 MALE（全部矩形）：E028 全球重训 **0.534**、M1s 0.619（差 −0.084 ± 0.013）、QM 0.680、M0 2.030；参照 S11 三区模型 0.563。M1s 在 CEAM、EQAS、NHSA、SHSA 更好；BOAS 1.03 最差；1–9 火点误差是 M1s 的 1.13 倍（`reports/global-scores.md`） | 6f84fc0 |
+| G3 | 全球重抽与区间校准 | ✅ done | 2026-11-04 | 每组前 50 次封存重抽（ADR 0013 第 5 条补充，用户批准）；全球验证窗口校准系数 **16.75**（S11 是 5.37），覆盖率从 14% 到 90% | fd36618 |
+| G4 | 全球数据集生成与发布 | ✅ done | 2026-11-04 | 8,680 万格子-月份；S-NPP 复核 1,988 个区 × 月、1.89 亿个火点，0 不符；全球年总量 2013 年（模型）16.0 M 到 2014 年（观测）16.6 M，没有断档（`reports/global-review.md`）。用户过目后发布 Release `global-v1`（CC BY 4.0），SHA256 在 `results/expected/dataset-global-v1.sha256` | |
 
 ## 交接备注
 
@@ -180,3 +187,22 @@ needs_human:
   - 测试 2 的弱点会直接影响全球推广：留出区误差是训练区的 2.5 倍、总量偏低 14–45%、区间覆盖率只有 56%。全球产品必须标明“训练区以外的估计不确定性更大”。
   - 冻结模型只用 3 个训练区，纬度起了区域标签的作用（S10 审核记录第 5 节）。全球重跑按计划来，不要事后改冻结模型。
 
+
+### 会话 G（2026-11-04，qiuxue-yee，完成）
+
+- **分支**：`feat/data-harmonization` 先合并了 `origin/main`（squash 后的 PR #2），在这个分支上继续，最后开新 PR（ADR 0013 第 1 条）。
+- **做法**：ADR 0013。代码 `harmonization/global_grid.py`、`harmonization/series_global.py`，配置 `config/regions-global.json`，一条命令 `pipeline.py global`。冻结文件没动。
+- **中间结果**都在数据目录：
+  - `processed/global/grid/`：全球稠密表，按纬度带分块；
+  - `global/inputs/`：去重后的模型输入；
+  - `global/resamples/{deploy,main,aux}/`：每次重抽一个 `.npy`，`est.npy` 是不重抽的估计。
+- **重抽**：每组只用前 50 次（ADR 0013 第 5 条补充，用户已批准；aux 已有 100 次，只用前 50 次）。三组都已完成。以后要补跑，用 `uv run python -X utf8 -m harmonization.series_global resample <deploy|main|aux> --max-new 20`，会跳过已完成的（`--max-new` 让进程每 20 次退出一次）。
+- **内存**：两个重抽进程并行时，主窗口两次内存不够（`_ArrayMemoryError`）。原因是长时间运行的进程占用的提交内存越来越大（上线版进程跑了 31 次后占到 34 GB）。现在**一次只跑一个进程**（先 main 再 deploy），每次重抽后释放模型。结果和并行完全一样，只是慢一些。
+- **已完成**：`calibrate`（系数 16.75）→ `build`（24 分钟，S-NPP 复核 0 不符）→ `package`。发布文件在 `D:/inspiratio-data/processed/global-v1/`，`SHA256SUMS.txt` 在同一目录。
+- **发布**：用户过目后（2026-11-04）发布 [Release `global-v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/global-v1)，共 30 个文件。前端文件在 Release 里是平铺的，下载后放进 `frontend/`。全部 SHA256 在 `results/expected/dataset-global-v1.sha256`，`pipeline.py check` 会对照。主要文件：
+  - `dataset_global-v1.parquet`：`446cd805725bd7e313e54874944b52bcc56962008a30b9f4473aa077d0205114`
+  - `region_totals_global-v1.csv`：`52f77eee3004b0e2ba5648b1c9f82376aacaa2ffdd36d6a8c702aebd03a0f6b3`
+  - `resamples20_global-v1.parquet`：`44aa476ac0e96e6035126218d8b6f0345c4897776e4b61f11499077f8a000a3a`
+  - `meta.json`：`52c9c5a1a0723941073090a5494ff7a1d02790e4b4be41c48fac8ad30b3c513e`
+- **接下来**：PR（feat/data-harmonization → main）等人合并。
+- **本机测试注意**：中文 Windows 上 `tests/test_guardrails.py` 读 `git log` 时会按 GBK 解码出错，要用 `PYTHONUTF8=1 uv run pytest` 跑；CI（Linux）不受影响。`tools/guardrails.py` 是冻结文件，没改。

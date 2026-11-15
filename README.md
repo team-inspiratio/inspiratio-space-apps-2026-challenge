@@ -1,54 +1,67 @@
 > **Rehearsal replay.** This repository replays, stage by stage, work that Team Inspiratio finished **before the event** (2026-11-02 to 2026-11-08) in a private draft repository. Commit times are replay times, not development times. See [SIMULATION.md](SIMULATION.md).
 
-# MODIS × VIIRS 火点协调
+# MODIS × VIIRS 火点协调 / Harmonized Fire Record
 
-<!-- PROGRESS-BOX:BEGIN -->
-> **当前进度 / Status**：里程碑 B 完成（S00–S15）。最终数据集 v1 已作为正式版 [Release `v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1) 发布（CC BY 4.0），说明见 [docs/data-card.md](docs/data-card.md)，前端接口见 [docs/data-interface.md](docs/data-interface.md)。最终模型是两段式 LightGBM（E028），外部盲审只考了一次：训练区 2012–2013 年的 MALE 0.258（简单比例法 M1s 0.332），完全没见过的留出区 0.644（M1s 0.857），验证报告见 [reports/validation.md](reports/validation.md)。一条命令复现：`uv run python -X utf8 pipeline.py all --from-release`（约 1.5 小时，37 项核对）。下一步：任务卡 [`G-global`](docs/sessions/G-global.md)（全球重跑）。
-> Status: milestone B done. Dataset v1 is Release `v1` (CC BY 4.0); read `docs/data-card.md`. Final test (run once on GitHub): MALE 0.258 on the training regions 2012-2013 (M1s 0.332), 0.644 on unseen holdout regions (M1s 0.857). Reproduce with `pipeline.py all --from-release`. Next: task card `G-global`.
->
-> **接力三步 / Take over in 3 steps**：① 按 [HANDOFF.md](HANDOFF.md) 装好环境、填好 `.env`；② 把 HANDOFF 里的“通用接力提示词”复制给 Claude Code 或 Codex；③ 按 AI 的提示做需要你本人做的事。详细进度见 [PROGRESS.md](PROGRESS.md)。
-<!-- PROGRESS-BOX:END -->
+**One consistent monthly fire record from 2000 to 2026, across two generations of NASA satellites.**
+把 MODIS（2000 年起）和 VIIRS（2012 年起）两代卫星的火点记录，统一成一条可以前后比较的月度序列：全球 0.25° 格子，2000-11 至 2026-10。
 
-把 MODIS（2000 年起）和 VIIRS（2012 年起）两代卫星的火点记录统一成一条可以前后比较的月度序列，再用一个网页让人选区域、看历史、判断最近一个完整月份是否偏高，并下载结果。
-
-**完整方案：[docs/proposal.md](docs/proposal.md)**
+![直接拼接会在 2012 年出现假台阶；协调后接得上](reports/figures/d1-1-problem.png)
 
 ## 一分钟看懂
 
-- **问题：** 两种传感器的分辨率和灵敏度不同，VIIRS 看到的火点数明显更多。直接拼接，2012 年会出现一个由换卫星造成、而不是火情变化造成的跳变。
-- **做法：** 用两者同时在轨的年份训练模型，只看 MODIS 的信息来预测 VIIRS 会记录多少火点，再把这个换算用到 2012 年以前。主模型是 LightGBM，简单比例法作为对照基线；AI 自动实验循环在验证集上帮忙改进模型。
-- **验证：** 用后面的年份推前面的年份，另留一个完全没见过的地区；验证集选模型，测试集锁住，只在模型冻结后跑一次、如实报告。
-- **产出：** 协调算法、公开数据集、网页三件套，加上一份方法与验证说明。
+- **问题**：VIIRS 比 MODIS 灵敏得多，同一片火，它数出的火点要多好几倍。直接把两段拼起来，2012 年会出现一个**由换卫星造成的假台阶**，而不是火情真的变了。
+- **做法**：用两颗卫星同时在轨的年份训练模型（两段式 LightGBM），只用 MODIS 的信息推出“VIIRS 会看到多少火点”，再把这个换算用到 2012 年以前。
+- **证明**：评分规则在看到结果之前就写好并冻结；测试数据只在 GitHub 云端打分，**只考一次**。
+- **结果**：
+  - 外部盲审：误差比简单比例法低 22%，在完全没见过的地区低 25%（[盲审成绩](reports/final-test.md)）；
+  - 全球验证：误差比简单比例法低 14%（[全球分数](reports/global-scores.md)）；
+  - 全球 2013 年（模型）1,600 万个火点，2014 年（观测）1,660 万个，交接处没有断层。
+- **规模**：5.29 亿条原始火点记录，4 颗卫星，26 年；全球 27.8 万个格子、8,680 万个格子-月份。
 
-## 方案目录
+## 我想……
 
-| 部分 | 内容 |
+| 我想 | 去这里 |
 |---|---|
-| [项目概览](docs/proposal.md#项目概览) | 问题、解法、交付物 |
-| [用大白话讲](docs/proposal.md#用大白话讲这个项目在干什么) | 不懂遥感也能看懂的解释 |
-| [方案](docs/proposal.md#方案用机器学习把历史统一到-viirs-尺度) / [验证](docs/proposal.md#验证怎么证明模型可信) | 主提案的核心 |
-| [网页成果](docs/proposal.md#网页成果) / [实施范围](docs/proposal.md#实施范围) | 用户能做什么、必做与扩展 |
-| [附录：执行手册](docs/proposal.md#附录执行手册) | 数据、算法、验证体系、AI 循环、24 个任务、提交物、风险、参考资料 |
+| **直接用数据** | 在 [Releases](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases) 下载：全球版 `global-v1`，示范区版 `v1`，都是 CC BY 4.0。先读[数据说明卡](docs/data-card.md)。不需要账号或密钥 |
+| **做网页** | [前端简报](docs/frontend-agent-brief.md)（含给 AI agent 的开场提示词），以及接口说明 [`data-interface.md`](docs/data-interface.md)、[`data-interface-global.md`](docs/data-interface-global.md) |
+| **看方法和证据** | [验证报告](reports/validation.md)，再看[项目经过](docs/project-journey.md)（每个决定为什么这么做） |
+| **了解整个方案** | [完整提案](docs/proposal.md) |
+| **重跑一遍** | `uv sync` 后运行 `uv run python -X utf8 pipeline.py all --from-release`（约 1.5 小时，自动核对 37 项） |
+| **接着开发** | [HANDOFF.md](HANDOFF.md)（接力说明），[PROGRESS.md](PROGRESS.md)（进度） |
+
+<!-- PROGRESS-BOX:BEGIN -->
+> **当前进度**：数据线全部任务卡已完成（S00–S15 和全球版 G）。数据已发布：全球版 [Release `global-v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/global-v1)，示范区版 [Release `v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1)，都是 CC BY 4.0。网页由前端队友在单独的 PR 里开发。
+> **Status**: all data-track task cards are done (S00–S15 and global stage G). Data released as `global-v1` (global) and `v1` (six demo regions), CC BY 4.0. The website is being built in separate PRs.
+<!-- PROGRESS-BOX:END -->
 
 ## 仓库结构
 
+每个主要目录都有自己的 README，说明里面每个文件是做什么的。
+
 ```
-README.md               本文件
-AGENTS.md / CLAUDE.md   给 AI 的项目规则
-PROGRESS.md             进度（机器可读状态块 + 阶段表）
-HANDOFF.md              接力说明和通用接力提示词（中英文）
-docs/proposal.md        完整方案（主提案 + 执行手册）
-docs/execution-plan.md  数据分析与算法部分的执行计划（唯一依据）
-docs/sessions/          各会话的任务卡
-tools/                  护栏和环境预检脚本
-tests/                  pytest
-notes/                  阅读和学习笔记
-pyproject.toml, uv.lock Python 依赖（用 uv sync 安装）
-.env.example            密钥模板（复制成 .env，.env 不提交）
+README.md            本文件：从这里开始
+docs/                文档：给人看的在前面，过程记录在后面   → docs/README.md
+reports/             结果报告和图                           → reports/README.md
+harmonization/       数据处理和模型代码，按阶段分           → harmonization/README.md
+results/             冻结和盲审的凭据（不要改）             → results/README.md
+config/              区域、评分矩形、设置、特征清单（大多已冻结）
+pipeline.py          一条命令重跑全部结果并核对
+tests/               自动测试（uv run pytest）
+tools/               护栏、环境预检
+notes/               学习笔记
+
+给 AI 的文件（人不用读）：
+AGENTS.md, CLAUDE.md AI 必须遵守的规则（红线、开工流程）
+PROGRESS.md          机器可读的进度状态
+.claude/, .github/   AI 钩子；CI 和云端阅卷工作流
 ```
+
+## 关于 AI
+
+这个项目的数据和算法部分大量使用了 AI（Claude Code）。人负责关键决定：选留出区、推送盲审标签、批准发布。AI 写代码、跑实验，每个技术决定都写进[决定记录](docs/decisions/)。为了防止“看了答案再改”，项目设了三层自动护栏（钩子、提交前检查、CI）。详见 [AI 使用说明](docs/ai-usage.md)。
 
 ## 约定
 
 - 改动走分支和 Pull Request，不直接推 main。
-- 密钥（如 FIRMS MAP_KEY）只放在本地 `.env`。
-- 原始数据和处理后的大文件不进仓库，来源和下载方式写在文档里。
+- 密钥只放在本地 `.env`，不进仓库。
+- 原始数据和大文件不进仓库，处理后的数据作为 Release 附件发布，并记录 SHA256。

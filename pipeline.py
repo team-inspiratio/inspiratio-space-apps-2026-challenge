@@ -5,6 +5,7 @@ task card 5-report S15).
   uv run python -X utf8 pipeline.py all                  # from the raw FIRMS/GFED files (~50 GB)
   uv run python -X utf8 pipeline.py check                # only compare the outputs
   uv run python -X utf8 pipeline.py list                 # stages and which are done
+  uv run python -X utf8 pipeline.py global               # stage G after `all` (ADR 0013)
 
 Needs `uv sync` and INSPIRATIO_DATA_DIR (in .env or the environment; an empty folder is fine).
 `--from-release` also needs the GitHub CLI logged in (`gh auth login --web`); `all` without it
@@ -73,6 +74,17 @@ COMMON = [
     ("validation", [["harmonization.validation", "all"]]),
     ("anomaly", [["harmonization.anomaly", "cases"]]),
 ]
+GLOBAL = [  # stage G (task card G-global, docs/decisions/0013); needs the `all` outputs
+    ("global-grid", [["harmonization.global_grid", "build"]]),
+    ("global-scores", [["harmonization.series_global", "scores"]]),
+    ("global-inputs", [["harmonization.series_global", "inputs"]]),
+    (
+        "global-resample",
+        [["harmonization.series_global", "resample", w] for w in ("deploy", "main", "aux")],
+    ),
+    ("global-calibrate", [["harmonization.series_global", "calibrate"]]),
+    ("global-build", [["harmonization.series_global", "build"]]),
+]
 TRACKED = [  # files the stages rewrite; they must come out as committed
     "reports/a5-stats.json",
     "reports/judge-check.md",
@@ -124,7 +136,9 @@ def fetch_release() -> None:
         print(f"{name}: SHA256 ok -> {dest}", flush=True)
 
 
-def stages(from_release: bool) -> list[tuple[str, object]]:
+def stages(from_release: bool, scope: str = "all") -> list[tuple[str, object]]:
+    if scope == "global":
+        return GLOBAL
     first = [("fetch", fetch_release)] if from_release else RAW
     return [*first, *COMMON]
 
@@ -133,8 +147,8 @@ def marker(name: str) -> Path:
     return data_dir() / f"pipeline_{name}.done"
 
 
-def run_all(from_release: bool, force: bool) -> None:
-    for name, what in stages(from_release):
+def run_all(from_release: bool, force: bool, scope: str = "all") -> None:
+    for name, what in stages(from_release, scope):
         m = marker(name)
         if m.exists() and not force:
             print(f"[skip] {name} (done; --force to rerun)", flush=True)
@@ -276,6 +290,26 @@ def check() -> bool:
     return n_fail == 0
 
 
+def check_global() -> bool:
+    """Global dataset files against results/expected/dataset-global-v1.sha256 (written when
+    Release global-v1 was published)."""
+    want_file = ROOT / "results" / "expected" / "dataset-global-v1.sha256"
+    if not want_file.exists():
+        print("no expected global hashes yet: nothing to compare")
+        return True
+    root = data_dir() / "processed" / "global-v1"
+    files = {p.name: p for p in root.rglob("*") if p.is_file()}
+    bad = []
+    for line in want_file.read_text(encoding="utf-8").splitlines():
+        digest, name = line.split()
+        if name in DOC_COPIES | {"data-interface-global.md"}:
+            continue
+        if name not in files or sha256(files[name]) != digest:
+            bad.append(name)
+    print(f"GLOBAL CHECK: {'all files match' if not bad else 'differ: ' + ', '.join(bad)}")
+    return not bad
+
+
 def committed_release_meta(v: str) -> str | None:
     """meta.json as published: kept next to the expected hashes for this comparison."""
     p = ROOT / "results" / "expected" / f"dataset-{v}-meta.json"
@@ -305,7 +339,7 @@ def region_json_with_recount(path: Path, v: str) -> str | None:
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    p.add_argument("what", choices=["all", "check", "list"])
+    p.add_argument("what", choices=["all", "check", "list", "global"])
     p.add_argument("--from-release", action="store_true", help="start from Release data-v0")
     p.add_argument("--force", action="store_true", help="rerun stages that are already done")
     a = p.parse_args()
@@ -314,9 +348,14 @@ def main() -> int:
 
         load_dotenv(ROOT / ".env")
     if a.what == "list":
-        for name, _ in stages(a.from_release):
+        for name, _ in [*stages(a.from_release), *GLOBAL]:
             print(f"{'done' if marker(name).exists() else '    '}  {name}")
         return 0
+    if a.what == "global":
+        t0 = time.time()
+        run_all(a.from_release, a.force, "global")
+        print(f"\nglobal stages done in {(time.time() - t0) / 60:.0f} min", flush=True)
+        return 0 if check_global() else 1
     if a.what == "all":
         t0 = time.time()
         run_all(a.from_release, a.force)
