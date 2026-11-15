@@ -158,3 +158,30 @@ def test_anomaly_class_mid_rank():
     ref = np.array([[1.0, 2, 3, 4, 5, 6, 7, 8, 9, 10, np.nan]] * 3)
     cls = final_test.anomaly_class(np.array([0.0, 5.5, 11.0]), ref)
     assert cls.tolist() == [0, 1, 2]
+
+
+def test_m1s_formula_and_new_cells():
+    train = pd.DataFrame(
+        {
+            "lat_idx": [1, 1, 2, 2],
+            "lon_idx": [1, 1, 1, 1],
+            "region": ["r", "r", "r", "r"],
+            "cal_month": [7, 7, 7, 7],
+            "aqua_count": [2.0, 0.0, 8.0, 0.0],
+            "snpp_count": [10.0, 2.0, 30.0, 0.0],
+        }
+    )
+    r = harmonize.m1s_ratios(train, lam=4)
+    k_region = 42 / 10
+    cell1 = r["cell"].set_index(["lat_idx", "lon_idx", "cal_month"]).loc[(1, 1, 7), "k"]
+    assert cell1 == pytest.approx((12 + 4 * k_region) / (2 + 4))
+    new = pd.DataFrame({"lat_idx": [9], "lon_idx": [9], "cal_month": [7], "aqua_count": [3.0]})
+    assert harmonize.apply_ratios(r, new)[0] == pytest.approx(3 * k_region)  # pooled ratio
+
+
+def test_quantile_map_monotone_and_ties():
+    a = np.array([0, 0, 0, 1, 2, 3, 4, 5], dtype=float)
+    v = np.array([0, 1, 2, 5, 8, 10, 12, 20], dtype=float)
+    h = harmonize.quantile_map(a, v, np.array([0.0, 1.0, 3.0, 5.0, 10.0]))
+    assert np.all(np.diff(h) >= 0)
+    assert h[-1] == pytest.approx(20 * 10 / 5)  # multiplicative above the training maximum
