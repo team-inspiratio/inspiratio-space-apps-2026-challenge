@@ -35,8 +35,24 @@ needs_human:
   - "Recorded: the S10 budget cut, deadline and remedy reruns were the user's decisions (docs/decisions/0007)"
   - "Tell the front end: the milestone-a pre-release + docs/data-interface.md are available (comment already left on PR #2)"
   - "GitHub CLI login: can be skipped on this already-logged-in computer; when taking over on another computer, first run gh auth login --web (needed to download the Release data)"
+  - "For a person to handle: hold a 1-hour review meeting following docs/review-packet.md, prioritizing X1 (PRs #4/#5 not merged) and X2 (repository private and without a LICENSE)"
+  - "Awaiting human confirmation: whether to unlock the 2012–2013 S-NPP observations to replace the training-region estimates (docs/decisions/0014; recommendation: replace only, no retraining, aggregated in the cloud; a person must commit the [unfreeze])"
+  - "Awaiting human confirmation: confidence levels for the global product, M1s fallback, web-page labels (docs/decisions/0015; recommendation: finer levels, no fallback)"
+  - "Awaiting human confirmation: the website deployment option (docs/decisions/0016; recommendation: first republish the fixed version on the existing Sites, then switch to GitHub Pages once the repository is public)"
+  - "For a person to handle: after the official guides are released on 11/13, check every draft in docs/submission/ item by item and fill in the bracketed items"
+  - "Awaiting a person's decision: whether a \"one click to a given region and month\" entry point is needed (currently the preset buttons go to a region in one click, and a route takes 1–3 clicks; this is a new feature and was not built)"
 ```
 <!-- STATUS:END -->
+
+## Submission prep (not part of the data track)
+
+> This section records the competition submission prep. It does not change the data track's status block and does not claim G-global.
+
+- Task 1 done: human review packet `docs/review-packet.md` (covers the 20 needs_human items of data branch `5dbc2e2`, plus two inventory findings, X1 and X2).
+- Task 2 done: proposal ADR 0014 (unlocking the 2012–2013 S-NPP observations) and ADR 0015 (global confidence levels, M1s fallback, web-page labels); both are proposals only and were not implemented.
+- Task 3 done: draft comparison of deployment options, ADR 0016 (chatgpt.site, Vercel, Netlify, GitHub Pages); nothing was deployed.
+- Task 4 done: draft submission materials `docs/submission/` (`project-page.md`, `demo-script.md`, `checklist.md`), all marked to be checked item by item after the official guides are released on 11/13.
+- Task 5 done: the three demo routes were tested on the PR #5 build and written into `docs/submission/demo-script.md`. No bugs blocking the demo were found, so the web code was not changed.
 
 ## Sessions overview
 
