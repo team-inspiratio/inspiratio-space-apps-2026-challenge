@@ -1,0 +1,101 @@
+name: Deploy V2 to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - frontend-v2/**
+      - inspiratio-site/public/data/global-v1/**
+      - results/expected/dataset-global-v1.sha256
+      - config/regions.json
+      - docs/anomaly-cases.json
+      - reports/validation.json
+      - reports/global-scores.json
+      - .github/workflows/pages-v2.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - frontend-v2/**
+      - inspiratio-site/public/data/global-v1/**
+      - results/expected/dataset-global-v1.sha256
+      - config/regions.json
+      - docs/anomaly-cases.json
+      - reports/validation.json
+      - reports/global-scores.json
+      - .github/workflows/pages-v2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-v2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend-v2
+    env:
+      PAGES_BASE_PATH: /inspiratio-space-challenges-2026/
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify the requested Pages address before publishing
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          if [ "$GITHUB_REPOSITORY" != "team-inspiratio/inspiratio-space-challenges-2026" ]; then
+            echo "::error::Rename the public repository to inspiratio-space-challenges-2026 before publishing."
+            exit 1
+          fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend-v2/package-lock.json
+      - run: npm ci
+      - run: npm run data:prepare
+      - run: npm test
+      - name: Build for the repository URL
+        run: npm run build -- --base="$PAGES_BASE_PATH"
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+      - name: Test the production build under the repository path
+        shell: bash
+        run: |
+          export BROWSER_EXECUTABLE="$(node --input-type=module -e 'import { chromium } from "playwright"; console.log(chromium.executablePath())')"
+          export FRONTEND_URL="http://127.0.0.1:4173${PAGES_BASE_PATH}"
+          npm exec vite preview -- --host 127.0.0.1 --port 4173 --strictPort --base="$PAGES_BASE_PATH" &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent "$FRONTEND_URL" > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl --fail --silent "$FRONTEND_URL" > /dev/null
+          npm run test:browser
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        with:
+          path: frontend-v2/dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Publish V2
+        id: deployment
+        uses: actions/deploy-pages@v4
