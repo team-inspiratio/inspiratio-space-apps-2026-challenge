@@ -6,15 +6,20 @@
 <!-- STATUS:BEGIN -->
 ```yaml
 current_card: docs/sessions/5-report.md        # 下一张（或正在做的）任务卡
-status: ready                           # ready | in_progress | blocked | done
-claimed_by: ""                          # 认领人名字；空表示无人认领
-claimed_at: ""                          # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
-last_pushed_stage: S12                  # 最后一个完成并 push 的阶段
+status: in_progress                     # ready | in_progress | blocked | done
+claimed_by: "qiuxue-yee"                # 认领人名字；空表示无人认领
+claimed_at: "2026-11-04T04:41:07Z"      # 认领时间，ISO 8601 UTC，例如 2026-11-03T08:00:00Z
+last_pushed_stage: S14                  # 最后一个完成并 push 的阶段
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
 data_release: dataset-v1                # 最终数据集 v1（S12）；处理后的输入在 data-v0，里程碑 A 在 milestone-a；SHA256 见交接备注
-next_step: "开新会话执行任务卡 5-report：S13 验证报告（D1，含最终测试 reports/final-test.md 和年代偏移调查）、S14 交付、S15 里程碑 B"
+next_step: "任务卡 5-report 进行中：S13、S14 已完成，下一步 S15 里程碑 B（干净环境一条命令复现 pipeline.py all，对上成绩表；人确认后发 Release v1、squash-merge 进 main）"
 needs_human:
+  - "待人决定：数据集许可证（建议 CC BY 4.0，docs/data-card.md、docs/decisions/0011 第 3 条），公开发布 Release v1 前定"
+  - "通知前端：异常指标参考实现 harmonization/anomaly.py + 25 个标准测试用例 docs/anomaly-cases.json（逐字段对答案；补充细节见 docs/data-interface.md 第 6 节、docs/decisions/0011 第 1 条）；数据集新增 CSV 版"
+  - "请通读：数据说明卡 docs/data-card.md、AI 使用说明 docs/ai-usage.md"
+  - "请通读：验证报告 reports/validation.md（6 张核心图 + 局限性；结论：训练区可信，留出区误差 2.5 倍、偏低 14–45%）"
+  - "待人确认（过目即可，不阻塞）：S13 新做的 GFED 检查和年代偏移调查的实现细节（docs/decisions/0010：年代偏移主数字用 5 折平均 AUC；GFED 只到 2016 年；文献数值不做数值比较）"
   - "请过目：最终测试成绩 reports/final-test.md（测试 1 比 M1s 好 22%；留出区误差是训练区的 2.5 倍、总量偏低 20–35%，全球阶段 G 前要考虑）"
   - "通知前端：最终数据集预发布版 dataset-v1 + docs/data-interface.md（v1：来源名改为 model_*，新增 lo_90/hi_90、nrt）"
   - "待人确认：S12 上线版沿用 2014-01–2021-06 的冻结模型，训练区 2012–2013 年用估计值，因为本机永远没有这两年 S-NPP（docs/decisions/0009 第 1 条）"
@@ -58,8 +63,8 @@ needs_human:
 | S10 | LightGBM 和 AI 实验 | ✅ done | 2026-11-04 | 37 次实验（E000–E036，预算按 ADR 0007 缩减并提前收工）；最佳验证 MALE：E028 两段式 LightGBM 0.2947，比 M1s（0.3766）低 21.8%（差 −0.082 ± 0.016，95% 区间 −0.113～−0.053），比 QM 低 0.169；前 3 名都通过护栏和泄漏审查（`reports/scores-s10.md`、`reports/model-review.md`） | |
 | S11 | 冻结与外部盲审 | ✅ done | 2026-11-04 | 选定 E028。测试 MALE：测试 1 **0.258**（M1s 0.332，低 22%），测试 2 留出区 **0.644**（M1s 0.857）；κ 0.69 / 0.53；区域区间覆盖率校准后 95.5% / 55.9%（原始 37.9% / 12.9%）；留出区零火点和低火点指标比 M1s 差、总量偏低 20–35%（`reports/final-test.md`） | 742547e |
 | S12 | 最终数据集 | ✅ done | 2026-11-04 | 上线版 = 冻结评估版 E028（ADR 0009）；261.6 万格子-月份：S-NPP 观测 55.4 万、模型估计 181.7 万、Terra 桥接 19.7 万、NOAA-20 换算 4.7 万；100 次重抽区间，区域区间乘校准系数 5.37；验收：S-NPP 段 426 个区域-月共 1519 万点与观测逐个一致；预发布版 `dataset-v1` | |
-| S13 | 验证报告（D1） | ⬜ todo | | | |
-| S14 | 交付 | ⬜ todo | | | |
+| S13 | 验证报告（D1） | ✅ done | 2026-11-04 | 第 3 节 1–7 全部完成（`reports/validation.md`）。新做的两项：年代偏移 AUC 0.57（训练区）/ 0.56（留出区），对照 2022–2026 年 0.75 / 0.70（Terra 漂移）；GFED 每 km² 燃烧面积火点数 2012 年前后不变（南部非洲 2.77 → 2.92，科尔多瓦 5.90 → 5.86），直接拼接跳约 5 倍。6 张核心图 `reports/figures/d1-*.png` | |
+| S14 | 交付 | ✅ done | 2026-11-04 | 数据集 CSV 版 `dataset_v1.csv.gz`（18 MB，和 Parquet 逐列核对，相对误差 < 5×10⁻⁶）；数据说明卡 `docs/data-card.md`；AI 使用说明 `docs/ai-usage.md`；异常指标参考实现 `harmonization/anomaly.py` + 25 个标准测试用例 `docs/anomaly-cases.json`（19 个手算边界 + 6 个真实数据）；HANDOFF 第 6 节“成果在哪”；ADR 0011 | |
 | S15 | ★里程碑 B：一条命令复现、Release v1、合并 main | ⬜ todo | | | |
 
 ## 交接备注

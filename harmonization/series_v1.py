@@ -3,6 +3,7 @@ flags, stability intervals, front-end files and release checksums.
 
 uv run python -X utf8 -m harmonization.series_v1 terra-check   # Terra-only inputs (validation)
 uv run python -X utf8 -m harmonization.series_v1 build         # <data>/processed/v1/
+uv run python -X utf8 -m harmonization.series_v1 package       # S14 files only, from the parquet
 
 Model (docs/decisions/0009): the frozen evaluation model of S11 (results/freeze.json, E028
 parameters and rounds refitted on the training regions 2014-01..2021-06) is also the production
@@ -33,6 +34,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import hashlib
+import io
 import json
 import sys
 
@@ -386,10 +388,27 @@ def write(out: pd.DataFrame, extra: dict) -> list[str]:
         with gzip.GzipFile(root / "frontend" / f"{region['name']}.json.gz", "wb", mtime=0) as f:
             f.write(data.encode("utf-8"))
     (root / "meta.json").write_text(json.dumps(meta, indent=2) + "\n", "utf-8", newline="\n")
-    doc = (ROOT / "docs" / "data-interface.md").read_text(encoding="utf-8")
-    (root / "data-interface.md").write_text(doc.replace("\r\n", "\n"), "utf-8", newline="\n")
+    return package(out, root)
+
+
+DOCS = ("data-interface.md", "data-card.md", "anomaly-cases.json")  # shipped with the release
+
+
+def package(out: pd.DataFrame, root=None) -> list[str]:
+    """S14 delivery: the dataset as gzip CSV (fixed gzip timestamp, LF, empty field = no data,
+    numbers to 6 significant digits), the documents of DOCS, then SHA256SUMS of every file.
+    Same input -> same bytes on every machine."""
+    root = root or data_dir() / "processed" / VERSION
+    with (
+        gzip.GzipFile(root / f"dataset_{VERSION}.csv.gz", "wb", mtime=0) as gz,
+        io.TextIOWrapper(gz, encoding="utf-8", newline="\n") as f,
+    ):
+        out.to_csv(f, index=False, lineterminator="\n", float_format="%.6g")
+    for name in DOCS:
+        text = (ROOT / "docs" / name).read_text(encoding="utf-8").replace("\r\n", "\n")
+        (root / name).write_text(text, "utf-8", newline="\n")
     files = sorted(p for p in root.rglob("*") if p.is_file() and p.name != "SHA256SUMS.txt")
-    lines = [f"{sha256(p)}  {p.name}" for p in files]
+    lines = [f"{sha256(p)}  {p.name}" for p in files]  # release assets are flat
     (root / "SHA256SUMS.txt").write_text("\n".join(lines) + "\n", "utf-8", newline="\n")
     return lines
 
@@ -398,6 +417,7 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("terra-check")
+    sub.add_parser("package", help="S14 files from the existing dataset parquet")
     b = sub.add_parser("build")
     b.add_argument("-n", type=int, default=freeze.RESAMPLES)
     b.add_argument("--resamples-only", action="store_true", help="only fill the resample cache")
@@ -409,13 +429,21 @@ def main() -> int:
         path.write_text(json.dumps(res, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(res["combined_male"], indent=2))
         return 0
+    if args.cmd == "package":
+        root = data_dir() / "processed" / VERSION
+        print("\n".join(package(pd.read_parquet(root / f"dataset_{VERSION}.parquet"), root)))
+        return 0
     out, extra = build(prepare.load_grid(), args.n, args.resamples_only)
     if args.resamples_only:
         return 0
-    rec = recount(out)
-    print(f"acceptance recount: {rec}", flush=True)
-    if rec["mismatches"]:
-        raise SystemExit("observed S-NPP months differ from the cleaned observations")
+    if any((data_dir() / "processed" / "clean" / "snpp").glob("*.parquet")):
+        rec = recount(out)
+        print(f"acceptance recount: {rec}", flush=True)
+        if rec["mismatches"]:
+            raise SystemExit("observed S-NPP months differ from the cleaned observations")
+    else:  # rebuilt from the data-v0 release, which has no cleaned VIIRS points (ADR 0003)
+        rec = {"skipped": "no cleaned S-NPP points in this data folder (data-v0 release)"}
+        print(f"acceptance recount skipped: {rec['skipped']}", flush=True)
     extra["meta"]["acceptance_recount"] = rec
     lines = write(out, extra)
     print(f"{len(out)} cell-months; sources: {out['source'].value_counts().to_dict()}")
