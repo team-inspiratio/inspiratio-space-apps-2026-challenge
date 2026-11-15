@@ -8,6 +8,9 @@
 |---|---|
 | `frontend/<region>.json.gz` | 每个预设区域一个 gzip 压缩的 JSON（格式见第 3 节），网页直接读 |
 | `dataset_v1.parquet` | 六个区全部格子 × 月份的长表（第 2 节），给分析和下载用 |
+| `dataset_v1.csv.gz` | 同一张表的 CSV（gzip 压缩，UTF-8，LF 换行）：空字段 = 没有数据，数值保留 6 位有效数字，布尔值写 `True`/`False`（S14） |
+| `data-card.md` | 数据说明卡（来源、处理、不确定性、验证、局限、引用；英文，附中文摘要） |
+| `anomaly-cases.json` | 异常指标的标准测试用例（第 6 节），前端逐项对答案 |
 | `region_totals_v1.csv` | 区域 × 月的总量、区间、来源、标记 |
 | `resamples20_v1.parquet` | 前 20 次重抽的格子级估计（只存非零值；列 `lat_idx, lon_idx, month, resample, value`），给用户自圈区域算区间：每个 `resample` 分别加总，再取第 2 小和第 19 大附近的值作近似 5%/95% |
 | `meta.json` | 模型、训练范围、轮数、区间是否校准 |
@@ -81,7 +84,17 @@ v1 的限制：
 
 把落在区域里的格子加起来；格子只有一部分在区域内时，按重叠面积的比例分配。这里假设火点在格子里均匀分布：圈的范围小时，边界误差会比较明显。圈选范围小于一个格子时，只给近似值，并提示这个限制。
 
-## 6. 异常指标（定义，参考实现在 S14）
+## 6. 异常指标（参考实现 `harmonization/anomaly.py`，标准测试用例 `anomaly-cases.json`）
+
+前端照下面的规则实现同一个函数 `anomaly(series, target, as_of, baseline)`，然后把 `anomaly-cases.json` 里每个用例的 `input` 喂进去，逐个字段和 `expected` 比（数值相对误差 1e-9 以内，列表完全相同）。25 个用例：19 个人工推算的边界情况（并列、正好 90/10、参考年数 9、中位数为 0、目标月缺测、当月未结束、S-NPP 基准期等），6 个用数据集 v1 真实区域总量的例子。输出字段：`status`、`value`、`n_ref`、`ref_years`、`median`、`ratio`、`percentile`、`level`（`high`/`normal`/`low`/空）、`preliminary`、`notes`。中英文措辞也在 JSON 的 `labels`、`notes` 里。下面原有的定义不变，S14 补上了几处细节（`docs/decisions/0011`）：
+
+- **月份结束**：截至日期（UTC，`YYYY-MM-DD`）不早于下个月 1 日，这个月才算结束。
+- **并列**：数值只给到 2 位小数，所以 |x − h| ≤ 0.005 算“等于”，x < h − 0.005 算“小于”。
+- **参考集**：同一日历月、2001 年至目标年前一年、有值且 `input_complete = true`；基准期选“S-NPP”时只留 `source = snpp` 的月份。只有 Terra 的月份（低置信度）也算参考。
+- **状态顺序**：没有值 `no_data` → 当月未结束 `month_in_progress`（只显示截至目前的值）→ 目标月缺测 `incomplete_coverage` → 没有参考月 `no_history` → 参考年数 1–9 `insufficient_history`（给百分位、中位数、倍数，不分等级）→ `ok`。
+- 中位数 = 普通中位数（偶数个时取中间两个的平均）；中位数 < 5 时不给倍数，`notes` 加 `small_median`；目标值来自近实时数据时 `preliminary = true`。
+
+原定义：
 
 - **只评价已经结束的完整月份**。当月还没结束时，只显示“截至某日的累计火点数”，不下异常结论。
 - **异常倍数** = 该月 `est` ÷ 历史同月中位数。
@@ -98,3 +111,4 @@ v1 的限制：
 |---|---|---|
 | v0 | 2026-11-03 | 里程碑 A：M1s 保底版，预发布版 `milestone-a` |
 | v1 | 2026-11-04 | S12：选定模型 LightGBM E028 + 稳定性区间 + 近实时标记，预发布版 `dataset-v1` |
+| v1（S14 交付） | 2026-11-04 | 数据不变；加 CSV 版、数据说明卡、异常指标参考实现和标准测试用例。正式发布为 Release `v1`（S15） |

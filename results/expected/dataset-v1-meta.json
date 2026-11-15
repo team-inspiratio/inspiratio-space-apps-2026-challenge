@@ -1,0 +1,71 @@
+{
+  "version": "v1",
+  "model": "LightGBM E028 (two-stage), frozen evaluation model",
+  "freeze": "results/freeze.json",
+  "freeze_commit": "738fd99866caa9f71a2b0b1135206df375cd0b8c",
+  "training": {
+    "regions": [
+      "california",
+      "cordoba",
+      "southern_africa"
+    ],
+    "months": [
+      "2014-01",
+      "2021-06"
+    ],
+    "rows": 347456
+  },
+  "inputs": [
+    "lat",
+    "cal_month",
+    "terra_count",
+    "terra_frp_median",
+    "terra_frp_p75",
+    "terra_low_frp_share",
+    "terra_pixel_area_mean",
+    "terra_night_share",
+    "terra_fire_days",
+    "terra_nbr_count",
+    "aqua_count",
+    "aqua_frp_median",
+    "aqua_frp_p75",
+    "aqua_low_frp_share",
+    "aqua_pixel_area_mean",
+    "aqua_night_share",
+    "aqua_fire_days",
+    "aqua_nbr_count"
+  ],
+  "rounds": {
+    "clf": 766,
+    "reg": 970
+  },
+  "resamples": 100,
+  "interval": {
+    "calibrated": true,
+    "interval_scale": 5.37,
+    "test_region_month_coverage_raw": {
+      "test1": 0.3787878787878788,
+      "test2": 0.12912912912912913
+    }
+  },
+  "bridge_fit": [
+    "2003-01",
+    "2019-12"
+  ],
+  "bridge_regions": "all six regions, MODIS only (docs/decisions/0005 item 6 option B)",
+  "continuation_fit": [
+    "2018-04",
+    "2026-10"
+  ],
+  "lambda": 20.0,
+  "acceptance_recount": {
+    "region_months": 426,
+    "months": [
+      "2014-01",
+      "2026-10"
+    ],
+    "points": 15192546,
+    "mismatches": 0,
+    "max_abs_diff": 0.0
+  }
+}
