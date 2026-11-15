@@ -6,15 +6,18 @@
 <!-- STATUS:BEGIN -->
 ```yaml
 current_card: docs/sessions/G-global.md        # next (or current) task card
-status: ready                           # ready | in_progress | blocked | done
+status: done                            # ready | in_progress | blocked | done
 claimed_by: ""                          # claimant's name; empty means unclaimed
 claimed_at: ""                          # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
-last_pushed_stage: S15                  # last stage completed and pushed
+last_pushed_stage: G4                   # last stage completed and pushed
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
-data_release: v1                        # full Release v1 (CC BY 4.0, S15); processed inputs are in data-v0, milestone A in milestone-a; SHA256 in the handover notes and results/expected/
-next_step: "Milestone B done (S13–S15; merged into main, Release v1 published). Next card G-global: global rerun (planned; on 2026-11-03 the user agreed to extend to global coverage)"
+data_release: global-v1               # full Release v1 (CC BY 4.0, S15); the global version is Release global-v1 (stage G); v1 for the 6 regions is still Release v1; processed inputs are in data-v0, milestone A in milestone-a; SHA256 in the handover notes and results/expected/
+next_step: "All task cards are done. The global Release global-v1 is published (docs/data-interface-global.md); waiting for the PR to be merged into main"
 needs_human:
+  - "Tell the front end: the global Release global-v1 is published (CC BY 4.0): gh release download global-v1 --repo team-inspiratio/inspiratio-space-apps-2026; the interface is in docs/data-interface-global.md (interval widening factor 16.75; the web page must explain that the intervals are very wide)"
+  - "Please merge: the G-global PR (feat/data-harmonization → main)"
+  - "Confirmed (by the user on 2026-11-04 together with approving the global-v1 release): the G-global production version uses the globally retrained model, and the interval factor is re-derived on the global validation windows (docs/decisions/0013 items 3 and 5)"
   - "Awaiting human confirmation (a look-over is enough; not blocking): S15 acceptance used the pipeline.py all --from-release entry point (starting from the grid tables in Release data-v0), not a full rerun from raw data (docs/decisions/0012 item 1)"
   - "Tell the front end: the full Release v1 is published (CC BY 4.0): gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026; same data as the pre-release dataset-v1, plus the CSV, the data card and the anomaly test cases"
   - "Tell the front end: the anomaly indicator reference implementation harmonization/anomaly.py + 25 standard test cases docs/anomaly-cases.json (check answers field by field; extra details in docs/data-interface.md section 6 and docs/decisions/0011 item 1); the dataset now also has a CSV version"
@@ -45,7 +48,7 @@ needs_human:
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ✅ done |
 | 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | ✅ done |
 | 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15 (milestone B) | ✅ done |
-| G | [`G-global`](docs/sessions/G-global.md) | Global rerun | ⏭ next |
+| G | [`G-global`](docs/sessions/G-global.md) | Global rerun | ✅ done |
 
 ## Stage table
 
@@ -67,6 +70,10 @@ needs_human:
 | S13 | Validation report (D1) | ✅ done | 2026-11-04 | All of items 1–7 in section 3 done (`reports/validation.md`). The two new items: era-shift AUC 0.57 (training regions) / 0.56 (holdout regions), versus 0.75 / 0.70 for the 2022–2026 control (Terra drift); hotspots per km² of GFED burned area unchanged across 2012 (southern Africa 2.77 → 2.92, Córdoba 5.90 → 5.86), while direct stitching jumps about 5 times. 6 core figures `reports/figures/d1-*.png` | |
 | S14 | Delivery | ✅ done | 2026-11-04 | CSV version of the dataset `dataset_v1.csv.gz` (18 MB, checked column by column against the Parquet, relative error < 5×10⁻⁶); data card `docs/data-card.md`; AI usage statement `docs/ai-usage.md`; anomaly indicator reference implementation `harmonization/anomaly.py` + 25 standard test cases `docs/anomaly-cases.json` (19 hand-worked edge cases + 6 from real data); HANDOFF section "Where the results are"; ADR 0011 | |
 | S15 | ★Milestone B: one-command reproduction, Release v1, merge into main | ✅ done | 2026-11-04 | After the user confirmed, squash-merged into main and published the full Release `v1` (CC BY 4.0). Fresh clone + empty data directory running `pipeline.py all --from-release`: 87 minutes, all 37 `pipeline.py check` items pass (score files identical word for word; scores on both validation windows equal freeze.json and E028; the test set's est_final and 100 resamples bit-for-bit identical to the sealed answer sheet; SHA256 of every file in datasets v0 and v1 matches). Along the way, fixed download and import wrongly skipping work in an empty data directory (ADR 0012) | |
+| G1 | Global configuration and global dense table | ✅ done | 2026-11-04 | `config/regions-global.json`: 14 GFED regions + 3 holdout boxes, 278,192 cells (273,712 training, 4,480 holdout), 86.8 million cell-months; split into 10° latitude bands; one global training run takes about 4 minutes (24.36 million rows) | |
+| G2 | Global validation scores (by GFED region, reported only) | ✅ done | 2026-11-04 | Combined MALE over both windows (all rectangles): E028 global retrain **0.534**, M1s 0.619 (difference −0.084 ± 0.013), QM 0.680, M0 2.030; reference S11 three-region model 0.563. M1s is better in CEAM, EQAS, NHSA and SHSA; BOAS is worst at 1.03; the error for 1–9 hotspots is 1.13 times M1s's (`reports/global-scores.md`) | 6f84fc0 |
+| G3 | Global resampling and interval calibration | ✅ done | 2026-11-04 | First 50 sealed resamples per group (ADR 0013 item 5 addendum, approved by the user); calibration factor on the global validation windows **16.75** (S11: 5.37), raising coverage from 14% to 90% | fd36618 |
+| G4 | Global dataset generation and release | ✅ done | 2026-11-04 | 86.8 million cell-months; S-NPP recount over 1,988 region × months and 189 million hotspots, 0 mismatches; global annual totals go from 16.0 M in 2013 (model) to 16.6 M in 2014 (observed), with no break (`reports/global-review.md`). After the user looked it over, Release `global-v1` was published (CC BY 4.0), with SHA256 in `results/expected/dataset-global-v1.sha256` | |
 
 ## Handover notes
 
@@ -179,3 +186,22 @@ needs_human:
   - main is now the complete milestone B, and the `feat/data-harmonization` branch is kept. Before continuing work on that branch, first `git merge origin/main` so the branch history joins up with the squashed main, then open a new PR.
   - Test 2's weaknesses directly affect global extension: in the holdout regions the error is 2.5 times the training regions', totals are 14–45% too low, and interval coverage is only 56%. The global product must state that "estimates outside the training regions have larger uncertainty".
   - The frozen model uses only 3 training regions, and latitude acts as a region label (section 5 of the S10 review notes). The global rerun follows the plan; do not change the frozen model after the fact.
+
+### Session G (2026-11-04, qiuxue-yee, done)
+
+- **Branch**: `feat/data-harmonization` first merged `origin/main` (the squashed PR #2), continued on this branch, and finally opened a new PR (ADR 0013 item 1).
+- **Method**: ADR 0013. Code `harmonization/global_grid.py`, `harmonization/series_global.py`; configuration `config/regions-global.json`; one command `pipeline.py global`. Frozen files were not touched.
+- **Intermediate results** are all in the data directory:
+  - `processed/global/grid/`: the global dense table, split by latitude band;
+  - `global/inputs/`: the deduplicated model inputs;
+  - `global/resamples/{deploy,main,aux}/`: one `.npy` per resample; `est.npy` is the estimate without resampling.
+- **Resampling**: only the first 50 per group are used (ADR 0013 item 5 addendum, approved by the user; aux already had 100, of which only the first 50 are used). All three groups are done. To add more runs later, use `uv run python -X utf8 -m harmonization.series_global resample <deploy|main|aux> --max-new 20`, which skips finished ones (`--max-new` makes the process exit every 20 runs).
+- **Memory**: with two resampling processes in parallel, the main window ran out of memory twice (`_ArrayMemoryError`). The cause is that long-running processes keep growing their committed memory (the production-version process reached 34 GB after 31 runs). Now **only one process runs at a time** (main first, then deploy), and the model is freed after each resample. The results are exactly the same as in parallel, just slower.
+- **Done**: `calibrate` (factor 16.75) → `build` (24 minutes, S-NPP recount 0 mismatches) → `package`. The release files are in `D:/inspiratio-data/processed/global-v1/`, with `SHA256SUMS.txt` in the same directory.
+- **Release**: after the user looked it over (2026-11-04), [Release `global-v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/global-v1) was published, 30 files in total. The front-end files are flat in the Release; after downloading, put them in `frontend/`. All SHA256 are in `results/expected/dataset-global-v1.sha256`, which `pipeline.py check` compares against. Main files:
+  - `dataset_global-v1.parquet`: `446cd805725bd7e313e54874944b52bcc56962008a30b9f4473aa077d0205114`
+  - `region_totals_global-v1.csv`: `52f77eee3004b0e2ba5648b1c9f82376aacaa2ffdd36d6a8c702aebd03a0f6b3`
+  - `resamples20_global-v1.parquet`: `44aa476ac0e96e6035126218d8b6f0345c4897776e4b61f11499077f8a000a3a`
+  - `meta.json`: `52c9c5a1a0723941073090a5494ff7a1d02790e4b4be41c48fac8ad30b3c513e`
+- **Next**: the PR (feat/data-harmonization → main) is waiting for a person to merge it.
+- **Note for local tests**: on Chinese Windows, `tests/test_guardrails.py` fails to decode `git log` as GBK, so run `PYTHONUTF8=1 uv run pytest`; CI (Linux) is not affected. `tools/guardrails.py` is a frozen file and was not changed.

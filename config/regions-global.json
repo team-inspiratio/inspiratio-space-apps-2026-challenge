@@ -1,0 +1,18 @@
+{
+  "_comment": "Stage G (task card G-global, docs/decisions/0013): the global scope. Not frozen and not a replacement of config/regions.json, which stays frozen and still defines the three holdout regions (excluded from training and scoring; their VIIRS never reaches this machine) and the six v1 boxes. Read by harmonization/global_grid.py.",
+  "scope": "global",
+  "domain": {
+    "_comment": "A cell belongs to the global table when any rule holds.",
+    "gfed_land": "GFED4.1s basis-region code is not 0 (Ocean)",
+    "any_detection": "at least one cleaned detection of any sensor (Terra, Aqua, S-NPP, NOAA-20) in 2000-11..2026-10",
+    "scoring_rectangles": "inside any rectangle of config/rectangles.csv (so every rectangle is complete)",
+    "regions_json_boxes": "inside any box of config/regions.json (so the six v1 regions are complete)"
+  },
+  "regions": {
+    "scheme": "GFED4.1s basis regions (ancill/basis_regions of raw/gfed/GFED4.1s_2003.hdf5)",
+    "ocean_cells": "nearest cell with a non-zero code (Euclidean in grid index units, no wrap)",
+    "holdout": "cells inside the holdout boxes of config/regions.json take the holdout region name and role holdout; every other cell has role train and its GFED region name"
+  },
+  "band_deg": 10,
+  "release_tag": "global-v1"
+}

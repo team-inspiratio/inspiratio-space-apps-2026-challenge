@@ -53,6 +53,8 @@ Following the rules in AGENTS.md, execute docs/sessions/3-model.md.
 | The dataset | GitHub full Release `v1` (CC BY 4.0; the pre-release `dataset-v1` with the same content is kept as a historical record): `dataset_v1.parquet`, `dataset_v1.csv.gz`, `region_totals_v1.csv`, front-end `<region>.json.gz`. After downloading, check with `sha256sum -c SHA256SUMS.txt` |
 | Data card | [`docs/data-card.md`](docs/data-card.md) |
 | Front-end interface | [`docs/data-interface.md`](docs/data-interface.md) |
+| **Start here for a web agent** | [`docs/frontend-agent-brief.md`](docs/frontend-agent-brief.md) (includes a starter prompt) |
+| Project story and why each decision was made | [`docs/project-journey.md`](docs/project-journey.md) |
 | How the anomaly indicator is computed and checked | Reference implementation [`harmonization/anomaly.py`](harmonization/anomaly.py), standard test cases [`docs/anomaly-cases.json`](docs/anomaly-cases.json) (25 of them, for the front end to check one by one) |
 | AI usage statement | [`docs/ai-usage.md`](docs/ai-usage.md) |
 | Decisions still open | `needs_human` in the `PROGRESS.md` status block; details in [`docs/decisions/`](docs/decisions/) |

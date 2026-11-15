@@ -1,51 +1,64 @@
-# MODIS × VIIRS Hotspot Harmonization
+# MODIS × VIIRS Hotspot Harmonization / Harmonized Fire Record
 
-<!-- PROGRESS-BOX:BEGIN -->
-> **Status**: milestone B is done (S00–S15). The final dataset v1 is published as the full [Release `v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1) (CC BY 4.0), described in [docs/data-card.md](docs/data-card.md), with the front-end interface in [docs/data-interface.md](docs/data-interface.md). The final model is a two-stage LightGBM (E028), and the external blind grading was taken only once: MALE 0.258 on the training regions in 2012–2013 (simple ratio method M1s: 0.332) and 0.644 on the completely unseen holdout regions (M1s: 0.857); the validation report is in [reports/validation.md](reports/validation.md). One-command reproduction: `uv run python -X utf8 pipeline.py all --from-release` (about 1.5 hours, 37 checks). Next: task card [`G-global`](docs/sessions/G-global.md) (global rerun).
->
-> **Take over in 3 steps**: ① set up your environment and fill in `.env` following [HANDOFF.md](HANDOFF.md); ② copy the "universal relay prompt" from HANDOFF into Claude Code or Codex; ③ do whatever the AI says needs doing by you in person. Detailed progress is in [PROGRESS.md](PROGRESS.md).
-<!-- PROGRESS-BOX:END -->
+**One consistent monthly fire record from 2000 to 2026, across two generations of NASA satellites.**
+We bring the hotspot records of two satellite generations, MODIS (from 2000) and VIIRS (from 2012), onto one monthly series that can be compared across the whole period: global 0.25° cells, 2000-11 to 2026-10.
 
-We turn the hotspot records of two satellite sensor generations, MODIS (from 2000) and VIIRS (from 2012), into one monthly series that can be compared across the whole period, then build a web page where people pick an area, view its history, judge whether the latest complete month is unusually high, and download the results.
-
-**Full proposal: [docs/proposal.md](docs/proposal.md)**
+![Direct stitching creates a false step in 2012; the harmonized record joins up](reports/figures/d1-1-problem.png)
 
 ## The one-minute version
 
-- **Problem:** The two sensors differ in resolution and sensitivity, and VIIRS records clearly more hotspots. Stitched together directly, the series shows a jump in 2012 that is caused by the change of satellite, not by a change in fire activity.
-- **Approach:** Train a model on the years when both sensors were in orbit to predict, from MODIS information alone, how many hotspots VIIRS would record, then apply this conversion to the years before 2012. The main model is LightGBM, with a simple ratio method as the baseline for comparison; an AI-driven automated experiment loop helps improve the model on the validation set.
-- **Validation:** Use later years to predict earlier years, and hold out one region the model has never seen. The validation set selects the model; the test set stays locked, is run only once after the model is frozen, and is reported as it comes out.
-- **Outputs:** A harmonization algorithm, a public dataset and a web page, plus a write-up of the methods and validation.
+- **Problem**: VIIRS is much more sensitive than MODIS, and for the same fires it counts several times as many hotspots. Stitching the two periods together directly creates a **false step in 2012 caused by the change of satellite**, not by any real change in fire activity.
+- **Approach**: train a model (a two-stage LightGBM) on the years when both satellites were in orbit, inferring from MODIS information alone "how many hotspots VIIRS would see", then apply this conversion to the years before 2012.
+- **Proof**: the scoring rules were written and frozen before any results were seen; the test data is scored only in the GitHub cloud, and **the test is taken only once**.
+- **Results**:
+  - External blind grading: error 22% lower than the simple ratio method, and 25% lower in regions never seen before ([blind-test scores](reports/final-test.md));
+  - Global validation: error 14% lower than the simple ratio method ([global scores](reports/global-scores.md));
+  - Globally, 16.0 million hotspots in 2013 (model) and 16.6 million in 2014 (observed): no break at the handover.
+- **Scale**: 529 million raw hotspot records, 4 satellites, 26 years; 278,000 cells and 86.8 million cell-months worldwide.
 
-## Proposal contents
+## I want to…
 
-| Part | Contents |
+| I want to | Go here |
 |---|---|
-| [Project overview](docs/proposal.md#project-overview) | Problem, solution, deliverables |
-| [In plain language](docs/proposal.md#in-plain-language-what-this-project-does) | An explanation that needs no remote-sensing background |
-| [Approach](docs/proposal.md#approach-using-machine-learning-to-bring-history-onto-the-viirs-scale) / [Validation](docs/proposal.md#validation-how-we-show-the-model-can-be-trusted) | The core of the main proposal |
-| [Web page](docs/proposal.md#what-the-web-page-delivers) / [Implementation scope](docs/proposal.md#implementation-scope) | What users can do; required work and extensions |
-| [Appendix: Execution handbook](docs/proposal.md#appendix-execution-handbook) | Data, algorithm, validation framework, AI loop, 24 tasks, submission materials, risks, references |
+| **Use the data directly** | Download from [Releases](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases): the global version `global-v1` and the demo-region version `v1`, both CC BY 4.0. Read the [data card](docs/data-card.md) first. No account or key needed |
+| **Build the web page** | The [front-end brief](docs/frontend-agent-brief.md) (including an opening prompt for an AI agent), plus the interface specs [`data-interface.md`](docs/data-interface.md) and [`data-interface-global.md`](docs/data-interface-global.md) |
+| **See the method and the evidence** | The [validation report](reports/validation.md), then the [project journey](docs/project-journey.md) (why each decision was made) |
+| **Understand the whole plan** | The [full proposal](docs/proposal.md) |
+| **Rerun everything** | After `uv sync`, run `uv run python -X utf8 pipeline.py all --from-release` (about 1.5 hours, 37 automatic checks) |
+| **Continue development** | [HANDOFF.md](HANDOFF.md) (relay guide), [PROGRESS.md](PROGRESS.md) (progress) |
+
+<!-- PROGRESS-BOX:BEGIN -->
+> **Status**: all data-track task cards are done (S00–S15 and global stage G). The data is published: the global version as [Release `global-v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/global-v1) and the demo-region version as [Release `v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1), both CC BY 4.0. The website is being built by the front-end teammates in separate PRs.
+<!-- PROGRESS-BOX:END -->
 
 ## Repository layout
 
+Each main directory has its own README explaining what every file in it does.
+
 ```
-README.md               This file
-AGENTS.md / CLAUDE.md   Project rules for AI agents
-PROGRESS.md             Progress (machine-readable status block + stage table)
-HANDOFF.md              Relay guide and the universal relay prompt
-docs/proposal.md        Full proposal (main proposal + execution handbook)
-docs/execution-plan.md  Execution plan for the data analysis and algorithm work (the single source of truth)
-docs/sessions/          Task cards for each session
-tools/                  Guardrail and environment preflight scripts
-tests/                  pytest
-notes/                  Reading and study notes
-pyproject.toml, uv.lock Python dependencies (install with uv sync)
-.env.example            Secrets template (copy to .env; .env is never committed)
+README.md            This file: start here
+docs/                Documents: for people first, process records after   → docs/README.md
+reports/             Result reports and figures                            → reports/README.md
+harmonization/       Data processing and model code, by stage              → harmonization/README.md
+results/             Freeze and blind-grading records (do not change)      → results/README.md
+config/              Regions, scoring rectangles, settings, feature list (mostly frozen)
+pipeline.py          Rerun all results and check them with one command
+tests/               Automated tests (uv run pytest)
+tools/               Guardrails, environment preflight
+notes/               Study notes
+
+Files for AI agents (people need not read them):
+AGENTS.md, CLAUDE.md Rules an AI must follow (red lines, start-of-session routine)
+PROGRESS.md          Machine-readable progress status
+.claude/, .github/   AI hook; CI and the cloud grading workflow
 ```
+
+## About AI
+
+The data and algorithm part of this project used AI (Claude Code) heavily. People made the key decisions: choosing the holdout regions, pushing the blind-grading tag, approving the releases. The AI wrote the code and ran the experiments, and every technical decision is written into the [decision records](docs/decisions/). To prevent "changing things after seeing the answers", the project has three layers of automatic guardrails (hook, pre-commit check, CI). See the [AI usage statement](docs/ai-usage.md).
 
 ## Conventions
 
 - Changes go through branches and pull requests; do not push directly to main.
-- Secrets (such as the FIRMS MAP_KEY) live only in a local `.env`.
-- Raw data and large processed files stay out of the repository; their sources and download steps are documented.
+- Secrets live only in a local `.env` and never enter the repository.
+- Raw data and large files stay out of the repository; processed data is published as Release assets with recorded SHA256.
