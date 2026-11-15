@@ -1,17 +1,16 @@
-# Fire Atlas front-end source handover (web/)
+# Fire Atlas front end (web/)
 
-This is a complete copy of the source of the currently deployed web page, taken from the existing Sites source commit `bd39d7f2c5064917cee042607433375d59913ebf`. This time only the source and handover documents were organized; `src/`, the entry points, dependencies, lock file and existing tests are kept as they were, with no changes to features, scientific algorithms or deployment.
+The Fire Atlas front end provides maps, monthly calendars, anomaly summaries, exports, and methods documentation.
 
-Current address: <https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site> (Sites private access). This branch is `feat/web`; after it is merged, take over from `web/` on `main`.
+Current address: <https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site> (Sites private access).
 
 ## Running, building and testing locally
 
 Requires **Node.js 22.16+** and npm; preparing the real data also requires GitHub CLI: run `gh auth login` and make sure the account can read this private team repository. The front end needs no Python, FIRMS MAP_KEY, GPU or database.
 
 ```sh
-git clone https://github.com/team-inspiratio/inspiratio-space-apps-2026.git
-cd inspiratio-space-apps-2026
-git switch feat/web                 # use main once the PR is merged
+git clone https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge.git
+cd inspiratio-space-apps-2026-challenge
 cd web
 npm ci
 npm run data:prepare                # first prepare the Release v1 data the web page needs
@@ -29,7 +28,7 @@ npm run methods:data               # only after reports/ or results/final-test/ 
 
 **In a clean environment, `npm ci && npm run build` succeeds directly, but without the scientific data.** `build` itself does not fetch data; for the browser to load the six-region data properly, or to publish the full website, you must first run `npm run data:prepare` separately and then build. Do not deploy a `dist/` without prepared data. Dependencies are pinned exactly by `package-lock.json`.
 
-The tests are in `test/` (`feat/web-fixes` added the last 5 files):
+The tests are in `test/`:
 
 - `anomaly.test.mjs`: the 25 official anomaly indicator cases, with a snapshot in `test/fixtures/anomaly-cases.json` matching the root `docs/anomaly-cases.json`; answers are checked field by field, covering ties, insufficient history, missing data, near real-time and baseline periods.
 - `aggregate.test.mjs`: full/partial cell weights, no-coverage not treated as zero, each resample summed before taking the interval.
@@ -62,7 +61,7 @@ The script verifies the SHA256 of every file, retries failed fetches file by fil
 
 ## Directory structure and main components
 
-This is the original **Vite + plain JavaScript single-page app**, with the main views still concentrated in `src/main.js`; this time it was not split into components or refactored.
+This **Vite + plain JavaScript single-page app** keeps its main views in `src/main.js`.
 
 ```text
 web/

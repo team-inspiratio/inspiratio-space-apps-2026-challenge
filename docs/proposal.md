@@ -1,6 +1,6 @@
 # MODIS × VIIRS Hotspot Harmonization Proposal (Team Inspiratio)
 
-Team Inspiratio · 2026-11-02
+Team Inspiratio
 
 ## Project overview
 

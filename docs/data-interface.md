@@ -107,8 +107,8 @@ Original definitions:
 
 ## 7. Versions
 
-| Version | Date | Notes |
-|---|---|---|
-| v0 | 2026-11-03 | Milestone A: M1s fallback version, pre-release `milestone-a` |
-| v1 | 2026-11-04 | S12: selected model LightGBM E028 + stability intervals + near real-time flag, pre-release `dataset-v1`; from S15 the full Release `v1` (same data, plus the CSV, the data card and the anomaly test cases) |
-| v1 (S14 delivery) | 2026-11-04 | Data unchanged; adds the CSV version, the data card, and the anomaly indicator reference implementation with standard test cases. Published as Release `v1` (S15) |
+| Version | Notes |
+|---|---|
+| v0 | Milestone A: M1s fallback version, pre-release `milestone-a` |
+| v1 | S12: selected model LightGBM E028 + stability intervals + near real-time flag, pre-release `dataset-v1`; from S15 the full Release `v1` (same data, plus the CSV, the data card and the anomaly test cases) |
+| v1 (S14 delivery) | Data unchanged; adds the CSV version, the data card, and the anomaly indicator reference implementation with standard test cases. Published as Release `v1` (S15) |

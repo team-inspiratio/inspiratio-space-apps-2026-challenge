@@ -1,8 +1,8 @@
 # Frontend progress
 
-Scope: C-line web application; the G-global data job and root PROGRESS.md remain with their existing owner.
+Scope: web application.
 
-## 2026-11-04
+## Implemented features and validation
 
 - Implemented region presets, map overlay, box/polygon/coordinate selections, calendar, direct-splice comparison, anomaly card, historical baseline selector and annual source curves.
 - Implemented monthly CSV, selection GeoJSON and calendar PNG exports; method/validation and source/download dialogs.
