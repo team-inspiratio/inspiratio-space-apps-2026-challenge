@@ -33,7 +33,7 @@ Planned times are US Central Time (CST, UTC-6). The commit log has the actual pu
 | P01 | A | 11-14 17:16 | 11-14 23:16 | S00: environment, three-layer guardrails, CI, relay docs; holdout regions recorded (ADR 0001) | `2c37cf3` | 2026-11-03 13:44 | pushed |
 | P02 | A | 11-14 17:37 | 11-14 23:37 | S01: preregistration, frozen before any modelling (settings, holdout regions, scoring rectangles, grader.yml) | `569256a` | 2026-11-03 14:05 | pushed |
 | P03 | A | 11-14 17:58 | 11-14 23:58 | S02-S03: download and ingest (holdout-region VIIRS dropped at import) | `84abd8c` | 2026-11-03 15:52 | pushed |
-| P04 | A | 11-14 18:21 | 11-15 00:21 | S04-S06: cleaning, gridding and features, data health check; task card 1 done | `aa48ed0` | 2026-11-03 16:56 | planned |
+| P04 | A | 11-14 18:21 | 11-15 00:21 | S04-S06: cleaning, gridding and features, data health check; task card 1 done | `aa48ed0` | 2026-11-03 16:56 | pushed |
 | P05 | A | 11-14 18:39 | 11-15 00:39 | S07: judge code (prepare, evaluate, final_test), frozen after human review | `e19f26c` | 2026-11-03 17:38 | planned |
 | P06 | A | 11-14 19:02 | 11-15 01:02 | S08-S09: baselines M0/M1s/QM, dataset v0; milestone A | `25d7785` | 2026-11-03 17:50 | planned |
 | P07 | A | 11-14 19:26 | 11-15 01:26 | S10: LightGBM, 37 experiments, model review | `1922079` | 2026-11-03 21:52 | planned |
