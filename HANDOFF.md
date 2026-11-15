@@ -50,7 +50,7 @@ Following the rules in AGENTS.md, execute docs/sessions/3-model.md.
 | You want | Look here |
 |---|---|
 | Headline results | [`reports/validation.md`](reports/validation.md) (validation report, 6 core figures + limitations), [`reports/final-test.md`](reports/final-test.md) (one-time blind-test scores) |
-| The dataset | GitHub Release (pre-release `dataset-v1`; from S15 the full release `v1`): `dataset_v1.parquet`, `dataset_v1.csv.gz`, `region_totals_v1.csv`, front-end `<region>.json.gz`. After downloading, check with `sha256sum -c SHA256SUMS.txt` |
+| The dataset | GitHub full Release `v1` (CC BY 4.0; the pre-release `dataset-v1` with the same content is kept as a historical record): `dataset_v1.parquet`, `dataset_v1.csv.gz`, `region_totals_v1.csv`, front-end `<region>.json.gz`. After downloading, check with `sha256sum -c SHA256SUMS.txt` |
 | Data card | [`docs/data-card.md`](docs/data-card.md) |
 | Front-end interface | [`docs/data-interface.md`](docs/data-interface.md) |
 | How the anomaly indicator is computed and checked | Reference implementation [`harmonization/anomaly.py`](harmonization/anomaly.py), standard test cases [`docs/anomaly-cases.json`](docs/anomaly-cases.json) (25 of them, for the front end to check one by one) |
@@ -58,4 +58,4 @@ Following the rules in AGENTS.md, execute docs/sessions/3-model.md.
 | Decisions still open | `needs_human` in the `PROGRESS.md` status block; details in [`docs/decisions/`](docs/decisions/) |
 | What next | After milestone B comes task card [`G-global`](docs/sessions/G-global.md) (global rerun). Before starting, read section 9 "Limitations" of the validation report: the error in the holdout regions is 2.5 times that in the training regions, so the global stage needs more training regions or must mark everything outside them as low confidence |
 
-**Data only, no code**: with `gh` installed and logged in, run `gh release download dataset-v1 --repo team-inspiratio/inspiratio-space-apps-2026 -D <folder>` and read `data-card.md`; no FIRMS key is needed.
+**Data only, no code**: with `gh` installed and logged in, run `gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026 -D <folder>` and read `data-card.md`; no FIRMS key is needed.

@@ -5,17 +5,18 @@
 
 <!-- STATUS:BEGIN -->
 ```yaml
-current_card: docs/sessions/5-report.md        # next (or current) task card
-status: in_progress                     # ready | in_progress | blocked | done
-claimed_by: "qiuxue-yee"                # claimant's name; empty means unclaimed
-claimed_at: "2026-11-04T04:41:07Z"      # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
-last_pushed_stage: S14                  # last stage completed and pushed
+current_card: docs/sessions/G-global.md        # next (or current) task card
+status: ready                           # ready | in_progress | blocked | done
+claimed_by: ""                          # claimant's name; empty means unclaimed
+claimed_at: ""                          # claim time, ISO 8601 UTC, e.g. 2026-11-03T08:00:00Z
+last_pushed_stage: S15                  # last stage completed and pushed
 last_pushed_at: 2026-11-04
 branch: feat/data-harmonization
-data_release: dataset-v1                # final dataset v1 (S12); processed inputs are in data-v0, milestone A in milestone-a; SHA256 in the handover notes
-next_step: "Task card 5-report in progress: S13 and S14 done; next is S15 milestone B (one-command reproduction with pipeline.py all in a clean environment, matching the score tables; after a person confirms, publish Release v1 and squash-merge into main)"
+data_release: v1                        # full Release v1 (CC BY 4.0, S15); processed inputs are in data-v0, milestone A in milestone-a; SHA256 in the handover notes and results/expected/
+next_step: "Milestone B done (S13–S15; merged into main, Release v1 published). Next card G-global: global rerun (planned; on 2026-11-03 the user agreed to extend to global coverage)"
 needs_human:
-  - "Awaiting a person's decision: the dataset license (CC BY 4.0 suggested; docs/data-card.md, docs/decisions/0011 item 3), to be settled before Release v1 is published"
+  - "Awaiting human confirmation (a look-over is enough; not blocking): S15 acceptance used the pipeline.py all --from-release entry point (starting from the grid tables in Release data-v0), not a full rerun from raw data (docs/decisions/0012 item 1)"
+  - "Tell the front end: the full Release v1 is published (CC BY 4.0): gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026; same data as the pre-release dataset-v1, plus the CSV, the data card and the anomaly test cases"
   - "Tell the front end: the anomaly indicator reference implementation harmonization/anomaly.py + 25 standard test cases docs/anomaly-cases.json (check answers field by field; extra details in docs/data-interface.md section 6 and docs/decisions/0011 item 1); the dataset now also has a CSV version"
   - "Please read through: the data card docs/data-card.md and the AI usage statement docs/ai-usage.md"
   - "Please read through: the validation report reports/validation.md (6 core figures + limitations; conclusion: trustworthy in the training regions; in the holdout regions the error is 2.5 times larger and totals are 14–45% too low)"
@@ -43,8 +44,8 @@ needs_human:
 | 2 | [`2-baselines`](docs/sessions/2-baselines.md) | S07–S09 (milestone A) | ✅ done |
 | 3 | [`3-model`](docs/sessions/3-model.md) | S10 | ✅ done |
 | 4 | [`4-freeze-test`](docs/sessions/4-freeze-test.md) | S11–S12 | ✅ done |
-| 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15 (milestone B) | ⏭ next |
-| G | [`G-global`](docs/sessions/G-global.md) | Global rerun | not started (after S15) |
+| 5 | [`5-report`](docs/sessions/5-report.md) | S13–S15 (milestone B) | ✅ done |
+| G | [`G-global`](docs/sessions/G-global.md) | Global rerun | ⏭ next |
 
 ## Stage table
 
@@ -65,7 +66,7 @@ needs_human:
 | S12 | Final dataset | ✅ done | 2026-11-04 | Production version = the frozen evaluation version E028 (ADR 0009); 2.616 million cell-months: 554,000 S-NPP observed, 1.817 million model estimates, 197,000 Terra bridge, 47,000 NOAA-20 converted; 100 resampled intervals, regional intervals multiplied by the calibration factor 5.37; acceptance: in the S-NPP segment, 15.19 million points over 426 region-months match the observations one by one; pre-release `dataset-v1` | |
 | S13 | Validation report (D1) | ✅ done | 2026-11-04 | All of items 1–7 in section 3 done (`reports/validation.md`). The two new items: era-shift AUC 0.57 (training regions) / 0.56 (holdout regions), versus 0.75 / 0.70 for the 2022–2026 control (Terra drift); hotspots per km² of GFED burned area unchanged across 2012 (southern Africa 2.77 → 2.92, Córdoba 5.90 → 5.86), while direct stitching jumps about 5 times. 6 core figures `reports/figures/d1-*.png` | |
 | S14 | Delivery | ✅ done | 2026-11-04 | CSV version of the dataset `dataset_v1.csv.gz` (18 MB, checked column by column against the Parquet, relative error < 5×10⁻⁶); data card `docs/data-card.md`; AI usage statement `docs/ai-usage.md`; anomaly indicator reference implementation `harmonization/anomaly.py` + 25 standard test cases `docs/anomaly-cases.json` (19 hand-worked edge cases + 6 from real data); HANDOFF section "Where the results are"; ADR 0011 | |
-| S15 | ★Milestone B: one-command reproduction, Release v1, merge into main | ⬜ todo | | | |
+| S15 | ★Milestone B: one-command reproduction, Release v1, merge into main | ✅ done | 2026-11-04 | After the user confirmed, squash-merged into main and published the full Release `v1` (CC BY 4.0). Fresh clone + empty data directory running `pipeline.py all --from-release`: 87 minutes, all 37 `pipeline.py check` items pass (score files identical word for word; scores on both validation windows equal freeze.json and E028; the test set's est_final and 100 resamples bit-for-bit identical to the sealed answer sheet; SHA256 of every file in datasets v0 and v1 matches). Along the way, fixed download and import wrongly skipping work in an empty data directory (ADR 0012) | |
 
 ## Handover notes
 
@@ -159,3 +160,22 @@ needs_human:
   - The report (S13) must state clearly: Test 2's weaknesses (section 3), the intervals' insufficient coverage in new regions, that 2012–2013 in the training regions are estimates in the dataset (ADR 0009 item 1, awaiting human confirmation), and that the error for Terra-only months is about 1.6 times that with Aqua (ADR 0009 item 2).
   - The era-shift investigation (pre-registration section 8) has not been done yet; it is in S13.
   - In the GFED plausibility check, the 2012–2013 VIIRS part can only use data on the same basis as the blind grading, which this machine does not have.
+
+### Session 5 (2026-11-04, qiuxue-yee)
+
+- **S13 validation report**: `reports/validation.md`, code `harmonization/validation.py` (`drift | gfed | figures | all`); the 6 core figures and 2 supplementary figures are in `reports/figures/d1-*.png`; implementation details in ADR 0010.
+- **S14 delivery**: `docs/data-card.md`, `docs/ai-usage.md`, the anomaly indicator reference implementation `harmonization/anomaly.py` and 25 standard test cases `docs/anomaly-cases.json`, `dataset_v1.csv.gz`, HANDOFF section 5 ("Where the results are"); details in ADR 0011. The local data directory `processed/v1` has been repackaged with the CSV, the data card, the anomaly cases and a new `SHA256SUMS.txt`.
+- **S15 one-command reproduction**: `pipeline.py` (repository root).
+  - Commands: `all --from-release` (starts from Release `data-v0`, about 1.5 hours), `all` (starts from raw data, needs a FIRMS key and about 50 GB), `check`, `list`.
+  - Each stage writes `pipeline_<stage>.done` in the data directory, so a rerun after an interruption skips finished stages; add `--force` to rerun everything.
+  - The expected dataset hashes are in `results/expected/`.
+  - Acceptance result: in `D:/inspiratio-repro` (fresh clone + empty data directory), the run finished with 37/37 passing; the results are in `pipeline_check.json` in the data directory. This directory can be deleted.
+  - Scope, the steps not rerun and the reasons are in ADR 0012.
+- **License, Release v1, merge into main** (confirmed by the user on 2026-11-04):
+  - The dataset uses CC BY 4.0, now written into the data card and ADR 0011.
+  - PR #2 squash-merged into main.
+  - Full Release `v1` (tag on main's merge commit): https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1 . The files come from the local `D:/inspiratio-data/processed/v1`, with SHA256 matching `results/expected/dataset-v1.sha256`. Compared with the pre-release `dataset-v1`, the data is exactly the same, plus the CSV, the data card and the anomaly test cases, and the interface document is updated. Download with `gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026`, then `sha256sum -c SHA256SUMS.txt`.
+- **Tips for the G-global session**:
+  - main is now the complete milestone B, and the `feat/data-harmonization` branch is kept. Before continuing work on that branch, first `git merge origin/main` so the branch history joins up with the squashed main, then open a new PR.
+  - Test 2's weaknesses directly affect global extension: in the holdout regions the error is 2.5 times the training regions', totals are 14–45% too low, and interval coverage is only 56%. The global product must state that "estimates outside the training regions have larger uncertainty".
+  - The frozen model uses only 3 training regions, and latitude acts as a region label (section 5 of the S10 review notes). The global rerun follows the plan; do not change the frozen model after the fact.

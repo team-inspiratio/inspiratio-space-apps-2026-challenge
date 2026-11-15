@@ -16,7 +16,7 @@
 | **Size** | 2,615,808 cell-months (8,384 cells × 312 months). |
 | **Version** | v1, 2026-11-04. Model LightGBM E028, frozen before a one-time blind test. |
 | **Files** | `dataset_v1.parquet` and `dataset_v1.csv.gz` (same table), `region_totals_v1.csv`, one `frontend/<region>.json.gz` per region, `resamples20_v1.parquet`, `meta.json`, `SHA256SUMS.txt`, on the GitHub release of this repository. |
-| **License** | Proposed: CC BY 4.0 (to be confirmed by the team before public release). The input data are NASA FIRMS and GFED products; see "Citation". |
+| **License** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (confirmed by the team, 2026-11-04). The input data are NASA FIRMS and GFED products; see "Citation". |
 
 ## 1. Sources
 
@@ -88,7 +88,7 @@ Scores are MALE, the mean absolute difference of log(count + 1) on random 1°-5�
 
 ## 7. Citation and acknowledgement
 
-- Dataset: Team Inspiratio (2026). *Harmonized MODIS × VIIRS monthly active-fire counts, 0.25°, 2000-11 to 2026-10, version 1.* GitHub release of `team-inspiratio/inspiratio-space-apps-2026`.
+- Dataset: Team Inspiratio (2026). *Harmonized MODIS × VIIRS monthly active-fire counts, 0.25°, 2000-11 to 2026-10, version 1.* GitHub release `v1` of `team-inspiratio/inspiratio-space-apps-2026` (https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1). CC BY 4.0.
 - FIRMS: "We acknowledge the use of data and imagery from NASA's Fire Information for Resource Management System (FIRMS) (https://www.earthdata.nasa.gov/firms), part of NASA's Earth Science Data and Information System (ESDIS)."
 - GFED4.1s: van der Werf, G. R., et al. (2017). Global fire emissions estimates during 1997-2016. *Earth System Science Data*, 9, 697-720.
 - VIIRS 375 m product: Schroeder, W., Oliva, P., Giglio, L., & Csiszar, I. A. (2014). The New VIIRS 375 m active fire detection data product: Algorithm description and initial assessment. *Remote Sensing of Environment*, 143, 85-96.
@@ -104,4 +104,4 @@ Scores are MALE, the mean absolute difference of log(count + 1) on random 1°-5�
 - **How accurate**: MALE 0.258 in the training regions' test years (simple ratio method 0.332), with annual total bias within 9%; 0.644 in the holdout regions, an error 2.5 times that of the training regions, with totals 14%–45% too low (except northern Australia).
 - **Intervals**: the stability intervals only express "how much the estimate would change with a different set of training years", not "the true value has a 90% chance of falling inside"; after multiplying the regional intervals by 5.37 under a rule fixed in advance, coverage is 95.5% in the training regions and 55.9% in the holdout regions.
 - **Suitable for**: comparing hotspot activity across months and years within the training regions, building a burning calendar and judging "is this month's fire activity high". **Not suitable for**: counting fires, computing burned area or emissions, judging disaster severity, or use outside the training regions without a caveat.
-- **License**: CC BY 4.0 suggested; to be confirmed by the team before public release. The raw data comes from NASA FIRMS and GFED; see section 7 for how to cite.
+- **License**: CC BY 4.0 (confirmed by the team on 2026-11-04). The raw data comes from NASA FIRMS and GFED; see section 7 for how to cite.

@@ -32,4 +32,4 @@ S14 on the task card requires delivering: the dataset (CSV and Parquet), the dat
 
 ## Status
 
-The technical details in items 1–3 were decided by the AI under the user's authorization (ADR 0007 item 5), 2026-11-04. **Awaiting human confirmation**: the license (item 3); the front end must be told about the anomaly indicator details (item 1).
+The technical details in items 1–3 were decided by the AI under the user's authorization (ADR 0007 item 5), 2026-11-04. **The license has been confirmed by the user: CC BY 4.0** (2026-11-04, published with Release v1). The front end must be told about the anomaly indicator details (item 1).
