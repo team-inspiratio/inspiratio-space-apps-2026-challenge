@@ -8,7 +8,7 @@ S01 冻结了 `tools/guardrails.py`。冻结后第一次本地提交时发现：
 
 ## 选项
 
-1. **保持现状**：本地一律用 `python -X utf8 tools/guardrails.py check`（已改好 `.pre-commit-config.yaml` 和 `tools/preflight.py`，这两个文件不在冻结清单里）。手动运行时也要加 `-X utf8`，或设环境变量 `PYTHONUTF8=1`。
+1. **保持现状**：本地一律用 `python -X utf8 tools/guardrails.py check`（已改好 `.pre-commit-config.yaml` 和 `tools/preflight.py`，这两个文件不在冻结清单里）。手动运行时也要加 `-X utf8`，或设环境变量 `PYTHONUTF8=1`。跑测试同理：`uv run python -X utf8 -m pytest`（否则 `test_repository_passes_guardrails` 在中文 Windows 上会失败）。
 2. **由人解冻并修复**：在 `guardrails.py` 的两处 `subprocess.run` 加 `encoding="utf-8"`，重新冻结，提交信息写 `[unfreeze]` 和理由。只改编码，不改任何规则。
 
 ## 建议
