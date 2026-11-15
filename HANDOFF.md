@@ -74,7 +74,7 @@ Following the rules in AGENTS.md, execute docs/sessions/3-model.md.
 | 想要 / You want | 看这里 / Look here |
 |---|---|
 | 一句话结论和成绩 / Headline results | [`reports/validation.md`](reports/validation.md)（验证报告，6 张核心图 + 局限性）、[`reports/final-test.md`](reports/final-test.md)（一次性盲审成绩） |
-| 数据集 / The dataset | GitHub Release（`dataset-v1` 预发布版；S15 起为正式版 `v1`）：`dataset_v1.parquet`、`dataset_v1.csv.gz`、`region_totals_v1.csv`、前端 `<region>.json.gz`。下载后用 `sha256sum -c SHA256SUMS.txt` 核对 |
+| 数据集 / The dataset | GitHub Release 正式版 `v1`（CC BY 4.0；同样内容的预发布版 `dataset-v1` 保留作历史记录）：`dataset_v1.parquet`、`dataset_v1.csv.gz`、`region_totals_v1.csv`、前端 `<region>.json.gz`。下载后用 `sha256sum -c SHA256SUMS.txt` 核对 |
 | 数据说明卡 / Data card | [`docs/data-card.md`](docs/data-card.md)（英文，附中文摘要） |
 | 前端接口 / Front-end interface | [`docs/data-interface.md`](docs/data-interface.md) |
 | 异常指标怎么算、怎么对答案 / Anomaly indicator | 参考实现 [`harmonization/anomaly.py`](harmonization/anomaly.py)，标准测试用例 [`docs/anomaly-cases.json`](docs/anomaly-cases.json)（25 个，前端逐项对） |
@@ -82,4 +82,4 @@ Following the rules in AGENTS.md, execute docs/sessions/3-model.md.
 | 还要人决定的事 / Open decisions | `PROGRESS.md` 状态块的 `needs_human`，详情在 [`docs/decisions/`](docs/decisions/) |
 | 下一步 / What next | 里程碑 B 之后是任务卡 [`G-global`](docs/sessions/G-global.md)（全球重跑），开始前先读验证报告第 9 节“局限性”：留出区误差是训练区的 2.5 倍，全球阶段需要更多训练区或把训练区外标成低置信度 |
 
-**只想用数据、不想跑代码 / Data only**：装好 `gh` 并登录后，`gh release download dataset-v1 --repo team-inspiratio/inspiratio-space-apps-2026 -D <文件夹>`，读 `data-card.md` 即可，不需要 FIRMS key。
+**只想用数据、不想跑代码 / Data only**：装好 `gh` 并登录后，`gh release download v1 --repo team-inspiratio/inspiratio-space-apps-2026 -D <文件夹>`，读 `data-card.md` 即可，不需要 FIRMS key。

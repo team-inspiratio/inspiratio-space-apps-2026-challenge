@@ -189,6 +189,27 @@ def import_source(source: str, product: str, chunks: Iterator[tuple[pd.DataFrame
     }
 
 
+def imported_here(source: str) -> bool:
+    """Imported into THIS data folder. The ledger is committed (it describes the original run),
+    so being listed there alone does not mean the points are here."""
+    return any((data_dir() / "interim" / "points").glob(f"*/*/{source}.parquet"))
+
+
+def same_as_ledger(row: dict, ledger: dict, strict: bool = True) -> None:
+    """A source the committed ledger lists must import to exactly the recorded counts. The
+    yearly archive is hash-locked, so a difference stops the run; the API (2026) can change as
+    FIRMS reprocesses near-real-time data, so there it is only reported."""
+    old = ledger.get(row["source"])
+    if old is None:
+        return
+    for k in ("rows_raw", "rows_holdout_dropped", "rows_written"):
+        if int(old[k]) != int(row[k]):
+            msg = f"{row['source']}: {k} {row[k]} differs from the ledger ({old[k]})"
+            if strict:
+                raise SystemExit(msg)
+            print(f"WARNING {msg}", flush=True)
+
+
 def api_chunks(files: list[Path]) -> Iterator[tuple[pd.DataFrame, str]]:
     for f in files:
         df = pd.read_csv(f, dtype={"acq_time": str})
@@ -206,9 +227,10 @@ def main() -> int:
 
     for path in sorted((data_dir() / "raw" / "firms_yearly").glob("*.zip")):
         source = path.stem
-        if source in ledger:
+        if imported_here(source):
             continue
         row = import_source(source, "SP", zip_chunks(path))
+        same_as_ledger(row, ledger)
         listed = int(manifest.get(f"raw/firms_yearly/{path.name}", {}).get("rows", -1))
         if listed != row["rows_raw"]:
             raise SystemExit(f"{source}: read {row['rows_raw']} rows, manifest says {listed}")
@@ -222,7 +244,7 @@ def main() -> int:
     api_folders = [] if args.yearly_only else sorted(d for d in api_root.glob("*") if d.is_dir())
     for folder in api_folders:
         source = f"api_{folder.name}"
-        if source in ledger:
+        if imported_here(source):
             continue
         product = "NRT" if folder.name.endswith("NRT") else "SP"
         row = import_source(source, product, api_chunks(sorted(folder.glob("*.csv"))))
@@ -232,6 +254,7 @@ def main() -> int:
             fetched = fetched[fetched["source"] == folder.name]
             row["rows_raw"] = int(fetched["rows_raw"].sum())
             row["rows_holdout_dropped"] += int(fetched["rows_holdout_dropped"].sum())
+        same_as_ledger(row, ledger, strict=False)
         ledger[source] = row
         write_ledger(ledger)
         print(f"ok {source}: {row}", flush=True)

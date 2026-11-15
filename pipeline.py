@@ -29,14 +29,17 @@ check compares, without changing anything:
   - the frozen procedure on both validation windows with results/freeze.json and with E028 in
     reports/scores-s10.json (scores, parameters, rounds), and the calibration factor;
   - the rebuilt test-set estimates with the sealed results/submission.parquet (bit for bit);
-  - the dataset files v0 and v1 with results/expected/dataset-v*.sha256 (meta.json without its
-    acceptance recount when the cleaned S-NPP points are not in the data folder).
+  - the dataset files v0 and v1 with results/expected/dataset-v*.sha256. When the cleaned S-NPP
+    points are not in the data folder (Release start) the S12 acceptance recount is skipped:
+    meta.json is then compared without it, and the region files (which embed meta.json) bit for
+    bit after the published recount is put back.
 """
 
 from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import os
 import shutil
@@ -254,6 +257,9 @@ def check() -> bool:
                     ref.pop("acceptance_recount", None)
                     ok = meta == ref
                     detail = "equal except the skipped acceptance recount"
+            if not ok and name.endswith(".json.gz"):
+                ok = region_json_with_recount(p, v) == digest
+                detail = "bit for bit with the published acceptance recount put back" if ok else ""
             record(f"dataset {v}: {name}", ok, detail)
 
     width = max(len(n) for n, _, _ in results)
@@ -274,6 +280,27 @@ def committed_release_meta(v: str) -> str | None:
     """meta.json as published: kept next to the expected hashes for this comparison."""
     p = ROOT / "results" / "expected" / f"dataset-{v}-meta.json"
     return p.read_text(encoding="utf-8") if p.exists() else None
+
+
+def region_json_with_recount(path: Path, v: str) -> str | None:
+    """SHA256 of a web-page region file after its skipped acceptance recount is replaced by the
+    published one (series_v1 embeds meta.json under "model"), encoded as series_v1 writes it.
+    None when the file did not skip the recount."""
+    import gzip
+
+    data = json.loads(gzip.decompress(path.read_bytes()))
+    model = data.get("model", {})
+    if "skipped" not in model.get("acceptance_recount", {}):
+        return None
+    ref = json.loads(committed_release_meta(v) or "{}")
+    if "acceptance_recount" not in ref:
+        return None
+    model["acceptance_recount"] = ref["acceptance_recount"]
+    raw = json.dumps(data, separators=(",", ":")).encode("utf-8")
+    buf = io.BytesIO()
+    with gzip.GzipFile(fileobj=buf, mode="wb", mtime=0, filename=path.name) as f:
+        f.write(raw)
+    return hashlib.sha256(buf.getvalue()).hexdigest()
 
 
 def main() -> int:

@@ -1,6 +1,6 @@
 # 数据接口规范（数据集 v1 / S12 最终版；v0 见第 7 节）
 
-> 给前端用。v1 在 GitHub 预发布版 `dataset-v1`，用 `uv run python -X utf8 -m harmonization.series_v1 build` 生成。v1 用选定的模型 **LightGBM E028**（S11 冻结、经外部盲审打分），字段与 v0 兼容，新增区间和近实时标记，来源名从 `m1s_*` 改成 `model_*`。这里没写到的约定，以提案“网页成果”“异常指标”“从格子到用户区域”为准。做法细节见 `docs/decisions/0009`。
+> 给前端用。v1 在 GitHub 正式版 Release `v1`（CC BY 4.0；之前的预发布版 `dataset-v1` 数据相同），用 `uv run python -X utf8 -m harmonization.series_v1 build` 生成。v1 用选定的模型 **LightGBM E028**（S11 冻结、经外部盲审打分），字段与 v0 兼容，新增区间和近实时标记，来源名从 `m1s_*` 改成 `model_*`。这里没写到的约定，以提案“网页成果”“异常指标”“从格子到用户区域”为准。做法细节见 `docs/decisions/0009`。
 
 ## 1. 文件
 
@@ -110,5 +110,5 @@ v1 的限制：
 | 版本 | 时间 | 说明 |
 |---|---|---|
 | v0 | 2026-11-03 | 里程碑 A：M1s 保底版，预发布版 `milestone-a` |
-| v1 | 2026-11-04 | S12：选定模型 LightGBM E028 + 稳定性区间 + 近实时标记，预发布版 `dataset-v1` |
+| v1 | 2026-11-04 | S12：选定模型 LightGBM E028 + 稳定性区间 + 近实时标记，预发布版 `dataset-v1`；S15 起正式版 Release `v1`（数据相同，加 CSV、数据说明卡、异常测试用例） |
 | v1（S14 交付） | 2026-11-04 | 数据不变；加 CSV 版、数据说明卡、异常指标参考实现和标准测试用例。正式发布为 Release `v1`（S15） |
