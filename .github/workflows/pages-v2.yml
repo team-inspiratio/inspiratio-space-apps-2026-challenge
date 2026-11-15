@@ -34,7 +34,8 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Playwright 1.56.1 supports this image; ubuntu-latest may advance past it.
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: frontend-v2
@@ -85,7 +86,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       pages: write
       id-token: write
