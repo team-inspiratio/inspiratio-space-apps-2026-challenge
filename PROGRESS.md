@@ -221,3 +221,14 @@ needs_human:
   - `meta.json`: `52c9c5a1a0723941073090a5494ff7a1d02790e4b4be41c48fac8ad30b3c513e`
 - **Next**: the PR (feat/data-harmonization → main) is waiting for a person to merge it.
 - **Note for local tests**: on Chinese Windows, `tests/test_guardrails.py` fails to decode `git log` as GBK, so run `PYTHONUTF8=1 uv run pytest`; CI (Linux) is not affected. `tools/guardrails.py` is a frozen file and was not changed.
+
+### Front end (web/)
+
+- **Date / scope**: 2026-11-04, Codex; the existing front-end source was added to the repository so it is easier to take over and change. No features were changed this time, and the data tasks were not taken over.
+- **Current address**: https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site (a private Sites site). The deployment method and permissions are unchanged; GitHub Pages is not configured; no redeployment this time.
+- **Source location**: `web/`, on the `feat/web` branch created from the latest `main`, reviewed through a draft PR. The baseline for the existing deployment's source is Sites commit `bd39d7f2c5064917cee042607433375d59913ebf`; the main program, styles, dependencies and lock file were copied verbatim.
+- **Handover entry point**: `web/README.md` explains how to run and build, the existing tests, the Release v1 file list and how to prepare it, the deployment steps, the directory structure, and where the code for the map, calendar, card, line chart and methods view lives.
+- **Data**: scientific data does not go into Git. `npm run data:prepare` fetches and verifies the files from Release v1; `npm run build` itself does not fetch data, so the data must be prepared before publishing the full web page. The front end needs no FIRMS key.
+- **Known issues to fix**: the raw per-point hotspot CSV needs approved per-region files from the data side; `global-v1` is not yet integrated; custom selections and the 20-resample intervals are approximations; a human usability check on separate devices is still for the team to do. Redeploying needs edit/publish permission on the existing Sites project.
+- **Earlier front-end PR**: #3 uses a `frontend/` directory; this time `feat/web` / `web/` is the source handover location the user specified, to avoid merging two sets of directories into main at the same time.
+- **Acceptance this time**: in a clean environment `npm ci` and `npm run build` succeed; after preparing the v1 data, the 36 existing front-end tests pass (including the 25 standard anomaly cases), the repository's 79 Python tests pass with 2 local-data checks skipped; the full pre-commit check passes, and the guardrails show zero violations for the 13 frozen files. Apart from this handover documentation, the Git blobs of 24 source files match the existing deployment. The two root preflight items for the FIRMS key and the data directory belong to the data pipeline configuration; this front-end import did not fill in any key or start any data task.

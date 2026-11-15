@@ -1,0 +1,28 @@
+{
+  "name": "inspiratio-fire-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test test/*.test.mjs",
+    "data:prepare": "node scripts/prepare-data.mjs",
+    "methods:data": "node scripts/methods-data.mjs"
+  },
+  "dependencies": {
+    "@turf/area": "7.4.0",
+    "@turf/helpers": "7.4.0",
+    "@turf/intersect": "7.4.0",
+    "leaflet": "1.9.4",
+    "leaflet-draw": "1.0.4",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2"
+  },
+  "devDependencies": {
+    "vite": "8.3.5",
+    "hyparquet": "1.32.0",
+    "hyparquet-compressors": "1.1.2"
+  }
+}
