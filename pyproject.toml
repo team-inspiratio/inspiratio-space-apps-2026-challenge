@@ -41,7 +41,7 @@ default-groups = ["dev"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-extend-exclude = [".venv", "data", "harmonization/variants"]  # S10 records, kept verbatim
+extend-exclude = [".venv", "data", "harmonization/variants", "demo"]  # S10 records and demo render scripts, kept verbatim
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]

@@ -1,9 +1,9 @@
-# 上一轮前端交接摘要
+# Previous Frontend Handoff Summary
 
-这份摘要记录上一位 AI 报告的状态。当前的修改任务见[修改提示词](README.md)。
+This summary records the status reported by the previous AI. For the current revision task, see the [revision prompt](README.md).
 
-- 据交接，圈选区域已接入基于 0.25° 数据瓦片的直接拼接计数。无数值的月份显示 `—` 并给出原因。用户手动探索时，可以用 “Back to the story” 回到故事。
-- 据交接，地图已加入 Natural Earth 的国家、州省、城市、行政边界、水系等地理信息，放大时切到 0.25° 格网。
-- 为提高流畅性，上一轮加入了底图缓存、移动时降低渲染分辨率、数据 Worker、故事滚动停稳后播放、惯性平移和缓动缩放。这些改动是复查切换拖影时的背景。上一轮报告慢速机器的拖动仍约 50 ms/帧。
-- 上一轮还加入日期范围、共享链接、格子 CSV、NASA FIRMS 外链、日历统计、历史参考集切换、异常图层、cividis 配色和 Method & evidence。
-- 上一轮报告 37 项单元测试、14 项已有浏览器功能检查通过。新增功能的浏览器检查、手机布局和 FIRMS 外链仍待核实。当时也记录了排版润色、更新录屏和部署待办。
+- Per the handoff, area selection is wired to direct-splice counts built from the 0.25° data tiles. Months without a value show `—` along with the reason. While exploring manually, users can return to the story with "Back to the story".
+- Per the handoff, the map now includes Natural Earth countries, states/provinces, cities, administrative boundaries and water features, and switches to the 0.25° grid when zoomed in.
+- For smoother performance, the previous round added basemap caching, lower render resolution while moving, a data Worker, story playback once scrolling settles, inertial panning and eased zooming. These changes are the background for reviewing the transition ghosting. The previous round reported dragging on slow machines still takes about 50 ms/frame.
+- The previous round also added date ranges, share links, per-cell CSV, NASA FIRMS external links, calendar statistics, reference-set switching, an anomaly layer, the cividis color scheme, and Method & evidence.
+- The previous round reported 37 unit tests and 14 existing browser feature checks passing. Browser checks for the new features, the mobile layout and the FIRMS links are still unverified. It also logged typography polish, an updated screen recording and deployment as to-dos.

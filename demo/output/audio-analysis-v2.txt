@@ -1,0 +1,42 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'demo/output/fire-atlas-demo-v2.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.101
+  Duration: 00:00:30.00, start: 0.000000, bitrate: 750 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 551 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      encoder         : Lavc63.1.101 libx264
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 189 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+Stream mapping:
+  Stream #0:1 -> #0:0 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.101
+  Stream #0:0(und): Audio: pcm_s16le, 192000 Hz, stereo, s16, 6144 kb/s (default)
+    Metadata:
+      encoder         : Lavc63.1.101 pcm_s16le
+      handler_name    : SoundHandler
+size=N/A time=00:00:23.60 bitrate=N/A speed=  47x elapsed=0:00:00.50    [Parsed_loudnorm_0 @ 0x143f17660] 
+{
+	"input_i" : "-25.11",
+	"input_tp" : "-8.84",
+	"input_lra" : "7.10",
+	"input_thresh" : "-35.31",
+	"output_i" : "-23.52",
+	"output_tp" : "-7.32",
+	"output_lra" : "5.00",
+	"output_thresh" : "-33.63",
+	"normalization_type" : "dynamic",
+	"target_offset" : "-1.48"
+}
+[out#0/null @ 0x143f144e0] video:0KiB audio:22500KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:00:30.00 bitrate=N/A speed=49.8x elapsed=0:00:00.60    
