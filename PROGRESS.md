@@ -52,7 +52,7 @@ needs_human:
 - Task 3 done: draft comparison of deployment options, ADR 0016 (chatgpt.site, Vercel, Netlify, GitHub Pages); nothing was deployed.
 - Task 4 done: draft submission materials `docs/submission/` (`project-page.md`, `demo-script.md`, `checklist.md`), all marked to be checked item by item after the official guides are released on 11/13.
 - Task 5 done: the three demo routes were tested on the PR #5 build and written into `docs/submission/demo-script.md`. No bugs blocking the demo were found, so the web code was not changed.
-- Public data Releases (2026-11-15): this repository had no Releases, so the dataset links in the documents did not open. Added `.github/workflows/mirror-releases.yml`, which publishes `data-v0`, `v1` and `global-v1` here unchanged (source and read token come from the repository secrets `SOURCE_REPO` and `SOURCE_REPO_TOKEN`; each file checked against the source SHA256 digest before and after upload), and pointed the README, HANDOFF, data card, front-end brief, `pipeline.py` and both front ends at this repository. Needs a person to add the two secrets and run the workflow; the live V2 site must be rebuilt and redeployed to pick up the new links.
+- Dataset links (2026-11-15): pointed the README, HANDOFF, data card, front-end brief, `pipeline.py` and both front ends at the Releases of this repository, and filled the link fields of the submission project page. This repository has no Releases yet, so these links do not open until the team publishes `data-v0`, `v1` and `global-v1` here; how to do that is a team decision. The live V2 site must be rebuilt and redeployed to pick up the new links.
 
 ## Sessions overview
 
