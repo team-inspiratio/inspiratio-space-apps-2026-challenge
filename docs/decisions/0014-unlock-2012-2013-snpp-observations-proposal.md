@@ -8,8 +8,8 @@ The plan originally used S-NPP observations in the training regions for 2012-02 
 
 The test is now over:
 
-- The `final-test` tag was pushed by a person, and the run happened only once ([run record](https://github.com/team-inspiratio/inspiratio-space-apps-2026/actions/runs/41768696897)).
-- The scores are in `results/final-test/`, results commit `742547e`, 2026-11-04 03:50 UTC.
+- The `final-test` tag was pushed by a person, and the run happened only once ([public result archive](../../results/final-test/)).
+- The scores are in `results/final-test/`, recorded 2026-11-04 03:50 UTC.
 
 Scope:
 

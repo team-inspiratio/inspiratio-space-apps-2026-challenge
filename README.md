@@ -23,15 +23,15 @@ We bring the hotspot records of two satellite generations, MODIS (from 2000) and
 
 | I want to | Go here |
 |---|---|
-| **Use the data directly** | Download from [Releases](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases): the global version `global-v1` and the demo-region version `v1`, both CC BY 4.0. Read the [data card](docs/data-card.md) first. No account or key needed |
+| **Use the data directly** | Use the bundled [global frontend assets](inspiratio-site/public/data/global-v1/) (CC BY 4.0). See [available public files](docs/public-data.md) and the [data card](docs/data-card.md). No account or key needed |
 | **Build the web page** | The [front-end brief](docs/frontend-agent-brief.md) (including an opening prompt for an AI agent), plus the interface specs [`data-interface.md`](docs/data-interface.md) and [`data-interface-global.md`](docs/data-interface-global.md) |
 | **See the method and the evidence** | The [validation report](reports/validation.md), then the [project journey](docs/project-journey.md) (why each decision was made) |
 | **Understand the whole plan** | The [full proposal](docs/proposal.md) |
-| **Rerun everything** | After `uv sync`, run `uv run python -X utf8 pipeline.py all --from-release` (about 1.5 hours, 37 automatic checks) |
+| **Rerun everything** | Use `uv run python -X utf8 pipeline.py all` with your own FIRMS key and data directory. Processed-data Release shortcuts are not currently available; see [public data availability](docs/public-data.md) |
 | **Continue development** | [HANDOFF.md](HANDOFF.md) (relay guide), [PROGRESS.md](PROGRESS.md) (progress) |
 
 <!-- PROGRESS-BOX:BEGIN -->
-> **Status**: all data-track task cards are done (S00–S15 and global stage G). The data is published: the global version as [Release `global-v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/global-v1) and the demo-region version as [Release `v1`](https://github.com/team-inspiratio/inspiratio-space-apps-2026/releases/tag/v1), both CC BY 4.0. The website is being built by the front-end teammates in separate PRs.
+> **Status**: all data-track task cards are done (S00–S15 and global stage G). This public repository includes the global frontend assets, source and reports. It currently has no GitHub Release assets; see [public data availability](docs/public-data.md).
 <!-- PROGRESS-BOX:END -->
 
 ## Repository layout

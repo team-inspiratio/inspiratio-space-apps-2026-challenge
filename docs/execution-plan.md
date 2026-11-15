@@ -24,7 +24,7 @@
 
 ## 0. Context
 
-- **Repository**: `team-inspiratio/inspiratio-space-apps-2026` (private). At present it holds only documents: `docs/proposal.md` (consistent with the Claude Docs proposal), the README, `requirements.txt` and `.env.example`.
+- **Public repository**: `team-inspiratio/inspiratio-space-apps-2026-challenge`. Current source, documents, reports and bundled frontend assets are maintained here. See `docs/public-data.md` for current asset availability; the stages below record the scientific plan.
 - **Scope of this plan**: item ① of the user's division of work, i.e. line A (A1–A5) + line B (B1–B6) of the proposal + the D1 validation report, plus the data interface for the front end (C1) and the data card.
   - Not included: the front end, the proposal, the demo.
 - **Principles**:

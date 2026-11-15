@@ -1,12 +1,12 @@
 # Inspiratio Version 2
 
-Independent website source in `frontend-v2/`. The original website in `web/` and its deployment remain unchanged.
+Website source in `frontend-v2/`. Documentation, evidence and required data are provided in this public repository.
 
 ## Public website
 
 **[Open Inspiratio V2](https://inspiratio-fire-activity-v2.hushedotter14.chatgpt.site)** — publicly accessible without a local development server.
 
-The public site is hosted separately with Sites. GitHub stores the source; merging changes into `main` does not automatically update this deployment. Rebuild with the verified `global-v1` release assets and publish the resulting static output to update the public site.
+The public site is hosted separately with Sites. GitHub stores the source; merging changes into `main` does not automatically update this deployment. Rebuild with the verified bundled `global-v1` assets and publish the resulting static output to update the public site.
 
 ## Local setup
 
@@ -20,7 +20,9 @@ npm run build
 npm run dev -- --port 5176
 ```
 
-Data preparation requires authenticated GitHub CLI access to the existing global-v1 release and the repository Python environment. All downloaded assets are verified against the pinned SHA256 manifest. Downloaded data, dependencies and build output are ignored by Git. Without prepared data, the interface explicitly shows real limited samples; spatial selection is unavailable.
+Data preparation reads `../inspiratio-site/public/data/global-v1/` and verifies all 21 required files against `../results/expected/dataset-global-v1.sha256` before copying them into the ignored `public/data/global-v1/` directory. It uses local files only; no GitHub login, GitHub CLI, Python, network download or API key is required. The readiness marker is written only after all checks pass and is removed if preparation fails. The runtime does not need the separate `meta.json` asset. Without prepared data, the interface explicitly shows limited samples; spatial selection is unavailable.
+
+Documentation and evidence links resolve to this public repository. See [public data availability](../docs/public-data.md).
 
 ## Features
 
@@ -40,4 +42,4 @@ Browser tests require a running local server and prepared global-v1 data. Set FR
 
 ## Deployment
 
-V2 has its own public deployment at the link above and does not replace the original website. Build with npm run build -- --base=./ for a separately hosted static directory. Prepare verified release data before building the full site. Do not change the existing Pages deployment to publish V2 unless that replacement is explicitly intended.
+V2 has its own public deployment at the link above and does not replace the original website. Build with npm run build -- --base=./ for a separately hosted static directory. Run `npm run data:prepare` before building the full site. Do not change the existing Pages deployment to publish V2 unless that replacement is explicitly intended.

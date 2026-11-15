@@ -4,9 +4,7 @@
   "results/final-test/scores.json": "624438cb28d9d4799627bfd0f33d86bd866f591a5cea6e35756fba443323f068"
  },
  "grader": {
-  "run": "https://github.com/team-inspiratio/inspiratio-space-apps-2026/actions/runs/41768696897",
-  "answer_commit": "674b3f5",
-  "result_commit": "742547e",
+  "run": "https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge/tree/main/results/final-test",
   "result_time_utc": "2026-11-04 03:50"
  },
  "scores": {

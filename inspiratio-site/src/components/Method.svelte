@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  const REPO = 'https://github.com/team-inspiratio/inspiratio-space-apps-2026'
+  const REPO = 'https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge'
 
   // Blind test error per region (MALE, lower is better). Source: reports/final-test.md, section 2.
   const regions = [

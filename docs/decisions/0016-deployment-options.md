@@ -13,7 +13,7 @@ Current state (tested on 2026-11-04):
 | Live address | <https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site> |
 | Live version | The old version from before the fixes; `/methods.html` only falls back to the home page; PR #5 is not live |
 | Access scope | `web/README.md` says "Sites private access", but the home page and data files open without logging in; **the two disagree, and a person must confirm** |
-| Repository | Private; the organization `team-inspiratio` is on the GitHub Free plan; Pages is not enabled |
+| Public source | `team-inspiratio/inspiratio-space-apps-2026-challenge`; current bundled assets are listed in `docs/public-data.md` |
 | Members | 3 repository admins (terrywaio, QinqiXie, De1Ta-X), 1 with write access (qiuxue-yee) |
 | Site size | The six-region `dist/` is about 44 MB. Adding the global version adds about 33 MB of front-end JSON (largest single file about 5 MB). The 663 MB `resamples20` is not suitable for a static site |
 | Code | A static website, no server needed. There are 14 hard-coded root paths (such as `/data/v1/`, `/methods.html`), so the code must change to serve it under a subpath |
@@ -32,7 +32,7 @@ Prices and limits in the table below were taken from the official pages on 2026-
 | **Cost** | The current arrangement; details unverified | Hobby is free (including 100 GB of transfer); Pro costs extra | Free: 300 credits/month; Pro from $20/month | Free |
 | **Capacity** | The current 44 MB already works | CLI upload limit 100 MB (Hobby); with the global version about 77 MB, which fits but with little headroom | Each production deploy costs 15 credits, traffic 20 credits/GB | Site limit 1 GB, plenty |
 | **Usage restrictions** | Unverified | Hobby is limited to non-commercial personal use; a competition project usually qualifies, **but whether an organization counts needs confirming** | No special restrictions | No special restrictions; the site is always public |
-| **Code changes needed?** | No | No | No | **Yes**: served under the subpath `/inspiratio-space-apps-2026/`, the 14 root paths must be handled; an organization site repository avoids this (see below) |
+| **Code changes needed?** | No | No | No | **Yes**: served under the subpath `/inspiratio-space-apps-2026-challenge/`, the 14 root paths must be handled; an organization site repository avoids this (see below) |
 | **Automatic publishing** | None; published by hand | Can connect to Git, or CLI by hand | Can connect to Git (private organization repositories need Pro), or by hand | Yes, automatically after merging into `main` |
 
 ## Steps
