@@ -100,3 +100,7 @@ No active handover. See the status block for outstanding review items.
 - V2 uses the current public repository name, `inspiratio-space-apps-2026-challenge`, with no rename. The deployment job attempts to enable Pages; if GitHub rejects automatic setup, a repository admin selects GitHub Actions under Settings → Pages → Build and deployment → Source. Direct Pages management through the current GitHub integration returned HTTP 403.
 - V2 documentation and evidence links use this public repository. Data preparation verifies and copies the bundled global frontend files without credentials or downloads.
 - Public data availability and hosting requirements are documented in `docs/public-data.md`. No scientific results, frozen files or data-stage claims changed.
+
+## Website directory organization (2026-11-15)
+
+User-requested path-only relocation: the legacy frontend is now in `web/archive/website-v1/` and the production frontend is in `frontend-v2/website/`. Build scripts, tests, documentation links and the Pages workflow follow the new paths. Website content, URLs, scientific data and model behavior are unchanged. The completed data-task status above is unaffected.
