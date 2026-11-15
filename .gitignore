@@ -21,3 +21,9 @@ Thumbs.db
 
 # The sealed final-test submission is committed (plan section 4.4)
 !results/submission.parquet
+
+# Web dependencies, build output and local secret variants
+node_modules/
+dist/
+.env.*
+!.env.example
