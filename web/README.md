@@ -6,7 +6,7 @@ Current address: <https://inspiratio-fire-atlas.hybrid-0f7b5-5906.chatgpt.site> 
 
 ## Running, building and testing locally
 
-Requires **Node.js 22.16+** and npm; preparing the real data also requires GitHub CLI: run `gh auth login` and make sure the account can read this private team repository. The front end needs no Python, FIRMS MAP_KEY, GPU or database.
+Requires **Node.js 22.16+** and npm. The source code in this repository is public. Preparing the full dataset also requires GitHub CLI: run `gh auth login` with an account that can access the repository hosting the Release v1 assets (see "Data sources" below). The front end needs no Python, FIRMS MAP_KEY, GPU or database.
 
 ```sh
 git clone https://github.com/team-inspiratio/inspiratio-space-apps-2026-challenge.git
