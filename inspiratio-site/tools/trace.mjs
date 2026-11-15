@@ -1,0 +1,23 @@
+// Timeline trace of scrolling from story step 2 to step 4: sums rendering work by event type
+// and lists the longest single events, to find what causes long frames.
+import { chromium } from 'playwright-core'
+const browser = await chromium.launch({ executablePath: 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe' })
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 })
+await page.goto(process.env.URL ?? 'http://localhost:5199/', { waitUntil: 'networkidle' })
+await page.waitForTimeout(3500)
+await page.mouse.move(300, 450)
+for (let i = 0; i < 24; i++) (await page.mouse.wheel(0, 120), await page.waitForTimeout(30))
+await page.waitForTimeout(5000)
+await browser.startTracing(page, { categories: ['devtools.timeline', 'disabled-by-default-devtools.timeline'] })
+for (let i = 0; i < 16; i++) (await page.mouse.wheel(0, 120), await page.waitForTimeout(30))
+await page.waitForTimeout(5000)
+const buf = await browser.stopTracing()
+const events = JSON.parse(buf.toString()).traceEvents.filter((e) => e.ph === 'X' && e.dur)
+const sum = new Map()
+for (const e of events) sum.set(e.name, (sum.get(e.name) ?? 0) + e.dur / 1000)
+console.log('--- total ms by event ---')
+for (const [k, v] of [...sum].sort((a, b) => b[1] - a[1]).slice(0, 14)) console.log(v.toFixed(0).padStart(7), k)
+console.log('--- longest single events ---')
+for (const e of events.sort((a, b) => b.dur - a.dur).slice(0, 12))
+  console.log((e.dur / 1000).toFixed(0).padStart(6), 'ms', e.name, JSON.stringify(e.args?.data ?? {}).slice(0, 140))
+await browser.close()

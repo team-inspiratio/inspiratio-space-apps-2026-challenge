@@ -1,0 +1,21 @@
+import play from '@phosphor-icons/core/regular/play.svg?raw'
+import pause from '@phosphor-icons/core/regular/pause.svg?raw'
+import globe from '@phosphor-icons/core/regular/globe-hemisphere-west.svg?raw'
+import map from '@phosphor-icons/core/regular/map-trifold.svg?raw'
+import select from '@phosphor-icons/core/regular/selection-plus.svg?raw'
+import crosshair from '@phosphor-icons/core/regular/crosshair.svg?raw'
+import download from '@phosphor-icons/core/regular/download-simple.svg?raw'
+import image from '@phosphor-icons/core/regular/image.svg?raw'
+import link from '@phosphor-icons/core/regular/link-simple.svg?raw'
+import pin from '@phosphor-icons/core/regular/map-pin.svg?raw'
+import down from '@phosphor-icons/core/regular/arrow-down.svg?raw'
+import close from '@phosphor-icons/core/regular/x.svg?raw'
+import info from '@phosphor-icons/core/regular/info.svg?raw'
+import caret from '@phosphor-icons/core/regular/caret-down.svg?raw'
+import plus from '@phosphor-icons/core/regular/plus.svg?raw'
+import minus from '@phosphor-icons/core/regular/minus.svg?raw'
+import check from '@phosphor-icons/core/regular/check.svg?raw'
+import corners from '@phosphor-icons/core/regular/corners-out.svg?raw'
+
+export const icons = { play, pause, globe, map, select, crosshair, download, image, link, pin, down, close, info, caret, plus, minus, check, corners }
+export type IconName = keyof typeof icons
